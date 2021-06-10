@@ -11,6 +11,6 @@ public class BookDuckController {
 	public String test() {
 		
 		
-		return "home";
+		return "index";
 	}
 }

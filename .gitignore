@@ -2,7 +2,6 @@ pom.properties
 MANIFEST.MF
 # Created by https://www.toptal.com/developers/gitignore/api/maven,java,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=maven,java,eclipse
-
 ### Eclipse ###
 /Servers/
 Servers/

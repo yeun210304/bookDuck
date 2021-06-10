@@ -11,4 +11,14 @@
 		<mapper resource="/mybatis/" />
 	</mappers>
 	-->
+	
+	<typeAliases>
+		<typeAlias type="com.spring.bookduck.model.dto.LoginDto" alias="Ldto"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="/mybatis/login-mapper.xml"></mapper>
+	</mappers>
+	
+	
 </configuration>

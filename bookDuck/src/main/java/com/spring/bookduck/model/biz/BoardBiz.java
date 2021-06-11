@@ -9,7 +9,8 @@ public interface BoardBiz {
 	public PostDto selectOne(int post_id);
 	
 	// 게시글 작성
-	int insertBoard(PostDto dto);
+	public int insertNotice(PostDto dto);
+	public int insertQNA(PostDto dto);
 	
 	// 게시글 수정
 	int updateBoard(PostDto dto);

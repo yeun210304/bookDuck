@@ -32,7 +32,7 @@
 					<c:forEach var="b" items="list">
 						<tr>
 							<td>${b.post_no}</td>
-							<td><a href="noticeDetail.do?post_no=${b.post_no}">${b.post_title}</a></td>
+							<td><a href="noticeDetail.do?post_id=${b.post_id}">${b.post_title}</a></td>
 							<td>${b.post_writer}</td>
 							<td>${b.post_hit }</td>
 							<td>${b.post_regdate }</td>
@@ -45,7 +45,7 @@
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>	
-			<c:if test="${ !empty Ldto.member_id }">
+			<c:if test="${ Ldto.member_role eq 'ADMIN' }">
 				<tr>
 					<td colspan="6" align="right">
 						<button onclick="location.href='noticeInsertForm.do'">글쓰기</button>

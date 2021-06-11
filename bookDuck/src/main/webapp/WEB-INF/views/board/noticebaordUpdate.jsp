@@ -36,7 +36,7 @@
 				<td colspan="2">내용</td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea rows="60" cols="10" name="post_content" required>${post_content }</textarea></td>
+				<td colspan="2"><textarea rows="10" cols="60" name="post_content" required>${post_content }</textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2">

@@ -36,8 +36,10 @@
 			</td>
 		</tr>
 		<tr>
-			<th>내용</th>
-			<td colspan="5">${dto.boardContent }</td>
+			<th colspan="6">내용</th>
+		</tr>
+		<tr>
+			<td colspan="6">${dto.boardContent }</td>
 		</tr>
 		<tr>
 			<td colspan="6">

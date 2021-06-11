@@ -23,8 +23,14 @@ public class BoardBizImpl implements BoardBiz {
 	}
 
 	@Override
-	public int insertBoard(PostDto dto) {
-		return dao.insertBoard(dto);
+	public int insertNotice(PostDto dto) {
+		
+		return dao.insertNotice(dto);
+	}
+	
+	@Override
+	public int insertQNA(PostDto dto) {
+		return dao.insertQNA(dto);
 	}
 
 	@Override

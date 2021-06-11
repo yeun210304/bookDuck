@@ -54,12 +54,12 @@ public class NoticeBoardController {
 			dto.setChangeName("resources/uploadFiles/" + changeName);
 		}
 		
-		if(boardBiz.insertBoard(dto) > 0) {
+		if(boardBiz.insertNotice(dto) > 0) {
 			session.setAttribute("alertMsg", "성공적으로 게시글 작성되었습니다.");
-			return "redirect:list.do";
+			return "redirect:noticeList.do";
 		} else {
 			model.addAttribute("errorMsg", "게시글 작성 실패");
-			return "baord/errorPage";
+			return "board/errorPage";
 		}
 	}
 	
@@ -67,7 +67,10 @@ public class NoticeBoardController {
 	public String saveFile(HttpSession session, MultipartFile mpfile) {
 		
 		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-		
+		File storage = new File(savePath);
+		if(!storage.exists()) {
+			storage.mkdirs();
+		}
 		String originName = mpfile.getOriginalFilename();  // 원본명 ("aaa.jpg")
 			
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());

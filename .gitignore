@@ -112,3 +112,4 @@ buildNumber.properties
 
 # specific folder need to add (library .jar)
 !/bookDuck/WebContent/WEB-INF/lib/*
+bookDuck/target/m2e-wtp/web-resources/META-INF/maven/com.spring/bookduck/pom.properties

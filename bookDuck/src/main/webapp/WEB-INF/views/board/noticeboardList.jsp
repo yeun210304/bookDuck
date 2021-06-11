@@ -48,7 +48,7 @@
 			<c:if test="${ !empty Ldto.member_id }">
 				<tr>
 					<td colspan="6" align="right">
-						<button onclick="location.href='noticeInsert.do'">글쓰기</button>
+						<button onclick="location.href='noticeInsertForm.do'">글쓰기</button>
 					</td>
 				</tr>
 			</c:if>		

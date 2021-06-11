@@ -13,12 +13,12 @@ public class BoardDaoImpl implements BoardDao {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int increaseCount(int post_no) {
+	public int increaseCount(int post_id) {
 		return 0;
 	}
 
 	@Override
-	public PostDto selectOne(int post_no) {
+	public PostDto selectOne(int post_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

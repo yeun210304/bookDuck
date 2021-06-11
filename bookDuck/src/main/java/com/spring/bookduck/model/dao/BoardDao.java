@@ -5,8 +5,8 @@ import com.spring.bookduck.model.dto.PostDto;
 public interface BoardDao {
 	
 	// 게시글 상세조회
-	public int increaseCount(int post_no);
-	public PostDto selectOne(int post_no);
+	public int increaseCount(int post_id);
+	public PostDto selectOne(int post_id);
 	
 	// 게시글 작성
 	int insertBoard(PostDto dto);

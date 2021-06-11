@@ -45,7 +45,7 @@
 					<button onclick="postFormSubmit(1);">수정</button>
 					<button onclick="postFormSubmit(2);">삭제</button>
 				<form id="postForm" action="" method="post">
-		            <input type="hidden" name="postId" value="${ dto.post_id }">
+		            <input type="hidden" name="post_id" value="${ dto.post_id }">
 		           	<input type="hidden" name="filePath" value="${ dto.changeName }"> 
 		           	<!-- 첨부파일존재o : "파일경로" / 첨부파일존재x : "" -->
 		        </form>

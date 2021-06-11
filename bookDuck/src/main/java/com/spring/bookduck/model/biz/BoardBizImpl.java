@@ -13,13 +13,13 @@ public class BoardBizImpl implements BoardBiz {
 	BoardDao dao;
 	
 	@Override
-	public int increaseCount(int post_no) {
-		return dao.increaseCount(post_no);
+	public int increaseCount(int post_id) {
+		return dao.increaseCount(post_id);
 	}
 
 	@Override
-	public PostDto selectOne(int post_no) {
-		return dao.selectOne(post_no);
+	public PostDto selectOne(int post_id) {
+		return dao.selectOne(post_id);
 	}
 
 	@Override

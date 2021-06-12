@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="classifymapper">
+
+	<select id="totalre" resultType="AireDto">
+		SELECT RECOMMEND_NO, RECOMMEND_ID, RECOMMEND_AGE, RECOMMEND_GENRE, RECOMMEND_FAVOR, RECOMMEND_DATE
+		FROM AIRECOMMEND
+		ORDER BY RECOMMEND_NO DESC	
+	</select>
+
+	<select id="findreone" parameterType="String" resultType="AireDto">
+		SELECT RECOMMEND_NO, RECOMMEND_ID, RECOMMEND_AGE, RECOMMEND_GENRE, RECOMMEND_FAVOR, RECOMMEND_DATE
+		FROM AIRECOMMEND
+		WHERE RECOMMEND_ID = #{member_id}	
+	</select>
+
+
+
+
+
+	<select id="totalblist" resultType="BlistDto">
+		SELECT BLACKLIST_NO, BLACKLIST_FROM, BLACKLIST_TO, BLACKLIST_CONTENTS, BLACKLIST_DATE 
+		FROM BLACKLIST
+		ORDER BY BLACKLIST_NO DESC	
+	</select>
+
+
+
+
+</mapper>

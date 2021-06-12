@@ -21,13 +21,13 @@ public class BlistBizImpl implements BlistBiz {
 	}
 
 	@Override
-	public List<BlistDto> personBlist(String memberId) {
-		return dao.personBlist(memberId);
+	public List<BlistDto> personBlist(String member_id) {
+		return dao.personBlist(member_id);
 	}
 
 	@Override
-	public BlistDto findBOne(String memberId) {
-		return dao.findBOne(memberId);
+	public BlistDto findBOne(String member_id) {
+		return dao.findBOne(member_id);
 	}
 
 	@Override
@@ -41,8 +41,8 @@ public class BlistBizImpl implements BlistBiz {
 	}
 
 	@Override
-	public int deleteBlist(String memberId) {
-		return dao.deleteBlist(memberId);
+	public int deleteBlist(String member_id) {
+		return dao.deleteBlist(member_id);
 	}
 
 }

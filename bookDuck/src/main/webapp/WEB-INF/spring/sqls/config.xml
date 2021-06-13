@@ -14,10 +14,12 @@
 	
 	<typeAliases>
 		<typeAlias type="com.spring.bookduck.model.dto.LoginDto" alias="Ldto"/>
+		<typeAlias type="com.spring.bookduck.paydto.PayDto" alias="payDto"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mybatis/login-mapper.xml"></mapper>
+		<mapper resource="/mybatis/pay-mapper.xml"/>
 	</mappers>
 	
 	

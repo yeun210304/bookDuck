@@ -14,3 +14,4 @@ public class BookDuckController {
 		return "index";
 	}
 }
+	

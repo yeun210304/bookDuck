@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.bookduck.classify.dto.AireDto;
-
 @Repository
 public class AireDaoImpl implements AireDao {
 

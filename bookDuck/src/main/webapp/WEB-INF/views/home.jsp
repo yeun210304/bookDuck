@@ -184,10 +184,11 @@
 		<p>주소. 서울 강남구 테헤란로14길 6 남도빌딩 2층, 3층, 4층</p>
 		<p></p>
 		<p></p>
-		<p></p>
+		<p></p> 	
 	</div>
 	
 	<a href="loginform.do">로그인</a>
 
+	<a href="mypage.do">MYPAGE</a>
 </body>
 </html>

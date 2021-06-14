@@ -61,7 +61,6 @@ $(document).ready(function(){
 			type : "post",
 			url: "/member/memberIdChk",
 			data: data
-			
 	});
 });
 </script>

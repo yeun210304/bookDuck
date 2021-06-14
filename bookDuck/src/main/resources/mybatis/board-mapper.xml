@@ -14,6 +14,7 @@
 		FROM POST
 		WHERE BOARD_ID = #{board_id}
 		AND POST_DELFLAG = 'N'
+		ORDER BY POST_NO DESC
 	</select>
 
 	<select id="selectOne" parameterType="int" resultType="postDto">

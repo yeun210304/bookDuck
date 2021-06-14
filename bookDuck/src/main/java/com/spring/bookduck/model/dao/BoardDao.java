@@ -11,8 +11,8 @@ public interface BoardDao {
 	static String NAMESPACE = "boardMapper.";
 	
 	// 게시판 리스트 조회 (페이징 처리)
-	int selectListCount(int board_id);
-	List<PostDto> selectList(PageInfo pi, int board_id);
+	public int selectListCount(int board_id);
+	public List<PostDto> selectList(PageInfo pi, int board_id);
 	
 	// 게시글 상세조회
 	public int increaseCount(int post_id);

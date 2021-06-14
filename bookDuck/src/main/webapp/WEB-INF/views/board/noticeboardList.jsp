@@ -29,7 +29,7 @@
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<c:forEach var="dto" items="list">
+					<c:forEach var="dto" items="${list }">
 						<tr>
 							<td>${dto.post_no}</td>
 							<td><a href="noticeDetail.do?post_id=${dto.post_id}">${dto.post_title}</a></td>

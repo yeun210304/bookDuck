@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.bookduck.classify.biz.AireBiz;
 import com.spring.bookduck.classify.dto.AireDto;
-import com.spring.bookduck.model.dto.LoginDto;
 
 @Controller
 public class ClassifyAIController {

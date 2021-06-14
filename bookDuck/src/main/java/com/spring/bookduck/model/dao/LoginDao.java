@@ -1,5 +1,7 @@
 package com.spring.bookduck.model.dao;
 
+import java.util.Map;
+
 import com.spring.bookduck.model.dto.MemberDto;
 
 public interface LoginDao {
@@ -20,6 +22,10 @@ public interface LoginDao {
 	
 	//회원 탈퇴
 	public int leaveAccount(int member_no);
+	
+	//아이디 중복 확인
+	public void Register(Map map);
+	public MemberDto Id_Check(String id);
 	
 
 }

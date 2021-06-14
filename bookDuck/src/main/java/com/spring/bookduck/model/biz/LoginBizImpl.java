@@ -37,4 +37,9 @@ public class LoginBizImpl implements LoginBiz {
 		return 0;
 	}
 
+	@Override
+	public int idCheck(String member_id) {
+		return 0;
+	}
+
 }

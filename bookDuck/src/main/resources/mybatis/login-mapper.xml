@@ -33,6 +33,11 @@
 		WHERE MEMBER_EMAIL = #{member_email}
 	</select>
 	
+	<!-- ID 중복체크 -->
+	<select parameterType="String" id="Id_Check" resultType="Ldto">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{member_id}
+	</select>
+	
 	<!-- 회원가입 -->
 	<insert id = "join" parameterType="Ldto">
 	  	INSERT INTO MEMBER (MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_AGE,

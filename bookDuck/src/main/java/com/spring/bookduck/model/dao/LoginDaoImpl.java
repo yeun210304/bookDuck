@@ -1,5 +1,7 @@
 package com.spring.bookduck.model.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -50,6 +52,16 @@ public class LoginDaoImpl implements LoginDao {
 	@Override
 	public int leaveAccount(int member_no) {
 		return 0;
+	}
+
+	@Override
+	public void Register(Map map) {
+		
+	}
+
+	@Override
+	public MemberDto Id_Check(String id) {
+		return null;
 	}
 
 }

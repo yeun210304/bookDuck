@@ -11,6 +11,7 @@
 	<h1>Insert</h1>
 	
 	<form action="noticeInsertRes.do" enctype="multipart/form-data" method="post">
+		<input type="hidden" name="board_id" value="0">
 		<table>
 			<tr>
 				<th>제목</th>
@@ -22,13 +23,13 @@
 			</tr>
 			<tr>
 				<th>첨부파일</th>
-				<td><input type="file" name="upfile"></td>
+				<td><input type="file" name="mpfile"></td>
 			</tr>
 			<tr>
 				<th colspan="2">내용</th>
 			</tr>
 			<tr>
-				<td><textarea rows="60" cols="10" name="post_content" required></textarea></td>
+				<td colspan="2"><textarea rows="10" cols="60" name="post_content" required></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2">

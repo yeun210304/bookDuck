@@ -16,11 +16,13 @@
 		<typeAlias type="com.spring.bookduck.model.dto.LoginDto" alias="Ldto"/>
 		<typeAlias type="com.spring.bookduck.classify.dto.AireDto" alias="AireDto"/>
 		<typeAlias type="com.spring.bookduck.classify.dto.BlistDto" alias="BlistDto"/>
+		<typeAlias type="com.spring.bookduck.model.dto.PostDto" alias="postDto"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mybatis/login-mapper.xml"></mapper>
 		<mapper resource="/mybatis/classify-mapper.xml"></mapper>
+		<mapper resource="/mybatis/board-mapper.xml"/>
 	</mappers>
 	
 	

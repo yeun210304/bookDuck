@@ -36,8 +36,10 @@
 			</td>
 		</tr>
 		<tr>
-			<th>내용</th>
-			<td colspan="5">${dto.boardContent }</td>
+			<th colspan="6">내용</th>
+		</tr>
+		<tr>
+			<td colspan="6">${dto.boardContent }</td>
 		</tr>
 		<tr>
 			<td colspan="6">
@@ -45,7 +47,7 @@
 					<button onclick="postFormSubmit(1);">수정</button>
 					<button onclick="postFormSubmit(2);">삭제</button>
 				<form id="postForm" action="" method="post">
-		            <input type="hidden" name="postId" value="${ dto.post_id }">
+		            <input type="hidden" name="post_id" value="${ dto.post_id }">
 		           	<input type="hidden" name="filePath" value="${ dto.changeName }"> 
 		           	<!-- 첨부파일존재o : "파일경로" / 첨부파일존재x : "" -->
 		        </form>

@@ -13,32 +13,82 @@ public class BoardDaoImpl implements BoardDao {
 	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int increaseCount(int post_no) {
-		return 0;
+	public int increaseCount(int post_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE + "increseCount", post_id);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override
-	public PostDto selectOne(int post_no) {
-		// TODO Auto-generated method stub
-		return null;
+	public PostDto selectOne(int post_id) {
+		PostDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE + "selectOne", post_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return dto;
 	}
 
 	@Override
-	public int insertBoard(PostDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertNotice(PostDto dto) {
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "insertNotcie", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return res;
+	}
+	
+	@Override
+	public int insertQNA(PostDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "insertQNA", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override
 	public int updateBoard(PostDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE + "updateBoard", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override
 	public int deleteBoard(int post_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE + "deleteBoard", post_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 }

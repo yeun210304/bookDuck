@@ -1,6 +1,6 @@
 package com.spring.bookduck.model.dto;
 
-public class LoginDto {
+public class MemberDto {
 	
 	private int member_no;
 	private String member_id;
@@ -84,12 +84,12 @@ public class LoginDto {
 	
 	@Override
 	public String toString() {
-		return "LoginDto [member_no=" + member_no + ", member_id=" + member_id + ", member_pw=" + member_pw
+		return "MemberDto [member_no=" + member_no + ", member_id=" + member_id + ", member_pw=" + member_pw
 				+ ", member_age=" + member_age + ", member_gender=" + member_gender + ", member_email=" + member_email
 				+ ", member_enabled=" + member_enabled + ", member_payrole=" + member_payrole + ", member_role="
 				+ member_role + ", member_type=" + member_type + ", member_blist=" + member_blist + "]";
 	}
-	public LoginDto() {
+	public MemberDto() {
 		super();
 	}
 

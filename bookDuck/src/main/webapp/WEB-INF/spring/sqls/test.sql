@@ -1,5 +1,7 @@
 CREATE SEQUENCE MEMBERSEQ;
+DROP SEQUENCE MEMBERSEQ;
 
-INSERT INTO MEMBER VALUES(1, 'admin', 'admin1234', 20, 'F', 'admin@admin.com', 'Y', 'Y', 'ADMIN', 'GENERAL', 'N');
+INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'admin', 'admin1234', 20, 'F', 'admin@admin.com', 'Y', 'Y', 'ADMIN', 'GENERAL', 'N');
+INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'admin2', 'admin1234', 20, 'F', 'admin@admin.com', 'Y', 'Y', 'ADMIN', 'GENERAL', 'N');
 
 SELECT * FROM MEMBER

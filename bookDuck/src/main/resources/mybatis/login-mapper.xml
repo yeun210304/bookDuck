@@ -1,11 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="member">
-	<select id="login" parameterType="Ldto" resultType="Ldto">
+<mapper namespace="memberMapper">
+
+	<resultMap type="Ldto" id="memberMap">
+		<result property="member_no" column="MEMBER_NO"/>
+		<result property="member_id" column="MEMBER_ID"/>
+		<result property="member_pw" column="MEMBER_PW"/>
+		<result property="member_age" column="MEMBER_AGE"/>
+		<result property="member_gender" column="MEMBER_GENDER"/>
+		<result property="member_email" column="MEMBER_EMAIL"/>
+		<result property="member_enabled" column="MEMBER_ENABLED"/>
+		<result property="member_payrole" column="MEMBER_PAYROLE"/>
+		<result property="member_role" column="MEMBER_ROLE"/>
+		<result property="member_type" column="MEMBER_TYPE"/>
+		<result property="member_blist" column="MEMBER_BLIST"/>
+	</resultMap>
+
+	<!-- 로그인 -->
+	<select id="login" resultType="Ldto" parameterType="Ldto">
 		SELECT MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_AGE, MEMBER_GENDER, MEMBER_EMAIL, MEMBER_ENABLED,
 		MEMBER_PAYROLE, MEMBER_ROLE, MEMBER_TYPE, MEMBER_BLIST
 		FROM MEMBER
 		WHERE MEMBER_ID = #{member_id}
 		AND MEMBER_PW = #{member_pw}
 	</select>
+	
+	<!-- sns 로그인 -->
+	<select id="snslogin" resultType="Ldto" parameterType="String">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_AGE, MEMBER_GENDER,MEMBER_EMAIL, MEMBER_ENABLED,
+		MEMBER_PAYROLE, MEMBER_ROLE, MEMBER_TYPE, MEMBER_BLIST
+		FROM MEMBER
+		WHERE MEMBER_EMAIL = #{member_email}
+	</select>
+	
+	<!-- ID 중복체크 -->
+	<select parameterType="String" id="Id_Check" resultType="Ldto">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id = "join" parameterType="Ldto">
+	  	INSERT INTO MEMBER (MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_AGE,
+	  						MEMBER_GENDER, MEMBER_EMAIL, MEMBER_ENABLED,
+	  						MEMBER_PAYROLE, MEMBER_ROLE, MEMBER_TYPE,
+	  						MEMBER_BLIST)
+	  				VALUES (MEMBERSEQ.NEXTVAL, #{member_id}, #{member_pw}, #{member_age}, #{member_gender}, 
+	  						#{member_email}, 'Y', 'Y', 'USER', 'GENERAL', 'N')
+  	</insert>
+  	
+  	<!-- 비밀번호 변경 -->
+  	<update id="updatePw" parameterType="LDto">
+		UPDATE MEMBER
+		SET MEMER_PW = #{member_pw}
+		WHERE MEMBER_NO = #{member_no} 
+	</update>
+	
+	<!-- 탈퇴 -->
+	<delete id="leaveAccount">
+		DELETE FROM MEMBER
+		WHERE MEMBER_NO = #{member_no}
+	</delete>
+	
 </mapper>

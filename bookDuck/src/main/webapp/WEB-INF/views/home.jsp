@@ -186,6 +186,8 @@
 		<p></p>
 		<p></p>
 	</div>
+	
+	<a href="loginform.do">로그인</a>
 
 </body>
 </html>

@@ -10,7 +10,6 @@ public class BookDuckController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String test() {
 		
-		
 		return "index";
 	}
 }

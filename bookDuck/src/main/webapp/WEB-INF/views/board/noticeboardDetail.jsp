@@ -39,7 +39,7 @@
 			<th colspan="6">내용</th>
 		</tr>
 		<tr>
-			<td colspan="6">${dto.boardContent }</td>
+			<td colspan="6">${dto.post_content }</td>
 		</tr>
 		<tr>
 			<td colspan="6">

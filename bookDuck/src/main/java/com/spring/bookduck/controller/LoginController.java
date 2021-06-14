@@ -43,7 +43,7 @@ public class LoginController {
 		MemberDto res = biz.login(dto);
 		boolean check = false;
 		if(res !=null) {
-			session.setAttribute("login", res);
+			session.setAttribute("Ldto", res);
 			check=true;
 		}
 		

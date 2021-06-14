@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="boardMapper">
+<mapper  namespace="boardMapper">
 
-	<select id="selectOne" parameterType="int">
-		SELECT POST_ID, BAORD_ID, POST_NO, POST_CATEGORY, POST_WRITER, POST_TITLE, POST_CONTENT, POST_REGDATE,
+	<select id="listCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM POST
+		WHERE BOARD_ID = #{board_id}
+		AND POST_DELFLAG = 'N'
+	</select>
+	
+	<select id="selectList" parameterType="int" resultType="postDto">
+		SELECT POST_ID, BOARD_ID, POST_NO, POST_CATEGORY, POST_WRITER, POST_TITLE, POST_CONTENT, POST_REGDATE,
+		POST_HIT, POST_COMMENT_COUNT, POST_DELFLAG, ORIGINNAME, CHANGENAME
+		FROM POST
+		WHERE BOARD_ID = #{board_id}
+		AND POST_DELFLAG = 'N'
+	</select>
+
+	<select id="selectOne" parameterType="int" resultType="postDto">
+		SELECT POST_ID, BOARD_ID, POST_NO, POST_CATEGORY, POST_WRITER, POST_TITLE, POST_CONTENT, POST_REGDATE,
 		POST_HIT, POST_COMMENT_COUNT, POST_DELFLAG, ORIGINNAME, CHANGENAME
 		FROM POST
 		WHERE POST_ID = #{post_id}
@@ -19,7 +33,7 @@
 		INSERT INTO POST
 		VALUES(
 		POSTSEQ.NEXTVAL,
-		#{board_id},
+		0,
 		NOTICESEQ.NEXTVAL,
 		NULL,
 		#{post_writer},
@@ -34,7 +48,7 @@
 		INSERT INTO POST
 		VALUES(
 		POSTSEQ.NEXTVAL,
-		#{board_id},
+		1,
 		QNASEQ.NEXTVAL,
 		#{post_category},
 		#{post_writer},
@@ -59,5 +73,35 @@
 		SET POST_DELFLAG = 'Y'
 		WHERE POST_ID = #{post_id}
 	</update>
+	
+	<select id="selectCommentList" parameterType="int" resultType="commentDto">
+		SELECT COMMENT_ID, POST_ID, COMMENT_NO, COMMENT_GROUPNO, COMMENT_GROUPSEQ, COMMENT_CONTENT, COMMENT_WRITER, COMMENT_REGDATE, COMMENT_TITLETAB, COMMENT_DELFLAG
+		FROM COMM
+		WHERE POST_ID = #{post_id}
+		AND COMMENT_DELFLAG = 'N'
+		ORDER BY COMMENT_ID DESC
+	</select>
+	
+	<insert id="insertComment" parameterType="commentDto">
+		INSERT INTO COMM
+		VALUES(COMMSEQ.NEXTVAL, #{post_id}, #{comment_content}, #{comment_writer}, SYSDATE, 0, 'N' )
+	</insert>
 
+	<update id="increaseComment" parameterType="int">
+		UPDATE POST
+		SET POST_COMMENT_COUNT = POST_COMMENT_COUNT + 1
+		WHERE POST_ID = #{post_id}
+	</update>
+	
+	<delete id="deleteComment" parameterType="int">
+		UPDATE COMM
+		SET COMMENT_DELFLAG = 'Y'
+		WHERE COMMENT_ID = #{comment_id}
+	</delete>
+	<update id="decreaseComment" parameterType="int">
+		UPDATE POST
+		SET POST_COMMENT_COUNT = POST_COMMENT_COUNT - 1
+		WHERE POST_ID = #{post_id}
+	</update>
+	
 </mapper>

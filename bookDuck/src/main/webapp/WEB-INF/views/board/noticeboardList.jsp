@@ -23,7 +23,7 @@
 			<c:choose>
 				<c:when test="${empty list }">
 					<tr>
-						<td colsapn="6" align="center">				
+						<td colspan="6" align="center">				
 						------------	작성된 글이 없습니다		-------------
 						</td>
 					</tr>

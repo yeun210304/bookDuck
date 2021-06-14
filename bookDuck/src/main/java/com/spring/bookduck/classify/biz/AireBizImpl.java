@@ -20,8 +20,8 @@ public class AireBizImpl implements AireBiz {
 	}
 
 	@Override
-	public AireDto findReOne(String memberId) {
-		return dao.findReOne(memberId);
+	public AireDto findReOne(String member_id) {
+		return dao.findReOne(member_id);
 	}
 
 	@Override
@@ -35,8 +35,8 @@ public class AireBizImpl implements AireBiz {
 	}
 
 	@Override
-	public int deleteRe(String memberId) {
-		return dao.deleteRe(memberId);
+	public int deleteRe(String member_id) {
+		return dao.deleteRe(member_id);
 	}
 
 }

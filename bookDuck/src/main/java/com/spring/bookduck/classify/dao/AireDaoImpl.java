@@ -29,12 +29,12 @@ public class AireDaoImpl implements AireDao {
 	}
 
 	@Override
-	public AireDto findReOne(String memberId) {
+	public AireDto findReOne(String member_id) {
 		
 		AireDto dto = new AireDto();
 		
 		try {
-			dto = sqlSession.selectOne(NAMESPACE+"findone", memberId);
+			dto = sqlSession.selectOne(NAMESPACE+"findreone", member_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
@@ -48,7 +48,7 @@ public class AireDaoImpl implements AireDao {
 		int res = 0;
 		
 		try {
-			res = sqlSession.insert(NAMESPACE+"insertRe", dto);
+			res = sqlSession.insert(NAMESPACE+"insertre", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +62,7 @@ public class AireDaoImpl implements AireDao {
 		int res = 0;
 		
 		try {
-			res = sqlSession.update(NAMESPACE+"updateRe", dto);
+			res = sqlSession.update(NAMESPACE+"updatere", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,12 +71,12 @@ public class AireDaoImpl implements AireDao {
 	}
 
 	@Override
-	public int deleteRe(String memberId) {
+	public int deleteRe(String member_id) {
 		
 		int res = 0;
 		
 		try {
-			res = sqlSession.delete(NAMESPACE+"deleteRe", memberId);
+			res = sqlSession.delete(NAMESPACE+"deletere", member_id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

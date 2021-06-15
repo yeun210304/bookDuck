@@ -44,7 +44,13 @@ public class LoginDaoImpl implements LoginDao {
 
 	@Override
 	public int updatePw(MemberDto dto) {
-		return 0;
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"updatePw", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override

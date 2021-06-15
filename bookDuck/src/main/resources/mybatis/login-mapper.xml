@@ -49,10 +49,10 @@
   	</insert>
   	
   	<!-- 비밀번호 변경 -->
-  	<update id="updatePw" parameterType="LDto">
+  	<update id="updatePw">
 		UPDATE MEMBER
-		SET MEMER_PW = #{member_pw}
-		WHERE MEMBER_NO = #{member_no} 
+		SET MEMBER_PW = #{member_pw}
+		WHERE MEMBER_ID = #{member_id} 
 	</update>
 	
 	<!-- 탈퇴 -->

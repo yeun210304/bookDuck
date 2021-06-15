@@ -48,7 +48,6 @@ public class LoginController {
 		map.put("check", check);
 		
 		return map;
-		
 	}
 	
 	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
@@ -82,5 +81,23 @@ public class LoginController {
 		}
 		return "redirect:joinform.do";
 	}
+	
+	@RequestMapping("/updatePwForm.do")
+	public String updatePwForm() {
+		logger.info("[Controller] : updatePwForm.do");
+		return "member/updatePwForm";
+	}
+	
+	@RequestMapping("/updatePwRes.do")
+	public String updatePwRes(MemberDto dto, HttpSession session) throws Exception {
+		logger.info("[Controller] : updatePwRes.do");
+		if(biz.updatePw(dto)>0) {
+			session.invalidate();
+			return "member/login";
+		}
+		return "member/login";
+	}
+	
+	
 	
 }

@@ -21,6 +21,7 @@
 	<c:if test="${Ldto != null }">
 		<p>${Ldto.member_id }님 안녕하세요.</p>
 		<a href="mypage.do">MYPAGE</a>
+		<a href="updatePwForm.do">비밀번호변경</a>
 	</c:if>
 
 </body>

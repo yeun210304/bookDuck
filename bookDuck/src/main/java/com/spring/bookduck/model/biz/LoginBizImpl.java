@@ -29,7 +29,7 @@ public class LoginBizImpl implements LoginBiz {
 
 	@Override
 	public int updatePw(MemberDto dto) {
-		return 0;
+		return dao.updatePw(dto);
 	}
 
 	@Override

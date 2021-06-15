@@ -52,7 +52,7 @@
 		</tr>
 		<tr>
 			<td colspan="6" align="right">
-				<c:if test="${Ldto.member_Id eq dto.post_writer }">
+				<c:if test="${Ldto.member_id eq dto.post_writer }">
 					<button onclick="postFormSubmit(1);">수정</button>
 					<button onclick="postFormSubmit(2);">삭제</button>
 				<form id="postForm" action="" method="post">
@@ -105,7 +105,7 @@
 		$(function(){
 			selectCommentList();
 			
-			setInterval(selectCommentList, 1000);
+			//setInterval(selectCommentList, 1000);
 		});
 		
 		function addComment(){
@@ -116,7 +116,7 @@
 					data: {
 						comment_content : $("#comment").val(),
 						post_id : ${dto.post_id},
-						comment_writer : ${Ldto.member_id}
+						comment_writer : '${Ldto.member_id}'
 					},
 					success : function(status){
 						if(status == "success"){

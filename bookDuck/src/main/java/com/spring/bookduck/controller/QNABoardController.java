@@ -12,12 +12,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.bookduck.Pagination;
 import com.spring.bookduck.model.biz.BoardBiz;
 import com.spring.bookduck.model.dto.CommentDto;
+import com.spring.bookduck.model.dto.PageInfo;
 import com.spring.bookduck.model.dto.PostDto;
 
 @Controller
@@ -27,8 +31,14 @@ public class QNABoardController {
 	BoardBiz boardBiz;
 	
 	@RequestMapping("/qnaList.do")
-	public String qnaList() {
+	public String qnaList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, Model model) {
+		int listCount = boardBiz.selectListCount(1);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
+		List<PostDto> list = boardBiz.selectList(pi, 1);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
 		return "board/qnaboardList";
 	}
 	
@@ -151,7 +161,7 @@ public class QNABoardController {
 	
 	@ResponseBody
 	@RequestMapping("/commentInsert.do")
-	public String ajaxInsertComment(CommentDto dto) {
+	public String ajaxInsertComment(@RequestBody CommentDto dto) {
 		if(boardBiz.insertComment(dto) > 0) {
 			boardBiz.increaseComment(dto.getPost_id());
 			return "success";

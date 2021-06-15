@@ -85,7 +85,7 @@
 	
 	<insert id="insertComment" parameterType="commentDto">
 		INSERT INTO COMM
-		VALUES(COMMSEQ.NEXTVAL, #{post_id}, #{comment_content}, #{comment_writer}, SYSDATE, 0, 'N' )
+		VALUES(COMMSEQ.NEXTVAL, #{post_id}, NULL, NULL, NULL, #{comment_content}, #{comment_writer}, SYSDATE, 0, 'N' )
 	</insert>
 
 	<update id="increaseComment" parameterType="int">

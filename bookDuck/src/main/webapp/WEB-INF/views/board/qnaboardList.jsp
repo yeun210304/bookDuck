@@ -31,7 +31,7 @@
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<c:forEach var="dto" items="list">
+					<c:forEach var="dto" items="${list }">
 						<tr>
 							<td>${dto.post_no}</td>
 							<td>${dto.post_category }</td>

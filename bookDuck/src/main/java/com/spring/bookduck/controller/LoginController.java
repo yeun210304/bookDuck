@@ -3,7 +3,6 @@ package com.spring.bookduck.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -26,21 +25,23 @@ public class LoginController {
 	@Autowired
 	private LoginBiz biz;
 	
+	//로그인
 	@RequestMapping("/loginform.do")
 	public String loginForm() {
 		logger.info("[Controller] : loginform.do");
 		return "member/login";
 	}
 	
-	@RequestMapping(value="/ajaxlogin.do", method=RequestMethod.POST)
+	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Boolean> ajaxLogin(HttpSession session, @RequestBody MemberDto dto){
 		
-		logger.info("[Controller] : ajaxlogin.do");
+		logger.info("[Controller] : login.do");
 		MemberDto res = biz.login(dto);
 		boolean check = false;
 		if(res !=null) {
-			session.setAttribute("login", res);
+			session.setAttribute("Ldto", res); //세션 생성
+			session.setMaxInactiveInterval(10*60); //세션 시간 설정
 			check=true;
 		}
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
@@ -50,12 +51,20 @@ public class LoginController {
 		
 	}
 	
+	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception{
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	//회원가입 form 이동
 	@RequestMapping("/joinform.do")
 	public String JoinForm() {
 		logger.info("[Controller] : joinform.do");
 		return "member/joinform";
 	}
 
+	//아이디 중복 체크
 	@ResponseBody
 	@RequestMapping(value="/idCheck.do", method=RequestMethod.POST)
 	public int idCheck(MemberDto dto) {
@@ -64,6 +73,7 @@ public class LoginController {
 		return res;
 	}
 	
+	//가입 완료 버튼 누를 시
 	@RequestMapping(value="/reg.do", method=RequestMethod.POST)
 	public String Reg(MemberDto dto) {
 		logger.info("[Controller] : reg.do");

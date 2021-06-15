@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <% request.setCharacterEncoding("UTF-8"); %>    
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
@@ -23,8 +22,7 @@
 <title>Home</title>
 </head>
 <body>
-
-
+<%@ include file="header.jsp" %>
 	<div class="RealTimeNovle">
 		<h3>모두와 소설</h3>
 		<!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->

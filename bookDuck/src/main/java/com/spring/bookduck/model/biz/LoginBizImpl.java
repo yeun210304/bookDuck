@@ -38,8 +38,8 @@ public class LoginBizImpl implements LoginBiz {
 	}
 
 	@Override
-	public int idCheck(String member_id) {
-		return 0;
+	public int idCheck(MemberDto dto) {
+		return dao.idCheck(dto);
 	}
 
 }

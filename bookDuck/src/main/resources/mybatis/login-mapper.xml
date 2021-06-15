@@ -34,7 +34,7 @@
 	</select>
 	
 	<!-- ID 중복체크 -->
-	<select parameterType="String" id="Id_Check" resultType="Ldto">
+	<select id="Id_Check" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{member_id}
 	</select>
 	

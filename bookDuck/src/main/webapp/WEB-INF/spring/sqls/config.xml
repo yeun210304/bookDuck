@@ -13,7 +13,7 @@
 	-->
 	
 	<typeAliases>
-		<typeAlias type="com.spring.bookduck.model.dto.LoginDto" alias="Ldto"/>
+		<typeAlias type="com.spring.bookduck.model.dto.MemberDto" alias="Ldto"/>
 		<typeAlias type="com.spring.bookduck.classify.dto.AireDto" alias="AireDto"/>
 		<typeAlias type="com.spring.bookduck.classify.dto.BlistDto" alias="BlistDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.PostDto" alias="postDto"/>

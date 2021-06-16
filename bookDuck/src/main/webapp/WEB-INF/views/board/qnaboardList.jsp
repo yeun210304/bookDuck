@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,11 +35,17 @@
 					<c:forEach var="dto" items="${list }">
 						<tr>
 							<td>${dto.post_no}</td>
-							<td>${dto.post_category }</td>
+							<td>
+							<c:if test="${dto.post_category eq 'P' }">결제</c:if>	
+							<c:if test="${dto.post_category eq 'R' }">환불</c:if>	
+							<c:if test="${dto.post_category eq 'M' }">회원</c:if>	
+							<c:if test="${dto.post_category eq 'E' }">기타</c:if>					
+							<c:if test="${empty dto.post_category }">분류 없음</c:if>
+							</td>
 							<td><a href="qnaDetail.do?post_id=${dto.post_id}">${dto.post_title}[${dto.post_comment_count }]</a></td>
 							<td>${dto.post_writer}</td>
 							<td>${dto.post_hit }</td>
-							<td>${dto.post_regdate }</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.post_regdate }"/></td>
 							<td>
 	                        	<c:if test="${ !empty dto.originName }">
 	                        		★

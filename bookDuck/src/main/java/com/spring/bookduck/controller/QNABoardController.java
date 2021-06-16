@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -150,7 +151,7 @@ public class QNABoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/commentList.do", produces="application/json; charset=utf-8")
+	@RequestMapping(value="/commentList.do", produces = "application/json;")
 	public Map<String, List<CommentDto>> ajaxSelectCommentList(int post_id) {
 		List<CommentDto> list = boardBiz.selectCommentList(post_id);
 		Map<String, List<CommentDto>> map = new HashMap<String, List<CommentDto>>();
@@ -161,7 +162,7 @@ public class QNABoardController {
 	
 	@ResponseBody
 	@RequestMapping("/commentInsert.do")
-	public String ajaxInsertComment(@RequestBody CommentDto dto) {
+	public String ajaxInsertComment(CommentDto dto) {
 		if(boardBiz.insertComment(dto) > 0) {
 			boardBiz.increaseComment(dto.getPost_id());
 			return "success";
@@ -169,5 +170,4 @@ public class QNABoardController {
 			return "fail";
 		}
 	}
-	
 }

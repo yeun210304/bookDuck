@@ -10,7 +10,7 @@ public class CommentDto {
 	private int comment_groupseq;
 	private String comment_content;
 	private String comment_writer;
-	private Date comment_regdate;
+	private String comment_regdate;
 	private int comment_titletab;
 	private String comment_delflag;
 	
@@ -18,7 +18,7 @@ public class CommentDto {
 	}
 
 	public CommentDto(int comment_id, int post_id, int comment_no, int comment_groupseq, String comment_content,
-			String comment_writer, Date comment_regdate, int comment_titletab, String comment_delflag) {
+			String comment_writer, String comment_regdate, int comment_titletab, String comment_delflag) {
 		super();
 		this.comment_id = comment_id;
 		this.post_id = post_id;
@@ -79,11 +79,11 @@ public class CommentDto {
 		this.comment_writer = comment_writer;
 	}
 
-	public Date getComment_regdate() {
+	public String getComment_regdate() {
 		return comment_regdate;
 	}
 
-	public void setComment_regdate(Date comment_regdate) {
+	public void setComment_regdate(String comment_regdate) {
 		this.comment_regdate = comment_regdate;
 	}
 

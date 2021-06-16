@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 <body>
 
@@ -32,18 +37,24 @@
 				<td><input type="file" name="mpfile"></td>
 			</tr>
 			<tr>
-				<th colspan="4" align="center">내용</th>
-			</tr>
-			<tr>
-				<td colspan="4"><textarea rows="10" cols="60" name="post_content" required></textarea></td>
+				<td colspan="4"><textarea id="summernote" name="post_content" required></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="4" align="right">
 					<input type="submit" value="작성">
-					<input type="button" value="취소" onclick="qnaList.do">
+					<input type="button" value="취소" onclick="location.href='qnaList.do'">
 				</td>
 			</tr>
 		</table>
 	</form>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		  $('#summernote').summernote({
+			  height: 300,
+			  minHeight: 300,
+			  maxHeight: null
+		  });
+		});
+	</script>
 </body>
 </html>

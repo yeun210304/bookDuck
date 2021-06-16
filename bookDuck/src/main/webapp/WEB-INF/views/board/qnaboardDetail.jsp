@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,7 @@
 			<th>작성자</th>
 			<td>${dto.post_writer }</td>
 			<th>작성일</th>
-			<td>${dto.post_regdate }</td>
+			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.post_regdate }"/></td>
 			<th>조회수</th>
 			<td>${dto.post_hit}</td>
 		</tr>
@@ -52,25 +53,31 @@
 		</tr>
 		<tr>
 			<td colspan="6" align="right">
-				<c:if test="${Ldto.member_id eq dto.post_writer }">
-					<button onclick="postFormSubmit(1);">수정</button>
-					<button onclick="postFormSubmit(2);">삭제</button>
-				<form id="postForm" action="" method="post">
-		            <input type="hidden" name="post_id" value="${ dto.post_id }">
-		           	<input type="hidden" name="filePath" value="${ dto.changeName }"> 
-		           	<!-- 첨부파일존재o : "파일경로" / 첨부파일존재x : "" -->
-		        </form>
-		        <script>
-	            	function postFormSubmit(num){
-	            		if(num == 1){ // 수정하기 클릭시
-	            			$("#postForm").attr("action", "qnaUpdateForm.do").submit();
-	            		}else{ // 삭제하기 클릭시
-	            			$("#postForm").attr("action", "qnaDelete.do").submit();
-	            		}
-	            	}
-	            </script>
-				</c:if>
-				<button onclick="location.href='qnaList.do'">목록</button>
+				<c:choose>
+					<c:when test="${Ldto.member_id eq dto.post_writer }">
+						<button onclick="postFormSubmit(1);">수정</button>
+						<button onclick="postFormSubmit(2);">삭제</button>
+						<button onclick="location.href='qnaList.do'">목록</button>
+					<form id="postForm" action="" method="post">
+			            <input type="hidden" name="post_id" value="${ dto.post_id }">
+			           	<input type="hidden" name="filePath" value="${ dto.changeName }"> 
+			           	<!-- 첨부파일존재o : "파일경로" / 첨부파일존재x : "" -->
+			        </form>
+			        <script>
+		            	function postFormSubmit(num){
+		            		if(num == 1){ // 수정하기 클릭시
+		            			$("#postForm").attr("action", "qnaUpdateForm.do").submit();
+		            		}else{ // 삭제하기 클릭시
+		            			$("#postForm").attr("action", "qnaDelete.do").submit();
+		            		}
+		            	}
+		            </script>
+					</c:when>
+					<c:otherwise>
+						<button onclick="location.href='qnaList.do'">목록</button>
+					</c:otherwise>
+				</c:choose>
+				
 			</td>
 		</tr>
 	</table>
@@ -135,16 +142,23 @@
 		
 		function selectCommentList(){
 			$.ajax({
+				type : "post",
 				url : "commentList.do",
 				data: {post_id : ${dto.post_id}},
 				success: function(list){
 					var value = "";
-					$.each(list, function(i, obj){
+					$.each(list.list, function(i, obj){
 						value += "<tr>"
 							  +		"<td>" + obj.comment_writer + "</td>"
 							  +		"<td>" + obj.comment_content + "</td>"
 							  +		"<td>" + obj.comment_regdate + "</td>"
 							  +  "</tr>";
+						if('${Ldto.member_id}' == obj.comment_writer){
+							value += "<tr>"
+								  + "<td colspan='3' align='right'><button onclick='updateComment(this);'>수정</button></td>"
+								  + "<td colspan='3' align='right'><button onclick='deleteComment(this);'>삭제</button></td>"
+								  + "</tr>"
+						}
 					});
 					
 					$("#commentBody").html(value);

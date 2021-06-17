@@ -25,7 +25,7 @@
 
 		<typeAlias type="com.spring.bookduck.introduce.dto.IntroduceDto" alias="intdDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.CommentDto" alias="commentDto"/>
-		<typeAlias type="com.spring.bookduck.paydto.PayDto" alias="payDto"/>
+		<typeAlias type="com.spring.bookduck.pay.dto.PayDto" alias="payDto"/>
 
 	</typeAliases>
 	

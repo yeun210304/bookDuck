@@ -14,6 +14,7 @@ import com.spring.bookduck.introduce.biz.IntroduceBiz;
 import com.spring.bookduck.introduce.dto.IntroduceDto;
 import com.spring.bookduck.model.dto.MemberDto;
 import com.spring.bookduck.pay.controller.PayController;
+import com.spring.bookduck.pay.dto.PayDto;
 
 
 @Controller
@@ -25,15 +26,17 @@ public class MypageController {
 	private IntroduceBiz biz;
 	
 	@RequestMapping("mypage.do")
-	public String mypage(HttpSession session, HttpServletRequest request,MemberDto paydto, int intd_no,Model model ) {
+	public String mypage(HttpSession session, HttpServletRequest request,MemberDto dto,PayDto paydto,IntroduceDto intdDto,String intd_id,Model model ) {
 		
 
 		logger.info("[Controller] mypage.do ");
 		
 		session= request.getSession();
-		model.addAttribute("member_payrole",paydto.getMember_payrole().equals("Y"));
-		model.addAttribute("dto",biz.selectone(intd_no));
-		
+		model.addAttribute("member_id",dto.getMember_id());
+		model.addAttribute("member_payrole",dto.getMember_payrole().equals("Y"));
+		model.addAttribute("pay_id", paydto.getPay_id());
+		model.addAttribute("intd_id",intdDto.getIntd_id());
+		model.addAttribute("intd_id",biz.selectone(intd_id));
 		return"mypage";
 	}
 }

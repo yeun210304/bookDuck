@@ -12,12 +12,12 @@ public class IntroduceDaoIpml implements IntroduceDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public IntroduceDto selectone(int intd_no) {
+	public IntroduceDto selectone(String intd_id) {
 		
 		IntroduceDto dto = new IntroduceDto();
 		
 		try {
-			dto= sqlSession.selectOne(namespace+"intdselectone",intd_no);
+			dto= sqlSession.selectOne(namespace+"intdselectone",intd_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

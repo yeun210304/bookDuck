@@ -34,4 +34,11 @@ public interface BoardBiz {
 	//댓글 작성
 	public int insertComment(CommentDto dto);
 	public int increaseComment(int post_id);
+	
+	// 댓글 수정
+	public int updateComment(CommentDto dto);
+	
+	// 댓글 삭제
+	public int deleteComment(int comment_id);
+	public int decreaseComment(int post_id);
 }

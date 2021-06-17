@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.bookduck.model.dao.BoardDao;
 import com.spring.bookduck.model.dto.CommentDto;
@@ -52,8 +53,12 @@ public class BoardBizImpl implements BoardBiz {
 		return dao.updateBoard(dto);
 	}
 
+	@Transactional
 	@Override
 	public int deleteBoard(int post_id) {
+		
+		dao.deleteAllComment(post_id);
+		
 		return dao.deleteBoard(post_id);
 	}
 
@@ -70,6 +75,21 @@ public class BoardBizImpl implements BoardBiz {
 	@Override
 	public int increaseComment(int post_id) {
 		return dao.increaseComment(post_id);
+	}
+
+	@Override
+	public int updateComment(CommentDto dto) {
+		return dao.updateComment(dto);
+	}
+
+	@Override
+	public int deleteComment(int comment_id) {
+		return dao.deleteComment(comment_id);
+	}
+
+	@Override
+	public int decreaseComment(int post_id) {
+		return dao.decreaseComment(post_id);
 	}
 	
 }

@@ -142,7 +142,63 @@ public class BoardDaoImpl implements BoardDao {
 	public int increaseComment(int post_id) {
 		int res = 0;
 		
-		res = sqlSession.update(NAMESPACE + "increaseComment", post_id);
+		try {
+			res = sqlSession.update(NAMESPACE + "increaseComment", post_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int updateComment(CommentDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE + "updateComment", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return res;
+	}
+
+	@Override
+	public int deleteComment(int comment_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"deleteComment", comment_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int decreaseComment(int post_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE + "decreaseComment", post_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	@Override
+	public int deleteAllComment(int post_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE + "allCommentDelete", post_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return res;
 	}

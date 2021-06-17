@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.bookduck.model.dto.MemberDto;
 import com.spring.bookduck.pay.biz.PayBiz;
 import com.spring.bookduck.pay.dto.PayDto;
 
@@ -21,7 +22,7 @@ public class PayController {
 	private PayBiz biz;
 
 	@RequestMapping("payorder.do")
-	public String payorder() {
+	public String payorder(Model model) {
 		logger.info("[Controller]  payorder.do ");
 		return "pay/payorder";
 	}

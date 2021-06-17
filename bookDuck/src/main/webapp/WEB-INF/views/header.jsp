@@ -1,3 +1,4 @@
+<%@page import="com.spring.bookduck.pay.dto.PayDto"%>
 <%@page import="com.spring.bookduck.model.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -20,10 +21,11 @@
 	
 	<c:if test="${Ldto != null }">
 		<p>${Ldto.member_id }님 안녕하세요.</p>
-		<a href="mypage.do">MYPAGE</a>
+		<a href="mypage.do?member_id=${Ldto.member_id}&member_payrole=${Ldto.member_payrole}&intd_id=${intd_id}">MYPAGE</a>
 		<a href="updatePwForm.do">비밀번호변경</a>
 		<a href="leaveAccountForm.do">회원탈퇴</a>
 	</c:if>
+	
 
 </body>
 </html>

@@ -1,9 +1,19 @@
 package com.spring.bookduck.model.biz;
 
+import java.util.List;
+
+import com.spring.bookduck.model.dto.CommentDto;
+import com.spring.bookduck.model.dto.PageInfo;
 import com.spring.bookduck.model.dto.PostDto;
 
 public interface BoardBiz {
-
+	
+	static String NAMESPACE = "boardMapper.";
+	
+	// 게시판 리스트 조회 (페이징 처리)
+	public int selectListCount(int board_id);
+	public List<PostDto> selectList(PageInfo pi, int board_id);
+	
 	// 게시글 상세조회
 	public int increaseCount(int post_id);
 	public PostDto selectOne(int post_id);
@@ -13,10 +23,15 @@ public interface BoardBiz {
 	public int insertQNA(PostDto dto);
 	
 	// 게시글 수정
-	int updateBoard(PostDto dto);
+	public int updateBoard(PostDto dto);
 	
 	// 게시글 삭제
-	int deleteBoard(int post_id);
+	public int deleteBoard(int post_id);
 	
+	// 댓글 조회
+	List<CommentDto> selectCommentList(int post_id);
 
+	//댓글 작성
+	public int insertComment(CommentDto dto);
+	public int increaseComment(int post_id);
 }

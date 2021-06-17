@@ -1,6 +1,6 @@
-package com.spring.bookduck.paybiz;
+package com.spring.bookduck.pay.biz;
 
-import com.spring.bookduck.paydto.PayDto;
+import com.spring.bookduck.pay.dto.PayDto;
 
 
 public interface PayBiz {

@@ -40,8 +40,10 @@ public class LoginController {
 		MemberDto res = biz.login(dto);
 		boolean check = false;
 		if(res !=null) {
+
 			session.setAttribute("Ldto", res); //세션 생성
 			session.setMaxInactiveInterval(10*60); //세션 시간 설정
+
 			check=true;
 		}
 		Map<String, Boolean> map = new HashMap<String, Boolean>();

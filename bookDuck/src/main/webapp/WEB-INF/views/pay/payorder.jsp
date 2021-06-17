@@ -15,7 +15,7 @@
 	<div>
 		<h3>ID</h3>
 		<span> 
-			<input type="text" name="pay_id" />
+			<input name="pay_id" value="${dto.member_id}" />
 		</span>
 	</div>
 	<div>

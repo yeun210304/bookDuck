@@ -1,8 +1,10 @@
+<%@page import="com.spring.bookduck.pay.dto.PayDto"%>
+<%@page import="com.spring.bookduck.model.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>    
 <% response.setContentType("text/html; charset=UTF-8"); %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String id = "";
 	if (session.getAttribute("id") != null) {
@@ -15,6 +17,8 @@
 	} else {
 		nick = "NICK NULL";
 	}
+	MemberDto Ldto = (MemberDto)session.getAttribute("Ldto");
+	PayDto payDto = (PayDto)session.getAttribute("payDto");
 %>
 	
 <html>
@@ -22,7 +26,9 @@
 <title>Home</title>
 </head>
 <body>
+
 <%@ include file="header.jsp" %>
+
 	<div class="RealTimeNovle">
 		<h3>모두와 소설</h3>
 		<!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
@@ -187,6 +193,11 @@
 	
 	<a href="loginform.do">로그인</a>
 
-	<a href="mypage.do">MYPAGE</a>
+	<a href="mypage.do?member_payrole=${dto.member_payrole}&intd_no=${intd_no}">MYPAGE</a>
+	
+	<a href="noticeList.do">공지사항</a>
+	
+	<a href="qnaList.do">문의게시판</a>
+
 </body>
 </html>

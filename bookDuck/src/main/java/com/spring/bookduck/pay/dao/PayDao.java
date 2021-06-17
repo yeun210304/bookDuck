@@ -1,6 +1,6 @@
-package com.spring.bookduck.paydao;
+package com.spring.bookduck.pay.dao;
 
-import com.spring.bookduck.paydto.PayDto;
+import com.spring.bookduck.pay.dto.PayDto;
 
 public interface PayDao {
 	

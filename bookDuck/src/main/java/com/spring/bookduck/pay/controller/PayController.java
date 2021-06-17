@@ -1,4 +1,4 @@
-package com.spring.bookduck.paycontroller;
+package com.spring.bookduck.pay.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.spring.bookduck.paybiz.PayBiz;
-import com.spring.bookduck.paydto.PayDto;
+import com.spring.bookduck.pay.biz.PayBiz;
+import com.spring.bookduck.pay.dto.PayDto;
 
 @Controller
 public class PayController {

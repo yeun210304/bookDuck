@@ -1,10 +1,10 @@
-package com.spring.bookduck.paydao;
+package com.spring.bookduck.pay.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.spring.bookduck.paydto.PayDto;
+import com.spring.bookduck.pay.dto.PayDto;
 @Repository
 public class PayDaoImpl implements PayDao {
 

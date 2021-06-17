@@ -1,5 +1,7 @@
 package com.spring.bookduck.model.dto;
 
+import java.util.Date;
+
 public class PostDto {
 	
 	private int post_id;
@@ -9,7 +11,7 @@ public class PostDto {
 	private String post_writer;
 	private String post_title;
 	private String post_content;
-	private String post_regdate;
+	private Date post_regdate;
 	private int post_hit;
 	private int post_comment_count;
 	private String post_delflag;
@@ -20,7 +22,7 @@ public class PostDto {
 	}
 
 	public PostDto(int post_id, int board_id, int post_no, String post_category, String post_writer, String post_title,
-			String post_content, String post_regdate, int post_hit, int post_comment_count, String post_delflag,
+			String post_content, Date post_regdate, int post_hit, int post_comment_count, String post_delflag,
 			String originName, String changeName) {
 		this.post_id = post_id;
 		this.board_id = board_id;
@@ -93,11 +95,11 @@ public class PostDto {
 		this.post_content = post_content;
 	}
 
-	public String getPost_regdate() {
+	public Date getPost_regdate() {
 		return post_regdate;
 	}
 
-	public void setPost_regdate(String post_regdate) {
+	public void setPost_regdate(Date post_regdate) {
 		this.post_regdate = post_regdate;
 	}
 

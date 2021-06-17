@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="introduce">
+
+
+<select id="intdselectone" parameterType="int" resultType="intdDto" >
+SELECT INTD_NO,INTD_ID,INTD_CONTENT
+FROM INTRODUCETABLE
+WHERE INTD_NO= #{INTD_NO} ;
+</select>
+
+</mapper>

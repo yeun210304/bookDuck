@@ -9,7 +9,7 @@
 	</insert>
 	<!--결제시 유저 정보 회원으로 변경  -->
 	<update id="payroleupdate" parameterType="PayDto">
-		UPDATE MEMBER SET MEMBER_PAYROLE = 'N'
+		UPDATE MEMBER SET MEMBER_PAYROLE = 'Y'
 		WHERE MEMBER_ID =#{MEMBER_ID}
 	</update>
 

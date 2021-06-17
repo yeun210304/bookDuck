@@ -12,8 +12,8 @@ public class IntroduceBizImpl implements IntroduceBiz {
 	private IntroduceDao dao;
 	
 	@Override
-	public IntroduceDto selectone(int intd_no) {
-		return dao.selectone(intd_no);
+	public IntroduceDto selectone(String intd_id) {
+		return dao.selectone(intd_id);
 	}
 
 	@Override

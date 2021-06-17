@@ -7,10 +7,21 @@ INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, 'admin2', 'admin1234', 20, 'F', 'ad
 SELECT * FROM MEMBER
 
 
+
+
+
+
+
+
 INSERT INTO PAYTABLE
 VALUES (PAY_NO.NEXTVAL,'5000','회원권',SYSDATE,'admin')
 
 SELECT * FROM PAYTABLE
+
+SELECT MEMBER_PAYROLE
+FROM MEMBER
+WHERE MEMBER_ID='woobin'
+
 
 DELETE FROM PAYTABLE
 WHERE PAY_ID = 'admin'
@@ -19,14 +30,6 @@ UPDATE MEMBER SET MEMBER_PAYROLE = 'Y'
 WHERE MEMBER_ID ='user'
 
 
-
-
-select a.sid , a.serial#
-from v$session a , v$lock b , dba_objects c
-where a.sid = b.sid 
-and b.id1 = c.object_id
-and b.type = 'TM' 
-and c.object_name= INTRODUCETABLE;
 
 
 
@@ -42,8 +45,7 @@ SELECT * FROM INTRODUCETABLE;
 
 SELECT INTD_NO,INTD_ID,INTD_CONTENT
 FROM INTRODUCETABLE
-WHERE INTD_NO= 2 ;
-
+WHERE INTD_ID= 'user' ;
 
 
 

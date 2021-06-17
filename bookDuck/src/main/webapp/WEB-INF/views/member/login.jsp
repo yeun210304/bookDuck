@@ -27,7 +27,7 @@
 		}else{
 			$.ajax({
 				type:"post",
-				url:"ajaxlogin.do",
+				url:"login.do",
 				data:JSON.stringify(loginVal),
 				contentType:"application/json",
 				dataType:"json",
@@ -58,6 +58,7 @@
 
 
 <body>
+
 	<table>
 			<tr>
 				<th>ID</th>

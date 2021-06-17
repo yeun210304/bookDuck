@@ -24,8 +24,7 @@ public interface LoginDao {
 	public int leaveAccount(int member_no);
 	
 	//아이디 중복 확인
-	public void Register(Map map);
-	public MemberDto Id_Check(String id);
+	public int idCheck(MemberDto dto);
 	
 
 }

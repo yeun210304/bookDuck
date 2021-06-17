@@ -2,7 +2,6 @@
 <%@page import="com.spring.bookduck.model.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <% request.setCharacterEncoding("UTF-8"); %>    
 <% response.setContentType("text/html; charset=UTF-8"); %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -27,7 +26,8 @@
 <title>Home</title>
 </head>
 <body>
-	
+
+<%@ include file="header.jsp" %>
 
 	<div class="RealTimeNovle">
 		<h3>모두와 소설</h3>

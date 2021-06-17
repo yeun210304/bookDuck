@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.bookduck.model.biz.LoginBiz;
 import com.spring.bookduck.model.dto.MemberDto;
@@ -98,6 +99,28 @@ public class LoginController {
 			return "member/login";
 		}
 		return "member/login";
+	}
+	
+	@RequestMapping("/leaveAccountForm.do")
+	public String leaveAccountForm() throws Exception{
+		logger.info("[Controller] : leaveAccountForm.do");
+		return "member/leaveAccountForm";
+	}
+	
+	@RequestMapping("/leaveAccount.do")
+	public String leaveAccount(MemberDto dto, HttpSession session, RedirectAttributes rttr) throws Exception{
+		logger.info("[Controller] : leaveAccount.do");
+		MemberDto member = (MemberDto) session.getAttribute("Ldto");
+		String sessionPass = member.getMember_pw();
+		String dtoPass = dto.getMember_pw();
+		
+		if(!(sessionPass.equals(dtoPass))) {
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/member/leaveAccountForm";
+		}
+		biz.leaveAccount(dto);
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 	

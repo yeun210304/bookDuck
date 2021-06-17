@@ -58,7 +58,8 @@
 	<!-- 탈퇴 -->
 	<delete id="leaveAccount">
 		DELETE FROM MEMBER
-		WHERE MEMBER_NO = #{member_no}
+		WHERE MEMBER_ID = #{member_id} 
+		AND MEMBER_PW = #{member_pw}
 	</delete>
 	
 </mapper>

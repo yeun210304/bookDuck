@@ -194,5 +194,10 @@
 	<a href="loginform.do">로그인</a>
 
 	<a href="mypage.do?member_payrole=${dto.member_payrole}&intd_no=${intd_no}">MYPAGE</a>
+	
+	<a href="noticeList.do">공지사항</a>
+	
+	<a href="qnaList.do">문의게시판</a>
+
 </body>
 </html>

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
 
@@ -39,11 +40,11 @@
 			<th colspan="6">내용</th>
 		</tr>
 		<tr>
-			<td colspan="6">${dto.boardContent }</td>
+			<td colspan="6">${dto.post_content }</td>
 		</tr>
 		<tr>
-			<td colspan="6">
-				<c:if test="${Ldto.member_Id eq dto.post_writer }">
+			<td colspan="6" align="right">
+				<c:if test="${Ldto.member_id eq dto.post_writer }">
 					<button onclick="postFormSubmit(1);">수정</button>
 					<button onclick="postFormSubmit(2);">삭제</button>
 				<form id="postForm" action="" method="post">

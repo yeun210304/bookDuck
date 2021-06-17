@@ -190,5 +190,9 @@
 	<a href="loginform.do">로그인</a>
 
 	<a href="mypage.do">MYPAGE</a>
+	
+	<a href="noticeList.do">공지사항</a>
+	
+	<a href="qnaList.do">문의게시판</a>
 </body>
 </html>

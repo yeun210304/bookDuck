@@ -1,10 +1,10 @@
-package com.spring.bookduck.paybiz;
+package com.spring.bookduck.pay.biz;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.bookduck.paydao.PayDao;
-import com.spring.bookduck.paydto.PayDto;
+import com.spring.bookduck.pay.dao.PayDao;
+import com.spring.bookduck.pay.dto.PayDto;
 @Service
 public class PayBizImpl implements PayBiz {
 	

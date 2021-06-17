@@ -1,4 +1,4 @@
-package com.spring.bookduck.paydto;
+package com.spring.bookduck.pay.dto;
 
 import java.sql.Date;
 

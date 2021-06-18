@@ -145,9 +145,9 @@
 				type : "post",
 				url : "commentList.do",
 				data: {post_id : ${dto.post_id}},
-				success: function(list){
+				success: function(data){
 					var value = "";
-					$.each(list.list, function(i, obj){
+					$.each(data.list, function(i, obj){
 						value += "<tr>"
 							  +		"<td>" + obj.comment_writer + "</td>"
 							  +		"<td><textarea rows='2' cols='50' name='"+ obj.comment_id +"' readonly>" + obj.comment_content + "</textarea></td>"
@@ -162,7 +162,7 @@
 					});
 					
 					$("#commentBody").html(value);
-					$("#ccount").html(list.list.length);
+					$("#ccount").html(data.list.length);
 					
 				}, error: function(){
 					console.log("댓글 리스트 조회용 ajax 실패")

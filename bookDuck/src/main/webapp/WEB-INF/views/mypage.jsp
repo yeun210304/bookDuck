@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.spring.bookduck.pay.dto.PayDto"%>
 <%@page import="com.spring.bookduck.introduce.dto.IntroduceDto"%>
 <%@page import="com.spring.bookduck.model.dto.MemberDto"%>
@@ -11,7 +12,7 @@
 <title>Insert title here</title>
   <%
   MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
-  
+  IntroduceDto dto2 = (IntroduceDto)request.getAttribute("intdDto");
   %>
 
 </head>
@@ -28,10 +29,21 @@
 			<p>유료회원 입니다.</p>
 		</c:if>
 <div>
+	<%
+		if(dto2 == null){
+	%>
+		<table>
+			<tr>
+				<td colspan="1" align="center" onclick="location.href='intdinsert.do'">자기소개를 작성해 주세요</td>
+			</tr>
+		</table>
+	<%		
+		}
+	%>
 	<table>
 		<tr>
 			<th>자기소개</th>
-			<td><textarea rows="10" cols="10">${indto.content }</textarea></td>
+			<td><input type="text" name="intd_content" value="<%=dto2.getIntd_content() %>"></td>
 		</tr>
 	</table>
 </div>		

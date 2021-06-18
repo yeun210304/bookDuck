@@ -26,17 +26,19 @@ public class MypageController {
 	private IntroduceBiz biz;
 	
 	@RequestMapping("mypage.do")
-	public String mypage(HttpSession session, HttpServletRequest request,MemberDto dto,PayDto paydto,IntroduceDto intdDto,String intd_id,Model model ) {
+	public String mypage(HttpSession session, HttpServletRequest request,MemberDto dto,Model model ) {
 		
 
 		logger.info("[Controller] mypage.do ");
-		
 		session= request.getSession();
 		model.addAttribute("member_id",dto.getMember_id());
-		model.addAttribute("member_payrole",dto.getMember_payrole().equals("Y"));
-		model.addAttribute("pay_id", paydto.getPay_id());
-		model.addAttribute("intd_id",intdDto.getIntd_id());
-		model.addAttribute("intd_id",biz.selectone(intd_id));
-		return"mypage";
+		model.addAttribute("member_payrole",dto.getMember_payrole());
+	 	IntroduceDto intdres = biz.selectone(dto.getMember_id());
+	 	
+		model.addAttribute("intdDto",intdres);
+		
+		
+		
+		return "mypage";
 	}
 }

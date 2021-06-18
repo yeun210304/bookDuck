@@ -39,6 +39,7 @@
 						var pay_price = $("input[name=pay_price]").val();
 						//결제가 성공하면 얼럿창으로 로그를 확인하고 
 						alert(msg);
+						alert('다시 로그인 해주세요.');
 						//성공 시 location 으로 정보를 넘기며 컨트롤러에서 코드가 실행된다.
 						location.href ='pay.do?pay_id=' + pay_id + '&pay_price=' + pay_price;
 						

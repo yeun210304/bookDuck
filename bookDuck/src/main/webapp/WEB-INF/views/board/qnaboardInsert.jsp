@@ -50,11 +50,37 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		  $('#summernote').summernote({
-			  height: 300,
-			  minHeight: 300,
-			  maxHeight: null
+			  height: 300,		//에디터 높이
+			  minHeight: 300,	//최대 높이 => 설정시, 스크롤바 생성
+			  maxHeight: null,
+			  lang: "ko-KR",	// 한글 설정
+			  callbacks: {		// 콜백사용
+				  onImageUpload: function(files, editor, welEditable){
+					  console.log(files)
+					  for(var i = files.length - 1; i >= 0; i--){
+						  sendFile(files[i], this);
+					  }
+				  }
+			  }
 		  });
 		});
+		
+		function sendFile(file, el){
+			var form_data = new FormData();
+			form_data.append('file', file);
+			$.ajax({
+				data : form_data,
+				type : "POST",
+				url : 'imageUpload.do',
+				cache : false,
+				contentType : false,
+				enctype: 'multipart/form-data',
+				processData: false,
+				success: function(img_name){
+					$(el).summernote('editor.insertImage', img_name);
+				}
+			});
+		}
 	</script>
 </body>
 </html>

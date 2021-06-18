@@ -108,6 +108,31 @@ public class QNABoardController {
 		return changeName;
 		}
 	
+	@RequestMapping("/imageUpload.do")
+	public void imageUpload(HttpSession session, MultipartFile mpfile) {
+		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+		
+		File storage = new File(savePath);
+		
+		if(!storage.exists()) {
+			storage.mkdirs();
+		}
+		
+		String originName = mpfile.getOriginalFilename();  // 원본명 ("aaa.jpg")
+			
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int ranNum = (int)(Math.random() * 900000 + 10000);
+		String ext = originName.substring(originName.lastIndexOf("."));
+			
+		String changeName = currentTime + ranNum + ext;
+		
+		try {
+			mpfile.transferTo(new File(savePath + changeName));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping("/qnaUpdateForm.do")
 	public String updateForm(int post_id, Model model) {
 		model.addAttribute("dto", boardBiz.selectOne(post_id)); 

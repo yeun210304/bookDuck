@@ -48,6 +48,7 @@ public class QNABoardController {
 
 		if(boardBiz.increaseCount(post_id) > 0) {
 			model.addAttribute("dto", boardBiz.selectOne(post_id));
+			model.addAttribute("commentDto", boardBiz.selectCommentList(post_id));
 			return "board/qnaboardDetail";
 		} else {
 			model.addAttribute("errorMsg", "게시글 상세조회 실패");
@@ -165,6 +166,27 @@ public class QNABoardController {
 	public String ajaxInsertComment(CommentDto dto) {
 		if(boardBiz.insertComment(dto) > 0) {
 			boardBiz.increaseComment(dto.getPost_id());
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/commentUpdate.do")
+	public String ajaxUpdateComment(CommentDto dto) {
+		if(boardBiz.updateComment(dto) > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/commentDelete.do")
+	public String ajaxDeleteComment(int comment_id, int post_id) {
+		if(boardBiz.deleteComment(comment_id) > 0) {
+			boardBiz.decreaseComment(post_id);
 			return "success";
 		} else {
 			return "fail";

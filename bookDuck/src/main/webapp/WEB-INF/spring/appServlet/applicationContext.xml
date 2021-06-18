@@ -34,5 +34,9 @@
 		<property name="maxUploadSize" value="100000000"/>
 		<property name="maxInMemorySize" value="100000000"/>
 	</bean>
-		
+	
+	<!-- transaction manager -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
 </beans>

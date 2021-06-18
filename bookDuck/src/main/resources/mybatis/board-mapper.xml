@@ -75,6 +75,12 @@
 		WHERE POST_ID = #{post_id}
 	</update>
 	
+	<update id="allCommentDelete" parameterType="int">
+		UPDATE COMM
+		SET COMMENT_DELFLAG = 'Y'
+		WHERE POST_ID = #{post_id}
+	</update>
+	
 	<select id="selectCommentList" parameterType="int" resultType="commentDto">
 		SELECT COMMENT_ID, POST_ID, COMMENT_NO, COMMENT_GROUPNO, COMMENT_GROUPSEQ, COMMENT_CONTENT, COMMENT_WRITER, COMMENT_REGDATE, COMMENT_TITLETAB, COMMENT_DELFLAG
 		FROM COMM
@@ -94,11 +100,19 @@
 		WHERE POST_ID = #{post_id}
 	</update>
 	
-	<delete id="deleteComment" parameterType="int">
+	<update id="updateComment" parameterType="commentDto">
+		UPDATE COMM
+		SET COMMENT_CONTENT = #{comment_content},
+		COMMENT_REGDATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD') 
+		WHERE COMMENT_ID = #{comment_id}
+	</update>
+	
+	<update id="deleteComment" parameterType="int">
 		UPDATE COMM
 		SET COMMENT_DELFLAG = 'Y'
 		WHERE COMMENT_ID = #{comment_id}
-	</delete>
+	</update>
+	
 	<update id="decreaseComment" parameterType="int">
 		UPDATE POST
 		SET POST_COMMENT_COUNT = POST_COMMENT_COUNT - 1

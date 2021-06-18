@@ -90,10 +90,10 @@
 						<th colspan="2">
 							<textarea rows="2" cols="55" id="comment" readonly>로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해 주세요.</textarea>
 						</th>
-						<th><button disabled>동록</button></th>
+						<th><button disabled>등록</button></th>
 					</c:when>
 					<c:otherwise>
-						<th>
+						<th colspan="2">
 							<textarea rows="2" cols="55" id="comment"></textarea>
 						</th>
 						<th><button onclick="addComment();">등록</button></th>
@@ -101,7 +101,7 @@
 				</c:choose>
 			</tr>
 			<tr>
-				<td colspan="3">댓글(<span id="ccount">${dto.post_comment_count}</span>)</td>
+				<td colspan="3">댓글(<span id="ccount"></span>)</td>
 			</tr>
 		</thead>
 		<tbody id="commentBody">
@@ -150,21 +150,62 @@
 					$.each(list.list, function(i, obj){
 						value += "<tr>"
 							  +		"<td>" + obj.comment_writer + "</td>"
-							  +		"<td>" + obj.comment_content + "</td>"
+							  +		"<td><textarea rows='2' cols='50' name='"+ obj.comment_id +"' readonly>" + obj.comment_content + "</textarea></td>"
 							  +		"<td>" + obj.comment_regdate + "</td>"
 							  +  "</tr>";
 						if('${Ldto.member_id}' == obj.comment_writer){
 							value += "<tr>"
-								  + "<td colspan='3' align='right'><button onclick='updateComment(this);'>수정</button></td>"
-								  + "<td colspan='3' align='right'><button onclick='deleteComment(this);'>삭제</button></td>"
+								  + "<td colspan='3' align='right'><button name='"+obj.comment_id+"' onclick='updateCommentForm("+ obj.comment_id +");'>수정</button>"
+								  + "<button onclick='deleteComment("+ obj.comment_id +");'>삭제</button></td>"
 								  + "</tr>"
 						}
 					});
 					
 					$("#commentBody").html(value);
+					$("#ccount").html(list.list.length);
 					
 				}, error: function(){
 					console.log("댓글 리스트 조회용 ajax 실패")
+				}
+			});
+		}
+		
+		function updateCommentForm(comment_id){
+			$("textarea[name='"+comment_id+"']").attr('readonly', false).focus();
+			$("button[name='"+comment_id+"']").attr('onclick', 'updateComment('+comment_id+');')
+		}
+		
+		function updateComment(comment_id){
+			var newComment = $("textarea[name='"+comment_id+"']").val();
+			console.log(newComment);
+			$.ajax({
+				url : "commentUpdate.do",
+				data : {"comment_id" : comment_id,
+					"comment_content" : newComment},
+				success : function(status){
+					if(status == "success"){
+						$("textarea[name='"+comment_id+"']").attr('readonly', true);
+						$("button[name='"+comment_id+"']").attr('onclick', 'updateCommentForm('+comment_id+');')
+						selectCommentList();
+					}
+				},
+				error: function(){
+					console.log("댓글 수정용 ajax 통신 실패");
+				}
+			});
+		}
+		
+		function deleteComment(comment_id){
+			$.ajax({
+				url: "commentDelete.do",
+				data: {"comment_id" : comment_id,
+						"post_id" : ${dto.post_id}},
+				success : function(status){
+					if(status == "success"){
+						selectCommentList();
+					}
+				}, error: function(){
+					console.log("댓글 삭제 ajax 통신실패");
 				}
 			});
 		}

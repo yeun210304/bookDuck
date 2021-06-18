@@ -48,6 +48,7 @@ public class QNABoardController {
 
 		if(boardBiz.increaseCount(post_id) > 0) {
 			model.addAttribute("dto", boardBiz.selectOne(post_id));
+			model.addAttribute("commentDto", boardBiz.selectCommentList(post_id));
 			return "board/qnaboardDetail";
 		} else {
 			model.addAttribute("errorMsg", "게시글 상세조회 실패");
@@ -107,6 +108,31 @@ public class QNABoardController {
 		return changeName;
 		}
 	
+	@RequestMapping("/imageUpload.do")
+	public void imageUpload(HttpSession session, MultipartFile mpfile) {
+		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+		
+		File storage = new File(savePath);
+		
+		if(!storage.exists()) {
+			storage.mkdirs();
+		}
+		
+		String originName = mpfile.getOriginalFilename();  // 원본명 ("aaa.jpg")
+			
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int ranNum = (int)(Math.random() * 900000 + 10000);
+		String ext = originName.substring(originName.lastIndexOf("."));
+			
+		String changeName = currentTime + ranNum + ext;
+		
+		try {
+			mpfile.transferTo(new File(savePath + changeName));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping("/qnaUpdateForm.do")
 	public String updateForm(int post_id, Model model) {
 		model.addAttribute("dto", boardBiz.selectOne(post_id)); 
@@ -165,6 +191,27 @@ public class QNABoardController {
 	public String ajaxInsertComment(CommentDto dto) {
 		if(boardBiz.insertComment(dto) > 0) {
 			boardBiz.increaseComment(dto.getPost_id());
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/commentUpdate.do")
+	public String ajaxUpdateComment(CommentDto dto) {
+		if(boardBiz.updateComment(dto) > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/commentDelete.do")
+	public String ajaxDeleteComment(int comment_id, int post_id) {
+		if(boardBiz.deleteComment(comment_id) > 0) {
+			boardBiz.decreaseComment(post_id);
 			return "success";
 		} else {
 			return "fail";

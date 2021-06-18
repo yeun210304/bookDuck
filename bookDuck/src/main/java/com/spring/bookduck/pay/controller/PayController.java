@@ -1,6 +1,7 @@
 package com.spring.bookduck.pay.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,9 +63,10 @@ public class PayController {
 	}
 	//성공시 홈
 	@RequestMapping("paysuccess.do")
-	public String paysuccess() {
+	public String paysuccess(HttpSession session) {
+		session.invalidate();
 		logger.info("[Controller]  paysuccess.do ");
-
+		
 		return "home";
 	}
 	//결제취소시

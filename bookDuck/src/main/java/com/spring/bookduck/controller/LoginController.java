@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.bookduck.introduce.biz.IntroduceBiz;
+import com.spring.bookduck.introduce.dto.IntroduceDto;
 import com.spring.bookduck.model.biz.LoginBiz;
 import com.spring.bookduck.model.dto.MemberDto;
 
@@ -35,16 +37,15 @@ public class LoginController {
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Boolean> ajaxLogin(HttpSession session, @RequestBody MemberDto dto){
+	public Map<String, Boolean> ajaxLogin(HttpSession session, @RequestBody MemberDto dto ){
 		
 		logger.info("[Controller] : login.do");
 		MemberDto res = biz.login(dto);
+		
 		boolean check = false;
 		if(res !=null) {
-
 			session.setAttribute("Ldto", res); //세션 생성
 			session.setMaxInactiveInterval(10*60); //세션 시간 설정
-
 			check=true;
 		}
 		Map<String, Boolean> map = new HashMap<String, Boolean>();

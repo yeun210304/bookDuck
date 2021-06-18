@@ -48,6 +48,12 @@ public class IntroduceDto {
 		this.intd_content = intd_content;
 	}
 
+
+	@Override
+	public String toString() {
+		return "IntroduceDto [intd_no=" + intd_no + ", intd_id=" + intd_id + ", intd_content=" + intd_content + "]";
+	}
+
 	
 
 }

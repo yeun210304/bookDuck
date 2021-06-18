@@ -3,10 +3,13 @@
 <mapper namespace="introduce">
 
 
-<select id="intdselectone" parameterType="intdDto" >
-SELECT INTD_NO,INTD_ID,INTD_CONTENT
-FROM INTRODUCETABLE
-WHERE INTD_ID= #{INTD_ID} ;
+<select id="intdselectone" parameterType="String" resultType="intdDto" >
+
+SELECT INTD_ID, INTD_CONTENT, INTD_NO
+FROM MEMBER INNER JOIN INTRODUCETABLE
+ON MEMBER.MEMBER_ID = INTRODUCETABLE.INTD_ID
+WHERE MEMBER_ID  = #{intd_id}
+
 </select>
 
 </mapper>

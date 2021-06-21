@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.bookduck.Pagination;
 import com.spring.bookduck.model.biz.BoardBiz;
@@ -81,6 +82,7 @@ public class QNABoardController {
 	}
 	
 	// 전달받은 첨부파일 수정명 작업해서 서버에 업로드 시킨 후 해당 수정된파일명(서버에 업로된파일명)을 반환하는 메소드
+
 	public String saveFile(HttpSession session, MultipartFile mpfile) {
 		
 		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
@@ -108,9 +110,14 @@ public class QNABoardController {
 		return changeName;
 		}
 	
+	
 	@RequestMapping("/imageUpload.do")
-	public void imageUpload(HttpSession session, MultipartFile mpfile) {
-		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+	public String imageUpload(HttpSession session, MultipartHttpServletRequest mreq) {
+		
+		
+		int maxSize = 1024 * 1024 * 10;	//용량 제한
+		
+		String savePath = session.getServletContext().getRealPath("/resources/uploadImages/");
 		
 		File storage = new File(savePath);
 		
@@ -118,7 +125,9 @@ public class QNABoardController {
 			storage.mkdirs();
 		}
 		
-		String originName = mpfile.getOriginalFilename();  // 원본명 ("aaa.jpg")
+		MultipartFile attachFile = mreq.getFile("file");
+		
+		String originName = attachFile.getOriginalFilename();  // 원본명 ("aaa.jpg")
 			
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		int ranNum = (int)(Math.random() * 900000 + 10000);
@@ -127,11 +136,14 @@ public class QNABoardController {
 		String changeName = currentTime + ranNum + ext;
 		
 		try {
-			mpfile.transferTo(new File(savePath + changeName));
+			attachFile.transferTo(new File(savePath + changeName));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+		
+		return changeName;
+		}
+	
 	
 	@RequestMapping("/qnaUpdateForm.do")
 	public String updateForm(int post_id, Model model) {

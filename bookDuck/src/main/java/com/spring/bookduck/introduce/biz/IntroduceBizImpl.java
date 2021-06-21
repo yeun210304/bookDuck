@@ -23,12 +23,12 @@ public class IntroduceBizImpl implements IntroduceBiz {
 
 	@Override
 	public int update(IntroduceDto dto) {
-		return dao.insert(dto);
+		return dao.update(dto);
 	}
 
 	@Override
 	public int delete(IntroduceDto dto) {
-		return dao.insert(dto);
+		return dao.delete(dto);
 	}
 
 }

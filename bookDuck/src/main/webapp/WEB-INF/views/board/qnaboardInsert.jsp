@@ -55,19 +55,17 @@
 			  maxHeight: null,
 			  lang: "ko-KR",	// 한글 설정
 			  callbacks: {		// 콜백사용
-				  onImageUpload: function(files, editor, welEditable){
-					  console.log(files)
-					  for(var i = files.length - 1; i >= 0; i--){
-						  sendFile(files[i], this);
-					  }
+				  onImageUpload: function(files){
+					  console.log(files);
+					  sendFile(files[0]);
 				  }
 			  }
 		  });
 		});
 		
-		function sendFile(file, el){
-			var form_data = new FormData();
-			form_data.append('file', file);
+		function sendFile(file){
+			var data = new FormData();
+			data.append('file', file);
 			$.ajax({
 				data : form_data,
 				type : "POST",
@@ -77,7 +75,8 @@
 				enctype: 'multipart/form-data',
 				processData: false,
 				success: function(img_name){
-					$(el).summernote('editor.insertImage', img_name);
+					var image = $('<img>').attr('src', '/resources/uploadImages/' + img_name);
+					$("#summernote").summernote('editor.insertImage', image);
 				}
 			});
 		}

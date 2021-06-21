@@ -27,7 +27,16 @@ public class IntroduceDaoIpml implements IntroduceDao {
 
 	@Override
 	public int insert(IntroduceDto dto) {
-		return 0;
+		
+		int res =0;
+		
+		try {
+			res= sqlSession.insert(namespace+"insertintd",dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override

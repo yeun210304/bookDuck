@@ -45,7 +45,7 @@
 	  						MEMBER_PAYROLE, MEMBER_ROLE, MEMBER_TYPE,
 	  						MEMBER_BLIST)
 	  				VALUES (MEMBERSEQ.NEXTVAL, #{member_id}, #{member_pw}, #{member_age}, #{member_gender}, 
-	  						#{member_email}, 'Y', 'Y', 'USER', 'GENERAL', 'N')
+	  						#{member_email}, 'Y', 'N', 'USER', 'GENERAL', 'N')
   	</insert>
   	
   	<!-- 비밀번호 변경 -->

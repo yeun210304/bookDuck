@@ -12,4 +12,11 @@ WHERE MEMBER_ID  = #{intd_id}
 
 </select>
 
+<!-- 게시판 insert -->
+<insert id="insertintd" parameterType="intdDto">
+
+	INSERT INTO INTRODUCETABLE 
+	VALUES ( #{intd_id}, #{intd_content},INTD_NO.NEXTVAL)
+</insert>
+
 </mapper>

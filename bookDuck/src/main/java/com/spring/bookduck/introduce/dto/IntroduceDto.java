@@ -2,29 +2,20 @@ package com.spring.bookduck.introduce.dto;
 
 public class IntroduceDto {
 	
-	private int intd_no;
+	
 	private String intd_id;
 	private String intd_content;
-
+	private int intd_no;
 	
 	public IntroduceDto() {
 	}
 
 
-	public IntroduceDto(int intd_no, String intd_id, String intd_content) {
+	public IntroduceDto( String intd_id, String intd_content,int intd_no) {
 		super();
-		this.intd_no = intd_no;
+		
 		this.intd_id = intd_id;
 		this.intd_content = intd_content;
-	}
-
-
-	public int getIntd_no() {
-		return intd_no;
-	}
-
-
-	public void setIntd_no(int intd_no) {
 		this.intd_no = intd_no;
 	}
 
@@ -47,11 +38,21 @@ public class IntroduceDto {
 	public void setIntd_content(String intd_content) {
 		this.intd_content = intd_content;
 	}
+	
+
+	public int getIntd_no() {
+		return intd_no;
+	}
+
+
+	public void setIntd_no(int intd_no) {
+		this.intd_no = intd_no;
+	}
 
 
 	@Override
 	public String toString() {
-		return "IntroduceDto [intd_no=" + intd_no + ", intd_id=" + intd_id + ", intd_content=" + intd_content + "]";
+		return "IntroduceDto [intd_id=" + intd_id + ", intd_content=" + intd_content +"intd_no=" + intd_no +"]";
 	}
 
 	

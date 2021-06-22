@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.spring.bookduck.introduce.dto.IntroduceDto"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,8 +25,7 @@ function goWrite(frm) {
 	}
 	frm.submit();
 }
-</script>
-	
+</script>	
 <script type="text/javascript">
 		$(document).ready(function() {
 		  $('#summernote').summernote({
@@ -65,16 +64,17 @@ function goWrite(frm) {
 		}
 	</script>
 
-
 <body>
-<h2 style="text-align: center;">글 작성</h2><br><br><br>
+<h2 style="text-align: center;">자기소개 수정</h2><br><br><br>
 
 <div style="width: 60%; margin: auto;">
-	<form action="intdinsert.do" method="post">
-		<input type="text" name="intd_id" style="width: 20%;" value="${Ldto.member_id}"/><br>
+	<form action="updateintd.do" method="post">
+		<input type="hidden" name="intd_no" value="${intdDto.intd_no }">
+		<input type="text" name="member_id" readonly="readonly" style="width: 20%;" value="${Ldto.member_id}"/><br>
 		<br><br> 
-		<textarea id="summernote" name="intd_content"></textarea>
-		<input id="subBtn" type="button" value="글 작성" style="float: right;" onclick="goWrite(this.form)"/>
+		<textarea id="summernote" name="intd_content">${intdDto.intd_content}</textarea>
+		<input type="submit" value="수정" style="float: right;" onclick="goWrite(this.form)"/>
+		<input type="button" value="취소" onclick="location.href='home.do'"/>
 	</form>
 	
 	

@@ -12,6 +12,20 @@ public class IntroduceDaoIpml implements IntroduceDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
+	public IntroduceDto selectoneno(int intd_no) {
+		
+		IntroduceDto dto = new IntroduceDto();
+		
+		try {
+			dto= sqlSession.selectOne(namespace+"intdselectoneno",intd_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
+	@Override
 	public IntroduceDto selectone(String intd_id) {
 		
 		IntroduceDto dto = new IntroduceDto();
@@ -41,12 +55,30 @@ public class IntroduceDaoIpml implements IntroduceDao {
 
 	@Override
 	public int update(IntroduceDto dto) {
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(namespace+"updateintd",dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override
-	public int delete(IntroduceDto dto) {
-		return 0;
+	public int delete(int intd_no) {
+		
+		int res =0;
+		try {
+			res = sqlSession.delete(namespace+"deleteintd",intd_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
+
+	
 
 }

@@ -13,7 +13,14 @@
 <%
 MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 %>
-
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script>
+	$(document).ready(function() {
+		$('#summernote').summernote();
+		
+	});
+</script>
 </head>
 <body>
 	<h1>MYPAGE</h1>
@@ -34,7 +41,8 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 			<c:when test="${empty intdDto.intd_content}">
 				<table>
 					<tr>
-						<td colspan="1" align="center" onclick="location.href='intdinsertres.do'">자기소개를 작성해 주세요</td>
+						<td colspan="1" align="center"
+							onclick="location.href='intdinsertres.do?member_id=${Ldto.member_id}'">자기소개를 작성해 주세요</td>
 					</tr>
 				</table>
 			</c:when>
@@ -42,13 +50,20 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 				<table>
 					<tr>
 						<th>자기소개</th>
-						<td><input type="text" name="intd_content"
-							value="${intdDto.intd_content}"></td>
+						<td id="summernote">
+						${intdDto.intd_content}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="button" value="수정" onclick="location.href='updateintdres.do?intd_no=${intdDto.intd_no}'">	
+							<input type="button" value="삭제" onclick="location.href='deleteintd.do?intd_no=${intdDto.intd_no}'">
+						</td>
 					</tr>
 				</table>
 			</c:otherwise>
 		</c:choose>
-
+		<input type="button" value="Home" onclick="location.href='home.do'" />
 
 
 	</div>

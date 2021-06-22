@@ -12,6 +12,11 @@ public class IntroduceBizImpl implements IntroduceBiz {
 	private IntroduceDao dao;
 	
 	@Override
+	public IntroduceDto selectoneno(int intd_no) {
+		return dao.selectoneno(intd_no);
+	}
+	
+	@Override
 	public IntroduceDto selectone(String intd_id) {
 		return dao.selectone(intd_id);
 	}
@@ -27,8 +32,10 @@ public class IntroduceBizImpl implements IntroduceBiz {
 	}
 
 	@Override
-	public int delete(IntroduceDto dto) {
-		return dao.delete(dto);
+	public int delete(int intd_no) {
+		return dao.delete(intd_no);
 	}
+
+	
 
 }

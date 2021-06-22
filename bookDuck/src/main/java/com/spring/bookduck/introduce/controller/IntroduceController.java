@@ -68,4 +68,5 @@ public class IntroduceController {
 		return "redirect:mypage.do?member_id=" + Ldto.getMember_id() + "&member_payrole=" + Ldto.getMember_payrole();
 	}
 
+	
 }

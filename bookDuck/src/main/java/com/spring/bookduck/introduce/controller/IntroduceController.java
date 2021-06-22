@@ -14,61 +14,58 @@ import com.spring.bookduck.model.dto.MemberDto;
 
 @Controller
 public class IntroduceController {
-	
+
 	@Autowired
 	private IntroduceBiz biz;
-	
+
 	@RequestMapping("intdinsertres.do")
 	public String intdinsertres(Model model, MemberDto dto) {
-		
-		IntroduceDto intdres =biz.selectone(dto.getMember_id());
-		
-		model.addAttribute("intdDto",intdres);
+
+		IntroduceDto intdres = biz.selectone(dto.getMember_id());
+
+		model.addAttribute("intdDto", intdres);
 		System.out.println(intdres);
-		
+
 		return "introduce/intdinsertres";
 	}
+
 	@RequestMapping("intdinsert.do")
-	public String intdinsert(HttpSession session,HttpServletRequest request,IntroduceDto intdDto, MemberDto Ldto) {
+	public String intdinsert(HttpSession session, HttpServletRequest request, IntroduceDto intdDto, MemberDto Ldto) {
 		session = request.getSession();
-		if(biz.insert(intdDto)>0) {
+		if (biz.insert(intdDto) > 0) {
 			return "home";
 		}
 		return "introduce/intdinsertres";
 	}
+
 	@RequestMapping("updateintdres.do")
-	public String updateintdres(int intd_no,Model model) {
-		
-		model.addAttribute("intdDto",biz.selectoneno(intd_no));
-		
+	public String updateintdres(int intd_no, Model model) {
+
+		model.addAttribute("intdDto", biz.selectoneno(intd_no));
+
 		return "introduce/updateintdres";
 	}
+
 	@RequestMapping("updateintd.do")
-	public String updateintd(HttpSession session,HttpServletRequest request,IntroduceDto intdDto, MemberDto Ldto) {
+	public String updateintd(HttpSession session, HttpServletRequest request, IntroduceDto intdDto, MemberDto Ldto) {
 		session = request.getSession();
-		if(biz.update(intdDto)>0) {
-			
-			return "redirect:mypage.do?member_id="+Ldto.getMember_id()+"&member_payrole="+Ldto.getMember_payrole();
+		if (biz.update(intdDto) > 0) {
+
+			return "redirect:mypage.do?member_id=" + Ldto.getMember_id() + "&member_payrole="
+					+ Ldto.getMember_payrole();
 		}
-		
-		return "redirect:updateintdres.do?intd_no="+intdDto.getIntd_no();
+
+		return "redirect:updateintdres.do?intd_no=" + intdDto.getIntd_no();
 	}
-	
-	
-	
-	
-	
-	
+
 	@RequestMapping("deleteintd.do")
-	public String deleteintd(int intd_no, MemberDto Ldto){
-		
-		if(biz.delete(intd_no)>0) {
+	public String deleteintd(int intd_no, MemberDto Ldto) {
+
+		if (biz.delete(intd_no) > 0) {
 			return "home";
 		}
-		
-		return "redirect:mypage.do?member_id="+Ldto.getMember_id()+"&member_payrole="+Ldto.getMember_payrole();
+
+		return "redirect:mypage.do?member_id=" + Ldto.getMember_id() + "&member_payrole=" + Ldto.getMember_payrole();
 	}
-	
-	
-	
+
 }

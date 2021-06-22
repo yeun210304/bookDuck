@@ -13,13 +13,88 @@
 <%
 MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 %>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<!--SummerNote  -->
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
+	rel="stylesheet">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script>
 	$(document).ready(function() {
 		$('#summernote').summernote();
-		
+
 	});
+</script>
+<!-- Youtube 검색 -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+	crossorigin="anonymous"></script>
+<script>
+	//검색창 클릭시 얼럿
+	function fnGetList(sGetToken) {
+		var $getval = $("#search_box").val();
+		if ($getval == "") {
+			alert("검색어를 입력하세요.");
+			$("#search_box").focus();
+			return;
+		}
+		$("#get_view").empty();
+		$("#nav_view").empty();
+		//유튜브 API 불러오는부분
+		//https://developers.google.com/youtube/v3/docs/search/list
+		var order = "relevance";
+		var maxResults = "10"; //검색 리스트 개수
+		var key = "AIzaSyD5ZALqP1e8SkvfWL65oVDCHTUoibbtJGk";//api key값
+		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order="
+				+ order
+				+ "&q="
+				+ encodeURIComponent($getval)
+				+ "&key="
+				+ key
+				+ "&maxResults=" + maxResults;//검색해서 나온 url
+
+		console.log(sGetToken);
+		if (sGetToken != null) {
+			sTargetUrl += "&pageToken=" + sGetToken + "";
+		}
+		console.log(sTargetUrl);
+		$.ajax({
+			type : "POST",
+			url : sTargetUrl,
+			dataType : "jsonp",
+			success : function(jdata) {
+				console.log(jdata);
+				$(jdata.items).each(
+						function(i) {
+							//console.log(this.snippet.channelId);
+							$("#get_view").append(
+									'<p class="box"><a href="https://youtu.be/'+this.id.videoId+'">'
+											+ '<span>' + this.snippet.title
+											+ '</span></a></p>');
+
+						}).promise().done(
+						function() {
+							if (jdata.prevPageToken) {
+								$("#nav_view").append(
+										'<a href="javascript:fnGetList(\''
+												+ jdata.prevPageToken
+												+ '\');"><이전페이지></a>');
+							}
+							if (jdata.nextPageToken) {
+								$("#nav_view").append(
+										'<a href="javascript:fnGetList(\''
+												+ jdata.nextPageToken
+												+ '\');"><다음페이지></a>');
+							}
+						});
+			},
+			error : function(xhr, textStatus) {
+				console.log(xhr.responseText);
+				alert("에러");
+				return;
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -27,41 +102,48 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 	<c:if test="${Ldto != null }">
 		<p>${Ldto.member_id }님,</p>
 	</c:if>
-
-	<c:if test="${Ldto.member_payrole eq 'N'}">
-		<div>
-			<a href="payorder.do?">회원결제하기</a>
-		</div>
-	</c:if>
-	<c:if test="${Ldto.member_payrole eq 'Y'}">
-		<p>유료회원 입니다.</p>
-	</c:if>
 	<div>
 		<c:choose>
-			<c:when test="${empty intdDto.intd_content}">
-				<table>
-					<tr>
-						<td colspan="1" align="center"
-							onclick="location.href='intdinsertres.do?member_id=${Ldto.member_id}'">자기소개를 작성해 주세요</td>
-					</tr>
-				</table>
+			<c:when test="${Ldto.member_payrole eq 'N'}">
+				<div>
+					<a href="payorder.do?">회원결제하기</a>
+				</div>
 			</c:when>
-			<c:otherwise>
-				<table>
-					<tr>
-						<th>자기소개</th>
-						<td id="summernote">
-						${intdDto.intd_content}
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="button" value="수정" onclick="location.href='updateintdres.do?intd_no=${intdDto.intd_no}'">	
-							<input type="button" value="삭제" onclick="location.href='deleteintd.do?intd_no=${intdDto.intd_no}'">
-						</td>
-					</tr>
-				</table>
-			</c:otherwise>
+			<c:when test="${Ldto.member_payrole eq 'Y'}">
+				<p>유료회원 입니다.</p>
+				<c:choose>
+					<c:when test="${empty intdDto.intd_content}">
+						<table>
+							<tr>
+								<td colspan="1" align="center"
+									onclick="location.href='intdinsertres.do?member_id=${Ldto.member_id}'">
+									자기소개를작성해 주세요</td>
+							</tr>
+						</table>
+					</c:when>
+					<c:otherwise>
+						<table>
+							<tr>
+								<th>자기소개</th>
+								<td id="summernote">${intdDto.intd_content}</td>
+							</tr>
+							<tr>
+								<td><input type="button" value="수정"
+									onclick="location.href='updateintdres.do?intd_no=${intdDto.intd_no}'">
+									<input type="button" value="삭제"
+									onclick="location.href='deleteintd.do?intd_no=${intdDto.intd_no}'">
+								</td>
+							</tr>
+						</table>
+						<form name="form1" method="post" onsubmit="return false;">
+							<input type="text" id="search_box">
+							<button onclick="fnGetList();">가져오기</button>
+						</form>
+						<div id="get_view"></div>
+						<div id="nav_view"></div>		
+					</c:otherwise>
+				</c:choose>
+			</c:when>
 		</c:choose>
 		<input type="button" value="Home" onclick="location.href='home.do'" />
 

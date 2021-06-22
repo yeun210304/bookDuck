@@ -139,6 +139,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 							<input type="text" id="search_box">
 							<button onclick="fnGetList();">가져오기</button>
 						</form>
+						<div></div>
 						<div id="get_view"></div>
 						<div id="nav_view"></div>		
 					</c:otherwise>

@@ -185,6 +185,8 @@ public class QNABoardController {
 		}
 	}
 	
+	
+	// 댓글 관련
 	@ResponseBody
 	@RequestMapping(value="/commentList.do", produces = "application/json;")
 	public Map<String, List<CommentDto>> ajaxSelectCommentList(int post_id) {
@@ -225,5 +227,29 @@ public class QNABoardController {
 		} else {
 			return "fail";
 		}
+	}
+	
+	// 게시글 검색 조회
+	@RequestMapping("/search.do")
+	public String qnaSearchList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+								@RequestParam("condition") String condition,
+								@RequestParam("keyword") String keyword,
+								Model model) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		int listCount = boardBiz.selectSearchListCount(map);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		List<PostDto> list = boardBiz.selectSearchList(map, pi);
+		
+		
+		model.addAttribute("condition", condition);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		return "board/qnaboardList";
 	}
 }

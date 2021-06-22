@@ -1,24 +1,25 @@
 package com.spring.bookduck.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.bookduck.Pagination;
 import com.spring.bookduck.model.biz.BoardBiz;
@@ -110,40 +111,36 @@ public class QNABoardController {
 		return changeName;
 		}
 	
-	
 	@RequestMapping("/imageUpload.do")
-	public String imageUpload(HttpSession session, MultipartHttpServletRequest mreq) {
+	public void imageUpload(MultipartFile mpfile, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		// 업로드할 폴더 경로
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/uploadImages/");
+
+		// 업로드할 파일 이름
+		String originName = mpfile.getOriginalFilename();
 		
-		
-		int maxSize = 1024 * 1024 * 10;	//용량 제한
-		
-		String savePath = session.getServletContext().getRealPath("/resources/uploadImages/");
-		
-		File storage = new File(savePath);
-		
-		if(!storage.exists()) {
-			storage.mkdirs();
-		}
-		
-		MultipartFile attachFile = mreq.getFile("file");
-		
-		String originName = attachFile.getOriginalFilename();  // 원본명 ("aaa.jpg")
-			
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		int ranNum = (int)(Math.random() * 900000 + 10000);
 		String ext = originName.substring(originName.lastIndexOf("."));
 			
 		String changeName = currentTime + ranNum + ext;
-		
-		try {
-			attachFile.transferTo(new File(savePath + changeName));
-		} catch (Exception e) {
-			e.printStackTrace();
+
+		//System.out.println("원본 파일명 : " + originName);
+		//System.out.println("저장할 파일명 : " + changeName);
+
+		String filepath = savePath + changeName;
+		System.out.println("파일경로 : " + filepath);
+
+		File f = new File(filepath);
+		if (!f.exists()) {
+			f.mkdirs();
 		}
-		
-		return changeName;
-		}
-	
+		mpfile.transferTo(f);
+		out.println("/resources/uploadImages/"+changeName);
+		out.close();
+	}
 	
 	@RequestMapping("/qnaUpdateForm.do")
 	public String updateForm(int post_id, Model model) {
@@ -188,6 +185,8 @@ public class QNABoardController {
 		}
 	}
 	
+	
+	// 댓글 관련
 	@ResponseBody
 	@RequestMapping(value="/commentList.do", produces = "application/json;")
 	public Map<String, List<CommentDto>> ajaxSelectCommentList(int post_id) {
@@ -228,5 +227,29 @@ public class QNABoardController {
 		} else {
 			return "fail";
 		}
+	}
+	
+	// 게시글 검색 조회
+	@RequestMapping("/search.do")
+	public String qnaSearchList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+								@RequestParam("condition") String condition,
+								@RequestParam("keyword") String keyword,
+								@RequestParam("category") String category,
+								Model model) {
+		System.out.println("category : " + category);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		map.put("category", category);
+		
+		int listCount = boardBiz.selectSearchListCount(map);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		List<PostDto> list = boardBiz.selectSearchList(map, pi);
+		
+		model.addAttribute("map", map);
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		return "board/qnaboardList";
 	}
 }

@@ -65,18 +65,21 @@
 		
 		function sendFile(file){
 			var data = new FormData();
-			data.append('file', file);
+			data.append("mpfile", file);
 			$.ajax({
-				data : form_data,
-				type : "POST",
-				url : 'imageUpload.do',
+				data : data,
+				type : "post",
+				url : "imageUpload.do",
 				cache : false,
-				contentType : false,
+				contentType: false,
 				enctype: 'multipart/form-data',
 				processData: false,
-				success: function(img_name){
-					var image = $('<img>').attr('src', '/resources/uploadImages/' + img_name);
-					$("#summernote").summernote('editor.insertImage', image);
+				success: function(url){
+					//console.log(url);
+					var path = "http://localhost:8787/bookduck";
+					//console.log(path+url);
+					var image = $('<img>').attr('src', path+url).attr('width','500');
+					$("#summernote").summernote('insertNode', image[0]);
 				}
 			});
 		}

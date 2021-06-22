@@ -53,9 +53,37 @@
 		  $('#summernote').summernote({
 			  height: 300,
 			  minHeight: 300,
-			  maxHeight: null
+			  maxHeight: null,
+			  lang: "ko-KR",	// 한글 설정
+			  callbacks: {		// 콜백사용
+				  onImageUpload: function(files){
+					  console.log(files);
+					  sendFile(files[0]);
+				  }
+			  }
 		  });
 		});
+		
+		function sendFile(file){
+			var data = new FormData();
+			data.append("mpfile", file);
+			$.ajax({
+				data : data,
+				type : "post",
+				url : "imageUpload.do",
+				cache : false,
+				contentType: false,
+				enctype: 'multipart/form-data',
+				processData: false,
+				success: function(url){
+					//console.log(url);
+					var path = "http://localhost:8787/bookduck";
+					//console.log(path+url);
+					var image = $('<img>').attr('src', path+url).attr('width','500');
+					$("#summernote").summernote('insertNode', image[0]);
+				}
+			});
+		}
 	</script>
 </body>
 </html>

@@ -44,25 +44,30 @@
 		</tr>
 		<tr>
 			<td colspan="6" align="right">
-				<c:if test="${Ldto.member_id eq dto.post_writer }">
-					<button onclick="postFormSubmit(1);">수정</button>
-					<button onclick="postFormSubmit(2);">삭제</button>
-				<form id="postForm" action="" method="post">
-		            <input type="hidden" name="post_id" value="${ dto.post_id }">
-		           	<input type="hidden" name="filePath" value="${ dto.changeName }"> 
-		           	<!-- 첨부파일존재o : "파일경로" / 첨부파일존재x : "" -->
-		        </form>
-		        <script>
-	            	function postFormSubmit(num){
-	            		if(num == 1){ // 수정하기 클릭시
-	            			$("#postForm").attr("action", "noticeUpdateForm.do").submit();
-	            		}else{ // 삭제하기 클릭시
-	            			$("#postForm").attr("action", "noticeDelete.do").submit();
-	            		}
-	            	}
-	            </script>
-				</c:if>
-				<button onclick="location.href='noticeList.do'">목록</button>
+				<c:choose>
+					<c:when test="${Ldto.member_id eq dto.post_writer }">
+						<button onclick="postFormSubmit(1);">수정</button>
+						<button onclick="postFormSubmit(2);">삭제</button>
+						<button onclick="location.href='noticeList.do'">목록</button>
+					<form id="postForm" action="" method="post">
+			            <input type="hidden" name="post_id" value="${ dto.post_id }">
+			           	<input type="hidden" name="filePath" value="${ dto.changeName }"> 
+			           	<!-- 첨부파일존재o : "파일경로" / 첨부파일존재x : "" -->
+			        </form>
+			        <script>
+		            	function postFormSubmit(num){
+		            		if(num == 1){ // 수정하기 클릭시
+		            			$("#postForm").attr("action", "noticeUpdateForm.do").submit();
+		            		}else{ // 삭제하기 클릭시
+		            			$("#postForm").attr("action", "noticeDelete.do").submit();
+		            		}
+		            	}
+		            </script>
+					</c:when>
+					<c:otherwise>
+						<button onclick="location.href='noticeList.do'">목록</button>
+					</c:otherwise>
+				</c:choose>
 			</td>
 		</tr>
 	</table>

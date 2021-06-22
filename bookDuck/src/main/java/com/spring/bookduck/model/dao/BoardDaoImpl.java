@@ -79,7 +79,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		try {
 			res = sqlSession.insert(NAMESPACE + "insertQNA", dto);
-			System.out.println("res : " + res);
+			//System.out.println("res : " + res);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

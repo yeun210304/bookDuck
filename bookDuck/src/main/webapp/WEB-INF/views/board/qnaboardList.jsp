@@ -64,6 +64,33 @@
 			</c:if>		
 		</tbody>
 	</table>
+	
+	<div id="pagingArea">
+			<ul class="pagination">
+				<c:choose>
+					<c:when test="${pi.currentPage eq 1 }">
+						<li><a href="#">Previous</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="qnaList.do?currentPage=${pi.currentPage-1 }">Previous</a></li>
+					</c:otherwise>
+				</c:choose>
+				
+				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+					<li><a href="qnaList.do?currentPage=${p }">${p }</a></li>
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${pi.currentPage eq pi.maxPage }">
+						<li><a href="#">Next</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="qnaList.do?currentPage=${pi.currentPage+1 }">Next</a></li>
+					</c:otherwise>
+				</c:choose>
+				
+			</ul>
+		</div>
 
 </body>
 </html>

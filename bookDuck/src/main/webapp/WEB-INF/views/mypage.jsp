@@ -99,60 +99,21 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 		});
 	}
 </script>
-
-
-<!-- 유튜브 플레이어  -->
-	<script type="text/javascript">
-	//youtube API 불러오는 부분
-	var tag = document.createElement('script');
-	tag.src = "https://www.youtube.com/iframe_api";
-	var firstScriptTag = document.getElementsByTagName('script')[0];
-	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-	//플레이어 변수 설정
-	var player;
-	function onYouTubeIframeAPIReady() {
-	  player = new YT.Player('player', {
-	    //width&height를 설정할 수 있으나, 따로 css영역으로 뺐다.
-	    videoId: videoidno,
-	    events: {
-	      'onReady': onPlayerReady,//로딩중에 이벤트 실행한다
-	      'onStateChange': onPlayerStateChange//플레이어 상태 변화 시 이벤트를 실행한다.
-	    }
-	  });
-	}
-
-	function onPlayerReady(event) {
-	 //로딩된 후에 실행될 동작을 작성한다(소리 크기,동영상 속도를 미리 지정하는 것등등...)
-	  event.target.playVideo();//자동재생
-	 
-	}
-
-	var done = false;
-	function onPlayerStateChange(event) {
-	  if (event.data == YT.PlayerState.PLAYING && !done) {
-	    done = true;
-	    //플레이어가 재생중일 때 작성한 동작이 실행된다.
-	    //(원하는 시간만큼만 재생되고 멈추게 하는 것도 가능하다.)
-	  }
-	}
-	</script>
-
 </head>
 <body>
 	<h1>MYPAGE</h1>
-	<c:if test="${Ldto != null }">
-		<p>${Ldto.member_id }님,</p>
-	</c:if>
+	<br/><br/>
 	<div>
 		<c:choose>
 			<c:when test="${Ldto.member_payrole eq 'N'}">
 				<div>
-					<a href="payorder.do?">회원결제하기</a>
+					<p>${Ldto.member_id }님은 회원권이 없습니다. </p>
+					<a href="payorder.do?">회원 결제하기</a>
 				</div>
 			</c:when>
 			<c:when test="${Ldto.member_payrole eq 'Y'}">
-				<p>유료회원 입니다.</p>
+				<p>${Ldto.member_id }님은, 유료회원 입니다.</p>
+				<br/><br/>
 				<c:choose>
 					<c:when test="${empty intdDto.intd_content}">
 						<table>
@@ -162,6 +123,13 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 									자기소개를작성해 주세요</td>
 							</tr>
 						</table>
+						<br/><br/>
+						<form name="form1" method="post" onsubmit="return false;">
+							<input type="text" id="search_box" placeholder="동영상을 검색하세요">
+							<button onclick="fnGetList();">검색</button>
+						</form>
+						<div id="get_view"></div>
+						<div id="nav_view"></div>
 					</c:when>
 					<c:otherwise>
 						<table>
@@ -177,23 +145,21 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 								</td>
 							</tr>
 						</table>
+						<br/><br/>
 						<form name="form1" method="post" onsubmit="return false;">
-							<input type="text" id="search_box">
-							<button onclick="fnGetList();">가져오기</button>
+							<input type="text" id="search_box" placeholder="동영상을 검색하세요">
+							<button onclick="fnGetList();">검색</button>
 						</form>
-						<div></div>
 						<div id="get_view"></div>
 						<div id="nav_view"></div>
-						<div id="player"></div>		
 					</c:otherwise>
 				</c:choose>
 			</c:when>
 		</c:choose>
+		<br/><br/><br/>
 		<input type="button" value="Home" onclick="location.href='home.do'" />
-
-
 	</div>
-
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 

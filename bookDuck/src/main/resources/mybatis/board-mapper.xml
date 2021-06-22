@@ -138,6 +138,18 @@
 			</otherwise>
 		</choose>
 		LIKE '%' || #{keyword} || '%'
+		<if test='category == "P"'>
+			AND POST_CATEGORY = 'P'
+		</if>
+		<if test='category == "R"'>
+			AND POST_CATEGORY = 'R'
+		</if>
+		<if test='category == "M"'>
+			AND POST_CATEGORY = 'M'
+		</if>
+		<if test='category == "E"'>
+			AND POST_CATEGORY = 'E'
+		</if>
 		ORDER BY POST_NO DESC
 	</select>
 	
@@ -158,6 +170,18 @@
 			</otherwise>
 		</choose>
 		LIKE '%' || #{keyword} || '%'
+		<if test='category == "P"'>
+			AND POST_CATEGORY = 'P'
+		</if>
+		<if test='category == "R"'>
+			AND POST_CATEGORY = 'R'
+		</if>
+		<if test='category == "M"'>
+			AND POST_CATEGORY = 'M'
+		</if>
+		<if test='category == "E"'>
+			AND POST_CATEGORY = 'E'
+		</if>
 	</select>
 	
 	

@@ -234,20 +234,20 @@ public class QNABoardController {
 	public String qnaSearchList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
 								@RequestParam("condition") String condition,
 								@RequestParam("keyword") String keyword,
+								@RequestParam("category") String category,
 								Model model) {
-		
+		System.out.println("category : " + category);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("condition", condition);
 		map.put("keyword", keyword);
+		map.put("category", category);
 		
 		int listCount = boardBiz.selectSearchListCount(map);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		List<PostDto> list = boardBiz.selectSearchList(map, pi);
 		
-		
-		model.addAttribute("condition", condition);
-		model.addAttribute("keyword", keyword);
+		model.addAttribute("map", map);
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		return "board/qnaboardList";

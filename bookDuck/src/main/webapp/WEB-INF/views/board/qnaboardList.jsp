@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
 
@@ -26,8 +27,7 @@
 			<c:choose>
 				<c:when test="${empty list }">
 					<tr>
-						<td colsapn="7" align="center">------------ 작성된 글이 없습니다
-							-------------</td>
+						<td colspan="7" align="center">------------ 작성된 글이 없습니다 -------------</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
@@ -93,22 +93,30 @@
 	<!-- 검색 영역 -->
 	<form id="searchForm" action="search.do" method="Get" align="center">
 		<div class="select">
+			<select class="category-select" name="category">
+				<option value="A">전체</option>
+				<option value="P">결제</option>
+				<option value="R">환불</option>
+				<option value="M">회원</option>
+				<option value="E">기타</option>
+			</select>
 			<select class="custom-select" name="condition">
-				<option value="writer">작성자</option>
 				<option value="title">제목</option>
 				<option value="content">내용</option>
+				<option value="writer">작성자</option>
 			</select>
 		</div>
 		<div class="text">
-			<input type="text" class="form-control" name="keyword" value="${keyword }">
+			<input type="text" class="form-control" name="keyword" value="${map.keyword }">
 		</div>
 		<button type="submit" class="searchBtn btn btn-secondary">검색</button>
 	</form>
 	
-	<c:if test="${!empty condition }">
+	<c:if test="${!empty map.condition }">
 		<script type="text/javascript">
 			$(function(){
-				$("#searchForm option[value=${condition}]").attr("selected", true);
+				$("#searchForm option[value=${map.condition}]").attr("selected", true);
+				$("#searchForm option[value=${map.category}]").attr("selected", true);
 			});
 		</script>
 	</c:if>

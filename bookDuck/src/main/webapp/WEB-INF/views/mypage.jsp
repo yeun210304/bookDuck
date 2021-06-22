@@ -25,6 +25,9 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
 	});
 </script>
+
+
+
 <!-- Youtube 검색 -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -43,7 +46,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 		//유튜브 API 불러오는부분
 		//https://developers.google.com/youtube/v3/docs/search/list
 		var order = "relevance";
-		var maxResults = "10"; //검색 리스트 개수
+		var maxResults = "8"; //검색 리스트 개수
 		var key = "AIzaSyD5ZALqP1e8SkvfWL65oVDCHTUoibbtJGk";//api key값
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order="
 				+ order
@@ -68,9 +71,9 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						function(i) {
 							//console.log(this.snippet.channelId);
 							$("#get_view").append(
-									'<p class="box"><a href="https://youtu.be/'+this.id.videoId+'">'
-											+ '<span>' + this.snippet.title
-											+ '</span></a></p>');
+									
+											'<iframe width="320" height="180"src="https://www.youtube.com/embed/'+this.id.videoId+'"title="YouTube video player" frameborder="0"allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"allowfullscreen></iframe>'
+												);
 
 						}).promise().done(
 						function() {
@@ -96,6 +99,45 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 		});
 	}
 </script>
+
+
+<!-- 유튜브 플레이어  -->
+	<script type="text/javascript">
+	//youtube API 불러오는 부분
+	var tag = document.createElement('script');
+	tag.src = "https://www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+	//플레이어 변수 설정
+	var player;
+	function onYouTubeIframeAPIReady() {
+	  player = new YT.Player('player', {
+	    //width&height를 설정할 수 있으나, 따로 css영역으로 뺐다.
+	    videoId: videoidno,
+	    events: {
+	      'onReady': onPlayerReady,//로딩중에 이벤트 실행한다
+	      'onStateChange': onPlayerStateChange//플레이어 상태 변화 시 이벤트를 실행한다.
+	    }
+	  });
+	}
+
+	function onPlayerReady(event) {
+	 //로딩된 후에 실행될 동작을 작성한다(소리 크기,동영상 속도를 미리 지정하는 것등등...)
+	  event.target.playVideo();//자동재생
+	 
+	}
+
+	var done = false;
+	function onPlayerStateChange(event) {
+	  if (event.data == YT.PlayerState.PLAYING && !done) {
+	    done = true;
+	    //플레이어가 재생중일 때 작성한 동작이 실행된다.
+	    //(원하는 시간만큼만 재생되고 멈추게 하는 것도 가능하다.)
+	  }
+	}
+	</script>
+
 </head>
 <body>
 	<h1>MYPAGE</h1>
@@ -141,7 +183,8 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						</form>
 						<div></div>
 						<div id="get_view"></div>
-						<div id="nav_view"></div>		
+						<div id="nav_view"></div>
+						<div id="player"></div>		
 					</c:otherwise>
 				</c:choose>
 			</c:when>

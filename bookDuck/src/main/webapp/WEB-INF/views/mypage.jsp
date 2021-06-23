@@ -25,6 +25,9 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
 	});
 </script>
+
+
+
 <!-- Youtube 검색 -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -43,7 +46,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 		//유튜브 API 불러오는부분
 		//https://developers.google.com/youtube/v3/docs/search/list
 		var order = "relevance";
-		var maxResults = "10"; //검색 리스트 개수
+		var maxResults = "8"; //검색 리스트 개수
 		var key = "AIzaSyD5ZALqP1e8SkvfWL65oVDCHTUoibbtJGk";//api key값
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order="
 				+ order
@@ -68,9 +71,9 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						function(i) {
 							//console.log(this.snippet.channelId);
 							$("#get_view").append(
-									'<p class="box"><a href="https://youtu.be/'+this.id.videoId+'">'
-											+ '<span>' + this.snippet.title
-											+ '</span></a></p>');
+									
+											'<iframe width="320" height="180"src="https://www.youtube.com/embed/'+this.id.videoId+'"title="YouTube video player" frameborder="0"allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"allowfullscreen></iframe>'
+												);
 
 						}).promise().done(
 						function() {
@@ -99,18 +102,18 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 </head>
 <body>
 	<h1>MYPAGE</h1>
-	<c:if test="${Ldto != null }">
-		<p>${Ldto.member_id }님,</p>
-	</c:if>
+	<br/><br/>
 	<div>
 		<c:choose>
 			<c:when test="${Ldto.member_payrole eq 'N'}">
 				<div>
-					<a href="payorder.do?">회원결제하기</a>
+					<p>${Ldto.member_id }님은 회원권이 없습니다. </p>
+					<a href="payorder.do?">회원 결제하기</a>
 				</div>
 			</c:when>
 			<c:when test="${Ldto.member_payrole eq 'Y'}">
-				<p>유료회원 입니다.</p>
+				<p>${Ldto.member_id }님은, 유료회원 입니다.</p>
+				<br/><br/>
 				<c:choose>
 					<c:when test="${empty intdDto.intd_content}">
 						<table>
@@ -120,6 +123,13 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 									자기소개를작성해 주세요</td>
 							</tr>
 						</table>
+						<br/><br/>
+						<form name="form1" method="post" onsubmit="return false;">
+							<input type="text" id="search_box" placeholder="동영상을 검색하세요">
+							<button onclick="fnGetList();">검색</button>
+						</form>
+						<div id="get_view"></div>
+						<div id="nav_view"></div>
 					</c:when>
 					<c:otherwise>
 						<table>
@@ -135,22 +145,21 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 								</td>
 							</tr>
 						</table>
+						<br/><br/>
 						<form name="form1" method="post" onsubmit="return false;">
-							<input type="text" id="search_box">
-							<button onclick="fnGetList();">가져오기</button>
+							<input type="text" id="search_box" placeholder="동영상을 검색하세요">
+							<button onclick="fnGetList();">검색</button>
 						</form>
-						<div></div>
 						<div id="get_view"></div>
-						<div id="nav_view"></div>		
+						<div id="nav_view"></div>
 					</c:otherwise>
 				</c:choose>
 			</c:when>
 		</c:choose>
+		<br/><br/><br/>
 		<input type="button" value="Home" onclick="location.href='home.do'" />
-
-
 	</div>
-
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 

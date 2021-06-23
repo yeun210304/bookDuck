@@ -3,7 +3,9 @@ package com.spring.bookduck.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -141,5 +143,28 @@ public class NoticeBoardController {
 			return "board/errorPage";
 		}
 	}
+	
+	// 게시글 검색 조회
+		@RequestMapping("/noticeSearch.do")
+		public String qnaSearchList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+									@RequestParam("condition") String condition,
+									@RequestParam("keyword") String keyword,
+									@RequestParam("board_id") String board_id,
+									Model model) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("condition", condition);
+			map.put("keyword", keyword);
+			map.put("board_id", board_id);
+			
+			int listCount = boardBiz.selectSearchListCount(map);
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+			
+			List<PostDto> list = boardBiz.selectSearchList(map, pi);
+			
+			model.addAttribute("map", map);
+			model.addAttribute("pi", pi);
+			model.addAttribute("list", list);
+			return "board/noticeboardList";
+		}
 	
 }

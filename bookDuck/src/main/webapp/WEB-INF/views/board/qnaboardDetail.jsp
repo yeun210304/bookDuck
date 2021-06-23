@@ -28,7 +28,7 @@
 			<th>작성자</th>
 			<td>${dto.post_writer }</td>
 			<th>작성일</th>
-			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${dto.post_regdate }"/></td>
+			<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${dto.post_regdate }"/></td>
 			<th>조회수</th>
 			<td>${dto.post_hit}</td>
 		</tr>

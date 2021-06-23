@@ -91,7 +91,7 @@
 	
 	<insert id="insertComment" parameterType="commentDto">
 		INSERT INTO COMM
-		VALUES(COMMSEQ.NEXTVAL, #{post_id}, NULL, NULL, NULL, #{comment_content}, #{comment_writer}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 0, 'N' )
+		VALUES(COMMSEQ.NEXTVAL, #{post_id}, NULL, NULL, NULL, #{comment_content}, #{comment_writer}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), 0, 'N' )
 	</insert>
 
 	<update id="increaseComment" parameterType="int">
@@ -103,7 +103,7 @@
 	<update id="updateComment" parameterType="commentDto">
 		UPDATE COMM
 		SET COMMENT_CONTENT = #{comment_content},
-		COMMENT_REGDATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD') 
+		COMMENT_REGDATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') 
 		WHERE COMMENT_ID = #{comment_id}
 	</update>
 	
@@ -125,7 +125,14 @@
 		POST_HIT, POST_COMMENT_COUNT, POST_DELFLAG, ORIGINNAME, CHANGENAME
 		FROM POST
 		WHERE POST_DELFLAG = 'N'
-		AND BOARD_ID = 1
+		<choose>
+			<when test="board_id == 0">
+				AND BOARD_ID = 0
+			</when>
+			<otherwise>
+				AND BOARD_ID = 1
+			</otherwise>
+		</choose>
 		<choose>
 			<when test="condition == 'title'">
 				AND POST_TITLE
@@ -156,8 +163,15 @@
 	<select id="selectSearchCount" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM POST
-		WHERE BOARD_ID = 1
-		AND POST_DELFLAG = 'N'
+		WHERE POST_DELFLAG = 'N'
+		<choose>
+			<when test="board_id == 0">
+				AND BOARD_ID = 0
+			</when>
+			<otherwise>
+				AND BOARD_ID = 1
+			</otherwise>
+		</choose>
 		<choose>
 			<when test="condition == 'title'">
 				AND POST_TITLE

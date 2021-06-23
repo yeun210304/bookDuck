@@ -230,17 +230,19 @@ public class QNABoardController {
 	}
 	
 	// 게시글 검색 조회
-	@RequestMapping("/search.do")
+	@RequestMapping("/qnaSearch.do")
 	public String qnaSearchList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
 								@RequestParam("condition") String condition,
 								@RequestParam("keyword") String keyword,
 								@RequestParam("category") String category,
+								@RequestParam("board_id") String board_id,
 								Model model) {
 		System.out.println("category : " + category);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("condition", condition);
 		map.put("keyword", keyword);
 		map.put("category", category);
+		map.put("board_id", board_id);
 		
 		int listCount = boardBiz.selectSearchListCount(map);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);

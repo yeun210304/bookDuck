@@ -91,7 +91,8 @@
 	<br>
 	
 	<!-- 검색 영역 -->
-	<form id="searchForm" action="search.do" method="Get" align="center">
+	<form id="searchForm" action="qnaSearch.do" method="Get" align="center">
+		<input type="hidden" name="board_id" value="1">
 		<div class="select">
 			<select class="category-select" name="category">
 				<option value="A">전체</option>

@@ -1,6 +1,7 @@
 package com.spring.bookduck.model.biz;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,6 +91,16 @@ public class BoardBizImpl implements BoardBiz {
 	@Override
 	public int decreaseComment(int post_id) {
 		return dao.decreaseComment(post_id);
+	}
+
+	@Override
+	public List<PostDto> selectSearchList(Map<String, String> map, PageInfo pi) {
+		return dao.selectSearchList(map, pi);
+	}
+
+	@Override
+	public int selectSearchListCount(Map<String, String> map) {
+		return dao.selectSearchListCount(map);
 	}
 	
 }

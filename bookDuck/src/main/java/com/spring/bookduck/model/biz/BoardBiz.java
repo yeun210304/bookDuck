@@ -1,6 +1,7 @@
 package com.spring.bookduck.model.biz;
 
 import java.util.List;
+import java.util.Map;
 
 import com.spring.bookduck.model.dto.CommentDto;
 import com.spring.bookduck.model.dto.PageInfo;
@@ -41,4 +42,8 @@ public interface BoardBiz {
 	// 댓글 삭제
 	public int deleteComment(int comment_id);
 	public int decreaseComment(int post_id);
+	
+	// 게시글 검색 조회
+	public List<PostDto> selectSearchList(Map<String, String> map, PageInfo pi);
+	public int selectSearchListCount(Map<String, String> map);
 }

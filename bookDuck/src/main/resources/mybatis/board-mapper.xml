@@ -91,7 +91,7 @@
 	
 	<insert id="insertComment" parameterType="commentDto">
 		INSERT INTO COMM
-		VALUES(COMMSEQ.NEXTVAL, #{post_id}, NULL, NULL, NULL, #{comment_content}, #{comment_writer}, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 0, 'N' )
+		VALUES(COMMSEQ.NEXTVAL, #{post_id}, NULL, NULL, NULL, #{comment_content}, #{comment_writer}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), 0, 'N' )
 	</insert>
 
 	<update id="increaseComment" parameterType="int">
@@ -103,7 +103,7 @@
 	<update id="updateComment" parameterType="commentDto">
 		UPDATE COMM
 		SET COMMENT_CONTENT = #{comment_content},
-		COMMENT_REGDATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD') 
+		COMMENT_REGDATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') 
 		WHERE COMMENT_ID = #{comment_id}
 	</update>
 	
@@ -118,5 +118,85 @@
 		SET POST_COMMENT_COUNT = POST_COMMENT_COUNT - 1
 		WHERE POST_ID = #{post_id}
 	</update>
+	
+	<!-- 검색결과에 해당하는 게시글 조회용 쿼리문 -->
+	<select id="selectSearchList" parameterType="map" resultType="postDto">
+		SELECT POST_ID, BOARD_ID, POST_NO, POST_CATEGORY, POST_WRITER, POST_TITLE, POST_CONTENT, POST_REGDATE,
+		POST_HIT, POST_COMMENT_COUNT, POST_DELFLAG, ORIGINNAME, CHANGENAME
+		FROM POST
+		WHERE POST_DELFLAG = 'N'
+		<choose>
+			<when test="board_id == 0">
+				AND BOARD_ID = 0
+			</when>
+			<otherwise>
+				AND BOARD_ID = 1
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="condition == 'title'">
+				AND POST_TITLE
+			</when>
+			<when test="condition == 'writer'">
+				AND POST_WRITER
+			</when>
+			<otherwise>
+				AND POST_CONTENT
+			</otherwise>
+		</choose>
+		LIKE '%' || #{keyword} || '%'
+		<if test='category == "P"'>
+			AND POST_CATEGORY = 'P'
+		</if>
+		<if test='category == "R"'>
+			AND POST_CATEGORY = 'R'
+		</if>
+		<if test='category == "M"'>
+			AND POST_CATEGORY = 'M'
+		</if>
+		<if test='category == "E"'>
+			AND POST_CATEGORY = 'E'
+		</if>
+		ORDER BY POST_NO DESC
+	</select>
+	
+	<select id="selectSearchCount" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM POST
+		WHERE POST_DELFLAG = 'N'
+		<choose>
+			<when test="board_id == 0">
+				AND BOARD_ID = 0
+			</when>
+			<otherwise>
+				AND BOARD_ID = 1
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="condition == 'title'">
+				AND POST_TITLE
+			</when>
+			<when test="condition == 'writer'">
+				AND POST_WRITER
+			</when>
+			<otherwise>
+				AND POST_CONTENT
+			</otherwise>
+		</choose>
+		LIKE '%' || #{keyword} || '%'
+		<if test='category == "P"'>
+			AND POST_CATEGORY = 'P'
+		</if>
+		<if test='category == "R"'>
+			AND POST_CATEGORY = 'R'
+		</if>
+		<if test='category == "M"'>
+			AND POST_CATEGORY = 'M'
+		</if>
+		<if test='category == "E"'>
+			AND POST_CATEGORY = 'E'
+		</if>
+	</select>
+	
 	
 </mapper>

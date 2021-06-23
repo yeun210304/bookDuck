@@ -2,6 +2,7 @@ package com.spring.bookduck.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -79,7 +80,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		try {
 			res = sqlSession.insert(NAMESPACE + "insertQNA", dto);
-			System.out.println("res : " + res);
+			//System.out.println("res : " + res);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -201,6 +202,22 @@ public class BoardDaoImpl implements BoardDao {
 		}
 		
 		return res;
+	}
+
+	@Override
+	public List<PostDto> selectSearchList(Map<String, String> map, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (List)sqlSession.selectList(NAMESPACE+"selectSearchList", map, rowBounds);
+	}
+
+	@Override
+	public int selectSearchListCount(Map<String, String> map) {
+		return sqlSession.selectOne(NAMESPACE + "selectSearchCount", map);
 	}
 
 }

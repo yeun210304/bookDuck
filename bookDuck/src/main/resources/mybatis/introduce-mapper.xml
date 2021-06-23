@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="introduce">
+	<select id="intdselectoneno" parameterType="int"
+		resultType="intdDto">
+		SELECT INTD_ID,INTD_CONTENT,INTD_NO
+		FROM INTRODUCETABLE
+		WHERE INTD_NO=#{intd_no}
 
+	</select>
 
-<select id="intdselectone" parameterType="String" resultType="intdDto" >
+	<select id="intdselectone" parameterType="String" resultType="intdDto">
 
-SELECT INTD_ID, INTD_CONTENT, INTD_NO
-FROM MEMBER INNER JOIN INTRODUCETABLE
-ON MEMBER.MEMBER_ID = INTRODUCETABLE.INTD_ID
-WHERE MEMBER_ID  = #{intd_id}
+		SELECT INTD_ID, INTD_CONTENT, INTD_NO
+		FROM MEMBER INNER JOIN INTRODUCETABLE
+		ON MEMBER.MEMBER_ID = INTRODUCETABLE.INTD_ID
+		WHERE MEMBER_ID = #{intd_id}
 
-</select>
+	</select>
 
-<!-- 게시판 insert -->
-<insert id="insertintd" parameterType="intdDto">
+	<!-- 게시판 insert -->
+	<insert id="insertintd" parameterType="intdDto">
 
-	INSERT INTO INTRODUCETABLE 
-	VALUES ( #{intd_id}, #{intd_content},INTD_NO.NEXTVAL)
-</insert>
+		INSERT INTO INTRODUCETABLE
+		VALUES ( #{intd_id}, #{intd_content},INTD_NO.NEXTVAL)
+	</insert>
+
+	<update id="updateintd" parameterType="intdDto">
+		UPDATE INTRODUCETABLE
+		SET INTD_CONTENT=#{intd_content}
+		WHERE INTD_NO=#{intd_no}
+
+	</update>
+
+	<delete id="deleteintd" parameterType="int">
+		DELETE FROM INTRODUCETABLE
+		WHERE INTD_NO = #{intd_no}
+
+	</delete>
+
 
 </mapper>

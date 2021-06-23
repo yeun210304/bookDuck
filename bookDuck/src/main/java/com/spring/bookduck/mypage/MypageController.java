@@ -41,4 +41,11 @@ public class MypageController {
 		
 		return "mypage";
 	}
+	@RequestMapping("home.do")
+	public String home(HttpSession session, HttpServletRequest request) {
+		session= request.getSession();
+		
+		
+		return"home";
+	}
 }

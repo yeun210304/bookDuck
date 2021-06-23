@@ -26,7 +26,7 @@
 		<typeAlias type="com.spring.bookduck.introduce.dto.IntroduceDto" alias="intdDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.CommentDto" alias="commentDto"/>
 		<typeAlias type="com.spring.bookduck.pay.dto.PayDto" alias="payDto"/>
-
+		<typeAlias type="com.spring.bookduck.scrap.dto.ScrapDto" alias="scrapDto"/>
 	</typeAliases>
 	
 	<mappers>
@@ -35,6 +35,7 @@
 		<mapper resource="/mybatis/board-mapper.xml"/>
 		<mapper resource="/mybatis/pay-mapper.xml"/>
 		<mapper resource="/mybatis/introduce-mapper.xml"/>
+		<mapper resource="/mybatis/scrap-mapper.xml"/>
 	</mappers>
 	
 	

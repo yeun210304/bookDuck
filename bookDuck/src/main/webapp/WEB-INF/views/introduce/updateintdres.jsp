@@ -71,6 +71,7 @@ function goWrite(frm) {
 	<form action="updateintd.do" method="post">
 		<input type="hidden" name="intd_no" value="${intdDto.intd_no }">
 		<input type="text" name="member_id" readonly="readonly" style="width: 20%;" value="${Ldto.member_id}"/><br>
+		<input type="hidden" name="member_payrole" value="${Ldto.member_payrole }">
 		<br><br> 
 		<textarea id="summernote" name="intd_content">${intdDto.intd_content}</textarea>
 		<input type="submit" value="수정" style="float: right;" onclick="goWrite(this.form)"/>

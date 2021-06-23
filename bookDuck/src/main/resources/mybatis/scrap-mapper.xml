@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scrap">
+
+	<select id="scselectlist" parameterType="String" resultType="scrapDto">
+	SELECT SCRAP_NO,BOOK_ISBN,SCRAP_REGDATE,BOOK_TITLE
+	FROM MEMBER INNER JOIN SCRAP
+	ON MEMBER.MEMBER_ID = SCRAP.SCRAP_ID
+	WHERE MEMBER_ID = #{scrap_id}
+	ORDER BY SCRAP_NO DESC
+	</select>
+	
+	<insert id="scinsert" parameterType="scrapDto">
+		INSERT INTO SCRAP
+		VALUES(SCRAPNO.NEXTVAL,#{SCRAP_ID},#{book_isbn},SYSDATE)
+	</insert>
+	
+	<delete id="scdelete" parameterType="int">
+		DELETE FROM SCRAP
+		WHERE SCRAP_NO= #{scrap_no}
+	</delete>
+
+</mapper>

@@ -12,5 +12,10 @@ public class BookDuckController {
 		
 		return "index";
 	}
+	
+	@RequestMapping("/mapTest.do")
+	public String mapTest() {
+		return "board/mapTest";
+	}
 }
 	

@@ -149,12 +149,11 @@ public class NoticeBoardController {
 		public String qnaSearchList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
 									@RequestParam("condition") String condition,
 									@RequestParam("keyword") String keyword,
-									@RequestParam("board_id") String board_id,
 									Model model) {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("condition", condition);
 			map.put("keyword", keyword);
-			map.put("board_id", board_id);
+			map.put("board_id", "0");
 			
 			int listCount = boardBiz.selectSearchListCount(map);
 			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);

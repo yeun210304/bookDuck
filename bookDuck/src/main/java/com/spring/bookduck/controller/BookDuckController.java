@@ -15,7 +15,7 @@ public class BookDuckController {
 	
 	@RequestMapping("/mapTest.do")
 	public String mapTest() {
-		return "board/mapTest";
+		return "board/mapTestNaver";
 	}
 }
 	

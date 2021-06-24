@@ -38,6 +38,7 @@
 		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{member_id}
 	</select>
 	
+	
 	<!-- 회원가입 -->
 	<insert id = "join" parameterType="Ldto">
 	  	INSERT INTO MEMBER (MEMBER_NO, MEMBER_ID, MEMBER_PW, MEMBER_AGE,
@@ -61,5 +62,10 @@
 		WHERE MEMBER_ID = #{member_id} 
 		AND MEMBER_PW = #{member_pw}
 	</delete>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="Ldto" resultType="Ldto">
+		SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_EMAIL = #{member_email}
+	</select>
 	
 </mapper>

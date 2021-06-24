@@ -69,4 +69,15 @@ public class LoginDaoImpl implements LoginDao {
 		return res;
 	}
 
+	@Override
+	public MemberDto findId(MemberDto dto) {
+		MemberDto res = null;
+		try {
+			sqlSession.selectOne(NAMESPACE+"findId", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

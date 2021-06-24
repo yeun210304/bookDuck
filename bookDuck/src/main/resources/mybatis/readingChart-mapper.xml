@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="RChartMapper">
 
-	<select id="chartData" parameterType="String" resultType="googleChartDto">
+	<select id="chartData" parameterType="String" resultType="ReadingChartDto">
 		SELECT CHARTREADINGTIME, CHARTMDATE FROM READINGCHART
 		WHERE CHARTID = #{chartId}
 		ORDER BY CHARTREADINGTIME DESC
 	</select>
 
-	<insert id="insert" parameterType="googleChartDto">
+	<insert id="insert" parameterType="ReadingChartDto">
 		INSERT INTO READINGCHART
 		VALUES(CHARTNO_SEQ.NEXTVAL, 'admin','test title','test content', #{chartreadingtime}, #{chartMdate}, SYSDATE, 'isbn test')
 	</insert>

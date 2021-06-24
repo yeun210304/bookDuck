@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class ReadingChartDto {
 
-
 	private int chartNo;
 	private String chartId;
 	private String chartTitle;

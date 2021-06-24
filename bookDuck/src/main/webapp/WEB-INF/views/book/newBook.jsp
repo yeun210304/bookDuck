@@ -67,7 +67,7 @@
             sb.append(String.format("<li>categoryId : %s</li>", categoryId));
             sb.append(String.format("<li>categoryName : %s</li>", categoryName));
             sb.append(String.format("</ul></div>"));
-            sb.append(String.format("<div><a href='%s' class='btn btn-default btn-xs' target='_blank'>인터파크 바로가기</a></div>", link));
+            sb.append(String.format("<div><a href='%s' class='btn btn-default btn-xs' target='_blank'>&#128184;&nbsp;구매하기</a></div>", link));
             sb.append(String.format("</div>"));
             
         }
@@ -77,7 +77,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>정상작동해줘 제발..</title>
+<title>신작도서</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
  
@@ -118,7 +118,7 @@ div.result {
         <div class="panel page-header" style="text-align: center;">
             <h1 style="font-size: xx-large;">
             <!-- 주의)상대경로 대신 절대경로 표기를 권장 -->
-                 신작도서 <small>인터파크</small> <span
+                 &#128218;&nbsp;신작도서 <small></small> <span
                     style="font-size: small; color: #777777;"></span>
             </h1>
         </div>
@@ -126,7 +126,7 @@ div.result {
  
  
         <div class="panel panel-default" id="output">
-            <div class="panel-heading">신작도서</div>
+            <div class="panel-heading">&#128218;&nbsp;신작도서</div>
             <div class="panel-body">
                 <button type="button" class="btn btn-default">
                       TotalCount <span class="badge" id="totalcount"><%=totalcount%></span>

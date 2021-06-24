@@ -71,10 +71,13 @@ function goWrite(frm) {
 
 <div style="width: 60%; margin: auto;">
 	<form action="intdinsert.do" method="post">
-		<input type="text" name="intd_id" style="width: 20%;" value="${Ldto.member_id}"/><br>
+		<input type="text" name="intd_id" readonly="readonly" style="width: 20%;" value="${Ldto.member_id}"/><br>
+		<input type="hidden" name="member_id" value="${Ldto.member_id }">
+		<input type="hidden" name="member_payrole" value="${Ldto.member_payrole}">
 		<br><br> 
-		<textarea id="summernote" name="intd_content"></textarea>
-		<input id="subBtn" type="button" value="글 작성" style="float: right;" onclick="goWrite(this.form)"/>
+		<textarea id="summernote" name="intd_content">${intdDto.intd_content}</textarea>
+		<input type="submit" value="작성" style="float: right;" onclick="goWrite(this.form)"/>
+		<input type="button" value="취소" onclick="location.href='home.do'"/>
 	</form>
 	
 	

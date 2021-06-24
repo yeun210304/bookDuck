@@ -29,6 +29,17 @@
 	map.setCursor('pointer');
 	
 	// 검색 관련(주소 to 좌표)
+	
+	naver.maps.Service.geocode({address: '서점'}, function(status, response){
+		if(status === naver.maps.Service.Status.ERROR){
+			return alert('Something worng!');
+		}
+		
+		// 성공시의 response 처리
+		return alert('Good job!');
+	});
+	
+	/*
 	function searchAdressToCoordinate(address){
 		naver.maps.Service.geocode({
 			query: address
@@ -97,6 +108,7 @@
 
 		naver.maps.onJSContentLoaded = initGeocoder;
 		naver.maps.Event.once(map, 'init_stylemap', initGeocoder);
+	*/
 	
 </script>
 </body>

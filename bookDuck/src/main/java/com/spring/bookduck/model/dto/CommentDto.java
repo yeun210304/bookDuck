@@ -1,7 +1,5 @@
 package com.spring.bookduck.model.dto;
 
-import java.util.Date;
-
 public class CommentDto {
 	
 	private int comment_id;
@@ -19,7 +17,6 @@ public class CommentDto {
 
 	public CommentDto(int comment_id, int post_id, int comment_no, int comment_groupseq, String comment_content,
 			String comment_writer, String comment_regdate, int comment_titletab, String comment_delflag) {
-		super();
 		this.comment_id = comment_id;
 		this.post_id = post_id;
 		this.comment_no = comment_no;
@@ -85,6 +82,7 @@ public class CommentDto {
 
 	public void setComment_regdate(String comment_regdate) {
 		this.comment_regdate = comment_regdate;
+		System.out.println(comment_regdate);
 	}
 
 	public int getComment_titletab() {

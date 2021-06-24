@@ -61,38 +61,48 @@
 		</tbody>
 	</table>
 
-	<div id="pagingArea">
-		<ul class="pagination">
-			<c:choose>
-				<c:when test="${pi.currentPage eq 1 }">
-					<li><a href="#">Previous</a></li>
-				</c:when>
-				<c:otherwise>
-					<li><a href="qnaList.do?currentPage=${pi.currentPage-1 }">Previous</a></li>
-				</c:otherwise>
-			</c:choose>
-
-			<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-				<li><a href="qnaList.do?currentPage=${p }">${p }</a></li>
-			</c:forEach>
-
-			<c:choose>
-				<c:when test="${pi.currentPage eq pi.maxPage }">
-					<li><a href="#">Next</a></li>
-				</c:when>
-				<c:otherwise>
-					<li><a href="qnaList.do?currentPage=${pi.currentPage+1 }">Next</a></li>
-				</c:otherwise>
-			</c:choose>
-		</ul>
-	</div>
+	<div id="paging-area" align="center">
+			
+			<c:if test="${ pi.currentPage ne 1 }">
+				<c:choose>
+					<c:when test="${ !empty map.condition }">
+						<a href="qnaSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[이전]</a>
+            		</c:when>
+            		<c:otherwise>
+            			<a href="qnaList.do?currentPage=${ pi.currentPage-1 }">[이전]</a>
+            		</c:otherwise>
+            	</c:choose>
+			</c:if>
+			
+			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<c:choose>
+					<c:when test="${ !empty map.condition }">
+						<a href="qnaSearch.do?currentPage=${ p }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[${ p }]</a>
+	            	</c:when>
+	            	<c:otherwise>
+	            		<a href="qnaList.do?currentPage=${ p }">[${ p }]</a>
+            		</c:otherwise>
+            	</c:choose>
+            </c:forEach>
+            
+            <c:if test="${ pi.currentPage ne pi.maxPage }">
+            	<c:choose>
+            		<c:when test="${ !empty map.condition }">
+		            	<a href="qnaSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[다음]</a>
+		            </c:when>
+		            <c:otherwise>
+		            	<a href="qnaList.do?currentPage=${ pi.currentPage+1 }">[다음]</a>
+            		</c:otherwise>
+            	</c:choose>
+            </c:if>
+            
+        </div>
 
 	<br clear="both">
 	<br>
 	
 	<!-- 검색 영역 -->
 	<form id="searchForm" action="qnaSearch.do" method="Get" align="center">
-		<input type="hidden" name="board_id" value="1">
 		<div class="select">
 			<select class="category-select" name="category">
 				<option value="A">전체</option>

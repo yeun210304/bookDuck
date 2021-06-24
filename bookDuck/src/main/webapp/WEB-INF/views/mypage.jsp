@@ -12,6 +12,12 @@
 <title>Insert title here</title>
 <%
 MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
+
+String title = request.getParameter("title");
+String isbn = request.getParameter("isbn");
+
+System.out.println(title);
+System.out.println(isbn);
 %>
 <!--SummerNote  -->
 <link

@@ -97,10 +97,119 @@ if (key != null && value != null) {
 		String pubDate = xpath.compile("pubDate").evaluate(item);
 		String isbn = xpath.compile("isbn").evaluate(item);
 		String link = xpath.compile("link").evaluate(item);
-		String categoryId = xpath.compile("categoryId").evaluate(item);
 		String categoryName = xpath.compile("categoryName").evaluate(item);
+		String categoryId = xpath.compile("categoryId").evaluate(item);
 		//System.out.println(title);
-
+		
+		// 비어있는 값 대비
+		if(description == null || description == "" || description == " " ){
+			description = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(categoryId == null || categoryId == "" || categoryId == " " ){
+			categoryId = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(categoryName == null || categoryName == "" || categoryName == " " ){
+			categoryName = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(isbn == null || isbn == "" || isbn == " " ){
+			isbn = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(pubDate == null || pubDate == "" || pubDate == " " ){
+			pubDate = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(publisher == null || publisher == "" || publisher == " " ){
+			publisher = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(author == null || author == "" || author == " " ){
+			author = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		
+		
+		// categoryId 정리
+		if(categoryId == "101"){
+			categoryId = "소설";
+		}
+		if(categoryId == "102"){
+			categoryId = "시/에세이";
+		}
+		if(categoryId == "103"){
+			categoryId = "예술/대중문화";
+		}
+		if(categoryId == "104"){
+			categoryId = "사회과학";
+		}
+		if(categoryId == "105"){
+			categoryId = "역사와 문화";
+		}
+		if(categoryId == "107"){
+			categoryId = "잡지";
+		}
+		if(categoryId == "108"){
+			categoryId = "만화";
+		}
+		if(categoryId == "109"){
+			categoryId = "유아";
+		}
+		if(categoryId == "110"){
+			categoryId = "아동";
+		}
+		if(categoryId == "111"){
+			categoryId = "가정과 생활";
+		}
+		if(categoryId == "112"){
+			categoryId = "청소년";
+		}
+		if(categoryId == "113"){
+			categoryId = "초등학습서";
+		}
+		if(categoryId == "114"){
+			categoryId = "고등학습서";
+		}
+		if(categoryId == "115"){
+			categoryId = "국어/외국어/사전";
+		}
+		if(categoryId == "116"){
+			categoryId = "자연과 과학";
+		}
+		if(categoryId == "117"){
+			categoryId = "경제경영";
+		}
+		if(categoryId == "118"){
+			categoryId = "자기계발";
+		}
+		if(categoryId == "119"){
+			categoryId = "인문";
+		}
+		if(categoryId == "120"){
+			categoryId = "종교/역학";
+		}
+		if(categoryId == "122"){
+			categoryId = "컴퓨터/인터넷";
+		}
+		if(categoryId == "123"){
+			categoryId = "자격서/수험서";
+		}
+		if(categoryId == "124"){
+			categoryId = "취미/레저";
+		}
+		if(categoryId == "125"){
+			categoryId = "전공도서/대학교제";
+		}
+		if(categoryId == "126"){
+			categoryId = "건강뷰티";
+		}
+		if(categoryId == "128"){
+			categoryId = "여행";
+		}
+		if(categoryId == "129"){
+			categoryId = "중등학습서";
+		}
+		/*
+		request.setAttribute("coverLargeUrl", coverLargeUrl);
+		request.setAttribute("title", title);
+		request.setAttribute("isbn", isbn);
+		*/
+		System.out.println(title);
 		sb.append(String.format("<div class='row result'>"));
 		sb.append(String.format("<div class='col-md-1'><span>%s</span></div>", a));
 		sb.append(String.format("<div class='col-md-3'><img src='%s'></div>", coverLargeUrl));
@@ -112,21 +221,22 @@ if (key != null && value != null) {
 		sb.append(String.format("<li>priceStandard : %s</li>", priceStandard));
 		sb.append(String.format("<li>pubDate : %s</li>", pubDate));
 		sb.append(String.format("<li>isbn : %s</li>", isbn));
-		sb.append(String.format("<li>categoryId : %s</li>", categoryId));
 		sb.append(String.format("<li>categoryName : %s</li>", categoryName));
+		sb.append(String.format("<li>categoryId : %s</li>", categoryId));
 		sb.append(String.format("</ul></div>"));
 		sb.append(String.format("<div><a href='%s' class='btn btn-default btn-xs' target='_blank'>&#128184;&nbsp;구매하기</a></div>",
 		link));
-		sb.append(String.format("<div>☆☆☆☆☆</div>"));
+		sb.append(String.format("<div id=''><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s' class='btn btn-default btn-xs' target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author));
+		sb.append(String.format("<div id=''><a href='mypage.do?title=%s&isbn=%s' class='btn btn-default btn-xs' target='_blank'>&#127873;&nbsp;찜하기&nbsp;&nbsp;&nbsp;&nbsp;</a></div>",title,isbn));
 		sb.append(String.format("</div>"));
-
+		
 	}
 }
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>도서 검색</title>
+<title>카악퉤..</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -416,37 +526,37 @@ div.result {
 	var r = document.getElementById('value');
 
 	function startConverting() {
-		//크롬 브라우저에서만 지원
-		
+		//check this browser is chrome or not. because this application supported only in chrome browser
+
 		if ('webkitSpeechRecognition' in window) {
 			//Web speech API Function
 			var speechRecognizer = new webkitSpeechRecognition();
-			//continuous : 마이크 한번만 잡을지 말지 
+			//continuous : you will catch mic only one time or not
 			speechRecognizer.continuous = true;
-			//interimResults : 마이크 입력하는 동안 결과를 반환하지 않을것인가
+			//interimResults : during capturing the mic you will send results or not
 			speechRecognizer.interimResults = true;
-			//lang : 언어 (ko-KR : Korean, en-IN : englist)
+			//lang : language (ko-KR : Korean, en-IN : englist)
 			speechRecognizer.lang = "ko-KR";
 			//start!
 			speechRecognizer.start();
 
 			var finalTranscripts = '';
 
-			//마이크 입력(catch) 기능 시작 
+			//if the voice catched onresult function will start
 			speechRecognizer.onresult = function(event) {
 				var interimTranscripts = '';
 				for (var i = event.resultIndex; i < event.results.length; i++) {
 					var transcript = event.results[i][0].transcript;
 					transcript.replace("\n", "<br>");
 
-					//isFinal : 음성 인식이 완료되면 Final = true
+					//isFinal : if speech recognition is finished, isFinal = true
 					if (event.results[i].isFinal) {
 						finalTranscripts += transcript;
 					} else {
 						interimTranscripts += transcript;
 					}
 				}
-				// HTML에 insert
+				//insert into HTML
 				r.value = finalTranscripts + interimTranscripts;
 			};
 			speechRecognizer.onerror = function(event) {

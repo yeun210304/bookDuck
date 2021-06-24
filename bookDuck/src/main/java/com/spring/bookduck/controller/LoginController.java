@@ -3,15 +3,18 @@ package com.spring.bookduck.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -54,6 +57,7 @@ public class LoginController {
 		return map;
 	}
 	
+	// 로그아웃
 	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception{
 		session.invalidate();
@@ -86,6 +90,7 @@ public class LoginController {
 		return "redirect:joinform.do";
 	}
 	
+	// 비번 변경
 	@RequestMapping("/updatePwForm.do")
 	public String updatePwForm() {
 		logger.info("[Controller] : updatePwForm.do");
@@ -102,6 +107,7 @@ public class LoginController {
 		return "member/login";
 	}
 	
+	// 탈퇴
 	@RequestMapping("/leaveAccountForm.do")
 	public String leaveAccountForm() throws Exception{
 		logger.info("[Controller] : leaveAccountForm.do");
@@ -124,6 +130,36 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
+	//아이디 찾기
+	@RequestMapping("/findIdForm.do")
+	public String findIdForm() {
+		logger.info("[Controller]: findIdForm.do");
+		return "member/findIdForm";
+	}
 	
+	
+	@RequestMapping("/findIdRes.do")
+	public String findIdRes(MemberDto dto, Model model) {
+		logger.info("[Controller]: findIdRes.do");
+		MemberDto member = biz.findId(dto);
+		
+		if(member == null) {
+			model.addAttribute("check", 1);
+		}else {
+			model.addAttribute("check", 0);
+			model.addAttribute("member_id", dto.getMember_id());
+		}
+		
+		return "member/findIdForm";
+	}
+	
+	
+	
+	//비밀번호 찾기
+	@RequestMapping("/findPwForm.do")
+	public String findPwForm() {
+		logger.info("[Controller]: findPwForm.do");
+		return "member/findPwForm";
+	}
 	
 }

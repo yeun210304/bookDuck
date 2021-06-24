@@ -1,7 +1,5 @@
 package com.spring.bookduck.model.dao;
 
-import java.util.Map;
-
 import com.spring.bookduck.model.dto.MemberDto;
 
 public interface LoginDao {
@@ -25,6 +23,9 @@ public interface LoginDao {
 	
 	//아이디 중복 확인
 	public int idCheck(MemberDto dto);
+	
+	//ID찾기
+	public MemberDto findId(MemberDto dto);
 	
 
 }

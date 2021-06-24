@@ -1,5 +1,9 @@
 package com.spring.bookduck.model.biz;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +44,11 @@ public class LoginBizImpl implements LoginBiz {
 	@Override
 	public int idCheck(MemberDto dto) {
 		return dao.idCheck(dto);
+	}
+
+	@Override
+	public MemberDto findId(MemberDto dto) {
+		return dao.findId(dto);
 	}
 
 }

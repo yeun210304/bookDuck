@@ -54,6 +54,20 @@
 			$(".join").submit();
 		});
 	});
+	
+	function FindIdForm(){
+		$(".find_id").click(function(){
+			$(".find_id").attr("action", "/member/findIdForm");
+			$(".find_id").submit();
+		});
+	});
+	
+	function FindPwForm(){
+		$(".find_pw").click(function(){
+			$(".find_pw").attr("action", "/member/findPwForm");
+			$(".find_pw").submit();
+		});
+	});
 </script>
 
 
@@ -77,6 +91,10 @@
 			<tr>
 			<td>
 			<input type="button" value="회원가입" id="join" onclick="location.href='joinform.do'"/></td>
+			<td>
+			<input type="button" value="아이디 찾기" id="find_id" onclick="location.href='findIdForm.do'"/></td>
+			<td>
+			<input type="button" value="비밀번호 찾기" id="find_pw" onclick="location.href='findPwForm.do'"/></td>
 			</tr>
 		
 		</table>

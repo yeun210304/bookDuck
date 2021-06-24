@@ -56,32 +56,42 @@
 		</tbody>
 	</table>
 	
-	<div id="pagingArea">
-			<ul class="pagination">
+	<div id="paging-area" align="center">
+			
+			<c:if test="${ pi.currentPage ne 1 }">
 				<c:choose>
-					<c:when test="${pi.currentPage eq 1 }">
-						<li><a href="#">Previous</a></li>
-					</c:when>
-					<c:otherwise>
-						<li><a href="noticeList.do?currentPage=${pi.currentPage-1 }">Previous</a></li>
-					</c:otherwise>
-				</c:choose>
-				
-				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-					<li><a href="noticeList.do?currentPage=${p }">${p }</a></li>
-				</c:forEach>
-				
+					<c:when test="${ !empty map.condition }">
+						<a href="noticeSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}">[이전]</a>
+            		</c:when>
+            		<c:otherwise>
+            			<a href="noticeList.do?currentPage=${ pi.currentPage-1 }">[이전]</a>
+            		</c:otherwise>
+            	</c:choose>
+			</c:if>
+			
+			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 				<c:choose>
-					<c:when test="${pi.currentPage eq pi.maxPage }">
-						<li><a href="#">Next</a></li>
-					</c:when>
-					<c:otherwise>
-						<li><a href="noticeList.do?currentPage=${pi.currentPage+1 }">Next</a></li>
-					</c:otherwise>
-				</c:choose>
-				
-			</ul>
-		</div>
+					<c:when test="${ !empty map.condition }">
+						<a href="noticeSearch.do?currentPage=${ p }&condition=${map.condition}&keyword=${map.keyword}">[${ p }]</a>
+	            	</c:when>
+	            	<c:otherwise>
+	            		<a href="noticeList.do?currentPage=${ p }">[${ p }]</a>
+            		</c:otherwise>
+            	</c:choose>
+            </c:forEach>
+            
+            <c:if test="${ pi.currentPage ne pi.maxPage }">
+            	<c:choose>
+            		<c:when test="${ !empty map.condition }">
+		            	<a href="noticeSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}">[다음]</a>
+		            </c:when>
+		            <c:otherwise>
+		            	<a href="noticeList.do?currentPage=${ pi.currentPage+1 }">[다음]</a>
+            		</c:otherwise>
+            	</c:choose>
+            </c:if>
+            
+        </div>
 		
 		<br clear="both">
 	<br>

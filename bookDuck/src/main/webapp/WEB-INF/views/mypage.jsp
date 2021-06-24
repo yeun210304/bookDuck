@@ -71,12 +71,12 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						function(i) {
 							//console.log(this.snippet.channelId);
 							$("#get_view").append(
-									
+												//검색한 책목록을 ifram api 를 활용해서 영상을 띄운다
 											'<iframe width="320" height="180"src="https://www.youtube.com/embed/'+this.id.videoId+'"title="YouTube video player" frameborder="0"allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"allowfullscreen></iframe>'
 												);
 
 						}).promise().done(
-						function() {
+						function() {//다음 동영상 목록을 열어주는 페이징
 							if (jdata.prevPageToken) {
 								$("#nav_view").append(
 										'<a href="javascript:fnGetList(\''
@@ -181,12 +181,46 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						</form>
 						<div id="get_view"></div>
 						<div id="nav_view"></div>
+						<br/><br/>
+						<div>
+							<table border="1">
+								<col width="50" />
+								<col width="100" />
+								<col width="50" />
+								<tr>
+									<th>도서국제번호</th>
+									<th>제목</th>
+									<th>작성일</th>
+									<th>&nbsp;</th>
+								</tr>
+								<c:choose>
+									<c:when test="${empty sclist }">
+										<tr>
+											<td colspan="5" align="center">------------찜목록이 없습니다.------------</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${sclist }" var="scrapDto">
+											<tr>
+												<input type="hidden" value="${scrapDto.scrap_no }">
+												<td><a href="/">${scrapDto.book_isbn }</a></td>
+												<td>${scrapDto.book_title }</td>
+												<td>${scrapDto.scrap_regdate }</td>
+												<td><a href="scdelete.do?scrap_no=${scrapDto.scrap_no }&member_id=${Ldto.member_id}">삭제</a></td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</table>
+						</div>
 					</c:when>
 					<c:otherwise>
+					<!--///////////////////////////////////  -->
 						<table>
 							<tr>
 								<th>자기소개</th>
-								<td id="summernote">${intdDto.intd_content}</td>
+								<td id="summernote">${intdDto.intd_content}
+								</td>
 							</tr>
 							<tr>
 								<td><input type="button" value="수정"
@@ -203,6 +237,39 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						</form>
 						<div id="get_view"></div>
 						<div id="nav_view"></div>
+						<br/><br/>
+						<div>
+							<table border="1">
+								<col width="50" />
+								<col width="100" />
+								<col width="300" />
+								<tr>
+									<th>도서국제번호</th>
+									<th>제목</th>
+									<th>작성일</th>
+									<th>&nbsp;</th>
+								</tr>
+								<c:choose>
+									<c:when test="${empty sclist }">
+										<tr>
+											<td colspan="5" align="center">------------찜목록이 없습니다.------------</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${sclist }" var="scrapDto">
+											<tr>
+												<input type="hidden" value="${scrapDto.scrap_no }">
+												<td><a href="/">${scrapDto.book_isbn }</a></td>
+												<td>${scrapDto.book_title }</td>
+												<td>${scrapDto.scrap_regdate }</td>
+												<td><a href="scdelete.do?scrap_no=${scrapDto.scrap_no }&member_id=${Ldto.member_id}&member_payrole=${Ldto.member_payrole}">삭제</a></td>
+												<td><a href="scalldelete.do?scrap_id=${scrapDto.scrap_id }&member_id=${Ldto.member_id}&member_payrole=${Ldto.member_payrole}"></a></td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</table>
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</c:when>

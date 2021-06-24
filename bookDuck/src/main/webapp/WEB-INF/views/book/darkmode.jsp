@@ -28,29 +28,23 @@ String path = request.getContextPath();
 //검색 기준 및 검색 단어 수신
 
 
-String key = request.getParameter("key");
-
-String value = request.getParameter("value");
-if (key == null) {
-	key = "";
-	value = "";
-}
-
 String start = request.getParameter("start");
-if (start == null) {
-	start = "";
+if(start == null){
+	start = "1";
 }
-
-String target = request.getParameter("target");
-
 String sort = request.getParameter("sort");
+if(sort == null){
+	sort = "accuracy";
+}
+String value = request.getParameter("value");
+if(value == null){
+	value = "1";
+}
 
 System.out.println("---------");
-System.out.println(key);
-System.out.println(value);
 System.out.println(start);
-System.out.println(target);
 System.out.println(sort);
+System.out.println(value);
 
 /*
 Crawler craw = new Crawler();
@@ -66,13 +60,12 @@ StringBuilder sb = new StringBuilder();
 String totalcount = "0";
 String count = "0";
 
-if (key != null && value != null) {
 	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder builder = factory.newDocumentBuilder();
 	Document doc = null;
 	String str = String.format(
-	"http://book.interpark.com/api/search.api?key=7A71D8E679DA9C96874476B8E225B77A4592E29959B15764C52A257C0343754F&query=%s&queryType=%s&start=%s&maxResults=10&inputEncoding=utf-8&searchTarget=%s&sort=%s",
-	URLEncoder.encode(value, "UTF-8"), key, start, target, sort);
+	"http://book.interpark.com/api/search.api?key=7A71D8E679DA9C96874476B8E225B77A4592E29959B15764C52A257C0343754F&start=%s&maxResults=10&inputEncoding=utf-8&sort=%s&categoryId=129&query=%s",
+	 start, sort, URLEncoder.encode(value, "UTF-8"));
 	URL url = new URL(str);
 	System.out.println(url);
 
@@ -99,7 +92,7 @@ if (key != null && value != null) {
 		String link = xpath.compile("link").evaluate(item);
 		String categoryId = xpath.compile("categoryId").evaluate(item);
 		String categoryName = xpath.compile("categoryName").evaluate(item);
-		//System.out.println(title);
+		//System.out.println(description);
 
 		sb.append(String.format("<div class='row result'>"));
 		sb.append(String.format("<div class='col-md-1'><span>%s</span></div>", a));
@@ -121,12 +114,11 @@ if (key != null && value != null) {
 		sb.append(String.format("</div>"));
 
 	}
-}
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>도서 검색</title>
+<title>다크모드예시</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -160,13 +152,10 @@ div.result {
 	
 <script>
 
-
 	var currentPageNum; //현재 페이지 번호 저장용 전역변수
 	
     $(document).ready(function() {
-        $("#key option[value='<%=key%>']").attr("selected", "selected");
-        $("#value").val('<%=value%>');
-        
+    	$("#value").val('<%=value%>');
         console.log("통신");
         
        	 currentPageNum = "1";
@@ -175,70 +164,75 @@ div.result {
 		//이전, 다음 버튼 -> 페이지 이동
 		$("#previous").click(function() {
 			var previousNum = parseInt(currentPageNum)-1;
-			if(previousNum < 1){
-				previousNum = 1;
-			}
 			//ajax($("#value").val(), $("#key option:selected").val(), previousNum);			
 			currentPage(previousNum);
-			startChange($("#value").val(), $("#key option:selected").val(), previousNum,$("input:radio[name='target']:checked").val(), $("#publishTime").val());
+			startChange( previousNum, $("#publishTime").val(), $("#value").val());
 		});
 		
 		$("#next").click(function() {
 			var nextNum = parseInt(currentPageNum)+1;
 			//ajax($("#value").val(), $("#key option:selected").val(), nextNum);			
 			currentPage(nextNum);
-			startChange($("#value").val(), $("#key option:selected").val(), nextNum, $("input:radio[name='target']:checked").val(), $("#publishTime").val());
+			startChange( nextNum, $("#publishTime").val(), $("#value").val());
 		});
 	
 		
 		// 출간일 정렬
 		$("#publishTime").click(function() {
-			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#publishTime").val());
+			realsort(currentPageNum, $("#publishTime").val(), $("#value").val());
 		});
 		
 		// 정확도 정렬
 		$("#accuracy").click(function() {
-			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#accuracy").val());
+			realsort(currentPageNum, $("#accuracy").val(), $("#value").val());
 		});
 		
 		// 제목 정렬
 		$("#title").click(function() {
-			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#title").val());
+			realsort(currentPageNum, $("#title").val(), $("#value").val());
 		});
 		
 		// 판매량 정렬
 		$("#salesPoint").click(function() {
-			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#salesPoint").val());
+			realsort(currentPageNum,  $("#salesPoint").val(),$("#value").val());
 		});
 		
 		// 고객평점 정렬
 		$("#customerRating").click(function() {
-			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#customerRating").val());
+			realsort(currentPageNum,$("#customerRating").val(), $("#value").val());
 		});
 		
 		// 리뷰갯수 정렬
 		$("#reviewCount").click(function() {
-			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#reviewCount").val());
+			realsort( currentPageNum, $("#reviewCount").val(),$("#value").val());
 		});
 		
 		// 가격오름순 정렬
 		$("#price").click(function() {
-			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#price").val());
+			realsort(currentPageNum,  $("#price").val(), $("#value").val());
 		});
 		
 		// 가격내림순 정렬
 		$("#priceDesc").click(function() {
-			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#priceDesc").val());
+			realsort(currentPageNum,  $("#priceDesc").val(), $("#value").val());
+		});
+		
+
+		// 카테고리 검색 
+		$("#catesearch").click(function() {
+			realsort(currentPageNum,  $("#priceDesc").val(), $("#value").val());
+			console.log("실행중");
+			console.log($("#value").val());
 		});
 		
 		
-	    function realsort(value, key, start, target, sort){
+	    function realsort(start, sort, value){
 	    	
             //console.log("시작");
 	    	$.ajax({
             	
                 type : "post",
-                data: {"value" : value, "key" : key, "start" : start, "target" : target, "sort" : sort},
+                data: {"start" : start,  "sort" : sort, "value" : value},
                 
                 success: function(list){
                 	// console.log("성공");
@@ -249,7 +243,7 @@ div.result {
                     var value = "";
                     
                     
-                    for(var i=111; i < arr.length; i++){
+                    for(var i=94; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -271,13 +265,13 @@ div.result {
 	    
 	    
 	    
-	    function startChange(value, key, start, target, sort){
+	    function startChange(start, sort, value){
 	    	
             //console.log("시작");
 	    	$.ajax({
             	
                 type : "post",
-                data: {"value" : value, "key" : key, "start" : start, "target" : target, "sort" : sort},
+                data: { "start" : start, "sort" : sort, "value" : value},
                 
                 success: function(list){
                 	//console.log("성공");
@@ -289,13 +283,13 @@ div.result {
                     var value = "";
                     
                     
-                    for(var i=111; i < arr.length; i++){
+                    for(var i=94; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
-                    console.log(value);
+                    //console.log(value);
                     var value2 = value.split("<ul class=");
-                    console.log(value2);
+                    //console.log(value2);
                     
                     
 					$("#hi").hide();
@@ -306,8 +300,9 @@ div.result {
                 }
             });
         }
-    	
 	    
+	    
+    	
 	    	
 		
     });
@@ -324,55 +319,40 @@ div.result {
 
 </head>
 <body>
-
+	<input type="hidden" id="mode">
+	<input style="float: right;" class="btn btn-default" type="button" value="day" onclick="day_night_handler(this)">
+	<button style="float: right;" id="mic" class="btn btn-default"
+		onClick="startConverting();" type="button">
+							<span class="fa fa-microphone"></span>
+	</button>
 	<div class="container">
 
 		<div class="panel page-header" style="text-align: center;">
 			<h1 style="font-size: xx-large;">
 				<!-- 주의)상대경로 대신 절대경로 표기를 권장한다. -->
-				&#128218;&nbsp;도서검색 <small></small> <span
+				&#128218;&nbsp;국내도서 <small>중등학습서</small> <span
 					style="font-size: small; color: #777777;"></span>
 			</h1>
 		</div>
-
-		<div class="panel-group">
-			<div class="panel panel-default">
-				<div class="panel-heading">&#128270;&nbsp;도서 검색</div>
-				
-				<div class="panel-body">
+		<div class="panel panel-default" id="output">
+				<div class="panel-body" style="text-align: right;">
 					<form role="form" class="form-inline" method="POST">
 						<input type="hidden" id="start" name="start" value="1">
 						<input type="hidden" id="sort" name="sort" value="accuracy">
 						
-						<label class="radio-inline">
-						<input type="radio" class="target" name="target" value="book" checked="checked">국내도서</label> 
-						<label class="radio-inline">
-						<input type="radio" class="target" name="target" value="foreign">해외도서</label> 
-							
-						&nbsp;
-						<select class="form-control" id="key" name="key">
-							<option value="title">책 제목</option>
-							<option value="isbn">ISBN</option>
-						</select> 
-						
+						&#128270;&nbsp; 현재 분야에서 검색&nbsp;&nbsp;
 						<input type="text" class="form-control" 
-						id="value" name="value" required="required">
-						<button type="submit" id="bts" class="btn btn-default">
+						id="value" name="value" placeholder="검색어를 입력하세요." required="required">
+						<button type="submit" id="catesearch" class="btn btn-default">
 							<span class="glyphicon glyphicon-search"></span>
-							검색</button>
-						<button id="mic" class="btn btn-default"
-							onClick="startConverting();" type="button">
-							<span class="fa fa-microphone"></span>
-						</button>	
-							
+							검색
+						</button>
 					</form>
 				</div>
-			</div>
 		</div>
 
-
 		<div class="panel panel-default" id="output">
-			<div class="panel-heading">&#128036;&nbsp;도서 검색 결과</div>
+			<div class="panel-heading">&#128036;&nbsp;도서 목록</div>
 			<div class="panel-body" id="hey">
 				<button type="button" class="btn btn-default">
 					TotalCount <span class="badge" id="totalcount"><%=totalcount%></span>
@@ -412,12 +392,12 @@ div.result {
 
 
 	</div>
-		<script type="text/javascript">
-	var r = document.getElementById('value');
+	<script type="text/javascript">
+	var r = document.getElementById('mode');
 
 	function startConverting() {
 		//크롬 브라우저에서만 지원
-		
+
 		if ('webkitSpeechRecognition' in window) {
 			//Web speech API Function
 			var speechRecognizer = new webkitSpeechRecognition();
@@ -426,7 +406,7 @@ div.result {
 			//interimResults : 마이크 입력하는 동안 결과를 반환하지 않을것인가
 			speechRecognizer.interimResults = true;
 			//lang : 언어 (ko-KR : Korean, en-IN : englist)
-			speechRecognizer.lang = "ko-KR";
+			speechRecognizer.lang = "ko-K";
 			//start!
 			speechRecognizer.start();
 
@@ -448,12 +428,64 @@ div.result {
 				}
 				// HTML에 insert
 				r.value = finalTranscripts + interimTranscripts;
+				console.log(r.value);
+				if (r.value == "베이" || r.value == "데이" || r.value == "페이" || r.value == "데이." || r.value == "베이." || r.value == "헤이" || r.value == "내일") {
+					var target = document.querySelector('body');
+					BodySetBackgroundColor('white'); 			// 배경색
+					BodySetColor('black'); 						// 글자색
+					LinkSetColor('blue') 						// 링크색
+					self.value = 'day';
+					console.log(r.value);
+				} else if (r.value == "나이트" || r.value == "나이트.") {
+					var target = document.querySelector('body');
+					BodySetBackgroundColor('RGB(26,36,54)'); 	// 배경색
+					BodySetColor('black'); 						// 글자색
+					LinkSetColor('powderblue') 					// 링크색
+					self.value = 'night';
+					console.log(r.value);
+				}
 			};
 			speechRecognizer.onerror = function(event) {
 			};
 		} else {
 		}
-	}
+	
+
+
+		}
+
+		// 링크 색 바꾸기
+		function LinkSetColor(color) {
+			var alist = document.querySelectorAll('a');
+			for (var i = 0; i < alist.length; i++)
+				alist[i].style.color = color;
+		}
+
+		// 바디 글자색 바꾸기
+		function BodySetColor(color) {
+			document.querySelector('body').style.color = color;
+		}
+
+		// 바디 배경색 바꾸기
+		function BodySetBackgroundColor(color) {
+			document.querySelector('body').style.backgroundColor = color;
+		}
+
+		// 주간, 야간모드
+		function day_night_handler(self) {
+			var target = document.querySelector('body');
+			if (self.value == 'day') {
+				BodySetBackgroundColor('RGB(26,36,54)');
+				BodySetColor('black');
+				LinkSetColor('powderblue')
+				self.value = 'night';
+			} else {
+				BodySetBackgroundColor('white');
+				BodySetColor('black');
+				LinkSetColor('blue')
+				self.value = 'day';
+			}
+		}
 	</script>
 
 </body>

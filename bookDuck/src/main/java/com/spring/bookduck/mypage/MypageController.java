@@ -1,5 +1,7 @@
 package com.spring.bookduck.mypage;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,8 @@ import com.spring.bookduck.introduce.dto.IntroduceDto;
 import com.spring.bookduck.model.dto.MemberDto;
 import com.spring.bookduck.pay.controller.PayController;
 import com.spring.bookduck.pay.dto.PayDto;
+import com.spring.bookduck.scrap.biz.ScrapBiz;
+import com.spring.bookduck.scrap.dto.ScrapDto;
 
 
 @Controller
@@ -25,6 +29,9 @@ public class MypageController {
 	@Autowired
 	private IntroduceBiz biz;
 	
+	@Autowired
+	private ScrapBiz scbiz;
+	
 	@RequestMapping("mypage.do")
 	public String mypage(HttpSession session, HttpServletRequest request,MemberDto dto,Model model ) {
 		
@@ -34,10 +41,9 @@ public class MypageController {
 		model.addAttribute("member_id",dto.getMember_id());
 		model.addAttribute("member_payrole",dto.getMember_payrole());
 	 	IntroduceDto intdres = biz.selectone(dto.getMember_id());
-	 	
 		model.addAttribute("intdDto",intdres);
-		
-		
+		List<ScrapDto> scrapres = scbiz.sclist(dto.getMember_id());
+		model.addAttribute("sclist",scrapres);
 		
 		return "mypage";
 	}

@@ -193,65 +193,135 @@
 		<p></p> 	
 	</div>
 	
+	
+	<!-- 현재 위치 기준 주변 서점 또는 도서관 검색 -->
 	<div id="map" style="width:100%;height:350px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4cbf31fc0b4bc0ff759253ed7b23a16&libraries=services"></script>
 	<script type="text/javascript">
-		// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+	// 위도 경도 변수 선언
+	var lat; var lon;
 	
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = {
-		        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-		        level: 3 // 지도의 확대 레벨
-		    };  
+	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 	
-		// 지도를 생성합니다    
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-		// 장소 검색 객체를 생성합니다
-		var ps = new kakao.maps.services.Places(); 
-	
-		// 키워드로 장소를 검색합니다
-		ps.keywordSearch('서점', placesSearchCB, searchOptions); 
-		var searchOptions = {
-				location : new kakao.maps.LatLng(37.566826, 126.9786567),
-				size : 15,
-				radius : 5000,
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+		center: new kakao.maps.LatLng(33, 126), // 지도의 중심좌표
+		level: 6 // 지도의 확대 레벨
 		};
-		// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-		function placesSearchCB (data, status, pagination) {
-		    if (status === kakao.maps.services.Status.OK) {
+
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption);
 	
-		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-		        // LatLngBounds 객체에 좌표를 추가합니다
-		        //var bounds = new kakao.maps.LatLngBounds();
+	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+	if (navigator.geolocation) {
+	    
+	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	        
+	        lat = position.coords.latitude; // 위도
+	        lon = position.coords.longitude; // 경도
+	        
+	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+	            message = '<div style="padding:5px;">나의 위치</div>'; // 인포윈도우에 표시될 내용입니다
+	        
+	        // 마커와 인포윈도우를 표시합니다
+	        displayMarker(locPosition, message);
+	            
+	     	// 장소 검색 객체를 생성합니다
+	    	var ps = new kakao.maps.services.Places();
+	    	
+	    	// 키워드로 장소를 검색합니다
+	    	ps.keywordSearch('서점', placeSearchCB, {
+	    		location : new kakao.maps.LatLng(lat, lon),		// 검색 중심 좌표
+	    		size : 5,										// 표시될 갯수
+	    		radius : 10000,									// 제한 범위(m)
+	    		sort : kakao.maps.services.SortBy.DISTANCE,		// 정렬 기준(DISTANCE : 거리순 , ACCURACY : 정확도순)
+	    	});
+	    	ps.keywordSearch('도서관', placeSearchCB, {
+	    		location : new kakao.maps.LatLng(lat, lon),
+	    		size : 5,
+	    		radius : 10000,
+	    		sort : kakao.maps.services.SortBy.DISTANCE,
+	    	});
+	            
+	      });
+	    
+	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+	    
+	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
+	        message = 'geolocation을 사용할수 없어요..'
+	        
+	    displayMarker(locPosition, message);
 	
-		        for (var i=0; i<data.length; i++) {
-		            displayMarker(data[i]);    
-		            //bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-		        }       
+	 	// 장소 검색 객체를 생성합니다
+		var ps = new kakao.maps.services.Places();
+		
+		// 키워드로 장소를 검색합니다
+		ps.keywordSearch('서점', placeSearchCB, {
+			location : new kakao.maps.LatLng(lat, lon),
+			size : 5,
+			radius : 10000,
+		});
+		ps.keywordSearch('도서관', placeSearchCB, {
+    		location : new kakao.maps.LatLng(lat, lon),
+    		size : 5,
+    		radius : 10000,
+    		sort : kakao.maps.services.SortBy.DISTANCE,
+    	});
+	}
 	
-		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-		       // map.setBounds(bounds);
-		    } 
+	
+	function placeSearchCB(data, status, pagination){
+		if(status === kakao.maps.services.Status.OK){
+			for(var i = 0; i < data.length; i++){
+				displayMarker01(data[i]);
+			}
 		}
+	}
+	// 지도에 마커를 표시하는 함수입니다(검색 결과 마커들)
+	function displayMarker01(place) {
+	    
+	    // 마커를 생성하고 지도에 표시합니다
+	    var marker = new kakao.maps.Marker({
+	        map: map,
+	        position: new kakao.maps.LatLng(place.y, place.x) 
+	    });
+
+	    // 마커에 클릭이벤트를 등록합니다
+	    kakao.maps.event.addListener(marker, 'click', function() {
+	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+	        infowindow.setContent('<div style="padding:5px;font-size:12px;"><a href="'+ place.place_url +'" target="_blank">' + place.place_name +'</a><br/>'
+	        																  + place.address_name + '<br/>나로부터 '
+	        																  + place.distance + 'm</div>');
+	        infowindow.open(map, marker);
+	    });
+	}
 	
-		// 지도에 마커를 표시하는 함수입니다
-		function displayMarker(place) {
-		    
-		    // 마커를 생성하고 지도에 표시합니다
-		    var marker = new kakao.maps.Marker({
-		        map: map,
-		        position: new kakao.maps.LatLng(place.y, place.x) 
-		    });
+	// 지도에 마커와 인포윈도우를 표시하는 함수입니다(현재 위치 혹은 기본 위치일 때)
+	function displayMarker(locPosition, message) {
 	
-		    // 마커에 클릭이벤트를 등록합니다
-		    kakao.maps.event.addListener(marker, 'click', function() {
-		        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-		        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-		        infowindow.open(map, marker);
-		    });
-		}
+	    // 마커를 생성합니다
+	    var marker = new kakao.maps.Marker({  
+	        map: map, 
+	        position: locPosition
+	    }); 
+	    
+	    var iwContent = message, // 인포윈도우에 표시할 내용
+	        iwRemoveable = true;
+	
+	    // 인포윈도우를 생성합니다
+	    var infowindow = new kakao.maps.InfoWindow({
+	        content : iwContent,
+	        removable : iwRemoveable
+	    });
+	    
+	    // 인포윈도우를 마커위에 표시합니다 
+	    infowindow.open(map, marker);
+	    
+	    // 지도 중심좌표를 접속위치로 변경합니다
+	    map.setCenter(locPosition);      
+	}
 	</script>
 
 	<a href="loginform.do">로그인</a>

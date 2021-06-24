@@ -14,8 +14,27 @@
 <div id="map" style="width:100%;height:400px;"></div>
 
 <script>
+	// 위도 경도 변수 선언
+	var lat; var lon;
+	
+	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+	if (navigator.geolocation) {
+	    
+	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	        
+	        lat = position.coords.latitude, // 위도
+	        lon = position.coords.longitude; // 경도
+	            
+	      });
+	    
+	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+	    	lat = 33.450701;
+			lon = 126.570667;  
+	}
+	
 	var mapOptions = {
-	    center: new naver.maps.LatLng(37.3595704, 127.105399),
+	    center: new naver.maps.LatLng(lat, lon),
 	    zoom: 10
 	};
 	

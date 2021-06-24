@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="RChartMapper">
+
+	<select id="chartData" parameterType="String" resultType="googleChartDto">
+		SELECT CHARTREADINGTIME, CHARTMDATE FROM READINGCHART
+		WHERE CHARTID = #{chartId}
+		ORDER BY CHARTREADINGTIME DESC
+	</select>
+
+	<insert id="insert" parameterType="googleChartDto">
+		INSERT INTO READINGCHART
+		VALUES(CHARTNO_SEQ.NEXTVAL, 'admin','test title','test content', #{chartreadingtime}, #{chartMdate}, SYSDATE, 'isbn test')
+	</insert>
+	
+</mapper>

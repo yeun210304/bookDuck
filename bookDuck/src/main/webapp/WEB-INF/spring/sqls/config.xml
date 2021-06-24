@@ -2,16 +2,6 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 
-	<!--
-	<typeAliases>
-		<typeAlias type="com.spring.bookduck" alias=""/>
-	</typeAliases>
-	
-	<mappers>
-		<mapper resource="/mybatis/" />
-	</mappers>
-	-->
-	
 	<!-- null 값 설정 -->
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL" />
@@ -25,6 +15,7 @@
 
 		<typeAlias type="com.spring.bookduck.introduce.dto.IntroduceDto" alias="intdDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.CommentDto" alias="commentDto"/>
+		<typeAlias type="com.spring.bookduck.model.dto.ReadingChartDto" alias="ReadingChartDto"/>
 		<typeAlias type="com.spring.bookduck.pay.dto.PayDto" alias="payDto"/>
 
 	</typeAliases>
@@ -35,7 +26,7 @@
 		<mapper resource="/mybatis/board-mapper.xml"/>
 		<mapper resource="/mybatis/pay-mapper.xml"/>
 		<mapper resource="/mybatis/introduce-mapper.xml"/>
+		<mapper resource="/mybatis/readingChart-mapper.xml"/>
 	</mappers>
-	
 	
 </configuration>

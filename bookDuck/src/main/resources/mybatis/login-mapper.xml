@@ -65,7 +65,7 @@
 	
 	<!-- 아이디 찾기 -->
 	<select id="findId" parameterType="Ldto" resultType="Ldto">
-		SELECT * FROM MEMBER WHERE MEMBER_EMAIL = #{member_email}
+		SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_EMAIL = #{member_email}
 	</select>
 	
 </mapper>

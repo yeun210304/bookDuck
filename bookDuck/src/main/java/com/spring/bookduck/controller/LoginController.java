@@ -147,10 +147,10 @@ public class LoginController {
 			model.addAttribute("check", 1);
 		}else {
 			model.addAttribute("check", 0);
-			model.addAttribute("member_id", member.getMember_id());
+			model.addAttribute("member_id", dto.getMember_id());
 		}
 		
-		return "member/login";
+		return "member/findIdForm";
 	}
 	
 	

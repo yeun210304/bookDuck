@@ -11,7 +11,7 @@
 <body>
 	<h1>ID 찾기</h1>
 	
-	<form action="findIdRes.do" method="post">
+	<form action="findIdRes.do" method="post" name="findform">
 		<div class="findId-form_email">
 			<div class="email">email</div>
 			<div class="email_input_box">
@@ -25,15 +25,12 @@
 		</div>
 		<!-- 정보가 일치하지 않을 때 -->
 		<c:if test="${check==1 }">
-			<script type="text/javascript">
-				opener.document.findform.member_email.value="";
-			</script>
 			<label>일치하는 정보가 존재하지 않습니다.</label>
 		</c:if>
 		
 		<!-- 정보가 일치할 때 -->
 		<c:if test="${check==0 }">
-			<label>찾으시는 아이디는 ${member_id}입니다.</label>
+			<label>찾으시는 아이디는 '${member_id}'입니다.</label>
 		</c:if>
 	</form>
 

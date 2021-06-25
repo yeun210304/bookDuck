@@ -20,15 +20,11 @@ System.out.println(title);
 System.out.println(isbn);
 %>
 <!--SummerNote  -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script>
 	$(document).ready(function() {
 		$('#summernote').summernote();
-
 	});
 </script>
 
@@ -108,6 +104,7 @@ System.out.println(isbn);
 
 
 <!-- 구글차트 GoogleChart -->
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
     
@@ -116,11 +113,10 @@ System.out.println(isbn);
 
       function drawChart() {
     	  var jsonData = $.ajax({
-    		  
-    		  url: "chartData.do",
-    		  data: "chartId=admin",
-    		  dataType:"json",
-    		  async: false
+    		 url: "chartData.do",
+    		 data: "chartId=${Ldto.member_id}",
+    		 dataType:"json",
+    		 async: false
     		}).responseText;
 
     	  var stringJson = JSON.parse(jsonData);
@@ -144,7 +140,7 @@ System.out.println(isbn);
 			data.addRows(dataArray);
     	  
         var options = {
-          title: '독서량(분)',
+          title: '독서량(-+분)',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
@@ -153,7 +149,6 @@ System.out.println(isbn);
 
         chart.draw(data, options);
       }
-    
     </script>
 
 </head>
@@ -289,23 +284,33 @@ System.out.println(isbn);
 	<!-- 리딩차트. 구글차트 부분 -->
 	<div class="readingChart">
 	
-		<!-- 구글차트 위치-->
-		<div id="curve_chart" method="post" style="width:900px; height:500px"></div>
 	
-		<!-- 독서량 전달 -->
-		<p>독서량추가</p>
-		<form action="readingTimeInsert.do" method="post">
-			<!-- 날짜 -->
-			<input type="date" name="chartMdate" style="width:30%" />
-			<br/>
-			<!-- 독서한 시간(분) -->
-			<input type="range" min="1" max="600" style="width:30%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
-			<br/>
-			<span id="CRTime" ></span>분
-			<input type="submit" value="등록" />
-		</form>
+	<c:choose>
+			<c:when test="${Ldto.member_payrole eq 'N'}">
+				<p> </p>
+			</c:when>
+			<c:when test="${Ldto.member_payrole eq 'Y'}">
+			<!-- 구글차트 위치-->
+				<div id="curve_chart" method="get" style="width:900px; height:500px"></div>
+			
+				<!-- 독서량 전달 -->
+				<p>독서량</p>
+				<form action="readingTimeInsert.do" method="post">
+					<!-- 날짜 -->
+					<input type="date" name="chartMdate" style="width:30%" />
+					<br/>
+					<!-- 독서한 시간(분) -->
+					<input type="range" min="1" max="600" style="width:30%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
+					<br/>
+					<span id="CRTime" ></span>분
+					<input type="hidden" id="chartId" name="chartId" value="${Ldto.member_id}" />
+					<input type="submit" value="등록" />
+			</form>
+		</c:when>
+	</c:choose>
+	
 		
-		<input type="hidden" id="id" value="admin" name="chartid" />
+		
 		
 	</div>
 	

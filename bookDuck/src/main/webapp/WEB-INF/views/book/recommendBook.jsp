@@ -5,23 +5,12 @@ request.setCharacterEncoding("UTF-8");
 //절대경로 확인
 String path = request.getContextPath();
 
-
 String coverLargeUrl = request.getParameter("coverLargeUrl");
 String title = request.getParameter("title");
 String isbn = request.getParameter("isbn");
 String author = request.getParameter("author");
 
-System.out.println("-----------");
-System.out.println(coverLargeUrl);
-System.out.println(title);
-System.out.println(isbn);
-System.out.println(author);
-
-
-
-
 %>    
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -50,24 +39,6 @@ System.out.println(author);
 	<div id="tts">
 		<b>한줄낭독</b>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

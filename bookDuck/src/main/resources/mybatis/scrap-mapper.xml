@@ -19,5 +19,8 @@
 		DELETE FROM SCRAP
 		WHERE SCRAP_NO= #{scrap_no}
 	</delete>
-
+	<delete id="scalldelete">
+		DELETE FROM SCRAP
+		WHERE SCRAP_NO= #{scrap_no}
+	</delete>
 </mapper>

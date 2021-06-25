@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>책추천</title>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
 <%
 request.setCharacterEncoding("UTF-8");
 //절대경로 확인
@@ -11,19 +23,6 @@ String isbn = request.getParameter("isbn");
 String author = request.getParameter("author");
 
 %>    
-<html>
-<head>
-<meta charset="UTF-8">
-<title>책추천</title>
-<style type="text/css">
-
-</style>
-<script type="text/javascript">
-
-
-</script>
-</head>
-<body>
 	<div id="book">
 		<b>책정보</b><br/>
 		<img src="<%=coverLargeUrl %>"><br/>

@@ -35,8 +35,8 @@ public class ScrapBizImpl implements ScrapBiz {
 	}
 
 	@Override
-	public ScrapDto scalldelete(String scrap_id) {
-		return dao.scalldelete(scrap_id);
+	public void scalldelete(String scrap_no) {
+		 dao.scalldelete(scrap_no);
 	}
 
 }

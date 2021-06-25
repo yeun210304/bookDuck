@@ -27,6 +27,5 @@
 		<a href="leaveAccountForm.do">회원탈퇴</a>
 	</c:if>
 	
-
 </body>
 </html>

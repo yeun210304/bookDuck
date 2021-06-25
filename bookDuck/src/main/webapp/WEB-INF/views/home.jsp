@@ -233,30 +233,49 @@
 	    	
 	    	// 키워드로 장소를 검색합니다
 	    	ps.keywordSearch('서점', placeSearchCB, {
-	    		location : new kakao.maps.LatLng(lat, lon),		// 검색 중심 좌표
+	    		location : locPosition,							// 검색 중심 좌표
 	    		size : 5,										// 표시될 갯수
 	    		radius : 10000,									// 제한 범위(m)
 	    		sort : kakao.maps.services.SortBy.DISTANCE,		// 정렬 기준(DISTANCE : 거리순 , ACCURACY : 정확도순)
 	    	});
 	    	ps.keywordSearch('도서관', placeSearchCB, {
-	    		location : new kakao.maps.LatLng(lat, lon),
+	    		location : locPosition,
 	    		size : 5,
 	    		radius : 10000,
 	    		sort : kakao.maps.services.SortBy.DISTANCE,
 	    	});
 	            
+	      }, function(error){
+	    	  if(error.PERMISSION_DENIED){	// 사용자가 위치 권한 차단했을 경우
+	    		  var locPosition = new kakao.maps.LatLng(37.49767083325, 127.03050314956),    // kh 정보교육원 기준으로 함
+		  	        message = 'kh정보교육원'
+		  	        
+		  	    displayMarker(locPosition, message);
+	    		// 장소 검색 객체를 생성합니다
+	  	    	var ps = new kakao.maps.services.Places();
+	  	   		// 키워드로 장소를 검색합니다
+		    	ps.keywordSearch('서점', placeSearchCB, {
+		    		location : locPosition,		// 검색 중심 좌표
+		    		size : 5,										// 표시될 갯수
+		    		radius : 10000,									// 제한 범위(m)
+		    		sort : kakao.maps.services.SortBy.DISTANCE,		// 정렬 기준(DISTANCE : 거리순 , ACCURACY : 정확도순)
+		    	});
+		    	ps.keywordSearch('도서관', placeSearchCB, {
+		    		location : locPosition,
+		    		size : 5,
+		    		radius : 10000,
+		    		sort : kakao.maps.services.SortBy.DISTANCE,
+		    	});
+	    		  
+	    	  }
 	      });
 	    
-	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+	} else { // HTML5의 GeoLocation을 지원하지 않을 때
 	    
 		console.log("");
-		console.log("findLocation : Geolocation API Not Enable");    		
+		console.log("findLocation : geolocation을 사용할수 없어요..");
+		alert("지도 정보를 지원하지 않는 브라우저입니다.");
 		console.log("");
-		
-	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
-	        message = 'geolocation을 사용할수 없어요..'
-	        
-	    displayMarker(locPosition, message);
 	}
 	
 	
@@ -318,7 +337,5 @@
 	
 	<a href="qnaList.do">문의게시판</a>
 	
-	<a href="mapTest.do">지도테스트</a>
-
 </body>
 </html>

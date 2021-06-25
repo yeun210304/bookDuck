@@ -26,7 +26,8 @@
 
 	// 지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption);
-	
+	console.log("lat : " + lat);
+    console.log("lon : " + lon);
 	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 	if (navigator.geolocation) {
 	    
@@ -52,6 +53,27 @@
 	    	});    
 	      });
 	    
+	    console.log("lat_loc : " + lat);
+	    console.log("lon : " + lon);
+	    
+	} else{
+		
+		 lat = 33;
+		 lon = 126;
+		
+		 var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+         message = '<div style="padding:5px;">현재 나의 위치</div>'; // 인포윈도우에 표시될 내용입니다
+     
+	     // 마커와 인포윈도우를 표시합니다
+	     displayMarker(locPosition, message);
+	     console.log("lat_lat : " + lat);
+	     console.log("lon : " + lon);
+	     var ps = new kakao.maps.services.Places();
+	     ps.keywordSearch('서점', placeSearchCB, {
+	 		location : new kakao.maps.LatLng(lat, lon),
+	 		size : 10,
+	 		radius : 10000,
+	 	});   
 	}
 	
 	// 장소 검색 객체를 생성합니다

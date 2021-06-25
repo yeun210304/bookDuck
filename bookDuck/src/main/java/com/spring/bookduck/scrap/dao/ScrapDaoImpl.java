@@ -61,10 +61,13 @@ public class ScrapDaoImpl implements ScrapDao {
 	}
 
 	@Override
-	public ScrapDto scalldelete(String scrap_id) {
+	public void scalldelete(String scrap_no) {
 		
-	
-		return null;
+		try {
+		  sqlSession.delete(namespace+"scalldelete",scrap_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -12,17 +12,19 @@
 <title>Insert title here</title>
 <%
 MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
+
+String title = request.getParameter("title");
+String isbn = request.getParameter("isbn");
+
+System.out.println(title);
+System.out.println(isbn);
 %>
 <!--SummerNote  -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script>
 	$(document).ready(function() {
 		$('#summernote').summernote();
-
 	});
 </script>
 
@@ -102,6 +104,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
 
 <!-- 구글차트 GoogleChart -->
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
     
@@ -110,11 +113,10 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
       function drawChart() {
     	  var jsonData = $.ajax({
-    		  
-    		  url: "chartData.do",
-    		  data: "chartId=admin",
-    		  dataType:"json",
-    		  async: false
+    		 url: "chartData.do",
+    		 data: "chartId=${Ldto.member_id}",
+    		 dataType:"json",
+    		 async: false
     		}).responseText;
 
     	  var stringJson = JSON.parse(jsonData);
@@ -138,7 +140,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 			data.addRows(dataArray);
     	  
         var options = {
-          title: '독서량(분)',
+          title: '독서량(-+분)',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
@@ -147,9 +149,62 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
         chart.draw(data, options);
       }
-    
     </script>
-
+    <!--찜하기 삭제 스크립트  -->
+	<script type="text/javascript">
+		$(function() {
+			var chkObj = document.getElementsByName("RowCheck");
+			var rowCnt = chkObj.length;
+			
+			$("input[name='allCheck']").click(function() {
+				var chk_listArr = $("input[name='RowCheck']");
+				for(var i=0; i<chk_listArr.length; i++){
+					chk_listArr[i].checked= this.checked;
+				}
+			});
+			$("input[name='RowCheck']").click(function() {
+				if($("input[name'RowCheck']:checked").length == rowCnt){
+					$("input[name ='allCheck']")[0].checked =true;
+				}
+				else{
+					$("input[name ='allCheck']")[0].checked =false;
+				}
+			});
+		});
+		function deleteValue() {
+			var url ="scalldelete.do";//컨트롤러로 
+			var valueArr = new Array();
+			var list =$("input[name ='RowCheck']");
+			for(var i = 0; i < list.length ; i++){
+				if(list[i].checked){//선택하면 배열값으로 저장
+					valueArr.push(list[i].value);
+				}
+			}
+			if(valueArr.length == 0){
+				alert("선택된 목록이 없습니다.");
+			}
+			else{
+				var chk =confirm("삭제 하시겠습니까?");
+				$.ajax({
+					url : url,              //전송 url
+					type : 'POST',			//post 방식
+					traditional : true,	
+					data : {
+						valueArr : valueArr	//보내는 data 변수설정
+					},
+					success : function(jdata) {
+						if(jdata = 1){
+							alert("삭제성공");
+							location.reload();
+						}
+						else{
+							alert("삭제실패");
+						}
+					}
+				});
+			}
+		}
+	</script>
 </head>
 <body>
 	<h1>MYPAGE</h1>
@@ -162,9 +217,11 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 					<a href="payorder.do?">회원 결제하기</a>
 				</div>
 			</c:when>
+				<%--/////////////결제한 회원이보여지는 단 /////////////// --%>
 			<c:when test="${Ldto.member_payrole eq 'Y'}">
 				<p>${Ldto.member_id }님은, 유료회원 입니다.</p>
 				<br/><br/>
+				<%--/////////////자기소개가 없을시 보여지는 단 /////////////// --%>
 				<c:choose>
 					<c:when test="${empty intdDto.intd_content}">
 						<table>
@@ -175,6 +232,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 							</tr>
 						</table>
 						<br/><br/>
+						<%--/////////////youtube 동영상 검색 단 /////////////// --%>
 						<form name="form1" method="post" onsubmit="return false;">
 							<input type="text" id="search_box" placeholder="동영상을 검색하세요">
 							<button onclick="fnGetList();">검색</button>
@@ -182,12 +240,15 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						<div id="get_view"></div>
 						<div id="nav_view"></div>
 						<br/><br/>
+						<%--/////////////찜하기 단 /////////////// --%>
 						<div>
 							<table border="1">
+								<col width="10">
 								<col width="50" />
 								<col width="100" />
 								<col width="50" />
 								<tr>
+									<th><input id="allCheck" type="checkbox" name="allCheck"/></th>
 									<th>도서국제번호</th>
 									<th>제목</th>
 									<th>작성일</th>
@@ -202,7 +263,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 									<c:otherwise>
 										<c:forEach items="${sclist }" var="scrapDto">
 											<tr>
-												<input type="hidden" value="${scrapDto.scrap_no }">
+												<td><input name="RowCheck" type="checkbox" value="${scrapDto.scrap_no }" /></td>
 												<td><a href="/">${scrapDto.book_isbn }</a></td>
 												<td>${scrapDto.book_title }</td>
 												<td>${scrapDto.scrap_regdate }</td>
@@ -212,10 +273,11 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 									</c:otherwise>
 								</c:choose>
 							</table>
+							<input type="button" value="선택삭제" onclick="deleteValue();" />	
 						</div>
 					</c:when>
 					<c:otherwise>
-					<!--///////////////////////////////////  -->
+					<%--////////////자기소개가 있을때/////////////  --%>
 						<table>
 							<tr>
 								<th>자기소개</th>
@@ -240,10 +302,12 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						<br/><br/>
 						<div>
 							<table border="1">
+								<col width="10">
 								<col width="50" />
 								<col width="100" />
 								<col width="300" />
 								<tr>
+									<th><input id="allCheck" type="checkbox" name="allCheck"/></th>
 									<th>도서국제번호</th>
 									<th>제목</th>
 									<th>작성일</th>
@@ -258,7 +322,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 									<c:otherwise>
 										<c:forEach items="${sclist }" var="scrapDto">
 											<tr>
-												<input type="hidden" value="${scrapDto.scrap_no }">
+												<td><input name="RowCheck" type="checkbox" value="${scrapDto.scrap_no }" /></td>
 												<td><a href="/">${scrapDto.book_isbn }</a></td>
 												<td>${scrapDto.book_title }</td>
 												<td>${scrapDto.scrap_regdate }</td>
@@ -269,6 +333,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 									</c:otherwise>
 								</c:choose>
 							</table>
+							<input type="button" value="선택삭제" onclick="deleteValue();" />	
 						</div>
 					</c:otherwise>
 				</c:choose>
@@ -283,23 +348,33 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 	<!-- 리딩차트. 구글차트 부분 -->
 	<div class="readingChart">
 	
-		<!-- 구글차트 위치-->
-		<div id="curve_chart" method="post" style="width:900px; height:500px"></div>
 	
-		<!-- 독서량 전달 -->
-		<p>독서량추가</p>
-		<form action="readingTimeInsert.do" method="post">
-			<!-- 날짜 -->
-			<input type="date" name="chartMdate" style="width:30%" />
-			<br/>
-			<!-- 독서한 시간(분) -->
-			<input type="range" min="1" max="600" style="width:30%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
-			<br/>
-			<span id="CRTime" ></span>분
-			<input type="submit" value="등록" />
-		</form>
+	<c:choose>
+			<c:when test="${Ldto.member_payrole eq 'N'}">
+				<p> </p>
+			</c:when>
+			<c:when test="${Ldto.member_payrole eq 'Y'}">
+			<!-- 구글차트 위치-->
+				<div id="curve_chart" method="get" style="width:900px; height:500px"></div>
+			
+				<!-- 독서량 전달 -->
+				<p>독서량</p>
+				<form action="readingTimeInsert.do" method="post">
+					<!-- 날짜 -->
+					<input type="date" name="chartMdate" style="width:30%" />
+					<br/>
+					<!-- 독서한 시간(분) -->
+					<input type="range" min="1" max="600" style="width:30%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
+					<br/>
+					<span id="CRTime" ></span>분
+					<input type="hidden" id="chartId" name="chartId" value="${Ldto.member_id}" />
+					<input type="submit" value="등록" />
+			</form>
+		</c:when>
+	</c:choose>
+	
 		
-		<input type="hidden" id="id" value="admin" name="chartid" />
+		
 		
 	</div>
 	

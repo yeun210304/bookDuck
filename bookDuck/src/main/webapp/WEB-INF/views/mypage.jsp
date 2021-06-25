@@ -12,6 +12,12 @@
 <title>Insert title here</title>
 <%
 MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
+
+String title = request.getParameter("title");
+String isbn = request.getParameter("isbn");
+
+System.out.println(title);
+System.out.println(isbn);
 %>
 <!--SummerNote  -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">

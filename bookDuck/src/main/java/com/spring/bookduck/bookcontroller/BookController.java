@@ -12,10 +12,10 @@ public class BookController {
 		return "book/booksearch";
 	}
 	
-	@RequestMapping("/bookrecommend.do")
+	@RequestMapping("/recommendBook.do")
 	public String recommend() {
 		
-		return "book/bookrecommend";
+		return "book/recommendBook";
 	}
 	
 	@RequestMapping("/newBook.do")

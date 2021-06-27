@@ -80,7 +80,7 @@
 			</tr>
 			<tr>
 				<th>PW</th>
-				<td><input type="text" id="member_pw"/></td>
+				<td><input type="password" id="member_pw"/></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="button" value="login" id="login" onclick="login();"/></td>

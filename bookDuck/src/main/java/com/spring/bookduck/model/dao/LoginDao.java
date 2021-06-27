@@ -1,5 +1,7 @@
 package com.spring.bookduck.model.dao;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.spring.bookduck.model.dto.MemberDto;
 
 public interface LoginDao {
@@ -26,6 +28,9 @@ public interface LoginDao {
 	
 	//ID찾기
 	public MemberDto findId(MemberDto dto);
+	
+	//PW찾기
+	public void findPw(HttpServletResponse response, MemberDto dto);
 	
 
 }

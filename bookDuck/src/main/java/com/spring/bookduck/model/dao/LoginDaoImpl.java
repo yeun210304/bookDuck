@@ -1,5 +1,7 @@
 package com.spring.bookduck.model.dao;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -71,13 +73,20 @@ public class LoginDaoImpl implements LoginDao {
 
 	@Override
 	public MemberDto findId(MemberDto dto) {
+		
 		MemberDto res = null;
+		
 		try {
-			sqlSession.selectOne(NAMESPACE+"findId", dto);
+			res=sqlSession.selectOne(NAMESPACE+"findId", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public void findPw(HttpServletResponse response, MemberDto dto) {
+		
 	}
 
 }

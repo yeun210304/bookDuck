@@ -51,4 +51,9 @@ public class LoginBizImpl implements LoginBiz {
 		return dao.findId(dto);
 	}
 
+	@Override
+	public void findPw(HttpServletResponse response, MemberDto dto) {
+		
+	}
+
 }

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -147,7 +148,7 @@ public class LoginController {
 			model.addAttribute("check", 1);
 		}else {
 			model.addAttribute("check", 0);
-			model.addAttribute("member_id", dto.getMember_id());
+			model.addAttribute("member_id", member.getMember_id());
 		}
 		
 		return "member/findIdForm";
@@ -160,6 +161,11 @@ public class LoginController {
 	public String findPwForm() {
 		logger.info("[Controller]: findPwForm.do");
 		return "member/findPwForm";
+	}
+	
+	@RequestMapping(value="/findPwRes.do", method=RequestMethod.POST)
+	public void findPwRes(@ModelAttribute MemberDto member, HttpServletResponse response) {
+		biz.findPw(response, member);
 	}
 	
 }

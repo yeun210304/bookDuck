@@ -196,6 +196,12 @@
 			<artifactId>google-api-client</artifactId>
 			<version>1.31.2</version>
 		</dependency>
+		<!-- mail API -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

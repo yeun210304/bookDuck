@@ -1,5 +1,7 @@
 package com.spring.bookduck.model.dao;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 
 import com.spring.bookduck.model.dto.MemberDto;
@@ -31,6 +33,8 @@ public interface LoginDao {
 	
 	//PW찾기
 	public void findPw(HttpServletResponse response, MemberDto dto);
+
+	public String getPw(Map<String, Object> paramMap);
 	
 
 }

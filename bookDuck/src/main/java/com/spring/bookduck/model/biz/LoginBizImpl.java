@@ -1,6 +1,7 @@
 package com.spring.bookduck.model.biz;
 
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -56,4 +57,8 @@ public class LoginBizImpl implements LoginBiz {
 		
 	}
 
+	@Override
+	public String getPw(Map<String, Object> paramMap) {
+		return dao.getPw(paramMap);
+	}
 }

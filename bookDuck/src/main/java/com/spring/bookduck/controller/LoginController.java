@@ -3,7 +3,6 @@ package com.spring.bookduck.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,16 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.bookduck.introduce.biz.IntroduceBiz;
-import com.spring.bookduck.introduce.dto.IntroduceDto;
+import com.spring.bookduck.mail.MailDto;
+import com.spring.bookduck.mail.MailSender;
 import com.spring.bookduck.model.biz.LoginBiz;
 import com.spring.bookduck.model.dto.MemberDto;
 
@@ -39,7 +36,7 @@ public class LoginController {
 		return "member/login";
 	}
 	
-	@RequestMapping(value="/login.do", method=RequestMethod.POST)
+	@RequestMapping(value="/login.do")
 	@ResponseBody
 	public Map<String, Boolean> ajaxLogin(HttpSession session, @RequestBody MemberDto dto ){
 		
@@ -59,7 +56,7 @@ public class LoginController {
 	}
 	
 	// 로그아웃
-	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
+	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) throws Exception{
 		session.invalidate();
 		return "redirect:/";
@@ -74,7 +71,7 @@ public class LoginController {
 
 	//아이디 중복 체크
 	@ResponseBody
-	@RequestMapping(value="/idCheck.do", method=RequestMethod.POST)
+	@RequestMapping(value="/idCheck.do")
 	public int idCheck(MemberDto dto) {
 		logger.info("[Controller]: idCheck.do");
 		int res = biz.idCheck(dto);
@@ -82,7 +79,7 @@ public class LoginController {
 	}
 	
 	//가입 완료 버튼 누를 시
-	@RequestMapping(value="/reg.do", method=RequestMethod.POST)
+	@RequestMapping(value="/reg.do")
 	public String Reg(MemberDto dto) {
 		logger.info("[Controller] : reg.do");
 		if(biz.join(dto)>0) {
@@ -154,18 +151,34 @@ public class LoginController {
 		return "member/findIdForm";
 	}
 	
-	
-	
 	//비밀번호 찾기
 	@RequestMapping("/findPwForm.do")
 	public String findPwForm() {
 		logger.info("[Controller]: findPwForm.do");
 		return "member/findPwForm";
 	}
-	
-	@RequestMapping(value="/findPwRes.do", method=RequestMethod.POST)
-	public void findPwRes(@ModelAttribute MemberDto member, HttpServletResponse response) {
-		biz.findPw(response, member);
+	@Autowired
+	private MailSender mailSender;
+	@Autowired
+	private MailDto mailDto;
+			
+	@RequestMapping("/sendpw.do")
+	public String sendEmailAction (@RequestParam Map<String, Object> paramMap, Model model) throws Exception{
+		logger.info("[Controller]: sendpw.do");
+		String member_id = (String) paramMap.get("member_id");
+		String member_email = (String) paramMap.get("member_email");
+		String member_pw = biz.getPw(paramMap);
+		System.out.println("비밀번호: "+member_pw);
+		
+		if(member_pw != null) {
+			mailDto.setContent("비밀번호는 "+member_pw+"입니다.");
+			mailDto.setReceiver(member_email);
+			mailDto.setSubject(member_id+"님의 비밀번호 찾기 메일입니다.");
+			mailSender.SendEmail(mailDto);
+			return "redirect:/login.do";
+		}else {
+			return "redirect:/logout.do";
+		}
 	}
 	
 }

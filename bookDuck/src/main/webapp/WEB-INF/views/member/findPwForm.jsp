@@ -8,27 +8,12 @@
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-	$(function(){
-		$("#findBtn").click(function(){
-			$.ajax({
-				url: "/member/findPwForm",
-				type: "POST"
-				data: {
-					id: $("#member_id").val(),
-					email: $("#member_email").val()
-				},
-				success: fuction(result){
-					alert(result);
-				},
-			})
-		});
-	})
 
 </script>
 <body>
 	<h1>PW 찾기</h1>
 	
-	<form action="findPwRes.do" method="post" name="findform">
+	<form action="sendpw.do" name="findform" method="post">
 		<div class="findPw-form_id">
 			<div class="id">ID</div>
 			<div class="id_input_box">
@@ -44,7 +29,7 @@
 			</div>
 		</div>
 		<div class="findId-button">
-			<button type="submit">찾기</button>
+			<button type="submit" id="findBtn">찾기</button>
 			<button type="button">메인으로</button>
 		</div>
 	</form>

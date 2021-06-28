@@ -1,15 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+<style type="text/css">
+	ul{text-align : center;}
+	ul li{list-style: none; display: inline-block;}
+	#pagingArea{width:fit-content; margin:auto;}
+	#searchForm {text-align: center;}
+	#searchForm>*{display:inline-block; margin:5px;}
+</style>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
+
+<h2>공지사항</h2>
 
 	<table id="boardList">
 		<thead>
@@ -25,7 +35,7 @@
 			<c:choose>
 				<c:when test="${empty list }">
 					<tr>
-						<td colspan="6" align="center">------------	작성된 글이 없습니다 -------------</td>
+						<td colspan="6" align="center">------------ 작성된 글이 없습니다 -------------</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
@@ -37,67 +47,66 @@
 							<td>${dto.post_hit }</td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${dto.post_regdate }" /></td>
-							<td>
-	                        	<c:if test="${ !empty dto.originName }">
+							<td><c:if test="${ !empty dto.originName }">
 	                        		★
-	                        	</c:if>
-	                        </td>
+	                        	</c:if></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
-			</c:choose>	
+			</c:choose>
 			<c:if test="${ Ldto.member_role eq 'ADMIN' }">
 				<tr>
 					<td colspan="6" align="right">
 						<button onclick="location.href='noticeInsertForm.do'">글쓰기</button>
 					</td>
 				</tr>
-			</c:if>		
+			</c:if>
 		</tbody>
 	</table>
-	
+
 	<div id="paging-area" align="center">
-			
+		<ul>
 			<c:if test="${ pi.currentPage ne 1 }">
 				<c:choose>
 					<c:when test="${ !empty map.condition }">
-						<a href="noticeSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}">[이전]</a>
-            		</c:when>
-            		<c:otherwise>
-            			<a href="noticeList.do?currentPage=${ pi.currentPage-1 }">[이전]</a>
-            		</c:otherwise>
-            	</c:choose>
+						<li><a href="noticeSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}">[이전]</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="noticeList.do?currentPage=${ pi.currentPage-1 }">[이전]</a></li>
+					</c:otherwise>
+				</c:choose>
 			</c:if>
-			
+
 			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 				<c:choose>
 					<c:when test="${ !empty map.condition }">
-						<a href="noticeSearch.do?currentPage=${ p }&condition=${map.condition}&keyword=${map.keyword}">[${ p }]</a>
-	            	</c:when>
-	            	<c:otherwise>
-	            		<a href="noticeList.do?currentPage=${ p }">[${ p }]</a>
-            		</c:otherwise>
-            	</c:choose>
-            </c:forEach>
-            
-            <c:if test="${ pi.currentPage ne pi.maxPage }">
-            	<c:choose>
-            		<c:when test="${ !empty map.condition }">
-		            	<a href="noticeSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}">[다음]</a>
-		            </c:when>
-		            <c:otherwise>
-		            	<a href="noticeList.do?currentPage=${ pi.currentPage+1 }">[다음]</a>
-            		</c:otherwise>
-            	</c:choose>
-            </c:if>
-            
-        </div>
-		
-		<br clear="both">
+						<li><a href="noticeSearch.do?currentPage=${ p }&condition=${map.condition}&keyword=${map.keyword}">[${ p }]</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="noticeList.do?currentPage=${ p }">[${ p }]</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+
+			<c:if test="${ pi.currentPage ne pi.maxPage }">
+				<c:choose>
+					<c:when test="${ !empty map.condition }">
+						<li><a href="noticeSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}">[다음]</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="noticeList.do?currentPage=${ pi.currentPage+1 }">[다음]</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
+		</ul>
+	</div>
+
+	<br clear="both">
 	<br>
-	
+
 	<!-- 검색 영역 -->
-	<form id="searchForm" action="noticeSearch.do" method="Get" align="center">
+	<form id="searchForm" action="noticeSearch.do" method="Get"
+		align="center">
 		<input type="hidden" name="board_id" value="0">
 		<div class="select">
 			<select class="custom-select" name="condition">
@@ -107,15 +116,17 @@
 			</select>
 		</div>
 		<div class="text">
-			<input type="text" class="form-control" name="keyword" value="${map.keyword }">
+			<input type="text" class="form-control" name="keyword"
+				value="${map.keyword }">
 		</div>
 		<button type="submit" class="searchBtn btn btn-secondary">검색</button>
 	</form>
-	
+
 	<c:if test="${!empty map.condition }">
 		<script type="text/javascript">
-			$(function(){
-				$("#searchForm option[value=${map.condition}]").attr("selected", true);
+			$(function() {
+				$("#searchForm option[value=${map.condition}]").attr(
+						"selected", true);
 			});
 		</script>
 	</c:if>

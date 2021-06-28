@@ -7,9 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	ul {text-align: center;}
+	ul li {list-style: none; display: inline-block;}
+	#pagingArea{width:fit-content; margin:auto;}
+	#searchForm {text-align: center;}
+	#searchForm>*{display:inline-block; margin:5px;}
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
+
+<h2>문의게시판</h2>
 
 	<table id="boardList">
 		<thead>
@@ -34,11 +43,11 @@
 					<c:forEach var="dto" items="${list }">
 						<tr>
 							<td>${dto.post_no}</td>
-							<td><c:if test="${dto.post_category eq 'P' }">결제</c:if> <c:if
-									test="${dto.post_category eq 'R' }">환불</c:if> <c:if
-									test="${dto.post_category eq 'M' }">회원</c:if> <c:if
-									test="${dto.post_category eq 'E' }">기타</c:if> <c:if
-									test="${empty dto.post_category }">분류 없음</c:if></td>
+							<td><c:if test="${dto.post_category eq 'P' }">결제</c:if> 
+								<c:if test="${dto.post_category eq 'R' }">환불</c:if>
+								<c:if test="${dto.post_category eq 'M' }">회원</c:if>
+								<c:if test="${dto.post_category eq 'E' }">기타</c:if>
+								<c:if test="${empty dto.post_category }">분류 없음</c:if></td>
 							<td><a href="qnaDetail.do?post_id=${dto.post_id}">${dto.post_title}[${dto.post_comment_count }]</a></td>
 							<td>${dto.post_writer}</td>
 							<td>${dto.post_hit }</td>
@@ -62,14 +71,14 @@
 	</table>
 
 	<div id="paging-area" align="center">
-			
+		<ul class="pagination">
 			<c:if test="${ pi.currentPage ne 1 }">
 				<c:choose>
 					<c:when test="${ !empty map.condition }">
-						<a href="qnaSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[이전]</a>
+						<li class="page-item"><a href="qnaSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[이전]</a></li>
             		</c:when>
             		<c:otherwise>
-            			<a href="qnaList.do?currentPage=${ pi.currentPage-1 }">[이전]</a>
+            			<li class="page-item"><a href="qnaList.do?currentPage=${ pi.currentPage-1 }">[이전]</a></li>
             		</c:otherwise>
             	</c:choose>
 			</c:if>
@@ -77,10 +86,10 @@
 			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 				<c:choose>
 					<c:when test="${ !empty map.condition }">
-						<a href="qnaSearch.do?currentPage=${ p }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[${ p }]</a>
+						<li class="page-item"><a href="qnaSearch.do?currentPage=${ p }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[${ p }]</a></li>
 	            	</c:when>
 	            	<c:otherwise>
-	            		<a href="qnaList.do?currentPage=${ p }">[${ p }]</a>
+	            		<li class="page-item"><a href="qnaList.do?currentPage=${ p }">[${ p }]</a></li>
             		</c:otherwise>
             	</c:choose>
             </c:forEach>
@@ -88,14 +97,14 @@
             <c:if test="${ pi.currentPage ne pi.maxPage }">
             	<c:choose>
             		<c:when test="${ !empty map.condition }">
-		            	<a href="qnaSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[다음]</a>
+		            	<li class="page-item"><a href="qnaSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[다음]</a></li>
 		            </c:when>
 		            <c:otherwise>
-		            	<a href="qnaList.do?currentPage=${ pi.currentPage+1 }">[다음]</a>
+		            	<li class="page-item"><a href="qnaList.do?currentPage=${ pi.currentPage+1 }">[다음]</a></li>
             		</c:otherwise>
             	</c:choose>
             </c:if>
-            
+          </ul>	  
         </div>
 
 	<br clear="both">

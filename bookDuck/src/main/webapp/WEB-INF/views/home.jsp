@@ -270,9 +270,6 @@ String id = "";
 	<div id="map" style="width:100%;height:350px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4cbf31fc0b4bc0ff759253ed7b23a16&libraries=services"></script>
 	<script type="text/javascript">
-	// 위도 경도 변수 선언
-	var lat; var lon;
-	
 	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 	
@@ -291,8 +288,8 @@ String id = "";
 	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	        
-	        lat = position.coords.latitude; // 위도
-	        lon = position.coords.longitude; // 경도
+	        var lat = position.coords.latitude; // 위도
+	        var lon = position.coords.longitude; // 경도
 	        
 	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 	            message = '<div style="padding:5px;">나의 위치</div>'; // 인포윈도우에 표시될 내용입니다
@@ -305,42 +302,49 @@ String id = "";
 	    	
 	    	// 키워드로 장소를 검색합니다
 	    	ps.keywordSearch('서점', placeSearchCB, {
-	    		location : new kakao.maps.LatLng(lat, lon),		// 검색 중심 좌표
+	    		location : locPosition,							// 검색 중심 좌표
 	    		size : 5,										// 표시될 갯수
 	    		radius : 10000,									// 제한 범위(m)
 	    		sort : kakao.maps.services.SortBy.DISTANCE,		// 정렬 기준(DISTANCE : 거리순 , ACCURACY : 정확도순)
 	    	});
 	    	ps.keywordSearch('도서관', placeSearchCB, {
-	    		location : new kakao.maps.LatLng(lat, lon),
+	    		location : locPosition,
 	    		size : 5,
 	    		radius : 10000,
 	    		sort : kakao.maps.services.SortBy.DISTANCE,
 	    	});
 	            
+	      }, function(error){
+	    	  if(error.PERMISSION_DENIED){	// 사용자가 위치 권한 차단했을 경우
+	    		  var locPosition = new kakao.maps.LatLng(37.49767083325, 127.03050314956),    // kh 정보교육원 기준으로 함
+		  	        message = 'kh정보교육원'
+		  	        
+		  	    displayMarker(locPosition, message);
+	    		// 장소 검색 객체를 생성합니다
+	  	    	var ps = new kakao.maps.services.Places();
+	  	   		// 키워드로 장소를 검색합니다
+		    	ps.keywordSearch('서점', placeSearchCB, {
+		    		location : locPosition,		// 검색 중심 좌표
+		    		size : 5,										// 표시될 갯수
+		    		radius : 10000,									// 제한 범위(m)
+		    		sort : kakao.maps.services.SortBy.DISTANCE,		// 정렬 기준(DISTANCE : 거리순 , ACCURACY : 정확도순)
+		    	});
+		    	ps.keywordSearch('도서관', placeSearchCB, {
+		    		location : locPosition,
+		    		size : 5,
+		    		radius : 10000,
+		    		sort : kakao.maps.services.SortBy.DISTANCE,
+		    	});
+	    		  
+	    	  }
 	      });
 	    
-	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+	} else { // HTML5의 GeoLocation을 지원하지 않을 때
 	    
-	    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
-	        message = 'geolocation을 사용할수 없어요..'
-	        
-	    displayMarker(locPosition, message);
-	
-	 	// 장소 검색 객체를 생성합니다
-		var ps = new kakao.maps.services.Places();
-		
-		// 키워드로 장소를 검색합니다
-		ps.keywordSearch('서점', placeSearchCB, {
-			location : new kakao.maps.LatLng(lat, lon),
-			size : 5,
-			radius : 10000,
-		});
-		ps.keywordSearch('도서관', placeSearchCB, {
-    		location : new kakao.maps.LatLng(lat, lon),
-    		size : 5,
-    		radius : 10000,
-    		sort : kakao.maps.services.SortBy.DISTANCE,
-    	});
+		console.log("");
+		console.log("findLocation : geolocation을 사용할수 없어요..");
+		alert("지도 정보를 지원하지 않는 브라우저입니다.");
+		console.log("");
 	}
 	
 	
@@ -402,7 +406,5 @@ String id = "";
 	
 	<a href="qnaList.do">문의게시판</a>
 	
-	<a href="mapTest.do">지도테스트</a>
-
 </body>
 </html>

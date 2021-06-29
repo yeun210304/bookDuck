@@ -209,7 +209,19 @@ String id = "";
 </head>
 <body onload="submit()">
 
+<!-- 
+헤더부분 수정할거
+1. 항상 떠있게 바꿔주세요~! - 정은 
+2. 검색창추가해주세요 - 성필, 은희
+3. 메인이름추가링크 - 지연
+-->
 <%@ include file="header.jsp" %>
+	<a href="loginform.do">로그인</a>
+	
+	<a href="noticeList.do">공지사항</a>
+	
+	<a href="qnaList.do">문의게시판</a>
+
 
 	<!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->
 	<div class="RealTimeNovle">
@@ -254,16 +266,8 @@ String id = "";
 </body>
 	
 <body>
+	
 
-	<div class="info">
-		<p>KH정보교육원 강남지원1관 Q클래스 오전반 3조의 파이널프로젝트</p>
-		<p>지 연 소윤정 강성필 박은희 한우빈 이정은</p>
-		<p>E-Mail. jeeyeon210304@gmail.com</p>
-		<p>주소. 서울 강남구 테헤란로14길 6 남도빌딩 2층, 3층, 4층</p>
-		<p></p>
-		<p></p>
-		<p></p> 	
-	</div>
 	
 	
 	<!-- 현재 위치 기준 주변 서점 또는 도서관 검색 -->
@@ -400,11 +404,18 @@ String id = "";
 	}
 	</script>
 
-	<a href="loginform.do">로그인</a>
+
 	
-	<a href="noticeList.do">공지사항</a>
-	
-	<a href="qnaList.do">문의게시판</a>
+		<!-- footer 에 넣던지 하기! -->
+	<div class="info">
+		<p>KH정보교육원 강남지원1관 Q클래스 오전반 3조의 파이널프로젝트</p>
+		<p>지 연 소윤정 강성필 박은희 한우빈 이정은</p>
+		<p>E-Mail. jeeyeon210304@gmail.com</p>
+		<p>주소. 서울 강남구 테헤란로14길 6 남도빌딩 2층, 3층, 4층</p>
+		<p></p>
+		<p></p>
+		<p></p> 	
+	</div>
 	
 </body>
 </html>

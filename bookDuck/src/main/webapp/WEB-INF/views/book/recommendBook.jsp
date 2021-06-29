@@ -3,31 +3,31 @@
 <%@page import="com.spring.bookduck.scrap.dto.ScrapDto"%>
 <%@page import="com.spring.bookduck.rcvideo.dto.RcvideoDto"%>
 <%@page import="com.spring.bookduck.model.dto.MemberDto"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%request.setCharacterEncoding("UTF-8"); %>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>책추천</title>
+<title>도서추천</title>
 <style type="text/css">
 </style>
 <!--SummerNote  -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
+	
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
+
 <script>
 	$(document).ready(function() {
 		$('#summernote').summernote();
 	});
 </script>
 <!-- Youtube 검색 -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script>
 	//검색창 클릭시 얼럿
 	function fnGetList(sGetToken) {
@@ -101,84 +101,8 @@
 				});
 	}
 </script>
-</head>
-<body>
-	<%
-	request.setCharacterEncoding("UTF-8");
-
-	MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
-	RcvideoDto rcdto = new RcvideoDto();
-	//절대경로 확인
-	String path = request.getContextPath();
-
-	String coverLargeUrl = request.getParameter("coverLargeUrl");
-	String title = request.getParameter("title");
-	String isbn = request.getParameter("isbn");
-	String author = request.getParameter("author");
-	String categoryId = request.getParameter("categoryId");
-	
-	List<RcvideoDto> rclist = (List<RcvideoDto>)request.getAttribute("rclist");
-	
-	
-	if(title==null){
-		ScrapDto scdto = (ScrapDto)request.getAttribute("scrapDto");
-		coverLargeUrl= scdto.getBook_coverLargeUrl();
-		title = scdto.getBook_title();
-		isbn= scdto.getBook_isbn();
-		author = scdto.getBook_author();
-		categoryId= scdto.getBook_categoryId();
-		
-		System.out.println(rclist);
-		
-	}
-	
-	
-=======
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%
-request.setCharacterEncoding("UTF-8");
-
-//절대경로 확인
-String path = request.getContextPath();
-
-String coverLargeUrl = request.getParameter("coverLargeUrl");
-String title = request.getParameter("title");
-String isbn = request.getParameter("isbn");
-String author = request.getParameter("author");
-String categoryId = request.getParameter("categoryId");
 
 
-if(title == null){
-	coverLargeUrl = (String)request.getAttribute("coverLargeUrl");
-	title = (String)request.getAttribute("title");
-	isbn = (String)request.getAttribute("isbn");
-	author = (String)request.getAttribute("author");
-	categoryId = (String)request.getAttribute("categoryId");
-}
-
-System.out.println("-----------");
-System.out.println(coverLargeUrl);
-System.out.println(title);
-System.out.println(isbn);
-System.out.println(author);
-System.out.println(categoryId);
-
-%>    
-<html>
-<head>
-<meta charset="UTF-8">
-<title>도서추천</title>
-
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
 <script type="text/javascript">
 
 	$(function() {
@@ -251,6 +175,41 @@ System.out.println(categoryId);
 </script>
 </head>
 <body>
+	<%
+	request.setCharacterEncoding("UTF-8");
+
+	MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
+	RcvideoDto rcdto = new RcvideoDto();
+	//절대경로 확인
+	String path = request.getContextPath();
+
+	String coverLargeUrl = request.getParameter("coverLargeUrl");
+	String title = request.getParameter("title");
+	String isbn = request.getParameter("isbn");
+	String author = request.getParameter("author");
+	String categoryId = request.getParameter("categoryId");
+	
+	List<RcvideoDto> rclist = (List<RcvideoDto>)request.getAttribute("rclist");
+	
+	
+	if(title==null){
+		ScrapDto scdto = (ScrapDto)request.getAttribute("scrapDto");
+		coverLargeUrl= scdto.getBook_coverLargeUrl();
+		title = scdto.getBook_title();
+		isbn= scdto.getBook_isbn();
+		author = scdto.getBook_author();
+		categoryId= scdto.getBook_categoryId();
+		
+		System.out.println(rclist);
+		System.out.println("-----------");
+		System.out.println(coverLargeUrl);
+		System.out.println(title);
+		System.out.println(isbn);
+		System.out.println(author);
+		System.out.println(categoryId);
+	}
+
+%>    
 	<div id="book">
 		<h3>책정보</h3>
 		<img src="<%=coverLargeUrl %>"><br/><br/>
@@ -258,14 +217,6 @@ System.out.println(categoryId);
 		
 	</div><br/>
 	
-	%>
-	<div id="book">
-		<b>책정보</b><br /> <img src="<%=coverLargeUrl%>"><br />
-		<%=title%>&nbsp;<%=author%><br />
-		<%=isbn%><br />
-		<%=categoryId%>
-	</div>
-	<br />
 
 	<div id="star">
 		<h3>별점</h3> 
@@ -280,8 +231,6 @@ System.out.println(categoryId);
 			</div>
 			<button class='btn btn-default btn-xs'>&#127775;&nbsp;별점등록</button>		
 		</div>
-		
-		
 		
 
 	</div>

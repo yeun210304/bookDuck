@@ -3,16 +3,23 @@
 <mapper namespace="scrap">
 
 	<select id="scselectlist" parameterType="String" resultType="scrapDto">
-	SELECT SCRAP_NO,BOOK_ISBN,SCRAP_REGDATE,BOOK_TITLE
+	SELECT SCRAP_NO,BOOK_ISBN,SCRAP_REGDATE,BOOK_TITLE,BOOK_COVERLARGEURL,BOOK_AUTHOR,BOOK_CATEGORYID
 	FROM MEMBER INNER JOIN SCRAP
 	ON MEMBER.MEMBER_ID = SCRAP.SCRAP_ID
 	WHERE MEMBER_ID = #{scrap_id}
 	ORDER BY SCRAP_NO DESC
 	</select>
 	
+	<select id="scselectone" parameterType="String" resultType="scrapDto">
+	SELECT SCRAP_NO,BOOK_ISBN,SCRAP_REGDATE,BOOK_TITLE,BOOK_COVERLARGEURL,BOOK_AUTHOR,BOOK_CATEGORYID
+	FROM SCRAP
+	WHERE BOOK_ISBN =#{book_isbn} 
+	</select>
+	
+	
 	<insert id="scinsert" parameterType="scrapDto">
 		INSERT INTO SCRAP
-		VALUES(SCRAPNO.NEXTVAL,#{SCRAP_ID},#{book_isbn},SYSDATE)
+		VALUES(SCRAP_NO.NEXTVAL,#{scrap_id},#{book_isbn},SYSDATE,#{book_title},#{book_coverLargeUrl},#{book_author},#{book_categoryId})
 	</insert>
 	
 	<delete id="scdelete" parameterType="int">

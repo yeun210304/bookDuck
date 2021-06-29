@@ -227,7 +227,7 @@ if (key != null && value != null) {
 		sb.append(String.format("<div><a href='%s' class='btn btn-default btn-xs' target='_blank'>&#128184;&nbsp;구매하기</a></div>",
 		link));
 		sb.append(String.format("<div id=''><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s' class='btn btn-default btn-xs' target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author));
-		sb.append(String.format("<div id=''><a href='mypage.do?title=%s&isbn=%s' class='btn btn-default btn-xs' target='_blank'>&#127873;&nbsp;찜하기&nbsp;&nbsp;&nbsp;&nbsp;</a></div>",title,isbn));
+		sb.append(String.format("<div id=''><a href='scinsert.do?title=%s&isbn=%s&coverLargeUrl=%s&author=%s&categoryId=%s' class='btn btn-default btn-xs' target='_blank'>&#127873;&nbsp;찜하기&nbsp;&nbsp;&nbsp;&nbsp;</a></div>",title,isbn,coverLargeUrl,author,categoryId));
 		sb.append(String.format("</div>"));
 		
 	}

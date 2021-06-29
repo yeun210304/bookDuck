@@ -1,5 +1,7 @@
 package com.spring.bookduck.scrap.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.bookduck.introduce.dto.IntroduceDto;
 import com.spring.bookduck.model.dto.MemberDto;
+import com.spring.bookduck.rcvideo.biz.RcvideoBiz;
+import com.spring.bookduck.rcvideo.dto.RcvideoDto;
 import com.spring.bookduck.scrap.biz.ScrapBiz;
 import com.spring.bookduck.scrap.dto.ScrapDto;
 
@@ -20,7 +24,66 @@ public class ScrapController {
 	@Autowired
 	private ScrapBiz biz;
 	
+	@Autowired
+	private RcvideoBiz rcbiz;
 	
+	@RequestMapping("scinsert.do")
+	public String scinsert(HttpSession session, HttpServletRequest request) {
+		
+		HttpSession sess = request.getSession();
+		
+		MemberDto Ldto = (MemberDto) sess.getAttribute("Ldto");
+		Ldto.getMember_id();
+		String path = request.getContextPath();
+		String title = request.getParameter("title");
+		String isbn = request.getParameter("isbn");
+		String coverLargeUrl = request.getParameter("coverLargeUrl");
+		String author = request.getParameter("author");
+		String categoryId = request.getParameter("categoryId");
+		System.out.println(Ldto.getMember_id()+title+isbn+coverLargeUrl+author+categoryId);
+		
+		ScrapDto scdto = new ScrapDto();
+		
+		scdto.setBook_isbn(isbn);
+		scdto.setBook_title(title);
+		scdto.setBook_coverLargeUrl(coverLargeUrl);
+		scdto.setBook_author(author);
+		scdto.setBook_categoryId(categoryId);
+		scdto.setScrap_id(Ldto.getMember_id());
+		
+		biz.scinsert(scdto);
+		
+		return "redirect:mypage.do?member_id=" + Ldto.getMember_id() + "&member_payrole="
+		+ Ldto.getMember_payrole();
+	}
+	@RequestMapping("scselectone.do")
+	public String scselectone(HttpSession session, HttpServletRequest request,Model model) {
+		
+		session = request.getSession();
+		MemberDto Ldto = (MemberDto) session.getAttribute("Ldto");
+		Ldto.getMember_id();
+		
+		String title = request.getParameter("title");
+		String isbn = request.getParameter("isbn");
+		String coverLargeUrl = request.getParameter("coverLargeUrl");
+		String author = request.getParameter("author");
+		String categoryId = request.getParameter("categoryId");
+		
+		ScrapDto scdto = new ScrapDto();
+		
+		scdto.setBook_isbn(isbn);
+		scdto.setBook_title(title);
+		scdto.setBook_coverLargeUrl(coverLargeUrl);
+		scdto.setBook_author(author);
+		scdto.setBook_categoryId(categoryId);
+		model.addAttribute("scdto",scdto);
+		System.out.println(Ldto.getMember_id()+title+isbn+coverLargeUrl+author+categoryId);
+		
+		List<RcvideoDto> list = rcbiz.rcselectone(isbn);  
+		model.addAttribute("rclist",list);
+		
+		return "book/recommendBook";
+	}
 	
 	
 	@RequestMapping("scdelete.do")

@@ -9,7 +9,7 @@ public interface ScrapDao {
 	String namespace = "scrap.";
 	
 	public List<ScrapDto> sclist(String scrap_id);
-	public ScrapDto scselectone(int scrap_no);
+	public ScrapDto scselectone(String book_isbn);
 	public int scinsert(ScrapDto dto);
 	public int scdelete(int scrap_no);
 	public void scalldelete(String scrap_no);

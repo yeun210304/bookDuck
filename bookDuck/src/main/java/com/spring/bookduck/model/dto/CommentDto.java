@@ -4,7 +4,6 @@ public class CommentDto {
 	
 	private int comment_id;
 	private int post_id;
-	private int comment_no;
 	private int comment_groupseq;
 	private String comment_content;
 	private String comment_writer;
@@ -15,11 +14,10 @@ public class CommentDto {
 	public CommentDto() {
 	}
 
-	public CommentDto(int comment_id, int post_id, int comment_no, int comment_groupseq, String comment_content,
+	public CommentDto(int comment_id, int post_id, int comment_groupseq, String comment_content,
 			String comment_writer, String comment_regdate, int comment_titletab, String comment_delflag) {
 		this.comment_id = comment_id;
 		this.post_id = post_id;
-		this.comment_no = comment_no;
 		this.comment_groupseq = comment_groupseq;
 		this.comment_content = comment_content;
 		this.comment_writer = comment_writer;
@@ -42,14 +40,6 @@ public class CommentDto {
 
 	public void setPost_id(int post_id) {
 		this.post_id = post_id;
-	}
-
-	public int getComment_no() {
-		return comment_no;
-	}
-
-	public void setComment_no(int comment_no) {
-		this.comment_no = comment_no;
 	}
 
 	public int getComment_groupseq() {

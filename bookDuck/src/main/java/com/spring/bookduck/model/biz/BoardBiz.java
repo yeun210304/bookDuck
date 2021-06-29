@@ -43,6 +43,9 @@ public interface BoardBiz {
 	public int deleteComment(int comment_id);
 	public int decreaseComment(int post_id);
 	
+	// 대댓글 작성
+	public int answerCommentInsert(CommentDto dto);
+	
 	// 게시글 검색 조회
 	public List<PostDto> selectSearchList(Map<String, String> map, PageInfo pi);
 	public int selectSearchListCount(Map<String, String> map);

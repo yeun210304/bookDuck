@@ -220,4 +220,29 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne(NAMESPACE + "selectSearchCount", map);
 	}
 
+	@Override
+	public int answerCommentUpdate(int comment_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"answerCommentUpdate", comment_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int answerCommentInsert(CommentDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"answerCommentInsert", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 }

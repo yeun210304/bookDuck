@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper  namespace="bookfmMapper">
+  
+  	<insert id="insertBookFM" parameterType="BookFMDto">
+		INSERT INTO BOOKFM
+		VALUES(
+		BOOKFM_SEQ.NEXTVAL,
+		#{bookfm_isbn},
+		#{bookfm_title},
+		#{bookfm_author},
+		#{bookfm_fm}
+		)
+	</insert>
+  
+  	<select id="selectList" resultType="BookFMDto">
+		SELECT BOOKFM_FM
+		FROM BOOKFM
+		WHERE BOOKFM_ISBN = #{bookfm_isbn}
+	</select>
+  
+</mapper>

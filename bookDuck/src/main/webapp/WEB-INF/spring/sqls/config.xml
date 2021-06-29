@@ -17,7 +17,10 @@
 		<typeAlias type="com.spring.bookduck.model.dto.CommentDto" alias="commentDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.ReadingChartDto" alias="ReadingChartDto"/>
 		<typeAlias type="com.spring.bookduck.pay.dto.PayDto" alias="payDto"/>
-		<typeAlias type="com.spring.bookduck.scrap.dto.ScrapDto" alias="scrapDto"/>
+		<typeAlias type="com.spring.bookduck.scrap.dto.ScrapDto" alias="scrapDto"/>	
+		<typeAlias type="com.spring.bookduck.bookfm.dto.BookFMDto" alias="BookFMDto"/>
+		<typeAlias type="com.spring.bookduck.model.dto.RealTimeNovelDto" alias="RealTimeNovelDto"/>
+
 	</typeAliases>
 	
 	<mappers>
@@ -28,6 +31,8 @@
 		<mapper resource="/mybatis/introduce-mapper.xml"/>
 		<mapper resource="/mybatis/readingChart-mapper.xml"/>
 		<mapper resource="/mybatis/scrap-mapper.xml"/>
+		<mapper resource="/mybatis/bookfm-mapper.xml"/>
+		<mapper resource="/mybatis/RealTimeNovel-mapper.xml"/>
 	</mappers>
 	
 </configuration>

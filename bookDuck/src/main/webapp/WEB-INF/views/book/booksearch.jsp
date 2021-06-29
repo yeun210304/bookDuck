@@ -214,20 +214,20 @@ if (key != null && value != null) {
 		sb.append(String.format("<div class='col-md-1'><span>%s</span></div>", a));
 		sb.append(String.format("<div class='col-md-3'><img src='%s'></div>", coverLargeUrl));
 		sb.append(String.format("<div class='col-md-6'><ul>"));
-		sb.append(String.format("<li>title : %s</li>", title));
-		sb.append(String.format("<li>author : %s</li>", author));
-		sb.append(String.format("<li>publisher : %s</li>", publisher));
-		sb.append(String.format("<li>description : %s</li>", description));
-		sb.append(String.format("<li>priceStandard : %s</li>", priceStandard));
-		sb.append(String.format("<li>pubDate : %s</li>", pubDate));
-		sb.append(String.format("<li>isbn : %s</li>", isbn));
-		sb.append(String.format("<li>categoryName : %s</li>", categoryName));
-		sb.append(String.format("<li>categoryId : %s</li>", categoryId));
+		sb.append(String.format("<li><b>[&nbsp;제목&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", title));
+		sb.append(String.format("<li><b>[&nbsp;저자&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", author));
+		sb.append(String.format("<li><b>[&nbsp;출판사&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", publisher));
+		sb.append(String.format("<li><b>[&nbsp;설명&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", description));
+		sb.append(String.format("<li><b>[&nbsp;판매가&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", priceStandard));
+		sb.append(String.format("<li><b>[&nbsp;출간일&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", pubDate));
+		sb.append(String.format("<li><b>[&nbsp;ISBN&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", isbn));
+		sb.append(String.format("<li><b>[&nbsp;카테고리&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", categoryName));
+		sb.append(String.format("<li><b>[&nbsp;카테고리분류&nbsp;]</b> &nbsp; : &nbsp;%s</li>", categoryId));
 		sb.append(String.format("</ul></div>"));
 		sb.append(String.format("<div><a href='%s' class='btn btn-default btn-xs' target='_blank'>&#128184;&nbsp;구매하기</a></div>",
 		link));
-		sb.append(String.format("<div id=''><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s' class='btn btn-default btn-xs' target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author));
-		sb.append(String.format("<div id=''><a href='mypage.do?title=%s&isbn=%s' class='btn btn-default btn-xs' target='_blank'>&#127873;&nbsp;찜하기&nbsp;&nbsp;&nbsp;&nbsp;</a></div>",title,isbn));
+		sb.append(String.format("<div id=''><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s' class='btn btn-default btn-xs' target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author,categoryId));
+		sb.append(String.format("<div id=''><a href='scinsert.do?title=%s&isbn=%s&coverLargeUrl=%s&author=%s&categoryId=%s' class='btn btn-default btn-xs' target='_blank'>&#127873;&nbsp;찜하기&nbsp;&nbsp;&nbsp;&nbsp;</a></div>",title,isbn,coverLargeUrl,author,categoryId));
 		sb.append(String.format("</div>"));
 		
 	}
@@ -236,7 +236,7 @@ if (key != null && value != null) {
 <!DOCTYPE html>
 <html>
 <head>
-<title>카악퉤..</title>
+<title>도서검색</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -482,16 +482,18 @@ div.result {
 
 
 		<div class="panel panel-default" id="output">
-			<div class="panel-heading">&#128036;&nbsp;도서 검색 결과</div>
+			<div class="panel-heading">&#128036;&nbsp;도서 검색 결과&nbsp;&nbsp;
+				<button type="button" class="btn btn-default">
+					총&nbsp;<span class="badge" id="totalcount"><%=totalcount%></span> 개의 도서가 검색되었습니다.
+				</button>
+			</div>
 			<div class="panel-body" id="hey">
+				
 				<button type="button" class="btn btn-default">
-					TotalCount <span class="badge" id="totalcount"><%=totalcount%></span>
+					<span class="badge" id="count"><%=count%></span>&nbsp;개씩 정렬
 				</button>
 				<button type="button" class="btn btn-default">
-					Count <span class="badge" id="count"><%=count%></span>
-				</button>
-				<button type="button" class="btn btn-default">
-					CurrentPage <span class="badge currentPage">0</span>
+					현재 페이지 <span class="badge currentPage">0</span>
 				</button>
 				
 				<div id="sorting" style="float: right">
@@ -514,49 +516,49 @@ div.result {
 			<div id="pagingBody"></div>
 			<ul class="pager">
 				<li><button type="button" class="btn btn-default"
-						id="previous" value="1">Previous</button></li>
+						id="previous" value="1">&#11013;&nbsp;이전 페이지</button></li>
 				<li><button type="submit" class="btn btn-default" 
-					id="next" value="2">Next</button></li>
+					id="next" value="2">다음 페이지&nbsp;&#10145;</button></li>
 			</ul>
 		</div>
 
 
 	</div>
-		<script type="text/javascript">
+	
+	 <script type="text/javascript">
 	var r = document.getElementById('value');
 
 	function startConverting() {
-		//check this browser is chrome or not. because this application supported only in chrome browser
 
 		if ('webkitSpeechRecognition' in window) {
 			//Web speech API Function
 			var speechRecognizer = new webkitSpeechRecognition();
-			//continuous : you will catch mic only one time or not
+			//continuous : 마이크 한번만 잡을지 말지 
 			speechRecognizer.continuous = true;
-			//interimResults : during capturing the mic you will send results or not
+			//interimResults : 마이크 입력하는 동안 결과를 반환하지 않을것인가
 			speechRecognizer.interimResults = true;
-			//lang : language (ko-KR : Korean, en-IN : englist)
+			//lang : 언어 (ko-KR : Korean, en-IN : englist)
 			speechRecognizer.lang = "ko-KR";
 			//start!
 			speechRecognizer.start();
 
 			var finalTranscripts = '';
 
-			//if the voice catched onresult function will start
+			//마이크 입력(catch) 기능 시작
 			speechRecognizer.onresult = function(event) {
 				var interimTranscripts = '';
 				for (var i = event.resultIndex; i < event.results.length; i++) {
 					var transcript = event.results[i][0].transcript;
 					transcript.replace("\n", "<br>");
 
-					//isFinal : if speech recognition is finished, isFinal = true
+					//isFinal :  음성 인식이 완료되면 Final = true
 					if (event.results[i].isFinal) {
 						finalTranscripts += transcript;
 					} else {
 						interimTranscripts += transcript;
 					}
 				}
-				//insert into HTML
+				//HTML에 insert
 				r.value = finalTranscripts + interimTranscripts;
 			};
 			speechRecognizer.onerror = function(event) {

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="rcvideo">
+
+	<select id="rcselectone" parameterType="String" resultType="rcvideoDto">
+		SELECT RCVIDEO_NO,RCVIDEO_CONTENT,RCVIDEOTABLE.BOOK_ISBN AS
+		BOOK_ISBN,SCRAP.BOOK_ISBN AS BOOK_ISBN
+		FROM SCRAP INNER JOIN RCVIDEOTABLE
+		ON SCRAP.BOOK_ISBN = RCVIDEOTABLE.BOOK_ISBN
+		WHERE SCRAP.BOOK_ISBN =#{book_isbn}
+	</select>
+
+	<insert id="rcinsert" parameterType="rcvideoDto">
+		INSERT INTO RCVIDEOTABLE
+		VALUES(RCVIDEO_NO.NEXTVAL,#{rcvideo_content},#{book_isbn})
+	</insert>
+
+	<update id="rcupdate" parameterType="rcvideoDto">
+		UPDATE RCVIDEOTABLE
+		SET
+		RCVIDEO_CONTENT =#{rcvideo_content}
+		WHERE RCVIDEO_NO =#{rcvideo_no}
+	</update>
+
+	<delete id="rcdelete" parameterType="int">
+		DELETE FROM RCVIDEOTABLE
+		WHERE RCVIDEO_NO = #{rcvideo_no}
+
+	</delete>
+
+</mapper>

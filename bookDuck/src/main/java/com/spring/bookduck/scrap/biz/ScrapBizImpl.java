@@ -20,8 +20,8 @@ public class ScrapBizImpl implements ScrapBiz {
 	}
 
 	@Override
-	public ScrapDto scselectone(int scrap_no) {
-		return dao.scselectone(scrap_no);
+	public ScrapDto scselectone(String book_isbn) {
+		return dao.scselectone(book_isbn);
 	}
 
 	@Override

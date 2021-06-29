@@ -1,10 +1,17 @@
 package com.spring.bookduck.bookcontroller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.spring.bookduck.bookfm.biz.BookFMBiz;
 
 @Controller
 public class BookController {
+	
+	@Autowired
+	BookFMBiz bookfmbiz;
 	
 	@RequestMapping("/booksearch.do")
 	public String search() {
@@ -13,7 +20,10 @@ public class BookController {
 	}
 	
 	@RequestMapping("/recommendBook.do")
-	public String recommend() {
+	public String recommend(Model model, String isbn) {
+		
+		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
+		
 		
 		return "book/recommendBook";
 	}
@@ -58,6 +68,18 @@ public class BookController {
 	public String poem() {
 		
 		return "book/102시에세이";
+	}
+	
+	@RequestMapping("/tts.do")
+	public String tts() {
+		
+		return "book/tts";
+	}
+	
+	@RequestMapping("/ttsPrac.do")
+	public String ttsPrac() {
+		
+		return "book/ttsPrac";
 	}
 	
 }

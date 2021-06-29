@@ -157,6 +157,8 @@ public class LoginController {
 		logger.info("[Controller]: findPwForm.do");
 		return "member/findPwForm";
 	}
+	
+	/*
 	@Autowired
 	private MailSender mailSender;
 	@Autowired
@@ -180,5 +182,6 @@ public class LoginController {
 			return "redirect:/logout.do";
 		}
 	}
+	*/
 	
 }

@@ -2,7 +2,7 @@ package com.spring.bookduck.mail;
 
 
 public class MailDto {
-	
+	/*
 	private String subject;
 	private String content;
 	private String receiver;
@@ -25,5 +25,5 @@ public class MailDto {
 	public void setReceiver(String receiver) {
 		this.receiver = receiver;
 	}
-
+*/
 }

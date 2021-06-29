@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 
 public class MailSender {
-	
+	/*
 	@Autowired
 	protected JavaMailSender mailSender;
 
@@ -34,5 +34,5 @@ public class MailSender {
 		}
 		
 	}
-
+*/
 }

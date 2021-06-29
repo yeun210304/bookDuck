@@ -28,4 +28,7 @@
 	<!-- transaction -->
 	<tx:annotation-driven/>
 	
+	<!-- NaverDto Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverDto" class="com.spring.bookduck.snslogin.NaverDto" />
+	
 </beans:beans>

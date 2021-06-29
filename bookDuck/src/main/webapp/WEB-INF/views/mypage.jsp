@@ -13,11 +13,6 @@
 <%
 MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
-String title = request.getParameter("title");
-String isbn = request.getParameter("isbn");
-
-System.out.println(title);
-System.out.println(isbn);
 %>
 <!--SummerNote  -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -232,41 +227,36 @@ System.out.println(isbn);
 							</tr>
 						</table>
 						<br/><br/>
-						<%--/////////////youtube 동영상 검색 단 /////////////// --%>
-						<form name="form1" method="post" onsubmit="return false;">
-							<input type="text" id="search_box" placeholder="동영상을 검색하세요">
-							<button onclick="fnGetList();">검색</button>
-						</form>
-						<div id="get_view"></div>
-						<div id="nav_view"></div>
-						<br/><br/>
 						<%--/////////////찜하기 단 /////////////// --%>
 						<div>
 							<table border="1">
 								<col width="10">
-								<col width="50" />
+								<col width="25" />
 								<col width="100" />
-								<col width="50" />
 								<tr>
 									<th><input id="allCheck" type="checkbox" name="allCheck"/></th>
 									<th>도서국제번호</th>
 									<th>제목</th>
-									<th>작성일</th>
 									<th>&nbsp;</th>
 								</tr>
 								<c:choose>
 									<c:when test="${empty sclist }">
 										<tr>
-											<td colspan="5" align="center">------------찜목록이 없습니다.------------</td>
+											<td colspan="3" align="center">------------찜목록이 없습니다.------------</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${sclist }" var="scrapDto">
 											<tr>
-												<td><input name="RowCheck" type="checkbox" value="${scrapDto.scrap_no }" /></td>
-												<td><a href="/">${scrapDto.book_isbn }</a></td>
+												<td>
+													<input name="RowCheck" type="checkbox" value="${scrapDto.scrap_no }" />
+													<input type="hidden" name="book_author" value="${scrapDto.book_author }">
+													<input type="hidden" name="book_coverLargeUrl" value="${scrapDto.book_coverLargeUrl }">
+													<input type="hidden" name="book_categoryId" value="${scrapDto.book_categoryId }">
+												</td>
+												<td><a href="scselectone.do?title=${scrapDto.book_title }&coverLargeUrl=${scrapDto.book_coverLargeUrl }
+												&isbn=${scrapDto.book_isbn }&author=${scrapDto.book_author }&categoryId=${scrapDto.book_categoryId}"></a>${scrapDto.book_isbn }</td>
 												<td>${scrapDto.book_title }</td>
-												<td>${scrapDto.scrap_regdate }</td>
 												<td><a href="scdelete.do?scrap_no=${scrapDto.scrap_no }&member_id=${Ldto.member_id}">삭제</a></td>
 											</tr>
 										</c:forEach>
@@ -303,31 +293,33 @@ System.out.println(isbn);
 						<div>
 							<table border="1">
 								<col width="10">
-								<col width="50" />
+								<col width="25" />
 								<col width="100" />
-								<col width="300" />
 								<tr>
 									<th><input id="allCheck" type="checkbox" name="allCheck"/></th>
 									<th>도서국제번호</th>
 									<th>제목</th>
-									<th>작성일</th>
 									<th>&nbsp;</th>
 								</tr>
 								<c:choose>
 									<c:when test="${empty sclist }">
 										<tr>
-											<td colspan="5" align="center">------------찜목록이 없습니다.------------</td>
+											<td colspan="3" align="center">------------찜목록이 없습니다.------------</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${sclist }" var="scrapDto">
 											<tr>
-												<td><input name="RowCheck" type="checkbox" value="${scrapDto.scrap_no }" /></td>
-												<td><a href="/">${scrapDto.book_isbn }</a></td>
+												<td>
+													<input name="RowCheck" type="checkbox" value="${scrapDto.scrap_no }" />
+													<input type="hidden" name="book_author" value="${scrapDto.book_author }">
+													<input type="hidden" name="book_coverLargeUrl" value="${scrapDto.book_coverLargeUrl }">
+													<input type="hidden" name="book_categoryId" value="${scrapDto.book_categoryId }">
+												</td>
+												<td><a href="scselectone.do?title=${scrapDto.book_title }&coverLargeUrl=${scrapDto.book_coverLargeUrl }
+												&isbn=${scrapDto.book_isbn }&author=${scrapDto.book_author }&categoryId=${scrapDto.book_categoryId}">${scrapDto.book_isbn }</a></td>
 												<td>${scrapDto.book_title }</td>
-												<td>${scrapDto.scrap_regdate }</td>
 												<td><a href="scdelete.do?scrap_no=${scrapDto.scrap_no }&member_id=${Ldto.member_id}&member_payrole=${Ldto.member_payrole}">삭제</a></td>
-												<td><a href="scalldelete.do?scrap_id=${scrapDto.scrap_id }&member_id=${Ldto.member_id}&member_payrole=${Ldto.member_payrole}"></a></td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>

@@ -2,43 +2,46 @@
 <%@page import="com.spring.bookduck.model.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8"); %>    
-<% response.setContentType("text/html; charset=UTF-8"); %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>    
+<%
+    response.setContentType("text/html; charset=UTF-8");
+    %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String id = "";
+
+String id = "";
+
+	MemberDto Ldto = (MemberDto)session.getAttribute("Ldto");
+	PayDto payDto = (PayDto)session.getAttribute("payDto");
+
 	if (session.getAttribute("id") != null) {
 		id = (String) session.getAttribute("id");
 	}
-
-	String nick = "";
-	if (session.getAttribute("nick") != null) {
-		nick = (String) session.getAttribute("nick");
+	
+	//여기서 자꾸 오류나고 있음 아이디 제대로 넣어야함
+	//아이디랑 닉이 뭔지 알고 처리할 것. 값 가공 제대로 할 것
+	
+	// String nick = {Ldto.getMember_id()};
+	String Member_id = "";
+	if (session.getAttribute("Member_id") != null) {
+		Member_id = (String) session.getAttribute(Member_id);
 	} else {
-		nick = "NICK NULL";
+		Member_id = "Member_id NULL";
 	}
-	MemberDto Ldto = (MemberDto)session.getAttribute("Ldto");
-	PayDto payDto = (PayDto)session.getAttribute("payDto");
+
 %>
 	
 <html>
 <head>
-<title>Home</title>
-</head>
-<body>
-
-<jsp:include page="header02.jsp"/>
-
-	<div class="RealTimeNovle">
-		<h3>모두와 소설</h3>
-		<!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
-		<div id="messageWindow2" style="padding: 10px 0; height: 20em; overflow: auto; background-color: #a0c0d7;"></div>
-		<input id="inputMessage" type="text" onkeydown="if(event.keyCode==13){send();}" /> <input type="submit" value="send" onclick="send();" />
-
-		<script type="text/javascript">
-	
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+			
+			// websocket 웹소켓을 이용한 모두가 함께 쓰는 실시간소설 RealTimeNovel  
+			
 			//웹소켓 설정
-			var webSocket = new WebSocket('ws://localhost:8787/websockettest/broadcasting');
+			var webSocket = new WebSocket('ws://localhost:8787/bookduck/RealTimeNovel.do');
 			//var webSocket = new WebSocket('ws://localhost:8080/프로젝트명/broadcasting');
 			var inputMessage = document.getElementById('inputMessage');
 			//같은 이가 여러번 보낼때 이름 판별할 변수
@@ -59,7 +62,7 @@
 				var div=document.createElement('div');
 				
 				//접속했을 때 접속자들에게 알릴 내용.
-				webSocket.send("<%=nick%> is DisConnected\n");
+				webSocket.send("<%=Member_id%> is DisConnected\n");
 			}
 		
 			//	OnMessage는 클라이언트에서 서버 측으로 메시지를 보내면 호출되는 함수.
@@ -123,7 +126,7 @@
 				document.getElementById('messageWindow2').appendChild(clear);
 				
 				//접속했을 때 접속자들에게 알릴 내용.
-				webSocket.send("<%=nick%>|\|안녕하세요^^");
+				webSocket.send("<%=Member_id%>|\|안녕하세요^^");
 			}
 		
 			//	OnError는 웹 소켓이 에러가 나면 발생을 하는 함수.
@@ -133,65 +136,138 @@
 			
 			// send 함수를 통해서 웹소켓으로 메시지를 보낸다.
 			function send() {
-		
-				//inputMessage가 있을때만 전송가능
-				if(inputMessage.value!=""){
-					
-					//	서버에 보낼때 날아가는 값.
-					webSocket.send("<%=nick%>|\|" + inputMessage.value);
-					
-					// 채팅화면 div에 붙일 내용
-					var div=document.createElement('div');
-					
-					div.style["width"]="auto";
-					div.style["word-wrap"]="break-word";
-					div.style["float"]="right";
-					div.style["display"]="inline-block";
-					div.style["background-color"]="#ffea00";
-					div.style["padding"]="3px";
-					div.style["border-radius"]="3px";
-					div.style["margin-right"]="3px";
-		
-					//div에 innerHTML로 문자 넣기
-					div.innerHTML = inputMessage.value;
-					document.getElementById('messageWindow2').appendChild(div);
-		
-					//clear div 추가
-					var clear = document.createElement('div');
-					clear.style["clear"] = "both";
-					document.getElementById('messageWindow2').appendChild(clear);
-					
-					//	?
-					//inputMessage.value = "";
-		
-					//	inputMessage의 value값을 지운다.
-					inputMessage.value = '';
-		
-					//	textarea의 스크롤을 맨 밑으로 내린다.
-					messageWindow2.scrollTop = messageWindow2.scrollHeight;
-					
-					//	금방 보낸 사람을 임시 저장한다.
-					re_send = "<%=nick%>
-					";
+				//if(test()==1){
+					//inputMessage가 있을때만 전송가능
+					if(inputMessage.value!=""){
+						
+						//	서버에 보낼때 날아가는 값.
+						webSocket.send("<%=Member_id%>|\|" + inputMessage.value);
+						
+						// 채팅화면 div에 붙일 내용
+						var div=document.createElement('div');
+						
+						div.style["width"]="auto";
+						div.style["word-wrap"]="break-word";
+						div.style["float"]="right";
+						div.style["display"]="inline-block";
+						div.style["background-color"]="#ffea00";
+						div.style["padding"]="3px";
+						div.style["border-radius"]="3px";
+						div.style["margin-right"]="3px";
+			
+						//div에 innerHTML로 문자 넣기
+						div.innerHTML = inputMessage.value;
+						document.getElementById('messageWindow2').appendChild(div);
+						
+			
+						//clear div 추가
+						var clear = document.createElement('div');
+						clear.style["clear"] = "both";
+						document.getElementById('messageWindow2').appendChild(clear);
+						
+						//	?
+						//inputMessage.value = "";
+			
+						//	inputMessage의 value값을 지운다.
+						inputMessage.value = '';
+			
+						//	textarea의 스크롤을 맨 밑으로 내린다.
+						messageWindow2.scrollTop = messageWindow2.scrollHeight;
+						
+						//	금방 보낸 사람을 임시 저장한다.
+						re_send = "<%=Member_id%>";
 						}//inputMessage가 있을때만 전송가능 끝.
-		
+			//	}
+					
+			}
+			
+			function test(){
+				
+				var inputMessage = $("#inputMessage").val();
+				var novel_id = $("#novel_id").val();
+				
+				$.ajax({
+					url: "insertContent.do",
+					data: {"novel_content":inputMessage,
+						"novel_id":novel_id},
+					dataType: "application/json",
+					success: function(data){
+						if(data.success == "success"){
+							return 1;
+						} else{
+							return 0;
+						}
+					},
+					error: function(error){
+						alert("채팅ajax통신오류");
 					}
+				})
+			}
+			
 		</script>
+<title>Home</title>
+</head>
+<body onload="submit()">
+
+<!-- 
+헤더부분 수정할거
+1. 항상 떠있게 바꿔주세요~! - 정은 
+2. 검색창추가해주세요 - 성필, 은희
+3. 메인이름추가링크 - 지연
+-->
+<%@ include file="header.jsp" %>
+	<a href="loginform.do">로그인</a>
+	
+	<a href="noticeList.do">공지사항</a>
+	
+	<a href="qnaList.do">문의게시판</a>
+
+
+	<!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->
+	<div class="RealTimeNovle">
+		<!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
+		<div id="messageWindow2" style="padding: 10px 0; height: 20em; overflow: auto; background-color: #a0c0d7;"></div>
+		
+		<c:choose>
+			<c:when test="${Ldto.member_payrole eq 'Y'}">
+			<!-- 사용자가 입력한 키의 코드를 .d보내준다. -->
+				 <form action="insertNovel.do" method="post">
+					<input id="inputMessage" type="text" name="novel_content" onkeydown="if(event.keyCode==13){send();}" />
+					<input type="submit" value="입력" onclick="send();" />
+					<input type="hidden" id="novel_id" value="${Ldto.member_id}" name="novel_id" />
+				 </form> 
+			</c:when>
+			<c:otherwise>
+				<input type="text" readonly="readonly" value="로그인시 이용하실 수 있습니다"/>
+			</c:otherwise>
+		</c:choose>
 		
 		
-
+		<script type="text/javascript">
+		    function submit()
+		    {
+		        document.getElementById("startrunning").click(); // Simulates button click
+		        document.submitForm.submit(); // Submits the form without the button
+		    }
+		</script>
+ 
+	
+	    <form id="submitForm" action="submitForm.do">
+	        <input type="hidden" id="startrunning">
+	        <c:forEach var="list" items="${list}">
+				<input type="text" id="novel_id" value="${list.novel_id}" />
+				<input type="text" id="novel_regdate" value="${list.novel_regdate}" />
+				<input type="text" id="novel_content" value="${list.novel_content}" />
+			</c:forEach>
+	    </form>
+	
+		
 	</div>
+</body>
+	
+<body>
+	
 
-
-	<div class="info">
-		<p>KH정보교육원 강남지원1관 Q클래스 오전반 3조의 파이널프로젝트 \n</p>
-		<p>지 연 소윤정 강성필 박은희 한우빈 이정은</p>
-		<p>E-Mail. jeeyeon210304@gmail.com</p>
-		<p>주소. 서울 강남구 테헤란로14길 6 남도빌딩 2층, 3층, 4층</p>
-		<p></p>
-		<p></p>
-		<p></p> 	
-	</div>
 	
 	
 	<!-- 현재 위치 기준 주변 서점 또는 도서관 검색 -->
@@ -328,11 +404,18 @@
 	}
 	</script>
 
-	<a href="loginform.do">로그인</a>
+
 	
-	<a href="noticeList.do">공지사항</a>
-	
-	<a href="qnaList.do">문의게시판</a>
+		<!-- footer 에 넣던지 하기! -->
+	<div class="info">
+		<p>KH정보교육원 강남지원1관 Q클래스 오전반 3조의 파이널프로젝트</p>
+		<p>지 연 소윤정 강성필 박은희 한우빈 이정은</p>
+		<p>E-Mail. jeeyeon210304@gmail.com</p>
+		<p>주소. 서울 강남구 테헤란로14길 6 남도빌딩 2층, 3층, 4층</p>
+		<p></p>
+		<p></p>
+		<p></p> 	
+	</div>
 	
 </body>
 </html>

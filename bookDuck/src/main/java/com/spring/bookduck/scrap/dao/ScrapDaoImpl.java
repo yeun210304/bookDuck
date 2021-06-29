@@ -30,8 +30,12 @@ public class ScrapDaoImpl implements ScrapDao {
 	}
 
 	@Override
-	public ScrapDto scselectone(int scrap_no) {
-		return null;
+	public ScrapDto scselectone(String book_isbn) {
+		
+		ScrapDto scdto = new ScrapDto();
+		scdto= sqlSession.selectOne(namespace+"scselectone",book_isbn);
+		
+		return scdto;
 	}
 
 	@Override

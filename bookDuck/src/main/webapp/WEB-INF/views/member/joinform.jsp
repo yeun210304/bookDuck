@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,18 @@
 		</div>
 		<div class="join-form_email">
 			<div class="email">이메일</div>
-			<input type="email" id="member_email" name="member_email">
+			<input type="text" id="usermail1" name="usermail1" class="usermail1" maxlength="20">
+			<span id="imt3" style="font-weight:bold; color:black;">@</span>
+			<input type="text" id="usermail2" name="usermail2" class="usermail2" maxlength="10">
+			<!-- [1]이메일 인증번호 발송 -> [2]이메일 인증번호 확인 -->
+			<input type="button" name="btemail" class="btemail" id="btemail" value="인증번호 발송!">
+			
+			<!-- 인증번호 입력란 -->
+			<input type="text" name="writechk" class="writechk" id="writechk" value="">
+			<span id="explainsp">*메일로 보내드린 인증번호 6자리를 입력해 주세요</span>
+			
+			<!-- 이메일 인증시 Y/N -->
+			<input type="hidden" name="emailchk" class="emailchk" id="emailchk" value="" style="background: yellow;">
 		</div>
 		<div class="join-button">
 			<button type="submit">회원가입</button>
@@ -59,5 +71,55 @@ function Check_id(){
 		}
 	})
 }
+$("#btemail").click(function(){
+	//alert("이메일 인증 시작!");
+	var user_email1 = $(".usermail1").val();
+	var user_email2 = $(".usermail2").val();
+	
+	var key; //인증키
+	var bool = true;
+	
+	if(bool){
+		$.ajax({
+			url:"<c:url value='member/certifiedMail.do'/>",
+			type: "post",
+			dataType:"json",
+			data:{"user_email1":user_email1,
+				  "user_email2":user_email2},
+			success: function(result){
+				alert("인증번호 발송!");
+				key=result;
+				bool=false;
+			},
+		error: function(xhr, status, error){
+			alert("Error : "+status+"==>"+error);
+		}
+	}); //ajax
+	$(".writechk").show(); //이메일 인증 입력란
+	$(".btemail").val("인증번호 확인!"); //이메일 인증 버튼 -> 내용 변경
+	
+	$(".writechk").keyup(function(){
+		if($(".writechk").val()>=6){
+			var userContent = $(".writechk").val();
+			//alert(userContent);
+			
+			if(userContent == key){
+				alert("인증 성공!");
+				$("#emailchk").val("Y"); //숨겨져 있음 -> DB에 저장할거임 (Y/N)
+				$("#btemail").val("인증 완료!"); 
+				$("#btemail").attr("disabled", true); //읽기 전용으로 변환
+				$(".writechk").attr("disabled", true);
+			}else{
+				$("#emailchk").val("N");
+				$("#btemail").val("인증번호 재발송!");
+				event.preventDefault();
+			}
+		}
+	}); //keyup
+	}else{
+		alert("test1 => false");
+		event.preventDefault();
+	}
+})
 </script>
 </html>

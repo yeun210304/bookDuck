@@ -65,7 +65,14 @@
 	
 	<!-- 아이디 찾기 -->
 	<select id="findId" parameterType="Ldto" resultType="Ldto">
-		SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_EMAIL = #{member_email}
+		SELECT MEMBER_ID FROM MEMBER 
+		WHERE MEMBER_EMAIL = #{member_email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id = "getPw" parameterType="Ldto" resultType="String">
+		SELECT MEMBER_PW FROM MEMBER 
+		WHERE MEMBER_ID = #{member_id} AND MEMBER_EMAIL = #{member_email}
 	</select>
 	
 </mapper>

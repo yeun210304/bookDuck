@@ -25,12 +25,15 @@
     #header_1_center{width:40%;}
     #header_1_right{width:30%;}
     
+    #header_2>ul{width:100%; height:100%; list-style-type: none; margin: auto; padding:0;}
+    #header_2>ul>li{diplay: inline-block; width:25%; height:100%; line-height: 55px; text-align:center;}
+    #header_2>ul>li a{text-decoration: none; color:black; font-size: 18px; font-weight: 900;}
+    
     .content{
     	width: 80%;
     	margin: auto;
     }
     .innerOuter{
-        border:1px solid lightgray;
         width:80%;
         margin:auto;
         padding:5% 10%;
@@ -62,7 +65,11 @@
 			</div>
 		</div>
 		<div id="header_2">
-			
+			<ul>
+				<li><a href="">추천페이지</a></li>
+				<li><a href="noticeList.do">공지사항</a></li>
+				<li><a href="qnaList.do">문의사항</a></li>
+			</ul>
 		</div>
 	</div>
 </body>

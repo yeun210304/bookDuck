@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<%@ include file="header.jsp" %>
+<jsp:include page="header02.jsp"/>
 
 	<div class="RealTimeNovle">
 		<h3>모두와 소설</h3>

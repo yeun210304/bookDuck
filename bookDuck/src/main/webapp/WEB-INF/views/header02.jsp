@@ -13,6 +13,7 @@
         padding-top: 20px;
         margin:auto;
     }
+    
     #header>div{width:100%; margin-bottom:10px}
     #header_1{height:40%;}
     #header_2{height:60%;}
@@ -39,13 +40,14 @@
         padding:5% 10%;
         background:white;
     }
+    a{text-decoration: none; color: black;}
 </style>
 </head>
 <body>
 	<div id="header">
 		<div id="header_1">
 			<div id="header_1_left">
-				<img alt="" src="">
+				<img src="" alt="">
 			</div>
 			<div id="header_1_center"></div>
 			<div id="header_1_right">

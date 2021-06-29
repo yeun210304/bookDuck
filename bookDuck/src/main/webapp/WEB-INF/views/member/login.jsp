@@ -80,7 +80,7 @@
 			</tr>
 			<tr>
 				<th>PW</th>
-				<td><input type="text" id="member_pw"/></td>
+				<td><input type="password" id="member_pw"/></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="button" value="login" id="login" onclick="login();"/></td>
@@ -98,6 +98,27 @@
 			</tr>
 		
 		</table>
+		
+	<div id = "naver_id_login">
+	<!-- 네이버 로그인 창으로 이동 -->
+	<div id="naver_id_login" style="text-align:center"><a href="${url}">
+	<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
+	<br>
+	</div>
+ 
+	<script>
+ 
+         var naver_id_login = new naver_id_login("Hft3mSmHcCpHqnsB7j3E", "http://localhost:8787/bookduck/login_callback.do");    // Client ID, CallBack URL 삽입
+                                            // 단 'localhost'가 포함된 CallBack URL
+         var state = naver_id_login.getUniqState();
+        
+         naver_id_login.setButton("white", 4, 40);
+         naver_id_login.setDomain("http://localhost:8787/bookduck/loginform.do");    //  URL
+         naver_id_login.setState(state);
+         naver_id_login.setPopup();
+         naver_id_login.init_naver_id_login();
+ 
+	</script>
 
 </body>
 </html>

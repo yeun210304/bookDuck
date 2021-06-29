@@ -1,5 +1,9 @@
 package com.spring.bookduck.model.biz;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
 import com.spring.bookduck.model.dto.MemberDto;
 
 public interface LoginBiz {
@@ -24,6 +28,11 @@ public interface LoginBiz {
 	
 	//아이디 찾기
 	public MemberDto findId(MemberDto dto);
+	
+	//비밀번호 찾기
+	public void findPw(HttpServletResponse response, MemberDto dto);
+
+	public String getPw(Map<String, Object> paramMap);
 
 
 }

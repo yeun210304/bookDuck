@@ -24,7 +24,21 @@
 		ORDER BY BLACKLIST_NO DESC	
 	</select>
 
-
+	
+	
+	<select id="idsearch" parameterType="String" resultType="LDto">
+		<![CDATA[
+			SELECT MEMBER_NO, MEMBER_ID
+			FROM 
+				(SELECT MEMBER_NO, MEMBER_ID, ROWNUM AS RNUM FROM MEMBER)
+			WHERE MEMBER_ID LIKE '%'||#{member_id}||'%' AND RNUM < 15
+			ORDER BY MEMBER_ID
+		 ]]>
+	</select>
+	
+ 
+	
+	
 
 
 </mapper>

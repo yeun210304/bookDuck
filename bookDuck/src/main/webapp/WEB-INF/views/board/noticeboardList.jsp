@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+	#boardList{text-align: center;}
 	ul{text-align : center;}
 	ul li{list-style: none; display: inline-block;}
 	#pagingArea{width:fit-content; margin:auto;}
@@ -19,6 +20,11 @@
 </head>
 <body>
 
+
+
+<jsp:include page="../header02.jsp"/>
+<div class="content">
+<div class="innerOuter">
 <h2>공지사항</h2>
 
 	<table id="boardList">
@@ -29,6 +35,7 @@
 				<th>작성자</th>
 				<th>조회수</th>
 				<th>작성일</th>
+				<th>첨부파일</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -130,6 +137,7 @@
 			});
 		</script>
 	</c:if>
-
+	</div>
+</div>
 </body>
 </html>

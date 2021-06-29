@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+	#boardList{text-align: center;}
 	ul {text-align: center;}
 	ul li {list-style: none; display: inline-block;}
 	#pagingArea{width:fit-content; margin:auto;}
@@ -17,8 +18,11 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
+<jsp:include page="../header02.jsp"/>
 
-<h2>문의게시판</h2>
+<div class="content">
+
+	<h2>문의게시판</h2>
 
 	<table id="boardList">
 		<thead>
@@ -140,6 +144,6 @@
 			});
 		</script>
 	</c:if>
-
+</div>
 </body>
 </html>

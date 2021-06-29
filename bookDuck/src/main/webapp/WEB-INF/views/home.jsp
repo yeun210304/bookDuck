@@ -2,14 +2,20 @@
 <%@page import="com.spring.bookduck.model.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8"); %>    
-<% response.setContentType("text/html; charset=UTF-8"); %>
+<%
+request.setCharacterEncoding("UTF-8");
+%>    
+<%
+    response.setContentType("text/html; charset=UTF-8");
+    %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+
+String id = "";
+
 	MemberDto Ldto = (MemberDto)session.getAttribute("Ldto");
 	PayDto payDto = (PayDto)session.getAttribute("payDto");
 
-	String id = "";
 	if (session.getAttribute("id") != null) {
 		id = (String) session.getAttribute("id");
 	}

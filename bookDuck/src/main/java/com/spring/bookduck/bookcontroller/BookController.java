@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.bookduck.bookfm.biz.BookFMBiz;
+import com.spring.bookduck.rcvideo.biz.RcvideoBiz;
 import com.spring.bookduck.bookstar.biz.BookStarBiz;
+
 
 @Controller
 public class BookController {
@@ -14,6 +16,9 @@ public class BookController {
 	@Autowired
 	BookFMBiz bookfmbiz;
 	BookStarBiz bookstarbiz;
+	
+	@Autowired
+	RcvideoBiz rcbiz;
 	
 	@RequestMapping("/booksearch.do")
 	public String search() {
@@ -25,8 +30,11 @@ public class BookController {
 	public String recommend(Model model, String isbn) {
 		
 		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
+		model.addAttribute("rclist",rcbiz.rcselectone(isbn));
+    
 		//model.addAttribute("staravg", bookstarbiz.selectOne(isbn));
 		
+
 		
 		return "book/recommendBook";
 	}

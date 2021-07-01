@@ -8,15 +8,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	#boardList{text-align: center;}
+	#boardList{text-align: center; width: 80%;}
+	#boardList>tbody>tr{height: 50px;}
 	ul{text-align : center;}
 	ul li{list-style: none; display: inline-block;}
 	#pagingArea{width:fit-content; margin:auto;}
 	#searchForm {text-align: center;}
 	#searchForm>*{display:inline-block; margin:5px;}
 </style>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
 

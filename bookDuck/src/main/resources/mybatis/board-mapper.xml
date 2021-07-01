@@ -76,22 +76,36 @@
 	</update>
 	
 	<update id="allCommentDelete" parameterType="int">
-		UPDATE COMM
+		UPDATE REPLY
 		SET COMMENT_DELFLAG = 'Y'
 		WHERE POST_ID = #{post_id}
 	</update>
 	
 	<select id="selectCommentList" parameterType="int" resultType="commentDto">
-		SELECT COMMENT_ID, POST_ID, COMMENT_NO, COMMENT_GROUPNO, COMMENT_GROUPSEQ, COMMENT_CONTENT, COMMENT_WRITER, COMMENT_REGDATE, COMMENT_TITLETAB, COMMENT_DELFLAG
-		FROM COMM
+		SELECT COMMENT_ID, POST_ID, COMMENT_GROUPNO, COMMENT_GROUPSEQ, COMMENT_CONTENT, COMMENT_WRITER, COMMENT_REGDATE, COMMENT_TITLETAB, COMMENT_DELFLAG
+		FROM REPLY
 		WHERE POST_ID = #{post_id}
 		AND COMMENT_DELFLAG = 'N'
-		ORDER BY COMMENT_ID DESC
+		ORDER BY COMMENT_GROUPNO DESC, COMMENT_GROUPSEQ
 	</select>
 	
 	<insert id="insertComment" parameterType="commentDto">
-		INSERT INTO COMM
-		VALUES(COMMSEQ.NEXTVAL, #{post_id}, NULL, NULL, NULL, #{comment_content}, #{comment_writer}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), 0, 'N' )
+		INSERT INTO REPLY
+		VALUES(REPLYSEQ.NEXTVAL, #{post_id}, COMMENT_GROUPNOSEQ.NEXTVAL, 1, #{comment_content}, #{comment_writer}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), 0, 'N' )
+	</insert>
+	
+	<update id="answerCommentUpdate" parameterType="int">
+		UPDATE REPLY
+		SET COMMENT_GROUPSEQ = COMMENT_GROUPSEQ + 1
+		WHERE COMMENT_GROUPNO = (SELECT COMMENT_GROUPNO FROM REPLY WHERE COMMENT_ID = #{comment_id})
+		AND COMMENT_GROUPSEQ > (SELECT COMMENT_GROUPSEQ FROM REPLY WHERE COMMENT_ID = #{comment_id})
+		AND POST_ID = (SELECT POST_ID FROM REPLY WHERE COMMENT_ID = #{comment_id})
+	</update>
+	
+	<insert id="answerCommentInsert" parameterType="commentDto">
+		INSERT INTO REPLY
+		VALUES(REPLYSEQ.NEXTVAL, #{post_id}, (SELECT COMMENT_GROUPNO FROM REPLY WHERE COMMENT_ID = #{comment_id}), (SELECT COMMENT_GROUPSEQ + 1 FROM REPLY WHERE COMMENT_ID = #{comment_id}),
+			   #{comment_content}, #{comment_writer}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), (SELECT COMMENT_TITLETAB + 1 FROM REPLY WHERE COMMENT_ID = #{comment_id}), 'N')
 	</insert>
 
 	<update id="increaseComment" parameterType="int">
@@ -101,14 +115,14 @@
 	</update>
 	
 	<update id="updateComment" parameterType="commentDto">
-		UPDATE COMM
+		UPDATE REPLY
 		SET COMMENT_CONTENT = #{comment_content},
 		COMMENT_REGDATE = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') 
 		WHERE COMMENT_ID = #{comment_id}
 	</update>
 	
 	<update id="deleteComment" parameterType="int">
-		UPDATE COMM
+		UPDATE REPLY
 		SET COMMENT_DELFLAG = 'Y'
 		WHERE COMMENT_ID = #{comment_id}
 	</update>

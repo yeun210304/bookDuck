@@ -8,7 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	#boardList{text-align: center;}
+	#boardList{text-align: center; width: 80%;}
+	#boardList>tbody>tr{height: 50px;}
 	ul {text-align: center;}
 	ul li {list-style: none; display: inline-block;}
 	#pagingArea{width:fit-content; margin:auto;}

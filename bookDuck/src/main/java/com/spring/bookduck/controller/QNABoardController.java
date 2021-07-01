@@ -187,6 +187,7 @@ public class QNABoardController {
 	
 	
 	// 댓글 관련
+	// 댓글 리스트
 	@ResponseBody
 	@RequestMapping(value="/commentList.do", produces = "application/json;")
 	public Map<String, List<CommentDto>> ajaxSelectCommentList(int post_id) {
@@ -197,6 +198,7 @@ public class QNABoardController {
 		return map; 
 	}
 	
+	// 댓글 등록
 	@ResponseBody
 	@RequestMapping("/commentInsert.do")
 	public String ajaxInsertComment(CommentDto dto) {
@@ -208,6 +210,7 @@ public class QNABoardController {
 		}
 	}
 	
+	// 댓글 수정
 	@ResponseBody
 	@RequestMapping("/commentUpdate.do")
 	public String ajaxUpdateComment(CommentDto dto) {
@@ -218,6 +221,7 @@ public class QNABoardController {
 		}
 	}
 	
+	// 댓글 삭제
 	@ResponseBody
 	@RequestMapping("/commentDelete.do")
 	public String ajaxDeleteComment(int comment_id, int post_id) {
@@ -227,6 +231,18 @@ public class QNABoardController {
 		} else {
 			return "fail";
 		}
+	}
+	
+	// 대댓글 작성
+	@ResponseBody
+	@RequestMapping("/commentAnswerInsert.do")
+	public String ajaxAnswerComment(CommentDto dto) {
+		if(boardBiz.answerCommentInsert(dto) > 0) {
+			boardBiz.increaseComment(dto.getPost_id());
+			return "success";
+		}
+		
+		return "fail";
 	}
 	
 	// 게시글 검색 조회

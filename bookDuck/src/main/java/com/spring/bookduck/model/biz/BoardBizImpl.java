@@ -103,4 +103,12 @@ public class BoardBizImpl implements BoardBiz {
 		return dao.selectSearchListCount(map);
 	}
 	
+	@Transactional
+	@Override
+	public int answerCommentInsert(CommentDto dto) {
+		dao.answerCommentUpdate(dto.getComment_id());
+		
+		return dao.answerCommentInsert(dto);
+	};
+	
 }

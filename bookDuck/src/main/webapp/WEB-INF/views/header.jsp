@@ -27,23 +27,7 @@
 		<a href="updatePwForm.do">비밀번호변경</a>
 		<a href="leaveAccountForm.do">회원탈퇴</a>
 	</c:if>
-	
-	<script>
-        var naver_id_login = new naver_id_login("Hft3mSmHcCpHqnsB7j3E", "http://localhost:8787/bookduck/login_callback.do"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
-        
-        // 접근 토큰 값 출력
-        alert(naver_id_login.oauthParams.access_token);
-        
-        // 네이버 사용자 프로필 조회
-        naver_id_login.get_naver_userprofile("naverSignInCallback()");
-        
-        // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-        function naverSignInCallback() {
-            alert(naver_id_login.getProfileData('email'));
-            alert(naver_id_login.getProfileData('nickname'));
-            alert(naver_id_login.getProfileData('age'));
-        }
-    </script>
+
 	
 </body>
 </html>

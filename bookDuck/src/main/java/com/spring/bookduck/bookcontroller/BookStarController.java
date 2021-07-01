@@ -8,18 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.google.api.client.http.HttpRequest;
-import com.spring.bookduck.bookfm.biz.BookFMBiz;
-import com.spring.bookduck.bookfm.dto.BookFMDto;
+import com.spring.bookduck.bookstar.biz.BookStarBiz;
+import com.spring.bookduck.bookstar.dto.BookStarDto;
 
 @Controller
-public class BooKFMController {
-	
-	@Autowired
-	BookFMBiz bookfmbiz;
+public class BookStarController {
 
-	@RequestMapping("/bookfmInsertRes.do")
-	public String BookfmInsertRes(HttpServletRequest request, BookFMDto dto, HttpSession session, Model model) {
+	@Autowired
+	BookStarBiz bookstarbiz;
+
+	@RequestMapping("/bookstarInsertRes.do")
+	public String BookstarInsertRes(HttpServletRequest request, BookStarDto dto, HttpSession session, Model model) {
 		
 		String coverLargeUrl = request.getParameter("coverLargeUrl");
 		String title = request.getParameter("title");
@@ -27,38 +26,33 @@ public class BooKFMController {
 		String author = request.getParameter("author");
 		String categoryId = request.getParameter("categoryId");
 		
-		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
+		System.out.println(isbn);
+
+		//model.addAttribute("staravg", bookstarbiz.selectOne(isbn));
+		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
 		
-		if(bookfmbiz.insertBookFM(dto) > 0) {
+		if(bookstarbiz.insertBookStar(dto) > 0) {
 			model.addAttribute("coverLargeUrl", coverLargeUrl);
 			model.addAttribute("title", title);
 			model.addAttribute("isbn", isbn);
 			model.addAttribute("author", author);
 			model.addAttribute("categoryId", categoryId);
 			
-			model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
-			System.out.println(bookfmbiz.selectList(isbn));
+			//model.addAttribute("staravg", bookstarbiz.selectOne(isbn));
+			//System.out.println("실행중??");
+			//System.out.println(bookstarbiz.selectOne(isbn));
+			
+			// 연습
+			System.out.println("연습중");
+			model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
+			System.out.println(bookstarbiz.selectAvg(isbn));
 			
 			model.addAttribute("alertMsg", "성공적으로 저장되었습니다.");
-			//return "book/booksearch";
-			//return "redirect:recommendBook.do?title=<%=title %>&coverLargeUrl=<%=coverLargeUrl %>&isbn=<%=isbn %>&author=<%=author %>&categoryId=<%=categoryId %>";
 			return "book/recommendBook";
 		} else {
-			model.addAttribute("errorMsg", "한줄낭독 등록 실패");
+			model.addAttribute("errorMsg", "별점 등록 실패");
 			return "book/recommendBook";
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

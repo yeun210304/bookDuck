@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bookstarMapper">
+
+	<insert id="insertBookStar" parameterType="BookStarDto">
+		MERGE INTO BOOKSTAR
+		USING DUAL 
+			ON (BOOKSTAR_ID = #{bookstar_id} 
+				AND BOOKSTAR_ISBN = #{bookstar_isbn})
+		WHEN MATCHED THEN
+			UPDATE SET
+				BOOKSTAR_STAR = #{bookstar_star}
+		WHEN NOT MATCHED THEN
+			INSERT(
+				BOOKSTAR_ID, BOOKSTAR_ISBN, BOOKSTAR_TITLE, BOOKSTAR_STAR
+			) 
+			VALUES(
+				#{bookstar_id},
+				#{bookstar_isbn},
+				#{bookstar_title},
+				#{bookstar_star}
+			)
+	</insert>
+	<!-- 
+  	<select id="selectOne" resultType="BookStarDto">
+		SELECT BOOKSTAR_STAR
+		FROM BOOKSTAR
+		WHERE BOOKSTAR_ISBN = #{bookstar_isbn}
+	</select>
+  	-->
+  
+    <select id="selectAvg" resultType="Double">
+		SELECT AVG(BOOKSTAR_STAR)
+		FROM BOOKSTAR
+		WHERE BOOKSTAR_ISBN = #{bookstar_isbn}
+	</select>
+
+
+</mapper>

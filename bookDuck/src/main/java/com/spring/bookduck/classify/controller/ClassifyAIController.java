@@ -1,19 +1,27 @@
 package com.spring.bookduck.classify.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.bookduck.classify.biz.AiUtils;
 import com.spring.bookduck.classify.biz.AireBiz;
+import com.spring.bookduck.classify.dto.AiUtilDto;
 import com.spring.bookduck.classify.dto.AireDto;
+import com.spring.bookduck.model.dto.MemberDto;
 
 @Controller
 public class ClassifyAIController {
@@ -52,8 +60,33 @@ public class ClassifyAIController {
 	}
 	
 	
+	@RequestMapping("/airecommend.do")
+	@ResponseBody
+	public Map<String, List<AiUtilDto>> airecommend(HttpServletRequest request, String age_mw, String category){
+		System.out.println(age_mw);
+		System.out.println(category);
+		String path = request.getSession().getServletContext().getRealPath("/");
 		
-	
+		HttpSession session = request.getSession();
+		MemberDto dto = (MemberDto) session.getAttribute("Ldto");
+		String id = dto.getMember_id();		
+		
+		Map<String, List<AiUtilDto>> map = new HashMap<String,  List<AiUtilDto>>();
+		List<AiUtilDto> predictresult = new ArrayList<AiUtilDto>();
+		
+		AiUtils aiutil = new AiUtils();
+		String makefile = aiutil.makeWekaData(id, age_mw, category, 55, path);
+		if(makefile.equals("성공")) {
+			predictresult = aiutil.predict(id, path);
+			if(predictresult != null) {
+				map.put("list", predictresult);
+			} else {
+				map.put("list", null);
+			}
+		}
+		
+		return map;
+	}
 	
 	
 	

@@ -5,7 +5,7 @@
 	<select id="chartData" parameterType="String" resultType="ReadingChartDto">
 		SELECT CHARTREADINGTIME, CHARTMDATE FROM READINGCHART
 		WHERE CHARTID = #{chartId}
-		ORDER BY CHARTREADINGTIME DESC
+		ORDER BY CHARTNO
 	</select>
 
 	<insert id="insert" parameterType="ReadingChartDto">

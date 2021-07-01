@@ -38,9 +38,9 @@ public class ReadingChartController {
 	public String chartInsert(ReadingChartDto dto) {
 
 		if (biz.insert(dto) > 0){
-			return "mypage";
+			return "redirect:mypage.do";
 		} 
-		return "mypage";
+		return "redirect:mypage.do";
 	}
 }
 

@@ -158,6 +158,13 @@ public class LoginController {
 		return "member/findPwForm";
 	}
 	
+	//네이버 로그인 테스트
+	@RequestMapping("/navertest.do")
+	public String NaverTest() {
+		logger.info("네이버 로그인 페이지 테스트");
+		return "member/naverlogin";
+	}
+	
 	/*
 	@Autowired
 	private MailSender mailSender;

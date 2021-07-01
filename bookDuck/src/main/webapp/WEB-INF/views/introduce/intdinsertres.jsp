@@ -67,7 +67,7 @@ function goWrite(frm) {
 
 
 <body>
-<h2 style="text-align: center;">글 작성</h2><br><br><br>
+<h2 style="text-align: center;">자기소개 작성</h2><br><br><br>
 
 <div style="width: 60%; margin: auto;">
 	<form action="intdinsert.do" method="post">

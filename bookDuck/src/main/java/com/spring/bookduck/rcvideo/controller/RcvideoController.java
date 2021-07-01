@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.bookduck.bookfm.biz.BookFMBiz;
 import com.spring.bookduck.model.dto.MemberDto;
 import com.spring.bookduck.rcvideo.biz.RcvideoBiz;
 import com.spring.bookduck.rcvideo.dto.RcvideoDto;
@@ -22,6 +23,9 @@ public class RcvideoController {
 	
 	@Autowired
 	private ScrapBiz scbiz;
+	
+	@Autowired
+	private BookFMBiz bookfmbiz;
 
 	@RequestMapping("rcinsertres.do")
 	public String rcinsertres(HttpSession session, HttpServletRequest request,Model model) {
@@ -44,7 +48,6 @@ public class RcvideoController {
 		
 		return "rcvideo/rcinsertres";
 	}
-
 	@RequestMapping("rcinsert.do")
 	public String rcinsert(HttpSession session, HttpServletRequest request,RcvideoDto rcdto,Model model) {
 		String title = request.getParameter("book_title");
@@ -70,14 +73,87 @@ public class RcvideoController {
 		return "redirect";
 	}
 	
-	@RequestMapping("deletercvideo.do")
-	public String rcdelete(int rcvideo_no,ScrapDto scdto) {
+	
+	
+	
+	
+	
+	
+	@RequestMapping("updatercvideores.do")
+	public String rcupdateres(HttpSession session, HttpServletRequest request,Model model,int rcvideo_no) {
+		session = request.getSession();
+		String title = request.getParameter("title");
+		String isbn = request.getParameter("isbn");
+		String coverLargeUrl = request.getParameter("coverLargeUrl");
+		String author = request.getParameter("author");
+		String categoryId = request.getParameter("categoryId");
 		
-		if(biz.rcdelete(rcvideo_no)>0) {
+		ScrapDto scdto = new ScrapDto();
+		
+		scdto.setBook_isbn(isbn);
+		scdto.setBook_title(title);
+		scdto.setBook_coverLargeUrl(coverLargeUrl);
+		scdto.setBook_author(author);
+		scdto.setBook_categoryId(categoryId);
+		model.addAttribute("scrapDto",scdto);
+		
+		model.addAttribute("rcvideoDto",biz.rcselectoneno(rcvideo_no));
+		
+		return "rcvideo/rcupdateres";
+	}
+	
+	@RequestMapping("updatercvideo.do")
+	public String rcupdate(HttpSession session, HttpServletRequest request,Model model,RcvideoDto rcvideoDto) {
+		
+		session = request.getSession();
+		
+		String title = request.getParameter("book_title");
+		String isbn = request.getParameter("book_isbn");
+		String coverLargeUrl = request.getParameter("book_coverLargeUrl");
+		String author = request.getParameter("book_author");
+		String categoryId = request.getParameter("book_categoryId");
+		
+		ScrapDto scdto = new ScrapDto();
+		
+		scdto.setBook_isbn(isbn);
+		scdto.setBook_title(title);
+		scdto.setBook_coverLargeUrl(coverLargeUrl);
+		scdto.setBook_author(author);
+		scdto.setBook_categoryId(categoryId);
+		model.addAttribute("scrapDto",scdto);
+		System.out.println("여기맞나"+title+isbn+coverLargeUrl+author+categoryId);
+		if(biz.rcupdate(rcvideoDto)>0) {
+			model.addAttribute("rclist",biz.rcselectone(isbn));
 			return "book/recommendBook";
 		}
 		
-		return "book/recommendBook";
+		return "home";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping("deletercvideo.do")
+	public String rcdelete(HttpSession session, HttpServletRequest request,Model model,int rcvideo_no) {
+		
+		if(biz.rcdelete(rcvideo_no)>0) {
+			String title = request.getParameter("title");
+			String isbn = request.getParameter("isbn");
+			String coverLargeUrl = request.getParameter("coverLargeUrl");
+			String author = request.getParameter("author");
+			String categoryId = request.getParameter("categoryId");
+			
+			return "redirect:recommendBook.do?title="+title+"&coverLargeUrl="+coverLargeUrl+"&isbn="+isbn+"&author="+author+"&categoryId="+categoryId;
+		}
+		
+		return "home";
 	}
 
 }

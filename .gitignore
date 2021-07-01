@@ -111,4 +111,4 @@ buildNumber.properties
 # End of https://www.toptal.com/developers/gitignore/api/maven,java,eclipse
 
 # specific folder need to add (library .jar)
-!/bookDuck/WebContent/WEB-INF/lib/*
+!/bookDuck/WEB-INF/lib/*

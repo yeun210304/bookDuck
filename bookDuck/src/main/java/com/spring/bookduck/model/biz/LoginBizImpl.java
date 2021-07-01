@@ -1,6 +1,5 @@
 package com.spring.bookduck.model.biz;
 
-import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +28,7 @@ public class LoginBizImpl implements LoginBiz {
 
 	@Override
 	public MemberDto snslogin(String member_email) {
-		return null;
+		return dao.snslogin(member_email);
 	}
 
 	@Override
@@ -60,5 +59,10 @@ public class LoginBizImpl implements LoginBiz {
 	@Override
 	public String getPw(Map<String, Object> paramMap) {
 		return dao.getPw(paramMap);
+	}
+
+	@Override
+	public int tokenchk(String member_email) {
+		return dao.tokenchk(member_email);
 	}
 }

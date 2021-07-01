@@ -221,6 +221,8 @@ String id = "";
 	<a href="noticeList.do">공지사항</a>
 	
 	<a href="qnaList.do">문의게시판</a>
+	
+	<a href="navertest.do">네이버테스트</a>
 
 
 	<!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->

@@ -31,6 +31,9 @@ public interface LoginDao {
 	//ID찾기
 	public MemberDto findId(MemberDto dto);
 	
+	//sns 로그인 토큰 체크
+	public int tokenchk(String member_email);
+	
 	//PW찾기
 	public void findPw(HttpServletResponse response, MemberDto dto);
 

@@ -18,6 +18,10 @@ public class RcvideoBizImpl implements RcvideoBiz {
 	public List<RcvideoDto> rcselectone(String rcvideo_isbn) {
 		return dao.rcselectone(rcvideo_isbn);
 	}
+	@Override
+	public RcvideoDto rcselectoneno(int rcvideo_no) {
+		return dao.rcselectoneno(rcvideo_no);
+	}
 
 	@Override
 	public int rcinsert(RcvideoDto dto) {

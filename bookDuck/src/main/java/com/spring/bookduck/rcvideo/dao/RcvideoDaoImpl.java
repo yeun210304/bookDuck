@@ -28,6 +28,14 @@ public class RcvideoDaoImpl implements RcvideoDao {
 		
 		return list;
 	}
+	@Override
+	public RcvideoDto rcselectoneno(int rcvideo_no){
+		RcvideoDto rcdto = new RcvideoDto();
+		
+		rcdto = sqlSession.selectOne(namespace+"rcselectoneno",rcvideo_no);
+		
+		return rcdto;
+	}
 
 	@Override
 	public int rcinsert(RcvideoDto dto) {
@@ -48,7 +56,11 @@ public class RcvideoDaoImpl implements RcvideoDao {
 		
 		int res =0;
 		
-		res= sqlSession.update(namespace+"rcupdate",dto);
+		try {
+			res= sqlSession.update(namespace+"rcupdate",dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return res;
 	}
@@ -57,7 +69,11 @@ public class RcvideoDaoImpl implements RcvideoDao {
 	public int rcdelete(int rcvideo_no) {
 		
 		int res =0;
-		res =sqlSession.delete(namespace+"rcdelete",rcvideo_no);
+		try {
+			res =sqlSession.delete(namespace+"rcdelete",rcvideo_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return res;
 	}

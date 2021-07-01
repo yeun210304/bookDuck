@@ -9,6 +9,13 @@
 		ON SCRAP.BOOK_ISBN = RCVIDEOTABLE.BOOK_ISBN
 		WHERE SCRAP.BOOK_ISBN =#{book_isbn}
 	</select>
+	
+	<select id="rcselectoneno" parameterType="int" resultType="rcvideoDto">
+		SELECT RCVIDEO_NO,RCVIDEO_CONTENT,BOOK_ISBN
+		FROM RCVIDEOTABLE
+		WHERE RCVIDEO_NO=#{rcvideo_no}
+	
+	</select>
 
 	<insert id="rcinsert" parameterType="rcvideoDto">
 		INSERT INTO RCVIDEOTABLE
@@ -17,9 +24,8 @@
 
 	<update id="rcupdate" parameterType="rcvideoDto">
 		UPDATE RCVIDEOTABLE
-		SET
-		RCVIDEO_CONTENT =#{rcvideo_content}
-		WHERE RCVIDEO_NO =#{rcvideo_no}
+		SET RCVIDEO_CONTENT =#{rcvideo_content}
+		WHERE BOOK_ISBN =#{book_isbn}
 	</update>
 
 	<delete id="rcdelete" parameterType="int">

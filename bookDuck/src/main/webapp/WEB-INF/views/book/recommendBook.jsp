@@ -58,47 +58,47 @@
 		}
 		console.log(sTargetUrl);
 		$
-				.ajax({
-					type : "POST",
-					url : sTargetUrl,
-					dataType : "jsonp",
-					success : function(jdata) {
-						console.log(jdata);
-						$(jdata.items)
-								.each(
-										function(i) {
-											//console.log(this.snippet.channelId);
-											$("#get_view")
-													.append(
-															//검색한 책목록을 ifram api 를 활용해서 영상을 띄운다
-															'<iframe width="320" height="180"src="https://www.youtube.com/embed/'
-															+this.id.videoId+'"title="YouTube video player" frameborder="0"allow="accelerometer; autoplay;clipboard-write; encrypted-media; gyroscope; picture-in-picture"allowfullscreen></iframe>');
-										})
-								.promise()
-								.done(
-										function() {//다음 동영상 목록을 열어주는 페이징
-											if (jdata.prevPageToken) {
-												$("#nav_view")
-														.append(
-																'<a href="javascript:fnGetList(\''
-																		+ jdata.prevPageToken
-																		+ '\');"><이전페이지></a>');
-											}
-											if (jdata.nextPageToken) {
-												$("#nav_view")
-														.append(
-																'<a href="javascript:fnGetList(\''
-																		+ jdata.nextPageToken
-																		+ '\');"><다음페이지></a>');
-											}
-										});
-					},
-					error : function(xhr, textStatus) {
-						console.log(xhr.responseText);
-						alert("에러");
-						return;
+		.ajax({
+			type : "POST",
+			url : sTargetUrl,
+			dataType : "jsonp",
+			success : function(jdata) {
+				console.log(jdata);
+				$(jdata.items)
+						.each(
+					function(i) {
+					//console.log(this.snippet.channelId);
+					$("#get_view")
+					.append(
+				//검색한 책목록을 ifram api 를 활용해서 영상을 띄운다
+				'<iframe width="320" height="180"src="https://www.youtube.com/embed/'
+					+this.id.videoId+'"title="YouTube video player" frameborder="0"allow="accelerometer; autoplay;clipboard-write; encrypted-media; gyroscope; picture-in-picture"allowfullscreen></iframe>');
+					})
+				.promise()
+				.done(
+			function() {//다음 동영상 목록을 열어주는 페이징
+				if (jdata.prevPageToken) {
+					$("#nav_view")
+					.append(
+					'<a href="javascript:fnGetList(\''
+					+ jdata.prevPageToken
+					+ '\');"><이전페이지></a>');
+					}
+				if (jdata.nextPageToken) {
+					$("#nav_view")
+					.append(
+					'<a href="javascript:fnGetList(\''
+					+ jdata.nextPageToken
+					+ '\');"><다음페이지></a>');
 					}
 				});
+			},
+			error : function(xhr, textStatus) {
+				console.log(xhr.responseText);
+				alert("에러");
+				return;
+			}
+		});
 	}
 </script>
 
@@ -298,33 +298,47 @@
 	<div>
 		<c:choose>
 			<c:when test="${empty rclist}">
-				<table>
-					<tr>
-						<td colspan="1" align="center"
-							onclick="location.href='rcinsertres.do?rcinsertres.do?title=<%=title%>&coverLargeUrl=<%=coverLargeUrl %>&isbn=<%=isbn %>&author=<%=author %>&categoryId=<%=categoryId%>'">
-						 	추천 동영상을 등록해 주세요</td>
-					</tr>
-				</table>
+				<c:choose>
+					<c:when test="${empty Ldto }"></c:when>
+					<c:otherwise>
+					<table>
+						<tr>
+							<td colspan="1" align="center"
+								onclick="location.href='rcinsertres.do?rcinsertres.do?title=<%=title%>&coverLargeUrl=<%=coverLargeUrl %>&isbn=<%=isbn %>&author=<%=author %>&categoryId=<%=categoryId%>'">
+							 	추천 동영상을 등록해 주세요</td>
+						</tr>
+					</table>
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 			<c:otherwise>
-			
-			<table>
-				<tr>
-					<th>추천 영상</th>
-				</tr>
-				<c:forEach items="${rclist}" var="rcvideoDto">
+			<c:forEach items="${rclist}" var="rcvideoDto" >
+				<table>
 					<tr>
 						<td id="summernote">${rcvideoDto.rcvideo_content}</td>
 					</tr>
-				<tr>
-					<td><input type="button" value="수정"
-						onclick="location.href='updatercvideores.do?rcvideo_no=${rcvideoDto.rcvideo_no}'">
-						<input type="button" value="삭제"
-						onclick="location.href='deletercvideo.do?rcvideo_no=${rcvideoDto.rcvideo_no}'">
-					</td>
-				</tr>
+				</table>
+					<c:choose>
+						<c:when test="${empty Ldto }">
+							<table>
+								<tr>
+									<td>로그인 하세요</td> 
+								</tr>
+							</table>
+						</c:when>
+						<c:otherwise>
+						<table>
+							<tr>
+								<td><input type="button" value="수정"
+									onclick="location.href='updatercvideores.do?rcvideo_no=${rcvideoDto.rcvideo_no}&title=<%=title%>&coverLargeUrl=<%=coverLargeUrl %>&isbn=<%=isbn %>&author=<%=author %>&categoryId=<%=categoryId%>'">
+									<input type="button" value="삭제"
+									onclick="location.href='deletercvideo.do?rcvideo_no=${rcvideoDto.rcvideo_no}&title=<%=title%>&coverLargeUrl=<%=coverLargeUrl %>&isbn=<%=isbn %>&author=<%=author %>&categoryId=<%=categoryId%>'">
+								</td>
+							</tr>	
+						</table>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
-			</table>
 			</c:otherwise>
 		</c:choose>
 		

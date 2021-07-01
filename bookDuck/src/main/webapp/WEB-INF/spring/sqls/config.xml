@@ -12,7 +12,6 @@
 		<typeAlias type="com.spring.bookduck.classify.dto.AireDto" alias="AireDto"/>
 		<typeAlias type="com.spring.bookduck.classify.dto.BlistDto" alias="BlistDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.PostDto" alias="postDto"/>
-
 		<typeAlias type="com.spring.bookduck.introduce.dto.IntroduceDto" alias="intdDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.CommentDto" alias="commentDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.ReadingChartDto" alias="ReadingChartDto"/>
@@ -21,7 +20,6 @@
 		<typeAlias type="com.spring.bookduck.rcvideo.dto.RcvideoDto" alias="rcvideoDto"/>
 		<typeAlias type="com.spring.bookduck.bookfm.dto.BookFMDto" alias="BookFMDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.RealTimeNovelDto" alias="RealTimeNovelDto"/>
-
 	</typeAliases>
 	
 	<mappers>

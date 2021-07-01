@@ -30,7 +30,7 @@
     
     #header_1_right{width:30%;}
     #header_1_right>ul{list-style:none;}
-    #header_1_right>ul>li{display: inline-block; padding: 10px;}
+    #header_1_right>ul>li{float:left; padding: 10px;}
     
     .content{
     	width: 80%;

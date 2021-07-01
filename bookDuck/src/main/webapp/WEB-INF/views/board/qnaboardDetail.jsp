@@ -10,7 +10,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 <style type="text/css">
 	table *{margin: 5px;}
-	table{width: 80%; margin: auto;}
+	table{width: 100%; margin: auto;}
 	#contentArea{border-bottom: 1px solid lightgray; margin-bottom: 50px;}
 	.commentList{border-style: none; resize: none;}
 </style>

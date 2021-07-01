@@ -29,6 +29,9 @@ public interface LoginBiz {
 	//아이디 찾기
 	public MemberDto findId(MemberDto dto);
 	
+	//sns token chk
+	public int tokenchk(String member_email);
+	
 	//비밀번호 찾기
 	public void findPw(HttpServletResponse response, MemberDto dto);
 

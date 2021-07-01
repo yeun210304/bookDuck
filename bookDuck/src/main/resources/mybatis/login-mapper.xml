@@ -70,9 +70,16 @@
 	</select>
 	
 	<!-- 비밀번호 찾기 -->
-	<select id = "getPw" parameterType="Ldto" resultType="String">
+	<select id = "getPw" parameterType="String" resultType="Ldto">
 		SELECT MEMBER_PW FROM MEMBER 
 		WHERE MEMBER_ID = #{member_id} AND MEMBER_EMAIL = #{member_email}
 	</select>
+	
+	<select id="tokenchk" resultType="int" parameterType="String" >
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_EMAIL = #{member_email}
+ 	</select>
+	
 	
 </mapper>

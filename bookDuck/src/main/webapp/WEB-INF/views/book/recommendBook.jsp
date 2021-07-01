@@ -1,3 +1,5 @@
+<%@page import="com.spring.bookduck.bookfm.dto.BookFMDto"%>
+<%@page import="java.sql.Array"%>
 <%@page import="java.util.List"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.spring.bookduck.scrap.dto.ScrapDto"%>
@@ -116,8 +118,22 @@
 				color : '#F05522'
 			});
 			console.log(targetNum);
+			console.log(typeof(targetNum));
+			
+			//var targetNum = documemt.getElementById("starsave").innerHTML;
+			document.getElementById('starsave').value = targetNum;
 		});
-
+		/*
+		  $("#starsave").on("click",function(){
+			   $.ajax({
+			   type:'POST',
+			   url: 'bookstarInsertRes.do',
+			   data:{
+			      bookstar_star: targetNum,
+			    }
+			   })
+			  });
+		*/
 	});
 	
 	// 한줄 낭독
@@ -158,18 +174,16 @@
 			return;
 		}
 		utterThis.lang = lang;
-		utterThis.pitch = 1.0; // 0.4 ~ 1.0
-		utterThis.rate = 0.7; //속도
+		utterThis.pitch = 0.8; 	// 0.4 ~ 1.0
+		utterThis.rate = 0.9; 	//속도 0.7 괜춘
 		window.speechSynthesis.speak(utterThis);
 	
 	}
-	/*
-	document.addEventListener("click", function(e) {
-		var t = e.target;
-		var input = t.previousElementSibling;
-		speech(input.innerHTML);
-	});
-	*/
+	
+	function speak() {
+		var t = document.getElementById("ttsspeak");
+		speech(t.innerHTML);
+	}
 	
 	
 </script>
@@ -189,6 +203,8 @@
 	String author = request.getParameter("author");
 	String categoryId = request.getParameter("categoryId");
 	
+	String id = dto1.getMember_id();
+	System.out.println(dto1.getMember_id());
 	List<RcvideoDto> rclist = (List<RcvideoDto>)request.getAttribute("rclist");
 	
 	
@@ -208,7 +224,19 @@
 		System.out.println(author);
 		System.out.println(categoryId);
 	}
-
+	
+	if(title == null){
+		coverLargeUrl = (String)request.getAttribute("coverLargeUrl");
+		title = (String)request.getAttribute("title");
+		isbn = (String)request.getAttribute("isbn");
+		author = (String)request.getAttribute("author");
+		categoryId = (String)request.getAttribute("categoryId");
+	}
+	/*
+	BookFMDto fm = (BookFMDto)request.getAttribute("rowlist");
+	System.out.println("테스트중");
+	System.out.println(fm.getBookfm_fm());
+	*/
 %>    
 	<div id="book">
 		<h3>책정보</h3>
@@ -220,17 +248,32 @@
 
 	<div id="star">
 		<h3>별점</h3> 
-		<b>당신의 별점은?</b> (평균 :   점)
+		<b>당신의 별점은?</b> (평균 :  ${staravgg }
+		점)
 		<br/>
-		
-		<div class="make_star">
-			<div class="rating" data-rate="3" >
-				<i class="fas fa-star fa-2x"></i> <i class="fas fa-star fa-2x"></i> <i
-					class="fas fa-star fa-2x"></i> <i class="fas fa-star fa-2x"></i> <i
-					class="fas fa-star fa-2x"></i>
+		<form action="bookstarInsertRes.do" method="post">
+				<input type="hidden" name="coverLargeUrl" value="<%=coverLargeUrl %>">
+				<input type="hidden" name="title" value="<%=title %>">
+				<input type="hidden" name="author" value="<%=author %>">
+				<input type="hidden" name="isbn" value="<%=isbn %>">
+				<input type="hidden" name="categoryId" value="<%=categoryId %>">
+				
+				<input type="hidden" name="bookstar_id" value="<%=id %>">
+				<input type="hidden" name="bookstar_title" value="<%=title %>">
+				<input type="hidden" name="bookstar_isbn" value="<%=isbn %>">
+				<input type="hidden" id="starsave" name="bookstar_star">
+				
+				
+				
+			<div class="make_star">
+				<div class="rating" data-rate="3" >
+					<i class="fas fa-star fa-2x"></i> <i class="fas fa-star fa-2x"></i> <i
+						class="fas fa-star fa-2x"></i> <i class="fas fa-star fa-2x"></i> <i
+						class="fas fa-star fa-2x"></i>
+				</div>
 			</div>
-			<button class='btn btn-default btn-xs'>&#127775;&nbsp;별점등록</button>		
-		</div>
+			<button type="submit"  class='btn btn-default btn-xs'>&#127775;&nbsp;별점등록</button>	
+		</form>
 		
 
 	</div>
@@ -248,6 +291,7 @@
 				<input type="hidden" name="isbn" value="<%=isbn %>">
 				<input type="hidden" name="categoryId" value="<%=categoryId %>">
 				
+				
 				<table>
 					<tr>
 						<td><input type="hidden" name="bookfm_isbn" value="<%=isbn %>" readonly ></td>
@@ -263,26 +307,26 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="right">
-							<input type="submit" value="등록">
+							<input type="submit" class='btn btn-default btn-xs' value="등록">
 						</td>
 					</tr>
 				</table>
 			</form>
 			
-			
-			<div style="display: none;">
-				<c:choose>
-					<c:when test="${empty rowlist}">list값이 없습니다.</c:when>
-					<c:otherwise>
-						<c:forEach items="${rowlist }" var="dto">
-							${dto.bookfm_fm}
-						
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+			<div>
+				<div id="ttsspeak" style="display: none;">
+					<c:choose>
+						<c:when test="${empty rowlist}">등록된 정보가 없습니다. 한 줄을 등록해주세요.</c:when>
+						<c:otherwise>
+							<c:forEach items="${rowlist }" var="dto">
+								${dto.bookfm_fm}
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				
+				<button onclick="speak()" type="button" class='btn btn-default'>&#128265;&nbsp;SPEAK IT!</button>
 			</div>
-			<button type="button" class='btn btn-default'>&#128265;&nbsp;SPEAK IT!</button>
-			
 		</div>
 	</div>
 	<div id="youtubesearch" style="float: inherit;">

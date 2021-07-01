@@ -20,6 +20,7 @@
 		<typeAlias type="com.spring.bookduck.rcvideo.dto.RcvideoDto" alias="rcvideoDto"/>
 		<typeAlias type="com.spring.bookduck.bookfm.dto.BookFMDto" alias="BookFMDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.RealTimeNovelDto" alias="RealTimeNovelDto"/>
+		<typeAlias type="com.spring.bookduck.bookstar.dto.BookStarDto" alias="BookStarDto"/>n
 	</typeAliases>
 	
 	<mappers>
@@ -33,6 +34,7 @@
 		<mapper resource="/mybatis/rcvideo-mapper.xml"/>
 		<mapper resource="/mybatis/bookfm-mapper.xml"/>
 		<mapper resource="/mybatis/RealTimeNovel-mapper.xml"/>
+		<mapper resource="/mybatis/bookstar-mapper.xml"/>
 	</mappers>
 	
 </configuration>

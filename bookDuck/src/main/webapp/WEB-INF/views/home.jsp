@@ -402,6 +402,151 @@ String id = "";
 	    // 지도 중심좌표를 접속위치로 변경합니다
 	    map.setCenter(locPosition);      
 	}
+	</script>	
+	
+	
+	<!-- 인공지능을 활용한 책 카테고리 추천. -->
+	<br/><br/><br/><br/>
+	<div>
+		<table>
+			<tr>
+				<td colspan="4" id="airecommendbox">나이/성별/좋아하는 책 분류를 선택해주세요</td>			
+			</tr>
+			<tr>
+				<td>										
+					<select name="age">
+					     <optgroup label="나이">
+					        <option value="10s">10대</option>
+					        <option value="20s">20대</option>
+					        <option value="30s">30대</option>
+					        <option value="40s">40대</option>
+					        <option value="50s">50대</option>
+					        <option value="60s_over">60대 이상</option>
+					     </optgroup>
+					</select>
+				</td>
+				<td>
+					<select name="mw">
+						<optgroup label="성별">
+							<option value="man">남자</option>
+							<option value="woman">여자</option>
+						</optgroup>					
+					</select>				
+				</td>
+				<td>
+					<select name="category">
+						<optgroup label="좋아하는 책분류">
+							<option value="101">소설</option>
+							<option value="102">시/에세이</option>
+							<option value="103">예술/대중문화</option>
+							<option value="104">사회과학</option>
+							<option value="105">역사와 문화</option>
+							<option value="107">잡지</option>
+							<option value="108">만화</option>
+							<option value="109">유아</option>
+							<option value="110">아동</option>
+							<option value="111">가정과 생활</option>
+							<option value="112">청소년</option>
+							<option value="113">초등학습서</option>
+							<option value="114">고등학습서</option>
+							<option value="115">국어/외국어/사전</option>
+							<option value="116">자연과 과학</option>
+							<option value="117">경제경영</option>
+							<option value="118">자기계발</option>
+							<option value="119">인문</option>
+							<option value="120">종교/역학</option>
+							<option value="122">컴퓨터/인터넷</option>
+							<option value="123">자격서/수험서</option>
+							<option value="124">취미/레저</option>
+							<option value="125">전공도서/대학교재</option>
+							<option value="126">건강/뷰티</option>
+							<option value="128">여행</option>
+							<option value="129">중등학습서</option>							
+						</optgroup>					
+					</select>	
+				</td>
+				<td><input id="airecommend" type="button" value="추천받기"></td>			
+			</tr>
+		</table>
+	</div>
+	
+	<script type="text/javascript">
+		
+		var $age = $("select[name=age]").val();
+		var $mw = $("select[name=mw]").val();
+		var $category = $("select[name=category]").val();
+		var id = "${Ldto.member_id}";
+		var $aibox = $("#airecommendbox");
+		var scorelist = [];
+		var categorylist = [{category : '101' , name : '소설'},
+							{category : '102' , name : '시/에세이'},
+							{category : '103' , name : '예술/대중문화'},
+							{category : '104' , name : '사회과학'},
+							{category : '105' , name : '역사와 문화'},
+							{category : '107' , name : '잡지'},
+							{category : '108' , name : '만화'},
+							{category : '109' , name : '유아'},
+							{category : '110' , name : '아동'},
+							{category : '111' , name : '가정과 생활'},
+							{category : '112' , name : '청소년'},
+							{category : '113' , name : '초등학습서'},
+							{category : '114' , name : '고등학습서'},
+							{category : '115' , name : '국어/외국어/사전'},
+							{category : '116' , name : '자연과 과학'},
+							{category : '117' , name : '경제 경영'},
+							{category : '118' , name : '자기계발'},
+							{category : '119' , name : '인문'},
+							{category : '120' , name : '종교/역학'},
+							{category : '122' , name : '컴퓨터/인터넷'},
+							{category : '123' , name : '자격서/수험서'},
+							{category : '124' , name : '취미/레저'},
+							{category : '125' , name : '전공도서/대학교재'},
+							{category : '126' , name : '건강/뷰티'},
+							{category : '128' , name : '여행'},
+							{category : '129' , name : '중등학습서'}];
+				
+		$("#airecommend").click(function(){
+			if(id.trim() != ""){
+				$age = $("select[name=age]").val();
+				$mw = $("select[name=mw]").val();
+				$category = $("select[name=category]").val();			
+				
+				$.getJSON("airecommend.do?age_mw="+$age+"_"+$mw+"&category="+$category, function(result){
+					scorelist = result.list;
+					scorelist.sort((a,b) => (a.score > b.score) ? -1 : ((a.score < b.score) ? 1 : 0));
+					
+					var one;
+					var two;
+					var three;
+					
+					for(var i = 0 ; i < categorylist.length ; i++){						
+						if(categorylist[i].category == scorelist[0].category){							
+							one = categorylist[i].name
+						} else if(categorylist[i].category == scorelist[1].category){
+							two = categorylist[i].name
+						} else if(categorylist[i].category == scorelist[2].category){
+							three = categorylist[i].name
+						}
+					}
+					
+					$aibox.text("");
+					$aibox.text("추천 카테고리 1 : "+ one +" 2 : "+ two +" 3: "+ three);
+					
+				});
+			} else {
+				$aibox.text("");
+				$aibox.text("로그인을 해야 사용할 수 있는 기능입니다.");
+			}
+			
+			
+			
+		});
+	
+	
+	
+	
+	
+	
 	</script>
 
 

@@ -364,11 +364,12 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 			</form>
 		</c:when>
 	</c:choose>
-	
-		
-		
 		
 	</div>
+	
+	
+	
+	
 	
 	
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

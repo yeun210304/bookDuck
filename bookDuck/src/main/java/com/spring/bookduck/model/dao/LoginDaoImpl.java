@@ -33,7 +33,15 @@ public class LoginDaoImpl implements LoginDao {
 
 	@Override
 	public MemberDto snslogin(String member_email) {
-		return null;
+		
+		MemberDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"snslogin", member_email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override
@@ -100,6 +108,18 @@ public class LoginDaoImpl implements LoginDao {
 		
 		try {
 			res = sqlSession.selectOne(NAMESPACE+"getPw", paramMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int tokenchk(String member_email) {
+		int res = 0;
+		
+		try {
+			res=sqlSession.selectOne(NAMESPACE+"tokenchk", member_email);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

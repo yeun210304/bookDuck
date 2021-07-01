@@ -130,6 +130,7 @@ public class NoticeBoardController {
 		}
 	}
 	
+	@RequestMapping("/noticeDelete.do")
 	public String noticeDelete(int post_id, String filePath, HttpSession session, Model model) {
 		if(boardBiz.deleteBoard(post_id) > 0) {
 			if(!filePath.equals("")) {

@@ -153,10 +153,16 @@
 
 </head>
 <body>
-<jsp:include page="header02.jsp"/>
+<jsp:include page="header.jsp"/>
+
+	
 
 <div class="content">
 	<div class="innerOuter">
+	
+		<a href="updatePwForm.do">비밀번호변경</a>
+		<a href="leaveAccountForm.do">회원탈퇴</a>
+	
 	<h1>MYPAGE</h1>
 	<br/><br/>
 	<div>

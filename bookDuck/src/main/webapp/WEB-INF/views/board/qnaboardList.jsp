@@ -19,7 +19,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
-	<jsp:include page="../header02.jsp"/>
+	<jsp:include page="../header.jsp"/>
 
 	<div class="content">
 	

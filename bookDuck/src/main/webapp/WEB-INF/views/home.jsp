@@ -183,8 +183,8 @@
 3. 메인이름추가링크 - 지연
 -->
 
+<jsp:include page="header.jsp"/>
 
-<%@ include file="header.jsp" %>
 	<a href="loginform.do">로그인</a>
 	
 	<a href="noticeList.do">공지사항</a>

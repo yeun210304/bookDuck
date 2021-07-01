@@ -18,7 +18,7 @@ PayDto dto = (PayDto) session.getAttribute("payDto");
 <link href="css/pay.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="../header02.jsp" />
+<jsp:include page="../header.jsp" />
 
 	<div class="content">
 		<div class="innerOuter">

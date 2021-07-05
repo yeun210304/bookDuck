@@ -359,6 +359,8 @@
               <input type="text" class="form-control" 
               id="value" name="value" required="required">
              </div>
+             
+             
               <button type="submit" class="btn btn-default-info">
                 <span class="glyphicon glyphicon-search"></span>
                 검색

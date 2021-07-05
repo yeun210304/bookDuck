@@ -9,7 +9,17 @@
 <title>Insert title here</title>
 <style type="text/css">
 	table *{margin: 5px;}
-	table{width: 100%; margin: auto;}
+	table{width: 90%; margin: auto;}
+	th{background-color: #F5DC7A; height: 40px;}
+	td{background-color: #FDF7DD;}
+	button{
+		width : 60px;
+		height: 25px;
+		border: none;
+		border-radius: 25%;
+		background-color: #F5DC7A;
+		cursor: pointer;
+	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 </head>

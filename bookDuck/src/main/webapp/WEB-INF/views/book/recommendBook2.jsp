@@ -13,19 +13,13 @@
 <meta charset="UTF-8">
 <title>도서추천</title>
 <!--SummerNote  -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
-
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
+	
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -48,7 +42,7 @@
 		//유튜브 API 불러오는부분
 		//https://developers.google.com/youtube/v3/docs/search/list
 		var order = "relevance";
-		var maxResults = "6"; //검색 리스트 개수
+		var maxResults = "8"; //검색 리스트 개수
 		var key = "AIzaSyD5ZALqP1e8SkvfWL65oVDCHTUoibbtJGk";//api key값
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order="
 				+ order
@@ -110,6 +104,7 @@
 
 
 <script type="text/javascript">
+
 	$(function() {
 		// 별점
 		$('.make_star svg').click(function() {
@@ -121,8 +116,8 @@
 				color : '#F05522'
 			});
 			console.log(targetNum);
-			console.log(typeof (targetNum));
-
+			console.log(typeof(targetNum));
+			
 			//var targetNum = documemt.getElementById("starsave").innerHTML;
 			document.getElementById('starsave').value = targetNum;
 		});
@@ -136,9 +131,11 @@
 			    }
 			   })
 			  });
-		 */
+		*/
 	});
-
+	
+	
+	
 	// 한줄 낭독
 	var voices = [];
 	
@@ -152,14 +149,14 @@
 	function setVoiceList() {
 		voices = window.speechSynthesis.getVoices();
 	}
-
+	
 	setVoiceList();
 	if (window.speechSynthesis.onvoiceschanged !== undefined) {
 		window.speechSynthesis.onvoiceschanged = setVoiceList;
 	}
-
+	
 	function speech(txt) {
-
+		
 		if (!window.speechSynthesis) {
 			alert("음성 재생을 지원하지 않는 브라우저입니다. 크롬, 파이어폭스 등의 최신 브라우저를 이용하세요.");
 			return;
@@ -187,11 +184,9 @@
 		utterThis.lang = lang;
 		utterThis.pitch = 0.8; 	// 0.4 ~ 1.0
 		utterThis.rate = 0.9; 	// 속도 0.7 괜춘
-
 		window.speechSynthesis.speak(utterThis);
-
+	
 	}
-
 	
 	// 한 줄 낭독 시작 
 	function speak() {
@@ -205,7 +200,7 @@
 	function stop() {
 		window.speechSynthesis.pause();
 	}
-
+	
 	// 페이지 나가면 정지됨
 	$(window).on("beforeunload", function() {
 		window.speechSynthesis.cancel();
@@ -340,22 +335,21 @@
 	String isbn = request.getParameter("isbn");
 	String author = request.getParameter("author");
 	String categoryId = request.getParameter("categoryId");
-
+	
 	String id = dto1.getMember_id();
 	System.out.println(dto1.getMember_id());
-	List<RcvideoDto> rclist = (List<RcvideoDto>) request.getAttribute("rclist");
-
-	if (title == null) {
-		ScrapDto scdto = (ScrapDto) request.getAttribute("scrapDto");
-		coverLargeUrl = scdto.getBook_coverLargeUrl();
+	List<RcvideoDto> rclist = (List<RcvideoDto>)request.getAttribute("rclist");
+	
+	
+	if(title==null){
+		ScrapDto scdto = (ScrapDto)request.getAttribute("scrapDto");
+		coverLargeUrl= scdto.getBook_coverLargeUrl();
 		title = scdto.getBook_title();
-		isbn = scdto.getBook_isbn();
+		isbn= scdto.getBook_isbn();
 		author = scdto.getBook_author();
-
 		categoryId= scdto.getBook_categoryId();
 		
 		/*
-		categoryId = scdto.getBook_categoryId();
 		System.out.println(rclist);
 		System.out.println("-----------");
 		System.out.println(coverLargeUrl);
@@ -365,33 +359,24 @@
 		System.out.println(categoryId);
 		*/
 	}
-
-	if (title == null) {
-		coverLargeUrl = (String) request.getAttribute("coverLargeUrl");
-		title = (String) request.getAttribute("title");
-		isbn = (String) request.getAttribute("isbn");
-		author = (String) request.getAttribute("author");
-		categoryId = (String) request.getAttribute("categoryId");
+	
+	if(title == null){
+		coverLargeUrl = (String)request.getAttribute("coverLargeUrl");
+		title = (String)request.getAttribute("title");
+		isbn = (String)request.getAttribute("isbn");
+		author = (String)request.getAttribute("author");
+		categoryId = (String)request.getAttribute("categoryId");
 	}
-  
-
 	
 	List<BookFMDto> fm = (List<BookFMDto>)request.getAttribute("rowlist");
 	//System.out.println("테스트중");
 	//System.out.println(fm.get(0).getBookfm_fm());
 	
- 	/*
-	BookFMDto fm = (BookFMDto)request.getAttribute("rowlist");
-	System.out.println("테스트중");
-	System.out.println(fm.getBookfm_fm());
-	*/
-%>
+%>    
 
 	<jsp:include page="../header.jsp"/>
-      
 	<div class="content">
 		<div class="innerOuter">
-      
 		<!-- 왼쪽 시작  -->
 	<div id="left">
 	<div id="book">
@@ -441,9 +426,10 @@
 		</form>
 		</div>
 
-			<br />
+	</div>
+	<br />
 
-				<div id="tts">
+	<div id="tts">
 		<!-- <h4>한줄낭독</h4> -->
 		<nav>
 			<a href="#">&nbsp;한 줄 낭독</a>
@@ -478,7 +464,7 @@
 					</tr>
 				</table>
 			</form>
-
+			
 			<!-- style="display: none;" -->
 			<div>
 				<div id="ttsspeak" style="display: none;">
@@ -515,96 +501,56 @@
 		<br />
 	</div>
 	<div>
-
 		<c:choose>
-                    <c:when test="${empty rclist}">
-                        <c:choose>
-                            <c:when test="${empty Ldto }"></c:when>
-                            <c:otherwise>
-                                <table>
-                                    <tr>
-                                        <td>
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/6NZREGmnubw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        <input type="button" value="동영상 등록하기" onclick="location.href='rcinsertres.do?rcinsertres.do?title=<%=title%>&coverLargeUrl=<%=coverLargeUrl%>&isbn=<%=isbn%>&author=<%=author%>&categoryId=<%=categoryId%>'">
-                                        </td>
-                                    </tr>
-                                </table>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:when>
-                    <c:otherwise>
-                        <c:forEach items="${rclist}" var="rcvideoDto">
-                            <table>
-                                <tr>
-                                    <td id="summernote">${rcvideoDto.rcvideo_content}</td>
-                                </tr>
-                            </table>
-                            <c:choose>
-                            <c:when test="${empty Ldto }">
-                                    <table>
-                                        <tr>
-                                            <td>로그인 하세요</td>
-                                        </tr>
-                                    </table>
-                                </c:when>
-                                <c:otherwise>
-                                    <table>
-                                        <tr>
-                                            <td><input type="button" value="수정"
-                                                onclick="location.href='updatercvideores.do?rcvideo_no=${rcvideoDto.rcvideo_no}&title=<%=title%>&coverLargeUrl=<%=coverLargeUrl %>&isbn=<%=isbn %>&author=<%=author %>&categoryId=<%=categoryId%>'">
-                                                <input type="button" value="삭제"
-                                                onclick="location.href='deletercvideo.do?rcvideo_no=${rcvideoDto.rcvideo_no}&title=<%=title%>&coverLargeUrl=<%=coverLargeUrl %>&isbn=<%=isbn %>&author=<%=author %>&categoryId=<%=categoryId%>'">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </c:otherwise>
-                </c:choose>
-
-			</div>
-		</div>
+			<c:when test="${empty rclist}">
+				<c:choose>
+					<c:when test="${empty Ldto }"></c:when>
+					<c:otherwise>
+					<table>
+						<tr>
+							<td colspan="1" align="center"
+								onclick="location.href='rcinsertres.do?rcinsertres.do?title=<%=title%>&coverLargeUrl=<%=coverLargeUrl %>&isbn=<%=isbn %>&author=<%=author %>&categoryId=<%=categoryId%>'">
+							 	추천 동영상을 등록해 주세요</td>
+						</tr>
+					</table>
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+			<c:forEach items="${rclist}" var="rcvideoDto" >
+				<table>
+					<tr>
+						<td id="summernote">${rcvideoDto.rcvideo_content}</td>
+					</tr>
+				</table>
+					<c:choose>
+						<c:when test="${empty Ldto }">
+							<table>
+								<tr>
+									<td>로그인 하세요</td> 
+								</tr>
+							</table>
+						</c:when>
+						<c:otherwise>
+						<table>
+							<tr>
+								<td><input type="button" value="수정"
+									onclick="location.href='updatercvideores.do?rcvideo_no=${rcvideoDto.rcvideo_no}&title=<%=title%>&coverLargeUrl=<%=coverLargeUrl %>&isbn=<%=isbn %>&author=<%=author %>&categoryId=<%=categoryId%>'">
+									<input type="button" value="삭제"
+									onclick="location.href='deletercvideo.do?rcvideo_no=${rcvideoDto.rcvideo_no}&title=<%=title%>&coverLargeUrl=<%=coverLargeUrl %>&isbn=<%=isbn %>&author=<%=author %>&categoryId=<%=categoryId%>'">
+								</td>
+							</tr>	
+						</table>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+		
 	</div>
 	</div>
 	<!-- 오른쪽 부분 끝나는 곳  -->
 	</div>
 	</div>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
 </body>
 </html>

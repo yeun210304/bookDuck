@@ -232,6 +232,7 @@
 		<div id="header_1">
 			<div id="header_1_left">
 				<a href="goHome.do">북덕 BookDuck</a><img src="" alt="">
+				<img src="" alt="">
 			</div>
 			<div id="header_1_center">
 				<ul>

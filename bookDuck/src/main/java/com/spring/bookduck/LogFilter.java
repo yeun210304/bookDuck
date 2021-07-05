@@ -35,11 +35,14 @@ public class LogFilter implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 
+
 		logger.info("\nLOG Filter" + sb);
 		
 		chain.doFilter(req, response);
 		
 
+		// pass the request along the filter chain
+		chain.doFilter(request, response);
 	}
 
 	/**

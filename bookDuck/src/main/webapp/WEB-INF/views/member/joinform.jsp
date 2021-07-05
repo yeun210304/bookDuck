@@ -8,10 +8,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+var submitAction = function() { /* do something with Error */ return false; };
+
+function null_check(){
+	var checkpls = document.getElementById("checkpls").value;
+	if(checkpls==null||checkpls==0|checkpls==""){
+		$('form').bind('submit', submitAction);
+		alert("모든 항목을 입력해 주세요");
+		return false;
+	}
+}
+</script>
 </head>
 <body>
 	<h1>회원가입</h1>
 	<form action="reg.do" method="post">
+	<div class=checkpls id=checkpls>
 		<div class="join-form_id">
 			<div class="id">ID</div>
 			<div class="id_input_box">
@@ -34,7 +47,7 @@
 		</div>
 		<div class="join-form_email">
 			<div class="email">이메일</div>
-			<input type="text" id="usermail1" name="usermail1" class="usermail1" maxlength="20">
+			<input type="text" id="member_email" name="member_email" class="member_email" maxlength="20">
 			<span id="imt3" style="font-weight:bold; color:black;">@</span>
 			<input type="text" id="usermail2" name="usermail2" class="usermail2" maxlength="10">
 			<!-- [1]이메일 인증번호 발송 -> [2]이메일 인증번호 확인 -->
@@ -48,11 +61,13 @@
 			<input type="hidden" name="emailchk" class="emailchk" id="emailchk" value="" style="background: yellow;">
 		</div>
 		<div class="join-button">
-			<button type="submit">회원가입</button>
+			<input type="submit" onclick="null_check();" value=회원가입 />
+		</div>
 		</div>
 	</form>
 </body>
 <script type="text/javascript">
+
 function Check_id(){
 	$.ajax({
 		url:"idCheck.do",

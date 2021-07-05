@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.spring.bookduck.classify.dto.AiUtilDto;
 
 import weka.classifiers.Classifier;
@@ -21,8 +18,6 @@ import weka.core.converters.CSVLoader;
 import weka.core.converters.ConverterUtils.DataSource;
 
 public class AiUtils {
-	
-	private Logger logger = LoggerFactory.getLogger(AiUtils.class);
 	
 	public String makeWekaData(String id, String age_mw, String book_category, int score, String path) {
 		
@@ -64,9 +59,9 @@ public class AiUtils {
 				file01.delete();
 			}
 			if(file01.createNewFile()) {
-				logger.info("[AiUtils] : file01 생성 성공");
+				System.out.println("file01 생성 성공");
 			} else {
-				logger.info("[AiUtils] : file01 생성 실패");
+				System.out.println("file01 생성 실패");
 			}
 			
 			BufferedWriter fw01 = new BufferedWriter(new FileWriter(file01, false));
@@ -104,9 +99,9 @@ public class AiUtils {
 				file02.delete();
 			}
 			if(file02.createNewFile()) {
-				logger.info("[AiUtils] : file02 생성 성공");
+				System.out.println("file02 생성 성공");
 			} else {
-				logger.info("[AiUtils] : file02 생성 실패");
+				System.out.println("file02 생성 실패");
 			}
 			
 			BufferedWriter fw02= new BufferedWriter(new FileWriter(file02, false));

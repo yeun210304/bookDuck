@@ -63,9 +63,8 @@ public class ClassifyAIController {
 	@RequestMapping("/airecommend.do")
 	@ResponseBody
 	public Map<String, List<AiUtilDto>> airecommend(HttpServletRequest request, String age_mw, String category){
-		logger.info("[ClassifyAIController]/airecommend.do : age_mw 값 = " + age_mw);
-		logger.info("[ClassifyAIController]/airecommend.do : category 값 = " + category);
-		
+		System.out.println(age_mw);
+		System.out.println(category);
 		String path = request.getSession().getServletContext().getRealPath("/");
 		
 		HttpSession session = request.getSession();
@@ -78,13 +77,10 @@ public class ClassifyAIController {
 		AiUtils aiutil = new AiUtils();
 		String makefile = aiutil.makeWekaData(id, age_mw, category, 55, path);
 		if(makefile.equals("성공")) {
-			logger.info("[ClassifyAIController]/airecommend.do : makefile = 성공");
 			predictresult = aiutil.predict(id, path);
 			if(predictresult != null) {
-				logger.info("[ClassifyAIController]/airecommend.do : ML로 예상된 결과값이 있음");
 				map.put("list", predictresult);
 			} else {
-				logger.info("[ClassifyAIController]/airecommend.do : ML로 예상된 결과값이 없음");
 				map.put("list", null);
 			}
 		}

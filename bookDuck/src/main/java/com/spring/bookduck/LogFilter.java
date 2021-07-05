@@ -30,6 +30,7 @@ public class LogFilter implements Filter {
 	public void destroy() {
 	}
 
+	
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
@@ -54,9 +55,16 @@ public class LogFilter implements Filter {
 		  .append("\n* agent : " + agent)					// 사용자 정보 (browser version, os 등)
 		  .append("\n");
 
+
+
 		logger.info("\nLOG Filter" + sb);
 		
 		chain.doFilter(req, response);
+		
+
+		// pass the request along the filter chain
+		// chain.doFilter(request, response);
+
 	}
 
 	/**

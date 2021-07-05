@@ -27,6 +27,7 @@ String path = request.getContextPath();
 
 //검색 기준 및 검색 단어 수신
 
+
 String key = request.getParameter("key");
 
 String value = request.getParameter("value");
@@ -273,21 +274,6 @@ div.result {
 	margin-bottom: 10px;
 }
 
-
- 	#searchbox {
-    	position: relative;
-    	display: inline;
-    }    
-    
-    .allsearch{
-		position: absolute;
-		background-color:white;		
-		left:1px;
-	}
-
-</style>
-
-
 /* 도서 검색 */
 #h1 {
 	font-size: 50px;
@@ -487,7 +473,7 @@ text-decoration: none;
 
 .resize{
 	height: auto;
-	width: 205px;
+	width: 240px;
 }
 
 
@@ -594,7 +580,7 @@ text-decoration: none;
                     var value = "";
                     
                     
-                    for(var i=239; i < arr.length; i++){
+                    for(var i=207; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -634,7 +620,7 @@ text-decoration: none;
                     var value = "";
                     
                     
-                    for(var i=239; i < arr.length; i++){
+                    for(var i=207; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -651,43 +637,14 @@ text-decoration: none;
                 }
             });
         }
-	    
-	    $("#value").on("propertychange change keyup paste input", function() {
-			var booklist = [];
-			
-			if($(this).val() !== "" && $(this).val().trim() !== ""){
-				var search = $(this).val();				
-				
-				$.getJSON("classifybookajax.do?search="+search, function(result){
-					// console.log(list);
-					if(booklist.length !==0){
-						booklist = [];
-					}
-					booklist = result.list;
-					console.log(booklist);
-						
-					var $add = $("#value").parent();						
-						
-					for(var i = 0; i<booklist.length ; i++){
-						$add.find('a').remove();
-						$add.find('.allsearch').remove();
-						$add.append('<div class="allsearch"></div>')
-						for(var i = 0; i < booklist.length ; i++){								
-							$add.find('div').append("<a>"+booklist[i].substring(0,15)+"...</a><br/>");
-						}							
-					}						
-				});		
-				
-			} else {
-				$("#value").parent().find('a').remove();
-			}
-		});
     	
+	    
+	    	
+		
     });
 
-
+	
 	// 현재 페이지 
-
 	function currentPage(idx) {
 		$(".currentPage").text(idx);
 		currentPageNum = idx;
@@ -704,72 +661,63 @@ text-decoration: none;
 
 </head>
 <body>
+	<!-- 헤더 시작 -->
+	<jsp:include page="../header.jsp"/>
 
-  <!-- 헤더 시작 -->
- <jsp:include page="../header.jsp"/>
+	<div class="container">
 
-			<div class="container">
-        	<div class="panel page-header" style="text-align: center;">
+		<div class="panel page-header" style="text-align: center;">
+			
+				<!-- 주의)상대경로 대신 절대경로 표기를 권장한다. -->
+				<!-- 도서검색 효과 -->
+				<div class="e">
+					<h1 id="h1">
+						&#128218;&nbsp;도서검색
+					</h1>
+					<h2 id="h2">BookDuck</h2>
+				</div>
+				<span style="font-size: small; color: #777777;"></span>
+		</div>
 
-          <!-- 주의)상대경로 대신 절대경로 표기를 권장한다. -->
-          <!-- 도서검색 효과 -->
-          <div class="e">
-            <h1 id="h1">
-              &#128218;&nbsp;도서검색
-            </h1>
-            <h2 id="h2">BookDuck</h2>
-          </div>
-          <span style="font-size: small; color: #777777;"></span>
-      </div>
-        
-
-	   <div class="panel-body">
-
-      <div class="panel-group">
+		<div class="panel-group">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 				&#128270;&nbsp;도서 검색
 				</div>
 				
-	   			<div class="panel-body">
-           <div id="searchbox">
-                    <form role="form" class="form-inline" method="POST">
-                        <input type="hidden" id="start" name="start" value="1">
-                        <input type="hidden" id="sort" name="sort" value="accuracy">
+				<div class="panel-body">
+					<form role="form" class="form-inline" method="POST">
+						<input type="hidden" id="start" name="start" value="1">
+						<input type="hidden" id="sort" name="sort" value="accuracy">
+						
+						<label class="radio-inline">
+						<input type="radio" class="target" name="target" value="book" checked="checked">국내도서</label> 
+						<label class="radio-inline">
+						<input type="radio" class="target" name="target" value="foreign">해외도서</label> 
+							
+						&nbsp;
+						<select class="form-control" id="key" name="key">
+							<option value="title">책 제목</option>
+							<option value="isbn">ISBN</option>
+						</select> 
+						
+						<input type="text" class="form-control" 
+						id="value" name="value" required="required">
+						<button type="submit" id="bts" class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span>
+							검색</button>
+						<!-- 
+						<button id="mic" class="btn btn-default"
+							onClick="startConverting();" type="button">
+							<span class="fa fa-microphone"></span>
+						</button>	
+						 -->		
+					</form>
+				</div>
+			</div>
+		</div>
 
-                        <label class="radio-inline">
-                        <input type="radio" class="target" name="target" value="book" checked="checked">국내도서</label> 
-                        <label class="radio-inline">
-                        <input type="radio" class="target" name="target" value="foreign">해외도서</label> 
 
-                        &nbsp;
-                        <select class="form-control" id="key" name="key">
-                            <option value="title">책 제목</option>
-                            <option value="isbn">ISBN</option>
-                        </select>
-
-
-                          <input type="text" class="form-control" id="value" name="value" required="required">
-	
-                      
-                            <button type="submit" id="bts" class="btn btn-default">
-                            <span class="glyphicon glyphicon-search"></span>
-                            검색</button>
-                        <!-- 
-                        <button id="mic" class="btn btn-default"
-                            onClick="startConverting();" type="button">
-                            <span class="fa fa-microphone"></span>
-                        </button>
-                         -->
-                    </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-  
-  
 		<div class="panel panel-default" id="output">
 			<div class="panel-heading">&#128036;&nbsp;도서 검색 결과&nbsp;&nbsp;
 				<button type="button" class="btn btn-default">
@@ -810,17 +758,11 @@ text-decoration: none;
 					id="next" value="2">다음 페이지&nbsp;&#11166;</button></li>
 			</ul>
 		</div>
-
-
 		<div id="upup">
 			<img src="resources/img/arrow_up.png" >
 		</div>
 
 	</div>
-
-	</div>
-
-	
 
 </body>
 </html>

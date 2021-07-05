@@ -326,7 +326,9 @@
 	<div id="header">
 		<div id="header_1">
 			<div id="header_1_left">
+
 				<a href="goHome.do">북덕 BookDuck<img src="" alt=""></a>
+
 			</div>
 			<div id="header_1_center">
 				<ul>
@@ -356,6 +358,7 @@
 
           <!-- 검색 보내는 중 onclick="headsearch();"--> 
 				    <div id="searchbox">
+
               <input type="text" class="form-control" 
               id="value" name="value" required="required">
              </div>
@@ -365,6 +368,11 @@
               </button>
 
 						<div class="search-wrapper">
+
+
+					<!-- 
+					<div class="search-wrapper">
+
 						<div class="input-holder">
 							<input id="value" name="value" required="required" type="text" class="search-input" placeholder="" />
 							<button  type="submit" class="search-icon" onclick="searchToggle(this, event);">
@@ -373,6 +381,10 @@
 						</div>
 						<span class="close" onclick="searchToggle(this, event);"></span>
 					</div>	
+					 -->
+					 
+					 
+					 
 						<!-- 
 						<input type="text" class="form-control" 
 						id="value" name="value" required="required">
@@ -384,6 +396,7 @@
 					</form>
 					
 				</div>	
+				
 				
 				<c:choose>
 					<c:when test="${empty Ldto }">

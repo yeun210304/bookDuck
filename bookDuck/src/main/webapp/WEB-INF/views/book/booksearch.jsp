@@ -534,7 +534,6 @@ text-decoration: none;
 		});
 	
 		
-		
 		// 출간일 정렬
 		$("#publishTime").click(function() {
 			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#publishTime").val());

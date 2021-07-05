@@ -10,9 +10,24 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 <style type="text/css">
 	table *{margin: 5px;}
-	table{width: 100%; margin: auto;}
+	table{width: 90%; margin: auto;}
+	#contentArea th{background-color: #6277BA; height: 40px;}
+	#contentArea td{background-color: #B5BFE5;}
 	#contentArea{border-bottom: 1px solid lightgray; margin-bottom: 50px;}
-	.commentList{border-style: none; resize: none;}
+	#comment{resize : none;}
+	#replyArea{border-collapse: collapse; }
+	#commentBody{background-color: #B5BFE5;}
+	#commentBody tr{border-bottom: solid 1px white;}
+	.commentList{border-style: none; resize: none; background-color: #B5BFE5;}
+	button{
+		width : 50px;
+		height: 25px;
+		border: none;
+		border-radius: 25%;
+		background-color: #6277BA;
+		color: white;
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
@@ -98,15 +113,17 @@
 						<c:choose>
 							<c:when test="${empty Ldto }">
 								<th colspan="2">
-									<textarea rows="2" cols="55" id="comment" readonly>로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해 주세요.</textarea>
+									<textarea rows="4" cols="70" id="comment" readonly>로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해 주세요.</textarea>
 								</th>
 								<th><button disabled>등록</button></th>
 							</c:when>
 							<c:otherwise>
 								<th colspan="2">
-									<textarea rows="3" cols="55" id="comment"></textarea>
+									<textarea  rows="3" cols="55" id="comment" onkeydown="cancelCommentBtn();"></textarea>
 								</th>
-								<th><button id="addCommentBtn" onclick="addComment();">등록</button></th>
+								<th><button id="addCommentBtn" onclick="addComment();">등록</button>
+									<button id="cancelCommentBtn" onclick="cancelComment();" hidden="true">취소</button>
+								</th>
 							</c:otherwise>
 						</c:choose>
 					</tr>
@@ -126,6 +143,17 @@
 			
 			//setInterval(selectCommentList, 1000);
 		});
+		
+		function cancelCommentBtn(){
+			$("#cancelCommentBtn").attr("hidden", false);
+		}
+		
+		function cancelComment(){
+			$("#comment").val("");
+			$("#addCommentBtn").attr('onclick', 'addComment();').html('등록');
+			$("#cancelCommentBtn").attr("hidden", true);
+			selectCommentList();
+		}
 		
 		function addComment(){
 			if($("#comment").val().trim().length != 0){ //댓글 작성되어 있을 경우 => ajax로 댓글작성 요청
@@ -164,13 +192,13 @@
 						if(obj.comment_titletab > 0){
 							value += "<td>"
 							for(var i = 0; i < obj.comment_titletab; i++){
-								value += "ㄴ";
+								value += "<img src='https://image.flaticon.com/icons/png/128/1621/1621573.png' width='8px' height='8px'>";
 							}
 							value += obj.comment_writer + "</td>";
 						} else{
 							value += "<td>" + obj.comment_writer + "</td>";
 						}
-						value +=	"<td><textarea class='commentList' rows='5' cols='50' name='"+ obj.comment_id +"' readonly>" + obj.comment_content + "</textarea></td>"
+						value +=	"<td><textarea class='commentList' rows='4' cols='70' name='"+ obj.comment_id +"' readonly>" + obj.comment_content + "</textarea></td>"
 							  +		"<td>" + obj.comment_regdate + "</td>"
 							  +  "</tr>";
 						if('${Ldto.member_id}' == obj.comment_writer){
@@ -180,7 +208,7 @@
 								  + "</tr>"
 						} else if(${!empty Ldto}){
 							value += "<tr>"
-								  + "<td colspan='3' align='right'><button onclick='answerCommentForm("+obj.comment_id+");' >답글</button></tr>"
+								  + "<td colspan='3' align='right'><button onclick='answerCommentForm("+obj.comment_id+");' >답글</button></td></tr>"
 						}
 					});
 					
@@ -195,7 +223,7 @@
 		
 		function answerCommentForm(comment_id){
 			$("#comment").focus();
-			$("#addCommentBtn").attr('onclick', 'answerComment('+comment_id+');').html('답글등록');
+			$("#addCommentBtn").attr('onclick', 'answerComment('+comment_id+');').html('답글');
 		}
 		function answerComment(comment_id){
 			if($("#comment").val().trim().length != 0){ //댓글 작성되어 있을 경우 => ajax로 댓글작성 요청

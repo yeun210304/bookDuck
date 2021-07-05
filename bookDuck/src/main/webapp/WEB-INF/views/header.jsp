@@ -18,6 +18,159 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <style type="text/css">
+	/* 헤더 검색 */
+	
+
+	.search-wrapper {
+		left: 30px;
+	}
+	
+	.search-wrapper .input-holder {
+		height: 55px;
+		width: 50px;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0);
+		border-radius: 6px;
+		position: relative;
+		transition: all 0.3s ease-in-out;
+	}
+	
+	.search-wrapper.active .input-holder {
+		width: 250px;
+		border-radius: 30px;
+		background: #F2F2F2;
+		transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+	}
+	
+	.search-wrapper .input-holder .search-input {
+		width: 100%;
+		height: 20px;
+		padding: 0px 70px 0 20px;
+		opacity: 0;
+		position: absolute;
+		top: 9px;
+		left: 0px;
+		background: transparent;
+		box-sizing: border-box;
+		border: none;
+		outline: none;
+		font-size: 15px;
+		font-weight: 700;
+		line-height: 20px;
+		color: #392f31;
+		transform: translate(0, 60px);
+		transition: all .3s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+		transition-delay: 0.3s;
+	}
+	
+	.search-wrapper.active .input-holder .search-input {
+		opacity: 1;
+		transform: translate(0, 10px);
+	}
+	
+	.search-wrapper .input-holder .search-icon {
+		width: 40px;
+		height: 40px;
+		border: none;
+		border-radius: 6px;
+		background: #FFF;
+		padding: 0px;
+		outline: none;
+		position: relative;
+		z-index: 2;
+		float: right;
+		cursor: pointer;
+		transition: all 0.3s ease-in-out;
+	}
+	
+	.search-wrapper.active .input-holder .search-icon {
+		width: 40px;
+		height: 40px;
+		margin: 8px;
+		border-radius: 25px;
+	}
+	
+	.search-wrapper .input-holder .search-icon span {
+		width: 22px;
+		height: 22px;
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
+		transform: rotate(45deg);
+		transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
+	}
+	
+	.search-wrapper.active .input-holder .search-icon span {
+		transform: rotate(-45deg);
+	}
+	
+	.search-wrapper .input-holder .search-icon span::before, .search-wrapper .input-holder .search-icon span::after
+		{
+		position: absolute;
+		content: '';
+	}
+	
+	.search-wrapper .input-holder .search-icon span::before {
+		width: 4px;
+		height: 11px;
+		left: 10px;
+		top: 14px;
+		border-radius: 2px;
+		background: #A071F5;
+	}
+	
+	.search-wrapper .input-holder .search-icon span::after {
+		width: 14px;
+		height: 14px;
+		left: 5px;
+		top: 1px;
+		border-radius: 16px;
+		border: 4px solid #A071F5;
+	}
+	
+	.search-wrapper .close {
+		position: absolute;
+		z-index: 1;
+		top: 24px;
+		right: 20px;
+		width: 25px;
+		height: 25px;
+		cursor: pointer;
+		transform: rotate(-180deg);
+		transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
+		transition-delay: 0.2s;
+	}
+	
+	.search-wrapper.active .close {
+		right: -50px;
+		transform: rotate(45deg);
+		transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+		transition-delay: 0.5s;
+	}
+	
+	.search-wrapper .close::before, .search-wrapper .close::after {
+		position: absolute;
+		content: '';
+		background: #FE5F55;
+		border-radius: 2px;
+	}
+	
+	.search-wrapper .close::before {
+		width: 5px;
+		height: 25px;
+		left: 10px;
+		top: 0px;
+	}
+	
+	.search-wrapper .close::after {
+		width: 25px;
+		height: 5px;
+		left: 0px;
+		top: 10px;
+	}
+	/* 여기까지 검색바 */
+	
+	
 	#header{
         width:90%;
         height:100px;
@@ -153,6 +306,21 @@
 	} 
 	*/	
 </script>
+<script type="text/javascript">
+	
+	function searchToggle(obj, evt) {
+		var container = $(obj).closest('.search-wrapper');
+		if (!container.hasClass('active')) {
+			container.addClass('active');
+			evt.preventDefault();
+		} else if (container.hasClass('active')
+				&& $(obj).closest('.input-holder').length == 0) {
+			container.removeClass('active');
+			// clear input
+			container.find('.search-input').val('');
+		}
+	}
+</script>
 <body>
 
 	<div id="header">
@@ -168,8 +336,8 @@
 				</ul>
 			</div>
 			<div id="header_1_right" >
-				<!-- 검색 보내는 중 onclick="headsearch();"--> 
-				<div id="searchbox">
+        
+				
 					<!-- 
 					<input id="headervalue">
 					<button id="sear"  type="submit" class='btn btn-info btn-sm'>
@@ -178,19 +346,41 @@
 					</button>
 					-->
 					
+
+					<!-- 헤더 검색바 -->					
 					<form role="form" class="form-inline" method="POST" action="booksearch.do">
 						<input type="hidden" id="start" name="start" value="1">
 						<input type="hidden" id="sort" name="sort" value="accuracy">
 						<input type="hidden" id="target" name="target" value="book">
 						<input type="hidden" id="sort" name="key" value="title">
-						
-						
+
+          <!-- 검색 보내는 중 onclick="headsearch();"--> 
+				    <div id="searchbox">
+              <input type="text" class="form-control" 
+              id="value" name="value" required="required">
+             </div>
+              <button type="submit" class="btn btn-default-info">
+                <span class="glyphicon glyphicon-search"></span>
+                검색
+              </button>
+
+						<div class="search-wrapper">
+						<div class="input-holder">
+							<input id="value" name="value" required="required" type="text" class="search-input" placeholder="" />
+							<button  type="submit" class="search-icon" onclick="searchToggle(this, event);">
+								<span></span>
+							</button>
+						</div>
+						<span class="close" onclick="searchToggle(this, event);"></span>
+					</div>	
+						<!-- 
 						<input type="text" class="form-control" 
 						id="value" name="value" required="required">
-						<button type="submit" class="btn btn-default-info">
+						<button type="submit" class="btn btn-info">
 							<span class="glyphicon glyphicon-search"></span>
 							검색
 						</button>
+						-->
 					</form>
 					
 				</div>	

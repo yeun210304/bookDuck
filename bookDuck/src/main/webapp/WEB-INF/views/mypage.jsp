@@ -198,12 +198,11 @@
 							<tr>
 								<td colspan="1" align="center"
 									onclick="location.href='intdinsertres.do?member_id=${Ldto.member_id}'">
-									자기소개를작성해 주세요</td>
+									자기소개를작성해 주세요(클릭)</td>
 							</tr>
 						</table>
 						<br/><br/>
-						<%--/////////////찜하기 단 /////////////// --%>
-						<div>
+							<div>
 							<table border="1">
 								<col width="10">
 								<col width="25" />
@@ -212,7 +211,6 @@
 									<th><input id="allCheck" type="checkbox" name="allCheck"/></th>
 									<th>도서국제번호</th>
 									<th>제목</th>
-									<th>&nbsp;</th>
 								</tr>
 								<c:choose>
 									<c:when test="${empty sclist }">
@@ -230,22 +228,20 @@
 													<input type="hidden" name="book_categoryId" value="${scrapDto.book_categoryId }">
 												</td>
 												<td><a href="scselectone.do?title=${scrapDto.book_title }&coverLargeUrl=${scrapDto.book_coverLargeUrl }
-												&isbn=${scrapDto.book_isbn }&author=${scrapDto.book_author }&categoryId=${scrapDto.book_categoryId}"></a>${scrapDto.book_isbn }</td>
+												&isbn=${scrapDto.book_isbn }&author=${scrapDto.book_author }&categoryId=${scrapDto.book_categoryId}">${scrapDto.book_isbn }</a></td>
 												<td>${scrapDto.book_title }</td>
-												<td><a href="scdelete.do?scrap_no=${scrapDto.scrap_no }&member_id=${Ldto.member_id}">삭제</a></td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</table>
-							<input type="button" value="선택삭제" onclick="deleteValue();" />	
+							<input type="button" value="삭제" onclick="deleteValue();" />	
 						</div>
 					</c:when>
 					<c:otherwise>
 					<%--////////////자기소개가 있을때/////////////  --%>
 						<table>
 							<tr>
-								<th>자기소개</th>
 								<td id="summernote">${intdDto.intd_content}
 								</td>
 							</tr>
@@ -267,7 +263,6 @@
 									<th><input id="allCheck" type="checkbox" name="allCheck"/></th>
 									<th>도서국제번호</th>
 									<th>제목</th>
-									<th>&nbsp;</th>
 								</tr>
 								<c:choose>
 									<c:when test="${empty sclist }">
@@ -287,13 +282,12 @@
 												<td><a href="scselectone.do?title=${scrapDto.book_title }&coverLargeUrl=${scrapDto.book_coverLargeUrl }
 												&isbn=${scrapDto.book_isbn }&author=${scrapDto.book_author }&categoryId=${scrapDto.book_categoryId}">${scrapDto.book_isbn }</a></td>
 												<td>${scrapDto.book_title }</td>
-												<td><a href="scdelete.do?scrap_no=${scrapDto.scrap_no }&member_id=${Ldto.member_id}&member_payrole=${Ldto.member_payrole}">삭제</a></td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</table>
-							<input type="button" value="선택삭제" onclick="deleteValue();" />	
+							<input type="button" value="삭제" onclick="deleteValue();" />	
 						</div>
 					</c:otherwise>
 				</c:choose>

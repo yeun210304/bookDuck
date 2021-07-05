@@ -33,6 +33,7 @@ public class IntroduceController {
 	public String intdinsert(HttpSession session, HttpServletRequest request, IntroduceDto intdDto, MemberDto Ldto) {
 		session = request.getSession();
 		if (biz.insert(intdDto) > 0) {
+			System.out.println(Ldto);
 			return "redirect:mypage.do?member_id=" + Ldto.getMember_id() + "&member_payrole="
 					+ Ldto.getMember_payrole();
 		}

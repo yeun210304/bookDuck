@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 
 public class LogAop {
 
-	
 	public void before(JoinPoint join) {
 		Logger logger = LoggerFactory.getLogger(join.getTarget() + "");
 		logger.info("!!!==========      AOP Start      ==========!!!");

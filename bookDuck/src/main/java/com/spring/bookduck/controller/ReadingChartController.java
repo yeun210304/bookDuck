@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +17,6 @@ import com.spring.bookduck.model.dto.ReadingChartDto;
 @Controller
 public class ReadingChartController {
 
-	private Logger logger = LoggerFactory.getLogger(ReadingChartController.class);
-	
 	@Autowired
 	private ReadingChartBiz biz;
 	
@@ -31,8 +27,6 @@ public class ReadingChartController {
 	@ResponseBody
 	public Map<String, ReadingChartDto> chartData(String chartId){
 		
-		logger.info("[ReadingChartController] : chartData.do");		
-		
 		Map map = new HashMap();
 		List<ReadingChartDto> list = biz.chartData(chartId);
 		map.put("map", list);
@@ -42,8 +36,6 @@ public class ReadingChartController {
 	
 	@RequestMapping("/readingTimeInsert.do")
 	public String chartInsert(ReadingChartDto dto) {
-		
-		logger.info("[ReadingChartController] : readingTimeInsert.do");		
 
 		if (biz.insert(dto) > 0){
 			return "redirect:mypage.do";
@@ -51,6 +43,15 @@ public class ReadingChartController {
 		return "redirect:mypage.do";
 	}
 }
+
+
+
+
+
+
+
+
+
 
 
 

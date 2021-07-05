@@ -6,7 +6,7 @@ import com.spring.bookduck.model.dto.RealTimeNovelDto;
 
 public interface RealTimeNovelBiz {
 
-	public List<RealTimeNovelDto> selectList();
+	public List<RealTimeNovelDto> select();
 	public int insert(RealTimeNovelDto dto);
 	
 }

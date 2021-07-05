@@ -9,7 +9,7 @@ public interface RealTimeNovelDao {
 
 	String NAMESPACE = "RealTimeNovelMapper.";
 	
-	public List<RealTimeNovelDto> selectList();
+	public List<RealTimeNovelDto> select();
 	public int insert(RealTimeNovelDto dto);
 	
 }

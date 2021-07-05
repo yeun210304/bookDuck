@@ -516,6 +516,7 @@
 		<br />
 	</div>
 	<div>
+
 		<c:choose>
                     <c:when test="${empty rclist}">
                         <c:choose>
@@ -540,7 +541,7 @@
                                 </tr>
                             </table>
                             <c:choose>
-<c:when test="${empty Ldto }">
+                            <c:when test="${empty Ldto }">
                                     <table>
                                         <tr>
                                             <td>로그인 하세요</td>
@@ -562,6 +563,7 @@
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>
+
 			</div>
 		</div>
 	</div>

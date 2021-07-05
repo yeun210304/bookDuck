@@ -3,6 +3,8 @@ package com.spring.bookduck.controller;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -30,7 +32,6 @@ public class WebSocketController {
 			for (Object client : clients) {
 				if (!client.equals(session)) {
 					((Session) client).getBasicRemote().sendText(message);
-				} else {
 				}
 			}
 		}
@@ -40,8 +41,6 @@ public class WebSocketController {
 	@OnOpen
 	public void onOpen(Session session) { // Add session to the connected
 										  // sessions set
-		
-		
 		System.out.println("세션연결 성공" + session);
 		clients.add(session);
 	}
@@ -51,5 +50,6 @@ public class WebSocketController {
 		// Remove session from the connected sessions set
 		clients.remove(session);
 	}
+	
 	
 }

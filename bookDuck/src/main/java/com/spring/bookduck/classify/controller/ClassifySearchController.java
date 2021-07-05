@@ -17,8 +17,6 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,15 +33,12 @@ import com.spring.bookduck.model.dto.MemberDto;
 @Controller
 public class ClassifySearchController {
 	
-	private Logger logger = LoggerFactory.getLogger(ClassifySearchController.class);
-			
 	@Autowired
-	private SearchBiz biz;	
+	private SearchBiz biz;
+	
 	
 	@RequestMapping("classifysearch.do")
 	public String SearchPage() {
-		
-		logger.info("[ClassifySearchController] : classifysearch.do");
 		
 		return "classify/classifysearch";
 	}
@@ -51,7 +46,6 @@ public class ClassifySearchController {
 	@RequestMapping("classifyidajax.do")
 	@ResponseBody
 	public Map<String, List<MemberDto>> idsearch(String member_id) {
-		logger.info("[ClassifySearchController]/classifyidajax.do : member_id = "+member_id);
 				
 		Map<String, List<MemberDto>> map = new HashMap<String, List<MemberDto>>();
 		
@@ -63,8 +57,6 @@ public class ClassifySearchController {
 	@RequestMapping("classifybookajax.do")
 	@ResponseBody
 	public Map<String, List<String>> booksearch(String search) throws Exception{
-		
-		logger.info("[ClassifySearchController] : classifybookajax.do");
 		
 		String key = "0061C990735847032625E99195E343C959D09BD0C9ED0B84A528F56247B727BB";		
 		String query = URLEncoder.encode(search, "UTF-8");
@@ -87,7 +79,7 @@ public class ClassifySearchController {
 				NodeList nodelist = eElement.getElementsByTagName("title").item(0).getChildNodes();
 				Node nval = (Node) nodelist.item(0);
 				list.add(nval.getNodeValue());
-				// System.out.println(nval.getNodeValue());				
+				//System.out.println(nval.getNodeValue());				
 			}	
 		}	
 				

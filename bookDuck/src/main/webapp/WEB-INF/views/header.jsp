@@ -208,104 +208,8 @@
     }
     a{text-decoration: none; color: black;}
     
-    #searchbox {
-    	position: relative;
-    }    
-    
-    .allsearch{
-		position: absolute;
-		background-color:white;		
-	}
-    
-    
 </style>
 </head>
-<script type="text/javascript">
-
-	
-	$(document).ready(function() {
-		$("#sear").click(function() {
-			
-			var value = document.getElementById("headervalue").value;
-			console.log(value);
-			$.ajax({
-				
-				url : "booksearch.do",
-				type : "post",
-				data : {"value" : value ,"key" : "title", "start" : "1", "target" : "book", "sort" : "accuracy"},
-				
-				success : function(data){
-					//location.href = "booksearch.do"
-					location.href = "booksearch.do?value=" + value + "&key=title&start=1&target=book&sort=accuracy";
-					//console.log("검색");
-					//console.log(data);
-					//const formdata = new FormData();
-					//formdata.append(data);
-					/*
-					$("#header").hide();
-					var arr = data.split('<');
-					console.log(arr);
-
-                    var value = "";
-                    
-                    for(var i=106; i < arr.length; i++){
-                    	value += '<'+arr[i]
-                    };
-                    
-                    var value2 = value.split("<ul class=");
-					
-					$("#bo").html(value);
-					*/
-				},
-				error : function() {
-					console.log("검색 실패");
-				}
-			});
-		});
-		
-		$("#value").on("propertychange change keyup paste input", function() {
-			var booklist = [];
-			
-			if($(this).val() !== "" && $(this).val().trim() !== ""){
-				var search = $(this).val();				
-				
-				$.getJSON("classifybookajax.do?search="+search, function(result){
-					// console.log(list);
-					if(booklist.length !==0){
-						booklist = [];
-					}
-					booklist = result.list;
-					console.log(booklist);
-						
-					var $add = $("#value").parent();						
-						
-					for(var i = 0; i<booklist.length ; i++){
-						$add.find('a').remove();
-						$add.find('.allsearch').remove();
-						$add.append('<div class="allsearch"></div>')
-						for(var i = 0; i < booklist.length ; i++){								
-							$add.find('div').append("<a>"+booklist[i].substring(0,15)+"...</a><br/>");
-						}							
-					}						
-				});		
-				
-			} else {
-				$("#value").parent().find('a').remove();
-			}
-		});
-		
-		
-	});
-	
-	/*
-	function headsearch() {
-		
-		var value = document.getElementById("headervalue").value;
-		location.href = "booksearch.do?value=" + value + "&key=title&start=1&target=book&sort=accuracy";
-
-	} 
-	*/	
-</script>
 <script type="text/javascript">
 	
 	function searchToggle(obj, evt) {
@@ -320,13 +224,14 @@
 			container.find('.search-input').val('');
 		}
 	}
+		
 </script>
 <body>
 
 	<div id="header">
 		<div id="header_1">
 			<div id="header_1_left">
-				<img src="" alt="">
+				<a href="goHome.do">북덕 BookDuck</a><img src="" alt="">
 			</div>
 			<div id="header_1_center">
 				<ul>
@@ -336,8 +241,7 @@
 				</ul>
 			</div>
 			<div id="header_1_right" >
-        
-				
+				<div>
 					<!-- 
 					<input id="headervalue">
 					<button id="sear"  type="submit" class='btn btn-info btn-sm'>
@@ -346,7 +250,6 @@
 					</button>
 					-->
 					
-
 					<!-- 헤더 검색바 -->					
 					<form role="form" class="form-inline" method="POST" action="booksearch.do">
 						<input type="hidden" id="start" name="start" value="1">
@@ -356,15 +259,15 @@
 
           <!-- 검색 보내는 중 onclick="headsearch();"--> 
 				    <div id="searchbox">
-              <input type="text" class="form-control" 
-              id="value" name="value" required="required">
-             </div>
+						<input type="text" class="form-control" 
+						id="value" name="value" required="required">
+           			  </div>
              
              
-              <button type="submit" class="btn btn-default-info">
-                <span class="glyphicon glyphicon-search"></span>
-                검색
-              </button>
+					<button type="submit" class="btn btn-default-info">
+						<span class="glyphicon glyphicon-search"></span>
+						검색
+					</button>
 
 						<div class="search-wrapper">
 						<div class="input-holder">

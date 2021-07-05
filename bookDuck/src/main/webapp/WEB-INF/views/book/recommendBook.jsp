@@ -550,21 +550,6 @@
 		<br />
 	</div>
 	<div>
-		<c:choose>
-			<c:when test="${empty rclist}">
-			</div>
-			<br/><br/><br/>
-			<div>
-				<div id="youtubesearch" style="float: inherit;">
-					<%--/////////////youtube 동영상 검색 단 /////////////// --%>
-					<form name="form1" method="post" onsubmit="return false;">
-						<input type="text" id="search_box" placeholder="동영상을 검색하세요">
-						<button onclick="fnGetList();">검색</button>
-					</form>
-					<div id="get_view"></div>
-					<div id="nav_view"></div>
-					<br />
-				</div>
 				<c:choose>
 					<c:when test="${empty rclist}">
 						<c:choose>
@@ -572,9 +557,13 @@
 							<c:otherwise>
 								<table>
 									<tr>
-										<td>
-										<iframe width="560" height="315" src="https://www.youtube.com/embed/6NZREGmnubw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-										<input type="button" value="동영상 등록하기" onclick="location.href='rcinsertres.do?rcinsertres.do?title=<%=title%>&coverLargeUrl=<%=coverLargeUrl%>&isbn=<%=isbn%>&author=<%=author%>&categoryId=<%=categoryId%>'">
+										<td><iframe width="560" height="315"
+												src="https://www.youtube.com/embed/6NZREGmnubw"
+												title="YouTube video player" frameborder="0"
+												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+												allowfullscreen></iframe> <input type="button"
+											value="동영상 등록하기"
+											onclick="location.href='rcinsertres.do?rcinsertres.do?title=<%=title%>&coverLargeUrl=<%=coverLargeUrl%>&isbn=<%=isbn%>&author=<%=author%>&categoryId=<%=categoryId%>'">
 										</td>
 									</tr>
 								</table>
@@ -611,6 +600,9 @@
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+
+
+
 			</div>
 		</div>
 	</div>

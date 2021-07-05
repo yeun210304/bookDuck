@@ -23,6 +23,13 @@
 		FROM BLACKLIST
 		ORDER BY BLACKLIST_NO DESC	
 	</select>
+	
+	<insert id="insertblist" parameterType="BlistDto">
+		INSERT INTO BLACKLIST VALUES ( BLACKLIST_SEQ.NEXTVAL, #{blacklist_from}, #{blacklist_to}, #{blacklist_contents}, SYSDATE )	
+	</insert>
+	
+	
+	
 
 	
 	
@@ -31,7 +38,7 @@
 			SELECT MEMBER_NO, MEMBER_ID
 			FROM 
 				(SELECT MEMBER_NO, MEMBER_ID, ROWNUM AS RNUM FROM MEMBER)
-			WHERE MEMBER_ID LIKE '%'||#{member_id}||'%' AND RNUM < 15
+			WHERE MEMBER_ID LIKE #{member_id} AND RNUM < 15
 			ORDER BY MEMBER_ID
 		 ]]>
 	</select>

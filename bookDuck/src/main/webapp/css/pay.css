@@ -20,9 +20,9 @@ body {
   width:300px;
   height:400px;
   padding: 30px, 20px;
-  background-color:purple;
+  background-color:#fdf7dd;
   text-align:center;
-  top:70%;
+  top:50%;
   left:50%;
   transform: translate(-50%,-50%);
   border-radius: 15px;
@@ -53,9 +53,11 @@ body {
   font-size:16px;
   height:25px;
   background: none;
+  text-align: center;
+  
 }
 
-.pw {
+.price {
   width: 100%;
   border:none;
   outline:none;
@@ -63,6 +65,7 @@ body {
   font-size:16px;
   height:25px;
   background: none;
+  text-align: center;
 }
 
 .btn {
@@ -74,7 +77,6 @@ body {
   height:40px;
   background: #fcf798;
   background-size: 200%;
-  color:black;
   font-weight: bold;
   border-radius: 15px;
   border-color:#fcf798;
@@ -85,7 +87,6 @@ body {
 
 .btn:hover {
   background-position: center;
-  background-color:black;
   color: white;
 }
 

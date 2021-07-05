@@ -44,13 +44,14 @@ String target = request.getParameter("target");
 
 String sort = request.getParameter("sort");
 
+/*
 System.out.println("---------");
 System.out.println(key);
 System.out.println(value);
 System.out.println(start);
 System.out.println(target);
 System.out.println(sort);
-
+*/
 /*
 Crawler craw = new Crawler();
 craw.Crawler(value, start, key);
@@ -73,9 +74,8 @@ if (key != null && value != null) {
 	"http://book.interpark.com/api/search.api?key=7A71D8E679DA9C96874476B8E225B77A4592E29959B15764C52A257C0343754F&query=%s&queryType=%s&start=%s&maxResults=10&inputEncoding=utf-8&searchTarget=%s&sort=%s",
 	URLEncoder.encode(value, "UTF-8"), key, start, target, sort);
 	URL url = new URL(str);
-	System.out.println(url);
-
 	//System.out.println(url);
+	
 	InputSource is = new InputSource(url.openStream());
 	doc = builder.parse(is);
 
@@ -208,25 +208,27 @@ if (key != null && value != null) {
 		request.setAttribute("title", title);
 		request.setAttribute("isbn", isbn);
 		*/
-		System.out.println(title);
+		//System.out.println(title);
 		sb.append(String.format("<div class='row result'>"));
 		sb.append(String.format("<div class='col-md-1'><span>%s</span></div>", a));
-		sb.append(String.format("<div class='col-md-3'><img src='%s'></div>", coverLargeUrl));
-		sb.append(String.format("<div class='col-md-6'><ul>"));
-		sb.append(String.format("<li><b>[&nbsp;제목&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", title));
-		sb.append(String.format("<li><b>[&nbsp;저자&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", author));
-		sb.append(String.format("<li><b>[&nbsp;출판사&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", publisher));
-		sb.append(String.format("<li><b>[&nbsp;설명&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", description));
-		sb.append(String.format("<li><b>[&nbsp;판매가&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", priceStandard));
-		sb.append(String.format("<li><b>[&nbsp;출간일&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", pubDate));
-		sb.append(String.format("<li><b>[&nbsp;ISBN&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", isbn));
-		sb.append(String.format("<li><b>[&nbsp;카테고리&nbsp;]</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;%s</li>", categoryName));
-		sb.append(String.format("<li><b>[&nbsp;카테고리분류&nbsp;]</b> &nbsp; : &nbsp;%s</li>", categoryId));
-		sb.append(String.format("</ul></div>"));
-		sb.append(String.format("<div><a href='%s' class='btn btn-default btn-xs' target='_blank'>&#128184;&nbsp;구매하기</a></div>",
+		sb.append(String.format("<div class='col-md-3' style='background-size: 90%% 90%%; overflow : auto;'><img src='%s' class='resize'></div>", coverLargeUrl));
+		sb.append(String.format("<div class='col-md-6'>"));
+		sb.append(String.format("<table id = 'tbb' style='table-layout:fixed'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#127804;&nbsp; 출판사 </b></td> <td  id='td2'>%s</td> </tr>", publisher));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#127904;&nbsp; 설명 </b></td> <td id='td2'>%s</td> </tr>", description));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#127826;&nbsp; 판매가 </b></td> <td id='td2'>%s</td> </tr>", priceStandard));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#10024;&nbsp; 출간일 </b></td> <td id='td2'>%s</td> </tr>", pubDate));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#127800;&nbsp; ISBN </b></td> <td id='td2'>%s</td> </tr>", isbn));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#128049;&nbsp; 카테고리 </b></td> <td id='td2'>%s</td> </tr>", categoryName));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#127776;&nbsp; 분류 </b></td> <td id='td2'>%s</td> </tr> </table>", categoryId));
+		sb.append(String.format("</div>"));
+		sb.append(String.format("<div class='wrapper'>"));
+		sb.append(String.format("<div id='btncss'><a href='%s' target='_blank'>&#128184;&nbsp;구매하기</a></div>",
 		link));
-		sb.append(String.format("<div id=''><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s' class='btn btn-default btn-xs' target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author,categoryId));
-		sb.append(String.format("<div id=''><a href='scinsert.do?title=%s&isbn=%s&coverLargeUrl=%s&author=%s&categoryId=%s' class='btn btn-default btn-xs' target='_blank'>&#127873;&nbsp;찜하기&nbsp;&nbsp;&nbsp;&nbsp;</a></div>",title,isbn,coverLargeUrl,author,categoryId));
+		sb.append(String.format("<div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author,categoryId));
+		sb.append(String.format("<div id='btncss'><a href='scinsert.do?title=%s&isbn=%s&coverLargeUrl=%s&author=%s&categoryId=%s' target='_blank'>&nbsp;&#127873;&nbsp;&nbsp;찜하기&nbsp;&nbsp;</a></div>",title,isbn,coverLargeUrl,author,categoryId));
+		sb.append(String.format("</div>"));
 		sb.append(String.format("</div>"));
 		
 	}
@@ -245,30 +247,258 @@ if (key != null && value != null) {
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
 
+
 <style>
+/* 책 정보 */
+td{
+	width: 130px;
+	text-align: left;
+	vertical-align: top;
+	
+}
+#td1{
+	padding: 3px;
+}
+
+#td2{
+	width: 380px;
+	padding : 3px;
+}
+
+/* 검색 결과 */
 div.result {
 	border-top: 1px solid #dddddd;
 	margin-top: 10px;
 	padding: 20px;
 	margin-bottom: 10px;
 }
+
+ 	#searchbox {
+    	position: relative;
+    	display: inline;
+    }    
+    
+    .allsearch{
+		position: absolute;
+		background-color:white;		
+		left:1px;
+	}
+	
 </style>
 
+/* 도서 검색 */
+#h1 {
+	font-size: 50px;
+	font-weight: bold;
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+	color: #696969;
+	letter-spacing: 0px;
+	transition: 1s;
+	-webkit-transition: 1s;
+	-ms-transition: 1s;
+	position: relative;
+	padding: 10px;
+}
+
+#h1:before, #h1:after {
+	content: "";
+	position: absolute;
+	height: 7px;
+	width: 0px;
+	background: #ffd800;
+	transition: 300ms;
+	-webkit-transition: 1s;
+	-ms-transition: 1s;
+	opacity: 0.3;
+	left: 50%;
+	
+}
+
+#h1:before {
+	bottom: 0;
+}
+
+#h1:after {
+	top: 0;
+}
+
+#h1:hover {
+	letter-spacing: 30px;
+}
+
+#h1:hover:before, #h1:hover:after {
+	width: 95%;
+	opacity: 1;
+	left: 0;
+}
+
+#h1:hover ~ #h2 {
+	opacity: 0;
+}
+
+#h2{
+	color: #0A11FF;
+	font-family: 'Pinyon Script', cursive;
+	text-align: center;
+	font-size: 50px;
+	font-weight: 100;
+	bottom: 40px;
+	transition: 1s;
+	-webkit-transition: 1s;
+	-ms-transition: 1s;
+	opacity: 0.1;
+	width: 100%;
+}
+
+
+/* 정렬 그라데이션 css */
+
+#accuracy, #publishTime, #title, #salesPoint, #customerRating, #reviewCount, #price, #priceDesc {
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+ }
+
+
+#accuracy:hover, #publishTime:hover, #title:hover, #salesPoint:hover , #customerRating:hover, #reviewCount:hover, #price:hover, #priceDesc:hover{
+  background-position: right center;
+}
+
+#accuracy {
+  background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+}
+
+#publishTime{
+  background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);	
+}
+
+#title {
+  background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
+}
+
+#salesPoint {
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+}
+
+#customerRating {
+  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 51%, #ffecd2 100%);
+}
+
+
+#reviewCount {
+  background-image: linear-gradient(to right, #fcaebd 0%, #c55af2 51%, #e9b5ff 100%);
+}
+
+#price {
+  background-image: linear-gradient(to right, #d9f2b3 0%, #fccbc7 51%, #d9f2b3 100%);
+}
+
+#priceDesc {
+  background-image: linear-gradient(to right, #b5ffb9 0%, #817eed 51%, #5bf0b8 100%);
+}
+
+
+/* 버튼 css 연습중 */
+
+.wrapper {
+  position : relative;
+  text-align: center;
+}
+
+#btncss { 
+  padding : 10px 10px 10px 10px;
+  color: #A071F5;
+  font-weight : bold;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  display:inline-block;
+}
+
+a{
+text-decoration: none;
+}
+
+#btncss a:hover, #btncss a:visited, #btncss a:active {
+text-decoration: none;
+}
+
+
+#btncss::before {
+  content: '';
+  position: absolute;
+  bottom: 0%;
+  left: 0px;
+  width: 100%;
+  height: 1px;
+  background: #6098FF;
+  display: block;
+  -webkit-transform-origin: right top;
+  -ms-transform-origin: right top;
+  transform-origin: right top;
+  -webkit-transform: scale(0, 1);
+  -ms-transform: scale(0, 1);
+  transform: scale(0, 1);
+  -webkit-transition: transform 0.4s cubic-bezier(1, 0, 0, 1);
+  transition: transform 0.4s cubic-bezier(1, 0, 0, 1)
+}
+
+#btncss:hover::before {
+  -webkit-transform-origin: left top;
+  -ms-transform-origin: left top;
+  transform-origin: left top;
+  -webkit-transform: scale(1, 1);
+  -ms-transform: scale(1, 1);
+  transform: scale(1, 1)
+}
+
+/* 올라가기 고정 버튼 */
+
+#upup {
+    position: fixed;
+    height : 30px;
+    width : 50px;
+    right: 50px;
+    bottom: 50px;
+    z-index: 50;
+    /*
+    height : 50px;
+    width : 50px;
+    
+    right: 2%;
+    bottom: 50px;
+    z-index: 999;
+    */
+ 
+}
+
+#upup img{
+	height : 50px;
+    width : 50px;
+}
+
+
+.resize{
+	height: auto;
+	width: 240px;
+}
+
+
+</style>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:700|Pinyon+Script' rel='stylesheet' type='text/css'>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-
-
-<!-- jQuery library -->
-
-<!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
 <script>
-
 
 	var currentPageNum; //현재 페이지 번호 저장용 전역변수
 	
@@ -290,6 +520,8 @@ div.result {
 			//ajax($("#value").val(), $("#key option:selected").val(), previousNum);			
 			currentPage(previousNum);
 			startChange($("#value").val(), $("#key option:selected").val(), previousNum,$("input:radio[name='target']:checked").val(), $("#publishTime").val());
+	
+			$('html,body').animate({scrollTop:0},1000);
 		});
 		
 		$("#next").click(function() {
@@ -297,6 +529,8 @@ div.result {
 			//ajax($("#value").val(), $("#key option:selected").val(), nextNum);			
 			currentPage(nextNum);
 			startChange($("#value").val(), $("#key option:selected").val(), nextNum, $("input:radio[name='target']:checked").val(), $("#publishTime").val());
+			
+			$('html,body').animate({scrollTop:0},1000);
 		});
 	
 		
@@ -358,7 +592,7 @@ div.result {
                     var value = "";
                     
                     
-                    for(var i=111; i < arr.length; i++){
+                    for(var i=207; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -367,7 +601,7 @@ div.result {
                     //console.log(value2);
                     
                     
-					$("#hi").hide();
+					$("#originalBody").hide();
 					$("#pagingBody").html(value2[0]);
 
                 }, error: function(){
@@ -398,7 +632,7 @@ div.result {
                     var value = "";
                     
                     
-                    for(var i=111; i < arr.length; i++){
+                    for(var i=207; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -407,7 +641,7 @@ div.result {
                     console.log(value2);
                     
                     
-					$("#hi").hide();
+					$("#originalBody").hide();
 					$("#pagingBody").html(value2[0]);
 
                 }, error: function(){
@@ -415,65 +649,109 @@ div.result {
                 }
             });
         }
+	    
+	    $("#value").on("propertychange change keyup paste input", function() {
+			var booklist = [];
+			
+			if($(this).val() !== "" && $(this).val().trim() !== ""){
+				var search = $(this).val();				
+				
+				$.getJSON("classifybookajax.do?search="+search, function(result){
+					// console.log(list);
+					if(booklist.length !==0){
+						booklist = [];
+					}
+					booklist = result.list;
+					console.log(booklist);
+						
+					var $add = $("#value").parent();						
+						
+					for(var i = 0; i<booklist.length ; i++){
+						$add.find('a').remove();
+						$add.find('.allsearch').remove();
+						$add.append('<div class="allsearch"></div>')
+						for(var i = 0; i < booklist.length ; i++){								
+							$add.find('div').append("<a>"+booklist[i].substring(0,15)+"...</a><br/>");
+						}							
+					}						
+				});		
+				
+			} else {
+				$("#value").parent().find('a').remove();
+			}
+		});
     	
     });
+
+
+	// 현재 페이지 
 
 	function currentPage(idx) {
 		$(".currentPage").text(idx);
 		currentPageNum = idx;
 	}
     
+	// 올라가기 고정 버튼  
+	$(function(){
+		$('#upup').on('click',function(e){
+			e.preventDefault();
+			$('html,body').animate({scrollTop:0},1000);
+		});
+	});
 </script>
 
 </head>
 <body>
 
-	<div class="container">
 
-		<div class="panel page-header" style="text-align: center;">
-			<h1 style="font-size: xx-large;">
-				<!-- 주의)상대경로 대신 절대경로 표기를 권장한다. -->
-				&#128218;&nbsp;도서검색 <small></small> <span
-					style="font-size: small; color: #777777;"></span>
-			</h1>
-		</div>
+ <jsp:include page="../header.jsp"/>
+  <!-- 헤더 시작 -->
+			<div class="container">
+        	<div class="panel page-header" style="text-align: center;">
+          <!-- 주의)상대경로 대신 절대경로 표기를 권장한다. -->
+          <!-- 도서검색 효과 -->
+          <div class="e">
+            <h1 id="h1">
+              &#128218;&nbsp;도서검색
+            </h1>
+            <h2 id="h2">BookDuck</h2>
+          </div>
+          <span style="font-size: small; color: #777777;"></span>
+      </div>
+        
+	   <div class="panel-body">
+                    <form role="form" class="form-inline" method="POST">
+                        <input type="hidden" id="start" name="start" value="1">
+                        <input type="hidden" id="sort" name="sort" value="accuracy">
 
-		<div class="panel-group">
-			<div class="panel panel-default">
-				<div class="panel-heading">&#128270;&nbsp;도서 검색</div>
-				
-				<div class="panel-body">
-					<form role="form" class="form-inline" method="POST">
-						<input type="hidden" id="start" name="start" value="1">
-						<input type="hidden" id="sort" name="sort" value="accuracy">
-						
-						<label class="radio-inline">
-						<input type="radio" class="target" name="target" value="book" checked="checked">국내도서</label> 
-						<label class="radio-inline">
-						<input type="radio" class="target" name="target" value="foreign">해외도서</label> 
-							
-						&nbsp;
-						<select class="form-control" id="key" name="key">
-							<option value="title">책 제목</option>
-							<option value="isbn">ISBN</option>
-						</select> 
-						
-						<input type="text" class="form-control" 
-						id="value" name="value" required="required">
-						<button type="submit" id="bts" class="btn btn-default">
-							<span class="glyphicon glyphicon-search"></span>
-							검색</button>
-						<button id="mic" class="btn btn-default"
-							onClick="startConverting();" type="button">
-							<span class="fa fa-microphone"></span>
-						</button>	
-							
-					</form>
-				</div>
-			</div>
-		</div>
+                        <label class="radio-inline">
+                        <input type="radio" class="target" name="target" value="book" checked="checked">국내도서</label> 
+                        <label class="radio-inline">
+                        <input type="radio" class="target" name="target" value="foreign">해외도서</label> 
 
-
+                        &nbsp;
+                        <select class="form-control" id="key" name="key">
+                            <option value="title">책 제목</option>
+                            <option value="isbn">ISBN</option>
+                        </select>
+                      	<div id="searchbox">
+                          <input type="text" class="form-control" 
+                          id="value" name="value" required="required">
+					            	</div>
+                        <button type="submit" id="bts" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search"></span>
+                            검색</button>
+                        <!-- 
+                        <button id="mic" class="btn btn-default"
+                            onClick="startConverting();" type="button">
+                            <span class="fa fa-microphone"></span>
+                        </button>
+                         -->
+                    </form>
+                </div>
+            </div>
+        </div>
+  
 		<div class="panel panel-default" id="output">
 			<div class="panel-heading">&#128036;&nbsp;도서 검색 결과&nbsp;&nbsp;
 				<button type="button" class="btn btn-default">
@@ -500,7 +778,7 @@ div.result {
 					<button class="btn btn-default" id="priceDesc" value="priceDesc">가격내림순</button>
 				</div>
 				
-				<div id="hi">
+				<div id="originalBody">
 				<%=sb.toString()%>
 				</div>
 				
@@ -509,12 +787,22 @@ div.result {
 			<div id="pagingBody"></div>
 			<ul class="pager">
 				<li><button type="button" class="btn btn-default"
-						id="previous" value="1">&#11013;&nbsp;이전 페이지</button></li>
+						id="previous" value="1">&#11164;&nbsp;이전 페이지</button></li>
 				<li><button type="submit" class="btn btn-default" 
-					id="next" value="2">다음 페이지&nbsp;&#10145;</button></li>
+					id="next" value="2">다음 페이지&nbsp;&#11166;</button></li>
 			</ul>
 		</div>
+
+
+		<div id="upup">
+			<img src="resources/img/arrow_up.png" >
+		</div>
+
 	</div>
+
+	</div>
+
+	
 	
 	 <script type="text/javascript">
 	var r = document.getElementById('value');
@@ -558,6 +846,7 @@ div.result {
 		}
 	}
 	</script>
+
 
 </body>
 </html>

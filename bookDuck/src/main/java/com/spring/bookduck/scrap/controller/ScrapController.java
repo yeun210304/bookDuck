@@ -11,7 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.bookduck.bookfm.biz.BookFMBiz;
+import com.spring.bookduck.bookstar.biz.BookStarBiz;
+import com.spring.bookduck.introduce.biz.IntroduceBiz;
 import com.spring.bookduck.introduce.dto.IntroduceDto;
+import com.spring.bookduck.model.biz.LoginBiz;
 import com.spring.bookduck.model.dto.MemberDto;
 import com.spring.bookduck.rcvideo.biz.RcvideoBiz;
 import com.spring.bookduck.rcvideo.dto.RcvideoDto;
@@ -27,8 +31,18 @@ public class ScrapController {
 	@Autowired
 	private RcvideoBiz rcbiz;
 	
+	@Autowired
+	private BookStarBiz bookstarbiz;
+	
+	@Autowired
+	private BookFMBiz bookfmbiz;
+  
+	@Autowired
+	private IntroduceBiz ibiz;
+
+	
 	@RequestMapping("scinsert.do")
-	public String scinsert(HttpSession session, HttpServletRequest request) {
+	public String scinsert(HttpSession session, HttpServletRequest request,Model model) {
 		
 		HttpSession sess = request.getSession();
 		
@@ -52,7 +66,7 @@ public class ScrapController {
 		scdto.setScrap_id(Ldto.getMember_id());
 		
 		biz.scinsert(scdto);
-		
+			
 		return "redirect:mypage.do?member_id=" + Ldto.getMember_id() + "&member_payrole="
 		+ Ldto.getMember_payrole();
 	}
@@ -81,6 +95,10 @@ public class ScrapController {
 		
 		List<RcvideoDto> list = rcbiz.rcselectone(isbn);  
 		model.addAttribute("rclist",list);
+		
+		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
+		
+		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
 		
 		return "book/recommendBook";
 	}

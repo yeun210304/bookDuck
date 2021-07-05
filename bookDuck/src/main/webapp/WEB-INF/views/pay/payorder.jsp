@@ -19,46 +19,28 @@ PayDto dto = (PayDto) session.getAttribute("payDto");
 </head>
 <body>
 <jsp:include page="../header.jsp" />
-
 	<div class="content">
+	
 		<div class="innerOuter">
-			<div>
+			<div  style="width:200px; height:150px; float:left;">
 				<form action="insertpay.do" method="post" class="payForm">
 					<div class="idForm">
 						<h1>결제</h1>
 					</div>
 					<div>
 						<div class="passForm">
-							<p>구매자</p>
-							<input name="pay_id" value="${Ldto.member_id}" />
+							<input name="pay_id" value="${Ldto.member_id}" class="id" readonly="readonly" />
 						</div>
 						<div>
-							<p>상품가격</p>
-							<input name="pay_price" value="5000" />
+							<p>회원권 구매가</p>
+							<input name="pay_price" value="5000" class="price" readonly="readonly"/> 
 						</div>
 					</div>
-					<input type="submit" value="결제" class="bottomText" />
+					<input type="submit" value="결제" class="btn" />
 				</form>
 			</div>
 		</div>
 	</div>
-
-	<form action="insertpay.do" method="post">
-		<div>
-			<h3>ID</h3>
-			<span> <input name="pay_id" value="${Ldto.member_id}" />
-			</span>
-		</div>
-		<div>
-			<h3>결제 금액</h3>
-			<span> <input name="pay_price" value="5000" /> <input
-				type="button" value="취소" onclick="location.href='paycancel.do'" />
-			</span>
-		</div>
-		<div>
-			<input type="submit" value="결제" />
-		</div>
-	</form>
 
 </body>
 </html>

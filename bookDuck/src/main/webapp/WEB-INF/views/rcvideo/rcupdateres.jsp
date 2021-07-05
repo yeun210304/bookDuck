@@ -69,7 +69,7 @@ function goWrite(frm) {
 
 <div style="width: 60%; margin: auto;">
 	<form action="updatercvideo.do" method="post">
-		<input type="text" name="book_isbn" readonly="readonly" style="width: 20%;" value="${scrapDto.book_isbn}"/><br>
+		<input type="hidden" name="book_isbn" readonly="readonly" style="width: 20%;" value="${scrapDto.book_isbn}"/><br>
 		<input type="hidden" value="${scrapDto.book_isbn }">
 		<input type="hidden" name="book_title" value="${scrapDto.book_title }">
 		<input type="hidden" name="book_coverLargeUrl" value="${scrapDto.book_coverLargeUrl }">

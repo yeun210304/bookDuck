@@ -9,14 +9,41 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#boardList{text-align: center; width: 80%;}
-	#boardList>tbody>tr{height: 50px;}
+	#boardList>tbody>tr{height: 50px; background-color: #FDF7DD;}
+	thead{height: 40px; background-color: #F5DC7A;}
 	ul{text-align : center;}
 	ul li{list-style: none; display: inline-block;}
 	#pagingArea{width:fit-content; margin:auto;}
 	#searchForm {text-align: center;}
 	#searchForm>*{display:inline-block; margin:5px;}
+	.pagination a {
+		padding: 3px 8px;
+		margin: 5px;
+	}
+	a.on{
+		width: 30px;
+		height: 30px;
+		border: none;
+		border-radius: 100%;
+		background-color: #F5DC7A;
+		color: white;
+	}
+	button{
+		width : 60px;
+		height: 25px;
+		border: none;
+		border-radius: 25%;
+		background-color: #F5DC7A;
+		cursor: pointer;
+	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+		$(function(){
+			var currentPage = ${pi.currentPage};
+			$("#page"+currentPage).addClass("on");
+		});
+</script>
 
 </head>
 <body>
@@ -25,7 +52,7 @@
 
 	<div class="content">
 		<div class="innerOuter">
-			<h2>공지사항</h2>
+			<h2 align="center">공지사항</h2>
 		
 			<table id="boardList" align="center">
 				<thead>
@@ -72,14 +99,14 @@
 			</table>
 		
 			<div id="paging-area" align="center">
-				<ul>
+				<ul class="pagination">
 					<c:if test="${ pi.currentPage ne 1 }">
 						<c:choose>
 							<c:when test="${ !empty map.condition }">
-								<li><a href="noticeSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}">[이전]</a></li>
+								<li><a href="noticeSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}">이전</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="noticeList.do?currentPage=${ pi.currentPage-1 }">[이전]</a></li>
+								<li><a href="noticeList.do?currentPage=${ pi.currentPage-1 }">이전</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:if>
@@ -87,10 +114,10 @@
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:choose>
 							<c:when test="${ !empty map.condition }">
-								<li><a href="noticeSearch.do?currentPage=${ p }&condition=${map.condition}&keyword=${map.keyword}">[${ p }]</a></li>
+								<li><a id="page${p }" href="noticeSearch.do?currentPage=${ p }&condition=${map.condition}&keyword=${map.keyword}">${ p }</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="noticeList.do?currentPage=${ p }">[${ p }]</a></li>
+								<li><a id="page${p }" href="noticeList.do?currentPage=${ p }">${ p }</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -98,10 +125,10 @@
 					<c:if test="${ pi.currentPage ne pi.maxPage }">
 						<c:choose>
 							<c:when test="${ !empty map.condition }">
-								<li><a href="noticeSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}">[다음]</a></li>
+								<li><a href="noticeSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}">다음</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="noticeList.do?currentPage=${ pi.currentPage+1 }">[다음]</a></li>
+								<li><a href="noticeList.do?currentPage=${ pi.currentPage+1 }">다음</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:if>

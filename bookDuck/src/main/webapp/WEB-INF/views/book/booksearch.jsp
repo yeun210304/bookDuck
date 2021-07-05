@@ -661,63 +661,54 @@ text-decoration: none;
 
 </head>
 <body>
+
 	<!-- 헤더 시작 -->
 	<jsp:include page="../header.jsp"/>
+  
+			<div class="container">
+        	<div class="panel page-header" style="text-align: center;">
+          <!-- 주의)상대경로 대신 절대경로 표기를 권장한다. -->
+          <!-- 도서검색 효과 -->
+          <div class="e">
+            <h1 id="h1">
+              &#128218;&nbsp;도서검색
+            </h1>
+            <h2 id="h2">BookDuck</h2>
+          </div>
+          <span style="font-size: small; color: #777777;"></span>
+      </div>
+        
+	   <div class="panel-body">
+                    <form role="form" class="form-inline" method="POST">
+                        <input type="hidden" id="start" name="start" value="1">
+                        <input type="hidden" id="sort" name="sort" value="accuracy">
 
-	<div class="container">
+                        <label class="radio-inline">
+                        <input type="radio" class="target" name="target" value="book" checked="checked">국내도서</label> 
+                        <label class="radio-inline">
+                        <input type="radio" class="target" name="target" value="foreign">해외도서</label> 
 
-		<div class="panel page-header" style="text-align: center;">
-			
-				<!-- 주의)상대경로 대신 절대경로 표기를 권장한다. -->
-				<!-- 도서검색 효과 -->
-				<div class="e">
-					<h1 id="h1">
-						&#128218;&nbsp;도서검색
-					</h1>
-					<h2 id="h2">BookDuck</h2>
-				</div>
-				<span style="font-size: small; color: #777777;"></span>
-		</div>
-
-		<div class="panel-group">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-				&#128270;&nbsp;도서 검색
-				</div>
-				
-				<div class="panel-body">
-					<form role="form" class="form-inline" method="POST">
-						<input type="hidden" id="start" name="start" value="1">
-						<input type="hidden" id="sort" name="sort" value="accuracy">
-						
-						<label class="radio-inline">
-						<input type="radio" class="target" name="target" value="book" checked="checked">국내도서</label> 
-						<label class="radio-inline">
-						<input type="radio" class="target" name="target" value="foreign">해외도서</label> 
-							
-						&nbsp;
-						<select class="form-control" id="key" name="key">
-							<option value="title">책 제목</option>
-							<option value="isbn">ISBN</option>
-						</select> 
-						
-						<input type="text" class="form-control" 
-						id="value" name="value" required="required">
-						<button type="submit" id="bts" class="btn btn-default">
-							<span class="glyphicon glyphicon-search"></span>
-							검색</button>
-						<!-- 
-						<button id="mic" class="btn btn-default"
-							onClick="startConverting();" type="button">
-							<span class="fa fa-microphone"></span>
-						</button>	
-						 -->		
-					</form>
-				</div>
-			</div>
-		</div>
-
-
+                        &nbsp;
+                        <select class="form-control" id="key" name="key">
+                            <option value="title">책 제목</option>
+                            <option value="isbn">ISBN</option>
+                        </select>
+<input type="text" class="form-control" 
+                        id="value" name="value" required="required">
+                        <button type="submit" id="bts" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search"></span>
+                            검색</button>
+                        <!-- 
+                        <button id="mic" class="btn btn-default"
+                            onClick="startConverting();" type="button">
+                            <span class="fa fa-microphone"></span>
+                        </button>
+                         -->
+                    </form>
+                </div>
+            </div>
+        </div>
+  
 		<div class="panel panel-default" id="output">
 			<div class="panel-heading">&#128036;&nbsp;도서 검색 결과&nbsp;&nbsp;
 				<button type="button" class="btn btn-default">
@@ -758,11 +749,61 @@ text-decoration: none;
 					id="next" value="2">다음 페이지&nbsp;&#11166;</button></li>
 			</ul>
 		</div>
+
 		<div id="upup">
 			<img src="resources/img/arrow_up.png" >
 		</div>
 
 	</div>
+
+
+	</div>
+
+	
+	
+	 <script type="text/javascript">
+	var r = document.getElementById('value');
+
+	function startConverting() {
+
+		if ('webkitSpeechRecognition' in window) {
+			//Web speech API Function
+			var speechRecognizer = new webkitSpeechRecognition();
+			//continuous : 마이크 한번만 잡을지 말지 
+			speechRecognizer.continuous = true;
+			//interimResults : 마이크 입력하는 동안 결과를 반환하지 않을것인가
+			speechRecognizer.interimResults = true;
+			//lang : 언어 (ko-KR : Korean, en-IN : englist)
+			speechRecognizer.lang = "ko-KR";
+			//start!
+			speechRecognizer.start();
+
+			var finalTranscripts = '';
+
+			//마이크 입력(catch) 기능 시작
+			speechRecognizer.onresult = function(event) {
+				var interimTranscripts = '';
+				for (var i = event.resultIndex; i < event.results.length; i++) {
+					var transcript = event.results[i][0].transcript;
+					transcript.replace("\n", "<br>");
+
+					//isFinal :  음성 인식이 완료되면 Final = true
+					if (event.results[i].isFinal) {
+						finalTranscripts += transcript;
+					} else {
+						interimTranscripts += transcript;
+					}
+				}
+				//HTML에 insert
+				r.value = finalTranscripts + interimTranscripts;
+			};
+			speechRecognizer.onerror = function(event) {
+			};
+		} else {
+		}
+	}
+	</script>
+
 
 </body>
 </html>

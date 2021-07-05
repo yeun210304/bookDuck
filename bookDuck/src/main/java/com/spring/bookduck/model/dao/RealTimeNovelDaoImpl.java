@@ -17,26 +17,22 @@ public class RealTimeNovelDaoImpl implements RealTimeNovelDao {
 
 
 	@Override
-	public List<RealTimeNovelDto> select() {
+	public List<RealTimeNovelDto> selectList() {
 		
-		List<RealTimeNovelDto> list = new ArrayList<RealTimeNovelDto>();
+		List<RealTimeNovelDto> RTNovelList = new ArrayList<RealTimeNovelDto>();
 		
 		try {
-			list = sqlSession.selectList(NAMESPACE + "list");
+			RTNovelList = sqlSession.selectList(NAMESPACE + "selectList");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return list;
+		return RTNovelList;
 	}
 	
 	@Override
 	public int insert(RealTimeNovelDto dto) {
 		int res = 0;
-		System.out.println("dao.content : " + dto.getNovel_content());
-		System.out.println("dao.id : " + dto.getNovel_id());
-		System.out.println("dao.no : " + dto.getNovel_no());
-		System.out.println("dao.regdate : " + dto.getNovel_regdate());
 
 		try {
 			res = sqlSession.insert(NAMESPACE + "insert", dto);
@@ -46,6 +42,5 @@ public class RealTimeNovelDaoImpl implements RealTimeNovelDao {
 
 		return res;
 	}
-
 
 }

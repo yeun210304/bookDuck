@@ -13,7 +13,6 @@
 
 	MemberDto Ldto = (MemberDto)session.getAttribute("Ldto");
 	PayDto payDto = (PayDto)session.getAttribute("payDto");
-	RealTimeNovelDto RealTimeNovelDto = (RealTimeNovelDto)session.getAttribute("RealTimeNovelDto");
 	
 	String nick = "";
 	String novel_id = "";
@@ -21,6 +20,8 @@
 	if(Ldto != null){
 		if (request.getAttribute("nick") == null || request.getAttribute("nick") == "" || request.getAttribute("nick") != null || request.getAttribute("nick") != "") {
 			novel_id = Ldto.getMember_id();
+			
+			
 			request.setAttribute("nick", novel_id);
 			nick = (String) request.getAttribute("nick");
 		} else {
@@ -28,9 +29,9 @@
 		}
 	}
 	
-	
 %>
 	
+
 <html>
 <head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
@@ -60,8 +61,8 @@
 		//접속했을 때 접속자들에게 알릴 내용.
 		webSocket.send("<%=nick%> is DisConnected\n");
 	}
-		
-	//	OnMessage는 클라이언트에서 서버 측으로 메시지를 보내면 호출되는 함수.
+	
+	//	OnMessage는 클라이언트에서 서버 측으로 메시지를 보내면! 호출되는 함수.
 	function onMessage(event) {
 		
 		//클라이언트에서 날아온 메시지를 |\| 단위로 분리한다
@@ -105,26 +106,33 @@
 		messageWindow2.scrollTop = messageWindow2.scrollHeight;
 				
 	}
-		
+	
+	var novel_id = document.getElementById("novel_id");
+	
+	if(novel_id != "" || novel_id != null){
 	//	OnOpen은 서버 측에서 클라이언트와 웹 소켓 연결이 되었을 때 호출되는 함수.
-	function onOpen(event) {
-				
-		//접속했을 때, 내 영역에 보이는 글.
-		var div=document.createElement('div');
-				
-		div.style["text-align"]="center";
-				
-		div.innerHTML = "반갑습니다.";
-		document.getElementById('messageWindow2').appendChild(div);
-				
-		var clear=document.createElement('div');
-		clear.style["clear"]="both";
-		document.getElementById('messageWindow2').appendChild(clear);
-				
-		//접속했을 때 접속자들에게 알릴 내용.
-		webSocket.send("<%=nick%>|\|하이하이");
-	}
+		function onOpen(event) {
+					
+			//접속했을 때, 내 영역에 보이는 글.
+			var div=document.createElement('div');
+					
+			div.style["text-align"]="center";
 			
+			document.getElementById('messageWindow2').appendChild(div);
+			
+					
+			var clear=document.createElement('div');
+			clear.style["clear"]="both";
+			document.getElementById('messageWindow2').appendChild(clear);
+			
+			//접속했을 때 접속자들에게 알릴 내용.
+			webSocket.send("<%=nick%>|\|<%=nick%>님이 채팅에 입장하셨습니다.");
+		}
+	}
+	
+	
+	
+	
 	// send 함수를 통해서 웹소켓으로 메시지를 보낸다.
 	function send() {
 
@@ -148,11 +156,10 @@
 			div.style["padding"]="3px";
 			div.style["border-radius"]="3px";
 			div.style["margin-right"]="3px";
-
-			var testText = "testText";
 			
 			//div에 innerHTML로 문자 넣기
-			div.innerHTML = testText + inputMessage.value;
+			div.innerHTML = inputMessage.value;
+			
 			document.getElementById('messageWindow2').appendChild(div);
 
 			//clear div 추가
@@ -169,49 +176,41 @@
 			// 금방 보낸 사람을 임시 저장한다.
 			re_send = "<%=nick%>";
 			}//inputMessage가 있을때만 전송가능 끝.
-	}
 			
+			// insert를 비동기통신인 ajax를 이용해 시도해보기로함
+			$.ajax({
+				url: ""
+				
+			});
+	}
+		
 </script>
 <title>북덕 BookDuck</title>
 </head>
 <body>
 
-<!-- 
-헤더부분 수정할거
-1. 항상 떠있게 바꿔주세요~! - 정은 
-2. 검색창추가해주세요 - 성필, 은희
-3. 메인이름추가링크 - 지연
--->
-
 <jsp:include page="header.jsp"/>
 
-	<a href="loginform.do">로그인</a>
-	
-	<a href="noticeList.do">공지사항</a>
-	
-	<a href="qnaList.do">문의게시판</a>
-	
 	<a href="navertest.do">네이버테스트</a>
 
 
 	<!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->
 	<div class="RealTimeNovle">
+		
 		<!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
 		<div id="messageWindow2" style="padding: 10px 0; height: 20em; overflow: auto; background-color: #a0c0d7;"></div>
-		
 		<c:choose>
 			<c:when test="${Ldto.member_payrole eq 'Y'}">
 			<!-- 사용자가 입력한 키의 코드를 .d보내준다. -->
-				<!--  <form action="insertNovel.do" method="post"> --> 
 					<input id="inputMessage" type="text" name="novel_content" onkeydown="if(event.keyCode==13){send();}" />
 					<input type="submit" value="입력" onclick="send();" />
 					<input type="hidden" id="novel_id" value="${Ldto.member_id}" name="novel_id" />
-				<!--  </form>  --> 
 			</c:when>
 			<c:otherwise>
 				<input type="text" readonly="readonly" value="로그인시 이용하실 수 있습니다"/>
 			</c:otherwise>
 		</c:choose>
+		
 		
 			
 	</div>
@@ -489,17 +488,12 @@
 		});
 	
 	
-	
-	
-	
-	
 	</script>
 
-		<!-- footer 에 넣던지 하기! -->
 	<div class="info">
-		<p>KH정보교육원 강남지원1관 Q클래스 오전반 3조의 파이널프로젝트</p>
+		<p>KH정보교육원 강남지원1관 Q클래스 오전반 3조 파이널프로젝트</p>
 		<p>지 연 소윤정 강성필 박은희 한우빈 이정은</p>
-		<p>E-Mail.jeeyeon210304@gmail.com</p>
+		<p>지도강사 이동헌</p>
 		<p>주소. 서울 강남구 테헤란로14길 6 남도빌딩 2층, 3층, 4층</p>
 	</div>
 	

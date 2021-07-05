@@ -27,7 +27,6 @@ String path = request.getContextPath();
 
 //검색 기준 및 검색 단어 수신
 
-
 String key = request.getParameter("key");
 
 String value = request.getParameter("value");
@@ -682,13 +681,11 @@ text-decoration: none;
 			}
 		});
     	
-	    
-	    	
-		
     });
 
-	
+
 	// 현재 페이지 
+
 	function currentPage(idx) {
 		$(".currentPage").text(idx);
 		currentPageNum = idx;
@@ -796,12 +793,12 @@ text-decoration: none;
 			</ul>
 		</div>
 
+
 		<div id="upup">
 			<img src="resources/img/arrow_up.png" >
 		</div>
 
 	</div>
-
 
 	</div>
 

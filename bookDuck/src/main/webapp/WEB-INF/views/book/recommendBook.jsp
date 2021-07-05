@@ -424,6 +424,7 @@
 				<input type="hidden" name="isbn" value="<%=isbn %>">
 				<input type="hidden" name="categoryId" value="<%=categoryId %>">
 				
+				
 				<input type="hidden" name="bookstar_id" value="<%=id %>">
 				<input type="hidden" name="bookstar_title" value="<%=title %>">
 				<input type="hidden" name="bookstar_isbn" value="<%=isbn %>">

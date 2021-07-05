@@ -30,6 +30,7 @@ public class LogFilter implements Filter {
 	public void destroy() {
 	}
 
+	
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */

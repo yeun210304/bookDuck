@@ -6,6 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <style type="text/css">
 	#header{
         width:90%;
@@ -43,9 +54,107 @@
         background:white;
     }
     a{text-decoration: none; color: black;}
+    
+    #searchbox {
+    	position: relative;
+    }    
+    
+    .allsearch{
+		position: absolute;
+		background-color:white;		
+	}
+    
+    
 </style>
 </head>
+<script type="text/javascript">
+
+	
+	$(document).ready(function() {
+		$("#sear").click(function() {
+			
+			var value = document.getElementById("headervalue").value;
+			console.log(value);
+			$.ajax({
+				
+				url : "booksearch.do",
+				type : "post",
+				data : {"value" : value ,"key" : "title", "start" : "1", "target" : "book", "sort" : "accuracy"},
+				
+				success : function(data){
+					//location.href = "booksearch.do"
+					location.href = "booksearch.do?value=" + value + "&key=title&start=1&target=book&sort=accuracy";
+					//console.log("검색");
+					//console.log(data);
+					//const formdata = new FormData();
+					//formdata.append(data);
+					/*
+					$("#header").hide();
+					var arr = data.split('<');
+					console.log(arr);
+
+                    var value = "";
+                    
+                    for(var i=106; i < arr.length; i++){
+                    	value += '<'+arr[i]
+                    };
+                    
+                    var value2 = value.split("<ul class=");
+					
+					$("#bo").html(value);
+					*/
+				},
+				error : function() {
+					console.log("검색 실패");
+				}
+			});
+		});
+		
+		$("#value").on("propertychange change keyup paste input", function() {
+			var booklist = [];
+			
+			if($(this).val() !== "" && $(this).val().trim() !== ""){
+				var search = $(this).val();				
+				
+				$.getJSON("classifybookajax.do?search="+search, function(result){
+					// console.log(list);
+					if(booklist.length !==0){
+						booklist = [];
+					}
+					booklist = result.list;
+					console.log(booklist);
+						
+					var $add = $("#value").parent();						
+						
+					for(var i = 0; i<booklist.length ; i++){
+						$add.find('a').remove();
+						$add.find('.allsearch').remove();
+						$add.append('<div class="allsearch"></div>')
+						for(var i = 0; i < booklist.length ; i++){								
+							$add.find('div').append("<a>"+booklist[i].substring(0,15)+"...</a><br/>");
+						}							
+					}						
+				});		
+				
+			} else {
+				$("#value").parent().find('a').remove();
+			}
+		});
+		
+		
+	});
+	
+	/*
+	function headsearch() {
+		
+		var value = document.getElementById("headervalue").value;
+		location.href = "booksearch.do?value=" + value + "&key=title&start=1&target=book&sort=accuracy";
+
+	} 
+	*/	
+</script>
 <body>
+
 	<div id="header">
 		<div id="header_1">
 			<div id="header_1_left">
@@ -58,7 +167,34 @@
 					<li><a href="qnaList.do">문의게시판</a></li>
 				</ul>
 			</div>
-			<div id="header_1_right">
+			<div id="header_1_right" >
+				<!-- 검색 보내는 중 onclick="headsearch();"--> 
+				<div id="searchbox">
+					<!-- 
+					<input id="headervalue">
+					<button id="sear"  type="submit" class='btn btn-info btn-sm'>
+						<span class="glyphicon glyphicon-search"></span>
+						&nbsp;검색
+					</button>
+					-->
+					
+					<form role="form" class="form-inline" method="POST" action="booksearch.do">
+						<input type="hidden" id="start" name="start" value="1">
+						<input type="hidden" id="sort" name="sort" value="accuracy">
+						<input type="hidden" id="target" name="target" value="book">
+						<input type="hidden" id="sort" name="key" value="title">
+						
+						
+						<input type="text" class="form-control" 
+						id="value" name="value" required="required">
+						<button type="submit" class="btn btn-default-info">
+							<span class="glyphicon glyphicon-search"></span>
+							검색
+						</button>
+					</form>
+					
+				</div>	
+				
 				<c:choose>
 					<c:when test="${empty Ldto }">
 					<!-- 로그인 전 -->
@@ -79,5 +215,6 @@
 			</div>
 		</div>
 	</div>
+	<div id="bo"></div>
 </body>
 </html>

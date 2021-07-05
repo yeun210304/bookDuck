@@ -5,6 +5,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<% request.setCharacterEncoding("UTF-8"); %>
+<% response.setContentType("text/html; charset=UTF-8"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -150,6 +154,16 @@
 		}
 	}
 </script>
+
+<style type="text/css">
+	.blistclass	{
+		display: none;
+	}
+
+
+</style>
+
+
 
 </head>
 <body>
@@ -322,6 +336,96 @@
 	</div>
 
 	
+	<!-- 신고하기. 블랙리스트 -->
+	
+	<div>
+		<input id="blist" type="button" value="신고하기">
+		<div id="blistdiv" class="blistclass">			
+			<table>
+				<tr>
+					<td>ID</td>
+					<td>
+						<input id="blistid" type="text" placeholder="신고할 ID를 검색하세요">
+						<input id="blistidsearch" type="button" value="ID 찾기">
+					</td>
+				</tr>
+				<tr>
+					<td>신고내용</td>
+					<td>
+						<textarea id="blistcontent" rows="10" cols="60"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right">					
+						<input id="blistinsert" type="button" value="신고하기">
+						<input id="blistcancel" type="button" value="취소">
+					</td>				
+				</tr>				
+			</table>		
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	var $blist = $("#blist");
+	var $blistdiv = $("#blistdiv");
+	var $blistcancel = $("#blistcancel");
+	var $blistidsearch = $("#blistidsearch");
+	var $blistid = $("#blistid");
+	var $blistinsert = $("#blistinsert");
+	var $blistcontent = $("#blistcontent");
+	
+	$blist.click(function(){
+		$blistdiv.toggleClass("blistclass");
+		$blistdiv.parent().find("span").remove();
+		$blistid.val("");
+		$blistcontent.val("");
+	});
+	
+	$blistcancel.click(function(){
+		$blistdiv.addClass("blistclass");
+	});
+	
+	$blistidsearch.click(function(){
+		var $id = $blistid.val();
+		
+		$.getJSON("classifyidajax.do?member_id="+$id, function(list){
+			$blistidsearch.parent().find("span").remove();
+			var jsonlist = JSON.stringify(list);
+			var jsondata = JSON.parse(jsonlist);
+			
+			if(jsondata.list.length === 0){		
+				$blistidsearch.parent().append("<span>검색한 id가 존재하지 않습니다.</span>");		
+			} else{
+				$blistidsearch.parent().append("<span>검색한 id가 존재합니다.</span>");	
+			}			
+		});
+	});
+	
+	$blistinsert.click(function(){
+		
+		var from_id = "${Ldto.member_id }";
+		var to_id = $blistid.val();
+		var content = $blistcontent.val();
+		
+		if(to_id.length != 0 || to_id.trim() != ""){
+			$.getJSON("blistinsert.do?blist_from="+from_id+"&blist_to="+to_id+"&blist_contents="+content , function(data){
+				if(data.list != null && data.list.length != 0){
+					$blist.parent().find("span").remove();
+					$blistdiv.addClass("blistclass");
+					$blist.parent().append("<span>신고가 완료되었습니다.</span>")
+				} else{
+					$blist.parent().find("span").remove();
+					$blistdiv.addClass("blistclass");
+					$blist.parent().append("<span>신고가 실패했습니다.</span>")
+				}					
+			});
+		} else {
+			$blist.parent().find("span").remove();
+			$blist.parent().append("<span>신고할 ID를 검색해주세요.</span>")	
+		}		
+	});	
+	
+	</script>	
 	
 	
 	

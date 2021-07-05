@@ -256,6 +256,19 @@
 						<input type="hidden" id="sort" name="sort" value="accuracy">
 						<input type="hidden" id="target" name="target" value="book">
 						<input type="hidden" id="sort" name="key" value="title">
+
+          <!-- 검색 보내는 중 onclick="headsearch();"--> 
+				    <div id="searchbox">
+						<input type="text" class="form-control" 
+						id="value" name="value" required="required">
+           			  </div>
+             
+             
+					<button type="submit" class="btn btn-default-info">
+						<span class="glyphicon glyphicon-search"></span>
+						검색
+					</button>
+
 						<div class="search-wrapper">
 						<div class="input-holder">
 							<input id="value" name="value" required="required" type="text" class="search-input" placeholder="" />

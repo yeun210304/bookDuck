@@ -79,7 +79,7 @@ public class ClassifySearchController {
 				NodeList nodelist = eElement.getElementsByTagName("title").item(0).getChildNodes();
 				Node nval = (Node) nodelist.item(0);
 				list.add(nval.getNodeValue());
-				//System.out.println(nval.getNodeValue());				
+				// System.out.println(nval.getNodeValue());				
 			}	
 		}	
 				

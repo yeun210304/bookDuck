@@ -27,7 +27,6 @@ String path = request.getContextPath();
 
 //검색 기준 및 검색 단어 수신
 
-
 String key = request.getParameter("key");
 
 String value = request.getParameter("value");
@@ -417,13 +416,7 @@ div.result {
             });
         }
     	
-	    
-	    	
-		
     });
-
-	
-	
 
 	function currentPage(idx) {
 		$(".currentPage").text(idx);
@@ -521,8 +514,6 @@ div.result {
 					id="next" value="2">다음 페이지&nbsp;&#10145;</button></li>
 			</ul>
 		</div>
-
-
 	</div>
 	
 	 <script type="text/javascript">

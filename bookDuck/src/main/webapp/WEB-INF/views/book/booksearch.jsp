@@ -27,7 +27,6 @@ String path = request.getContextPath();
 
 //검색 기준 및 검색 단어 수신
 
-
 String key = request.getParameter("key");
 
 String value = request.getParameter("value");
@@ -273,6 +272,19 @@ div.result {
 	padding: 20px;
 	margin-bottom: 10px;
 }
+
+ 	#searchbox {
+    	position: relative;
+    	display: inline;
+    }    
+    
+    .allsearch{
+		position: absolute;
+		background-color:white;		
+		left:1px;
+	}
+	
+</style>
 
 /* 도서 검색 */
 #h1 {
@@ -637,14 +649,43 @@ text-decoration: none;
                 }
             });
         }
-    	
 	    
-	    	
-		
+	    $("#value").on("propertychange change keyup paste input", function() {
+			var booklist = [];
+			
+			if($(this).val() !== "" && $(this).val().trim() !== ""){
+				var search = $(this).val();				
+				
+				$.getJSON("classifybookajax.do?search="+search, function(result){
+					// console.log(list);
+					if(booklist.length !==0){
+						booklist = [];
+					}
+					booklist = result.list;
+					console.log(booklist);
+						
+					var $add = $("#value").parent();						
+						
+					for(var i = 0; i<booklist.length ; i++){
+						$add.find('a').remove();
+						$add.find('.allsearch').remove();
+						$add.append('<div class="allsearch"></div>')
+						for(var i = 0; i < booklist.length ; i++){								
+							$add.find('div').append("<a>"+booklist[i].substring(0,15)+"...</a><br/>");
+						}							
+					}						
+				});		
+				
+			} else {
+				$("#value").parent().find('a').remove();
+			}
+		});
+    	
     });
 
-	
+
 	// 현재 페이지 
+
 	function currentPage(idx) {
 		$(".currentPage").text(idx);
 		currentPageNum = idx;
@@ -662,9 +703,9 @@ text-decoration: none;
 </head>
 <body>
 
-	<!-- 헤더 시작 -->
-	<jsp:include page="../header.jsp"/>
-  
+
+ <jsp:include page="../header.jsp"/>
+  <!-- 헤더 시작 -->
 			<div class="container">
         	<div class="panel page-header" style="text-align: center;">
           <!-- 주의)상대경로 대신 절대경로 표기를 권장한다. -->
@@ -693,8 +734,10 @@ text-decoration: none;
                             <option value="title">책 제목</option>
                             <option value="isbn">ISBN</option>
                         </select>
-<input type="text" class="form-control" 
-                        id="value" name="value" required="required">
+                      	<div id="searchbox">
+                          <input type="text" class="form-control" 
+                          id="value" name="value" required="required">
+					            	</div>
                         <button type="submit" id="bts" class="btn btn-default">
                             <span class="glyphicon glyphicon-search"></span>
                             검색</button>
@@ -750,12 +793,12 @@ text-decoration: none;
 			</ul>
 		</div>
 
+
 		<div id="upup">
 			<img src="resources/img/arrow_up.png" >
 		</div>
 
 	</div>
-
 
 	</div>
 

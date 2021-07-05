@@ -15,17 +15,13 @@ public class RealTimeNovelBizImpl implements RealTimeNovelBiz {
 	private RealTimeNovelDao dao;
 	
 	@Override
-	public int insert(RealTimeNovelDto dto) {
-		System.out.println("biz.content : " + dto.getNovel_content());
-		System.out.println("biz.id : " + dto.getNovel_id());
-		System.out.println("biz.no : " + dto.getNovel_no());
-		System.out.println("biz.regdate : " + dto.getNovel_regdate());
-		return dao.insert(dto);
+	public List<RealTimeNovelDto> selectList() {
+		return dao.selectList();
 	}
-
+	
 	@Override
-	public List<RealTimeNovelDto> select() {
-		return dao.select();
+	public int insert(RealTimeNovelDto dto) {
+		return dao.insert(dto);
 	}
 
 }

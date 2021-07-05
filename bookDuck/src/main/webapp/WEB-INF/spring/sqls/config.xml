@@ -19,7 +19,7 @@
 		<typeAlias type="com.spring.bookduck.scrap.dto.ScrapDto" alias="scrapDto"/>
 		<typeAlias type="com.spring.bookduck.rcvideo.dto.RcvideoDto" alias="rcvideoDto"/>
 		<typeAlias type="com.spring.bookduck.bookfm.dto.BookFMDto" alias="BookFMDto"/>
-		<typeAlias type="com.spring.bookduck.model.dto.RealTimeNovelDto" alias="RealTimeNovelDto"/>
+		<typeAlias type="com.spring.bookduck.model.dto.RealTimeNovelDto" alias="RTNovelDto"/>
 		<typeAlias type="com.spring.bookduck.bookstar.dto.BookStarDto" alias="BookStarDto"/>
 	</typeAliases>
 	

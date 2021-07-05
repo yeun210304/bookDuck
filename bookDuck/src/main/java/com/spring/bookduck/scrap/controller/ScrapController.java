@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring.bookduck.bookfm.biz.BookFMBiz;
+import com.spring.bookduck.bookstar.biz.BookStarBiz;
 import com.spring.bookduck.introduce.biz.IntroduceBiz;
 import com.spring.bookduck.introduce.dto.IntroduceDto;
 import com.spring.bookduck.model.biz.LoginBiz;
@@ -30,7 +32,14 @@ public class ScrapController {
 	private RcvideoBiz rcbiz;
 	
 	@Autowired
+	private BookStarBiz bookstarbiz;
+	
+	@Autowired
+	private BookFMBiz bookfmbiz;
+  
+	@Autowired
 	private IntroduceBiz ibiz;
+
 	
 	@RequestMapping("scinsert.do")
 	public String scinsert(HttpSession session, HttpServletRequest request,Model model) {
@@ -86,6 +95,10 @@ public class ScrapController {
 		
 		List<RcvideoDto> list = rcbiz.rcselectone(isbn);  
 		model.addAttribute("rclist",list);
+		
+		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
+		
+		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
 		
 		return "book/recommendBook";
 	}

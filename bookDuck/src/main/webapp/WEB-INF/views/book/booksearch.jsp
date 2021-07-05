@@ -273,7 +273,6 @@ div.result {
 	margin-bottom: 10px;
 }
 
-
  	#searchbox {
     	position: relative;
     	display: inline;
@@ -284,8 +283,7 @@ div.result {
 		background-color:white;		
 		left:1px;
 	}
-
-</style>
+	
 
 
 /* 도서 검색 */
@@ -705,12 +703,12 @@ text-decoration: none;
 </head>
 <body>
 
-  <!-- 헤더 시작 -->
+ <!-- 헤더 시작 -->
  <jsp:include page="../header.jsp"/>
-
-			<div class="container">
-        	<div class="panel page-header" style="text-align: center;">
-
+  
+  <div class="container">
+         <div class="panel page-header" style="text-align: center;">
+          
           <!-- 주의)상대경로 대신 절대경로 표기를 권장한다. -->
           <!-- 도서검색 효과 -->
           <div class="e">
@@ -722,9 +720,6 @@ text-decoration: none;
           <span style="font-size: small; color: #777777;"></span>
       </div>
         
-
-	   <div class="panel-body">
-
       <div class="panel-group">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -732,7 +727,6 @@ text-decoration: none;
 				</div>
 				
 	   			<div class="panel-body">
-           <div id="searchbox">
                     <form role="form" class="form-inline" method="POST">
                         <input type="hidden" id="start" name="start" value="1">
                         <input type="hidden" id="sort" name="sort" value="accuracy">
@@ -747,12 +741,11 @@ text-decoration: none;
                             <option value="title">책 제목</option>
                             <option value="isbn">ISBN</option>
                         </select>
-
-
-                          <input type="text" class="form-control" id="value" name="value" required="required">
-	
-                      
-                            <button type="submit" id="bts" class="btn btn-default">
+                      	<div id="searchbox">
+                          <input type="text" class="form-control" 
+                          id="value" name="value" required="required">
+					     </div>
+                        <button type="submit" id="bts" class="btn btn-default">
                             <span class="glyphicon glyphicon-search"></span>
                             검색</button>
                         <!-- 
@@ -762,13 +755,9 @@ text-decoration: none;
                         </button>
                          -->
                     </form>
-                    </div>
                 </div>
             </div>
         </div>
-        
-        
-  
   
 		<div class="panel panel-default" id="output">
 			<div class="panel-heading">&#128036;&nbsp;도서 검색 결과&nbsp;&nbsp;
@@ -817,9 +806,6 @@ text-decoration: none;
 		</div>
 
 	</div>
-
-	</div>
-
 	
 
 </body>

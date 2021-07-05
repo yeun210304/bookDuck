@@ -39,6 +39,14 @@ public class BookController {
 		return "book/booksearch";
 	}
 	
+	@RequestMapping("/booksearch5.do")
+	public String search5() {
+		logger.info("[BookController] : booksearch.do");		
+		
+		return "book/booksearch5";
+	}
+	
+	
 	@RequestMapping("/recommendBook.do")
 	public String recommend(HttpSession session, HttpServletRequest request, Model model, String isbn) {
 		

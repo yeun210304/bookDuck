@@ -759,6 +759,8 @@ text-decoration: none;
                 </div>
             </div>
         </div>
+        
+        
   
 		<div class="panel panel-default" id="output">
 			<div class="panel-heading">&#128036;&nbsp;도서 검색 결과&nbsp;&nbsp;

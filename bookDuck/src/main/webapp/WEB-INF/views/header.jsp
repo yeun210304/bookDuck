@@ -269,7 +269,8 @@
 						검색
 					</button>
 
-						<div class="search-wrapper">
+					<!-- 
+					<div class="search-wrapper">
 						<div class="input-holder">
 							<input id="value" name="value" required="required" type="text" class="search-input" placeholder="" />
 							<button  type="submit" class="search-icon" onclick="searchToggle(this, event);">
@@ -278,6 +279,10 @@
 						</div>
 						<span class="close" onclick="searchToggle(this, event);"></span>
 					</div>	
+					 -->
+					 
+					 
+					 
 						<!-- 
 						<input type="text" class="form-control" 
 						id="value" name="value" required="required">
@@ -289,6 +294,7 @@
 					</form>
 					
 				</div>	
+				
 				
 				<c:choose>
 					<c:when test="${empty Ldto }">

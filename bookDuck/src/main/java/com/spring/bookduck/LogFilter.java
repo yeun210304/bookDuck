@@ -27,6 +27,7 @@ public class LogFilter implements Filter {
 		// TODO Auto-generated method stub
 	}
 
+	
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */

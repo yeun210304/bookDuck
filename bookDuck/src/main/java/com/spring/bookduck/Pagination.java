@@ -4,6 +4,7 @@ import com.spring.bookduck.model.dto.PageInfo;
 
 public class Pagination {
 
+	
 	public static PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit) {
 		// 마지막 페이지 수 (총 페이지 수)
 		int maxPage = (int)Math.ceil((double)listCount / boardLimit);

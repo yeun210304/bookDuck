@@ -723,6 +723,7 @@ text-decoration: none;
       </div>
         
 	   <div class="panel-body">
+	   <div id="searchbox">
                     <form role="form" class="form-inline" method="POST">
                         <input type="hidden" id="start" name="start" value="1">
                         <input type="hidden" id="sort" name="sort" value="accuracy">
@@ -737,10 +738,10 @@ text-decoration: none;
                             <option value="title">책 제목</option>
                             <option value="isbn">ISBN</option>
                         </select>
-                      	<div id="searchbox">
+                      	
                           <input type="text" class="form-control" 
                           id="value" name="value" required="required">
-					            	</div>
+					            	
                         <button type="submit" id="bts" class="btn btn-default">
                             <span class="glyphicon glyphicon-search"></span>
                             검색</button>
@@ -751,6 +752,7 @@ text-decoration: none;
                         </button>
                          -->
                     </form>
+                    </div>
                 </div>
             </div>
         </div>

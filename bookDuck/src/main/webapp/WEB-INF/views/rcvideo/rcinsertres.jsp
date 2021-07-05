@@ -71,7 +71,7 @@ function goWrite(frm) {
 
 <div style="width: 60%; margin: auto;">
 	<form action="rcinsert.do" method="post">
-		<input type="text" name="book_isbn" readonly="readonly" style="width: 20%;" value="${scrapDto.book_isbn}"/><br>
+		<input type="hidden" name="book_isbn" readonly="readonly" style="width: 20%;" value="${scrapDto.book_isbn}"/><br>
 		<input type="hidden" value="${scrapDto.book_isbn }">
 		<input type="hidden" name="book_title" value="${scrapDto.book_title }">
 		<input type="hidden" name="book_coverLargeUrl" value="${scrapDto.book_coverLargeUrl }">
@@ -79,7 +79,7 @@ function goWrite(frm) {
 		<input type="hidden" name="book_categoryId" value="${scrapDto.book_categoryId }">
 		<br><br> 
 		<textarea id="summernote" name="rcvideo_content">${rcvideoDto.rcvideo_content}</textarea>
-		<input type="submit" value="작성" style="float: right;" onclick="goWrite(this.form)"/>
+		<input type="submit" value="등록하기" style="float: right;" onclick="goWrite(this.form)"/>
 		<input type="button" value="취소" onclick="location.href='home.do'"/>
 	</form>
 	

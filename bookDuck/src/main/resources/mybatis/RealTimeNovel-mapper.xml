@@ -2,13 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="RealTimeNovelMapper">
 
-	<select id="selectList" resultType="RTNovelDto">
+	<select id="select" parameterType="RealTimeNovelDto">
 		SELECT NOVEL_ID, NOVEL_REGDATE, NOVEL_CONTENT
 		FROM REALTIMENOVEL 
-		ORDER BY NOVEL_ID
 	</select>
 	
-	<insert id="insert" parameterType="RTNovelDto">
+	<insert id="insert" parameterType="RealTimeNovelDto">
 		INSERT INTO REALTIMENOVEL
 		VALUES(NOVEL_SEQ.NEXTVAL, #{novel_id}, SYSDATE, #{novel_content})
 	</insert>

@@ -9,12 +9,34 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#boardList{text-align: center; width: 80%;}
-	#boardList>tbody>tr{height: 50px;}
+	#boardList>tbody>tr{height: 50px; background-color: #B5BFE5;}
+	thead{background-color: #6277BA; height: 40px;}
 	ul {text-align: center;}
 	ul li {list-style: none; display: inline-block;}
 	#pagingArea{width:fit-content; margin:auto;}
 	#searchForm {text-align: center;}
 	#searchForm>*{display:inline-block; margin:5px;}
+	.pagination a {
+		padding: 3px 8px;
+		margin: 5px;
+	}
+	a.on{
+		width: 30px;
+		height: 30px;
+		border: none;
+		border-radius: 100%;
+		background-color: #6277BA;
+		color: white;
+	}
+	button{
+		width : 60px;
+		height: 25px;
+		border: none;
+		border-radius: 25%;
+		background-color: #6277BA;
+		color: white;
+		cursor: pointer;
+	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 </head>
@@ -25,7 +47,7 @@
 	
 		<div class="innerOuter">
 	
-			<h2>문의게시판</h2>
+			<h2 align="center">문의게시판</h2>
 		
 			<table id="boardList" align="center">
 				<thead>
@@ -82,10 +104,10 @@
 					<c:if test="${ pi.currentPage ne 1 }">
 						<c:choose>
 							<c:when test="${ !empty map.condition }">
-								<li class="page-item"><a href="qnaSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[이전]</a></li>
+								<li class="page-item"><a href="qnaSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">이전</a></li>
 		            		</c:when>
 		            		<c:otherwise>
-		            			<li class="page-item"><a href="qnaList.do?currentPage=${ pi.currentPage-1 }">[이전]</a></li>
+		            			<li class="page-item"><a href="qnaList.do?currentPage=${ pi.currentPage-1 }">이전</a></li>
 		            		</c:otherwise>
 		            	</c:choose>
 					</c:if>
@@ -93,10 +115,10 @@
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:choose>
 							<c:when test="${ !empty map.condition }">
-								<li class="page-item"><a href="qnaSearch.do?currentPage=${ p }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[${ p }]</a></li>
+								<li class="page-item"><a id="page${p }" href="qnaSearch.do?currentPage=${ p }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">${p}</a></li>
 			            	</c:when>
 			            	<c:otherwise>
-			            		<li class="page-item"><a href="qnaList.do?currentPage=${ p }">[${ p }]</a></li>
+			            		<li class="page-item"><a id="page${p }" href="qnaList.do?currentPage=${p}">${p}</a></li>
 		            		</c:otherwise>
 		            	</c:choose>
 		            </c:forEach>
@@ -104,10 +126,10 @@
 		            <c:if test="${ pi.currentPage ne pi.maxPage }">
 		            	<c:choose>
 		            		<c:when test="${ !empty map.condition }">
-				            	<li class="page-item"><a href="qnaSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">[다음]</a></li>
+				            	<li class="page-item"><a href="qnaSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}&category=${map.category}">다음</a></li>
 				            </c:when>
 				            <c:otherwise>
-				            	<li class="page-item"><a href="qnaList.do?currentPage=${ pi.currentPage+1 }">[다음]</a></li>
+				            	<li class="page-item"><a href="qnaList.do?currentPage=${ pi.currentPage+1 }">다음</a></li>
 		            		</c:otherwise>
 		            	</c:choose>
 		            </c:if>
@@ -149,5 +171,11 @@
 			</c:if>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(function(){
+			var currentPage = ${pi.currentPage};
+			$("#page"+currentPage).addClass("on");
+		});
+	</script>
 </body>
 </html>

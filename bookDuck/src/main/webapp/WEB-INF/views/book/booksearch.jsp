@@ -693,6 +693,9 @@ text-decoration: none;
           <span style="font-size: small; color: #777777;"></span>
       </div>
         
+
+	   <div class="panel-body">
+
       <div class="panel-group">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -700,6 +703,7 @@ text-decoration: none;
 				</div>
 				
 	   			<div class="panel-body">
+           <div id="searchbox">
                     <form role="form" class="form-inline" method="POST">
                         <input type="hidden" id="start" name="start" value="1">
                         <input type="hidden" id="sort" name="sort" value="accuracy">
@@ -715,9 +719,9 @@ text-decoration: none;
                             <option value="isbn">ISBN</option>
                         </select>
 
-                      	<div id="searchbox">
+
                           <input type="text" class="form-control" id="value" name="value" required="required">
-					              </div>
+	
                       
                         <button type="submit" id="bts" class="btn btn-default">
                             <span class="glyphicon glyphicon-search"></span>
@@ -729,6 +733,7 @@ text-decoration: none;
                         </button>
                          -->
                     </form>
+                    </div>
                 </div>
             </div>
         </div>

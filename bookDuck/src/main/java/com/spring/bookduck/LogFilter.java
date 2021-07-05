@@ -57,6 +57,9 @@ public class LogFilter implements Filter {
 		logger.info("\nLOG Filter" + sb);
 		
 		chain.doFilter(req, response);
+		
+		
+		
 	}
 
 	/**

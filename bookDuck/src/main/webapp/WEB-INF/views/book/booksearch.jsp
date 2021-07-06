@@ -123,7 +123,6 @@ if (key != null && value != null) {
 			author = "이 도서는 정보를 제공하지 않습니다.";
 		}
 		
-		
 		// categoryId 정리
 		if(categoryId == "101"){
 			categoryId = "소설";

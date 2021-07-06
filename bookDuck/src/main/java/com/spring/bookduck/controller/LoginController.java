@@ -116,7 +116,10 @@ public class LoginController {
 	@RequestMapping("/updatePwRes.do")
 	public String updatePwRes(MemberDto dto, HttpSession session) throws Exception {
 		logger.info("[Controller] : updatePwRes.do");
-		if(biz.updatePw(dto)>0) {
+		MemberDto dto1 = new MemberDto();
+		dto1.setMember_pw(passwordEncoder.encode(dto.getMember_pw()));
+		dto1.setMember_id(dto.getMember_id());
+		if(biz.updatePw(dto1)>0) {
 			session.invalidate();
 			return "member/login";
 		}

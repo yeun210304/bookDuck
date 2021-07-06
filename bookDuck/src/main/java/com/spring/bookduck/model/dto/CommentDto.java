@@ -72,7 +72,7 @@ public class CommentDto {
 
 	public void setComment_regdate(String comment_regdate) {
 		this.comment_regdate = comment_regdate;
-		System.out.println(comment_regdate);
+		//System.out.println(comment_regdate);
 	}
 
 	public int getComment_titletab() {

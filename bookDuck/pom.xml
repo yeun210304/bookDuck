@@ -168,12 +168,7 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
-		<!-- spring-security-web -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
+		
 		<!-- file upload 관련 -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -260,7 +255,13 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.2</version>
 		</dependency>
-
+		
+		<!-- spring-security-web -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		
 	</dependencies>
 	<build>

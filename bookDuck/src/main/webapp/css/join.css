@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+*{ margin:0; padding: 0;}
+            div{margin-top: 60px;margin-left: 38%;}
+            ul,li{ list-style: none;}
+           li{margin-bottom: 20px; text-align: left;}
+            .box{width: 450px; height: 50px; border: 1px solid #666; padding: 10px;}
+            .pbox{width: 120px; height: 50px; border: 1px solid #666; padding: 10px;}
+            .necessary{font-size: small; color:red;}
+            button{background:#00C850; color:white; width: 450px; border: 1px solid #666; height:50px; font-size: x-large; }
+           

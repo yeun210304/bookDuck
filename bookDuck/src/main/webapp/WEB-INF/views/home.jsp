@@ -1,3 +1,14 @@
+<%@page import="org.w3c.dom.Node"%>
+<%@page import="javax.xml.xpath.XPathConstants"%>
+<%@page import="org.w3c.dom.NodeList"%>
+<%@page import="javax.xml.xpath.XPathFactory"%>
+<%@page import="javax.xml.xpath.XPath"%>
+<%@page import="org.xml.sax.InputSource"%>
+<%@page import="java.net.URL"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="org.w3c.dom.Document"%>
+<%@page import="javax.xml.parsers.DocumentBuilder"%>
+<%@page import="javax.xml.parsers.DocumentBuilderFactory"%>
 <%@page import="java.io.Console"%>
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@page import="com.spring.bookduck.model.dto.RealTimeNovelDto"%>
@@ -30,8 +41,202 @@
 	}
 	
 %>
-	
 
+<%	
+//절대경로 확인
+String path = request.getContextPath();
+
+/*
+* XML Parsing 
+* 1. XML document loading -> XML Object 
+* 2. root element 
+* 3. child element 
+* 4. text node 
+* 5. print
+*/
+
+//인터파크 도서 검색에 대한 XML 요청 및 분석, 결과 출력
+//http://book.interpark.com/api/search.api?key=개인키&query=검색어&queryType=검색기준&maxResults=10&inputEncoding=utf-8
+
+//검색 기준 및 검색 단어 수신
+
+String key = request.getParameter("key");
+
+String value = request.getParameter("value");
+if (key == null) {
+	key = "";
+	value = "";
+}
+
+String start = request.getParameter("start");
+if (start == null) {
+	start = "";
+}
+
+String target = request.getParameter("target");
+
+String sort = request.getParameter("sort");
+
+StringBuilder sb = new StringBuilder();
+String totalcount = "0";
+String count = "0";
+
+if (key != null && value != null) {
+	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	DocumentBuilder builder = factory.newDocumentBuilder();
+	Document doc = null;
+	String str = String.format(
+	"http://book.interpark.com/api/search.api?key=7A71D8E679DA9C96874476B8E225B77A4592E29959B15764C52A257C0343754F&query=harry");
+	URL url = new URL(str);
+	//System.out.println(url);
+	
+	InputSource is = new InputSource(url.openStream());
+	doc = builder.parse(is);
+
+	XPath xpath = XPathFactory.newInstance().newXPath();
+	totalcount = xpath.compile("/channel/totalResults").evaluate(doc);
+	NodeList itemList = (NodeList) xpath.compile("/channel/item").evaluate(doc, XPathConstants.NODESET);
+	int count_ = itemList.getLength();
+	count = String.valueOf(count_);
+	for (int a = 1; a <= count_; a++) {
+		Node item = (Node) xpath.compile(String.format("/channel/item[%s]", a)).evaluate(doc, XPathConstants.NODE);
+		String coverLargeUrl = xpath.compile("coverLargeUrl").evaluate(item);
+		String title = xpath.compile("title").evaluate(item);
+		String author = xpath.compile("author").evaluate(item);
+		String publisher = xpath.compile("publisher").evaluate(item);
+		String priceStandard = xpath.compile("priceStandard").evaluate(item);
+		String description = xpath.compile("description").evaluate(item);
+		String pubDate = xpath.compile("pubDate").evaluate(item);
+		String isbn = xpath.compile("isbn").evaluate(item);
+		String link = xpath.compile("link").evaluate(item);
+		String categoryName = xpath.compile("categoryName").evaluate(item);
+		String categoryId = xpath.compile("categoryId").evaluate(item);
+		//System.out.println(title);
+		
+		// 비어있는 값 대비
+		if(description == null || description == "" || description == " " ){
+			description = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(categoryId == null || categoryId == "" || categoryId == " " ){
+			categoryId = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(categoryName == null || categoryName == "" || categoryName == " " ){
+			categoryName = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(isbn == null || isbn == "" || isbn == " " ){
+			isbn = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(pubDate == null || pubDate == "" || pubDate == " " ){
+			pubDate = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(publisher == null || publisher == "" || publisher == " " ){
+			publisher = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		if(author == null || author == "" || author == " " ){
+			author = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		
+		// categoryId 정리
+		if(categoryId == "101"){
+			categoryId = "소설";
+		}
+		if(categoryId == "102"){
+			categoryId = "시/에세이";
+		}
+		if(categoryId == "103"){
+			categoryId = "예술/대중문화";
+		}
+		if(categoryId == "104"){
+			categoryId = "사회과학";
+		}
+		if(categoryId == "105"){
+			categoryId = "역사와 문화";
+		}
+		if(categoryId == "107"){
+			categoryId = "잡지";
+		}
+		if(categoryId == "108"){
+			categoryId = "만화";
+		}
+		if(categoryId == "109"){
+			categoryId = "유아";
+		}
+		if(categoryId == "110"){
+			categoryId = "아동";
+		}
+		if(categoryId == "111"){
+			categoryId = "가정과 생활";
+		}
+		if(categoryId == "112"){
+			categoryId = "청소년";
+		}
+		if(categoryId == "113"){
+			categoryId = "초등학습서";
+		}
+		if(categoryId == "114"){
+			categoryId = "고등학습서";
+		}
+		if(categoryId == "115"){
+			categoryId = "국어/외국어/사전";
+		}
+		if(categoryId == "116"){
+			categoryId = "자연과 과학";
+		}
+		if(categoryId == "117"){
+			categoryId = "경제경영";
+		}
+		if(categoryId == "118"){
+			categoryId = "자기계발";
+		}
+		if(categoryId == "119"){
+			categoryId = "인문";
+		}
+		if(categoryId == "120"){
+			categoryId = "종교/역학";
+		}
+		if(categoryId == "122"){
+			categoryId = "컴퓨터/인터넷";
+		}
+		if(categoryId == "123"){
+			categoryId = "자격서/수험서";
+		}
+		if(categoryId == "124"){
+			categoryId = "취미/레저";
+		}
+		if(categoryId == "125"){
+			categoryId = "전공도서/대학교제";
+		}
+		if(categoryId == "126"){
+			categoryId = "건강뷰티";
+		}
+		if(categoryId == "128"){
+			categoryId = "여행";
+		}
+		if(categoryId == "129"){
+			categoryId = "중등학습서";
+		}
+		/*
+		request.setAttribute("coverLargeUrl", coverLargeUrl);
+		request.setAttribute("title", title);
+		request.setAttribute("isbn", isbn);
+		*/
+		//System.out.println(title);
+		sb.append(String.format("<div class='row result'>"));
+		sb.append(String.format("<div class='col-md-1'><span>%s</span></div>", a));
+		sb.append(String.format("<div class='col-md-3' style='background-size: 90%% 90%%; overflow : auto;'><img src='%s' class='resize'></div>", coverLargeUrl));
+		sb.append(String.format("<div class='col-md-6'>"));
+		sb.append(String.format("<table id = 'tbb' style='table-layout:fixed'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#128049;&nbsp; 카테고리 </b></td> <td id='td2'>%s</td> </tr>", categoryName));
+		sb.append(String.format("</div>"));
+		sb.append(String.format("<div class='wrapper'>"));
+		sb.append(String.format("<div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author,categoryId));
+		sb.append(String.format("</div>"));
+		sb.append(String.format("</div>"));
+		
+	}
+}
+%>
 <html>
 <head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
@@ -185,13 +390,32 @@
 	}
 		
 </script>
+<script type="text/javascript">
+function genreTAG(){
+	var genreName = document.getElementById("genreName");
+}
+
+</script>
+
 <title>북덕 BookDuck</title>
 </head>
 <body>
 
-<jsp:include page="header.jsp"/>
+	<jsp:include page="header.jsp"/>
 
 	<a href="navertest.do">네이버테스트</a>
+	
+	<!-- 장르(태그) 선택 -->
+	<div class="genre">
+		<div id="genreName"></div>
+		<select name="genreTAG" onclick="genreTAG();">
+			<option value="" selected></option>
+			<option value=""> </option>
+			<option value=""> </option>
+			<option value=""> </option>		
+		</select>
+		<%=sb.toString()%>
+	</div>
 
 
 	<!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->
@@ -210,9 +434,6 @@
 				<input type="text" readonly="readonly" value="로그인시 이용하실 수 있습니다"/>
 			</c:otherwise>
 		</c:choose>
-		
-		
-			
 	</div>
 
 	<!-- 현재 위치 기준 주변 서점 또는 도서관 검색 -->

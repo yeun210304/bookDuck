@@ -65,4 +65,9 @@ public class LoginBizImpl implements LoginBiz {
 	public int tokenchk(String member_email) {
 		return dao.tokenchk(member_email);
 	}
+
+	@Override
+	public int emailCheck(MemberDto dto) {
+		return dao.emailCheck(dto);
+	}
 }

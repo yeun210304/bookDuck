@@ -25,19 +25,25 @@ public class SnsController {
 	
 	@RequestMapping("/naverlogin.do")
 	public String snsLogin(HttpSession session, HttpServletRequest request) {
+		//String naver_id_login = new naver_id_login("Hft3mSmHcCpHqnsB7j3E", "http://localhost:8787/bookduck/naverlogin.do");
+		//String redirectURI = URLEncoder.encode("http://localhost:8787/bookduck/naverlogin.do", "UTF-8");
 		logger.info("[Controller]: naverlogin.do");
 		String member_email = request.getParameter("member_email");
 		String token = request.getParameter("token");
 		
 		if(token != null) {
-			System.out.printf("token null:", token);
+			System.out.printf("token null:%s", token);
+		}
+		if(member_email == null) {
+			return "member/navercallback";
 		}
 		MemberDto res = biz.snslogin(member_email);
 		if(res == null) {
 			request.setAttribute("member_email", member_email);
-			System.out.println("네이버 간편 회원가입 email: "+member_email);
+			System.out.println("네이버 간편 회원가입 : "+member_email);
+			return "member/snsjoinform";
 		}
-		return "member/navercallback";
+		return "redirect:login.do";
 		
 	}
 	
@@ -96,7 +102,6 @@ public class SnsController {
 			System.out.println("카카오 가입 완료 회원 실행");
 			session.setAttribute("Ldto", Ldto);
 		}
-		System.out.println("여긴뭐지");
 		return "home";
 	}
 	

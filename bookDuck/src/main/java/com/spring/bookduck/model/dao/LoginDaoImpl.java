@@ -82,6 +82,17 @@ public class LoginDaoImpl implements LoginDao {
 			}
 		return res;
 	}
+	
+	@Override
+	public int emailCheck(MemberDto dto) {
+		int res = 0;
+			try {
+				res=sqlSession.selectOne(NAMESPACE+"Email_Check", dto);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return res;
+	}
 
 	@Override
 	public MemberDto findId(MemberDto dto) {

@@ -561,6 +561,62 @@
 	</div>
 	</div>
 	<!-- 오른쪽 부분 끝나는 곳  -->
+		<table id="selectrclist">
+			<tr>
+				<td>
+				<input type="text" id="youtubeurl" placeholder="youtube URL을 입력해 주세요">
+				</td>
+			</tr>
+		</table>
+
+<script type="text/javascript">
+function selectrclist(){
+	$.ajax({
+		type : "post",
+		url : "rcvideolist.do",
+		data: {book_isbn : ${dto.book_isbn}},
+		success: function(data){
+			var value = "";
+			$.each(data.list, function(i, obj){
+				value += "<tr>";
+				value += "<td>"
+				value += "<iframe width='560' height='315' src='"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td></tr>";
+				
+			});
+			
+			$("#selectrclist tr").next().html(value);
+			
+		}, error: function(){
+			
+		}
+		}
+		
+	});
+	
+}
+	function urlinsert() {
+		var url = $("#youtubeurl").val();
+		$.ajax
+		
+	}
+	$(function () {
+		selectrclist();
+		
+	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</div>
 	
 </body>

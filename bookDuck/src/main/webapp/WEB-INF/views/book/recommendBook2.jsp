@@ -222,7 +222,7 @@
 	
 	div #right{
 	width : 65%;
-	float: left;
+	float: right;
 	padding : 5px 0px 0px 70px;
 	}
 	

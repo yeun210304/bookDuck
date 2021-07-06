@@ -6,11 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- 	
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	-->
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
 <script
@@ -19,8 +20,9 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <style type="text/css">
-	
 	/* 헤더 검색 */
+	
+
 	.search-wrapper {
 		left: 30px;
 	}
@@ -207,7 +209,7 @@
         background:white;
     }
     a{text-decoration: none; color: black;}
-
+    
     #searchbox {
     	position: relative;
     }    
@@ -224,8 +226,6 @@
 
 	
 	$(document).ready(function() {
-		
-		// ajax 통신으로 만든 헤더 검색 (현재 안쓰는 코드) 
 		$("#sear").click(function() {
 			
 			var value = document.getElementById("headervalue").value;
@@ -299,7 +299,6 @@
 		
 	});
 	
-	
 	/*
 	function headsearch() {
 		
@@ -308,8 +307,9 @@
 
 	} 
 	*/	
+</script>
+<script type="text/javascript">
 	
-	// 검색 
 	function searchToggle(obj, evt) {
 		var container = $(obj).closest('.search-wrapper');
 		if (!container.hasClass('active')) {
@@ -358,30 +358,45 @@
 						<input type="hidden" id="target" name="target" value="book">
 						<input type="hidden" id="sort" name="key" value="title">
 
-					<!-- 
-					원래 검색바 
-					<div id="searchbox">
-	              		<input type="text" class="form-control" 
-	              		id="value" name="value" required="required">
-	             	</div>
-	                <button type="submit" class="btn btn-default-info">
-	                  <span class="glyphicon glyphicon-search"></span>
-	                    검색
-	                </button>
-					-->
+          <!-- 검색 보내는 중 onclick="headsearch();"--> 
 				
-					<!-- 꾸민 검색바 -->
+				<!-- 
+				    <div id="searchbox">
+		
+              <input type="text" class="form-control" 
+              id="value" name="value" required="required">
+             </div>
+              <button type="submit" class="btn btn-default-info">
+                <span class="glyphicon glyphicon-search"></span>
+                검색
+              </button>
+				-->
+
+
 					<div class="search-wrapper">
+
 						<div class="input-holder">
 							<input id="value" name="value" required="required" type="text" class="search-input" placeholder="" />
-								<button  type="submit" class="search-icon" onclick="searchToggle(this, event);">
-									<span></span>
-								</button>
+							<button  type="submit" class="search-icon" onclick="searchToggle(this, event);">
+								<span></span>
+							</button>
 						</div>
-							<span class="close" onclick="searchToggle(this, event);"></span>
+						<span class="close" onclick="searchToggle(this, event);"></span>
 					</div>	
-				</form>
-			</div>	
+					 
+					 
+					 
+						<!-- 
+						<input type="text" class="form-control" 
+						id="value" name="value" required="required">
+						<button type="submit" class="btn btn-info">
+							<span class="glyphicon glyphicon-search"></span>
+							검색
+						</button>
+						-->
+					</form>
+					
+				</div>	
 				
 				
 				<c:choose>
@@ -403,6 +418,5 @@
 				</c:choose>
 			</div>
 		</div>
-		
 </body>
 </html>

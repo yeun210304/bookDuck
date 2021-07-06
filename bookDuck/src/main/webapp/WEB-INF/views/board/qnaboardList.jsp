@@ -8,9 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	#boardList{text-align: center; width: 80%;}
+	#boardList{text-align: center; width: 100%;}
 	#boardList>tbody>tr{height: 50px; background-color: #B5BFE5;}
-	thead{background-color: #6277BA; height: 40px;}
+	thead th{background-color: #6277BA; height: 40px;}
 	ul {text-align: center;}
 	ul li {list-style: none; display: inline-block;}
 	#pagingArea{width:fit-content; margin:auto;}
@@ -48,7 +48,8 @@
 		<div class="innerOuter">
 	
 			<h2 align="center">문의게시판</h2>
-		
+			<br>
+			<br>
 			<table id="boardList" align="center">
 				<thead>
 					<tr>

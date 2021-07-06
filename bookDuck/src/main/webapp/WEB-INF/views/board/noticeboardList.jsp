@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	#boardList{text-align: center; width: 80%;}
+	#boardList{text-align: center; width: 100%;}
 	#boardList>tbody>tr{height: 50px; background-color: #FDF7DD;}
 	thead{height: 40px; background-color: #F5DC7A;}
 	ul{text-align : center;}
@@ -53,7 +53,8 @@
 	<div class="content">
 		<div class="innerOuter">
 			<h2 align="center">공지사항</h2>
-		
+			<br>
+			<br>
 			<table id="boardList" align="center">
 				<thead>
 					<tr>

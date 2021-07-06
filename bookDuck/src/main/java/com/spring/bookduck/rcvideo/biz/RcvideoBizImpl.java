@@ -37,5 +37,9 @@ public class RcvideoBizImpl implements RcvideoBiz {
 	public int rcdelete(int rcvideo_no) {
 		return dao.rcdelete(rcvideo_no);
 	}
+	@Override
+	public List<RcvideoDto> rclist(String book_isbn) {
+		return dao.rclist(book_isbn);
+	}
 
 }

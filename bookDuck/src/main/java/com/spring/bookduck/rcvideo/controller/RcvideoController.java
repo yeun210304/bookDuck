@@ -1,5 +1,10 @@
 package com.spring.bookduck.rcvideo.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.bookduck.bookfm.biz.BookFMBiz;
 import com.spring.bookduck.model.dto.MemberDto;
@@ -155,14 +161,29 @@ public class RcvideoController {
 		
 		return "home";
 	}
-	
-	@RequestMapping("rcvideolist.do")
-	public String rcvideolist() {
+	@ResponseBody
+	@RequestMapping(value="rcvideolist.do",produces = "application/json;")
+	public Map<String, List<RcvideoDto>> rcvideolist(String book_isbn ) {
+		
+		List<RcvideoDto> list = biz.rclist(book_isbn);
+		Map<String, List<RcvideoDto>> map = new HashMap<String, List<RcvideoDto>>(); 
+		map.put("list", list);
 		
 		
 		
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping("rcvideoinsert.do")
+	public int rcvidelinsert(RcvideoDto rcdto) {
 		
-		return null;
+		if(biz.rcinsert(rcdto)>0) {
+			return 1;
+		}
+		
+		
+		return 0;
+		
 	}
 
 }

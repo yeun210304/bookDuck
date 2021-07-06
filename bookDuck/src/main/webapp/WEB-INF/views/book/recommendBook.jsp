@@ -571,16 +571,17 @@
 			<tr>
 				<td>
 				<input type="text" id="youtubeurl" placeholder="youtube URL을 입력해 주세요">
+				<input type="button"  value="등록" onclick="urlinsert();">
 				</td>
 			</tr>
 		</table>
 
-<script type="text/javascript">
+		<script type="text/javascript">
 function selectrclist(){
 	$.ajax({
 		type : "post",
 		url : "rcvideolist.do",
-		data: {book_isbn : ${dto.book_isbn}},
+		data: {"book_isbn" :"8809559745767"},
 		success: function(data){
 			var value = "";
 			$.each(data.list, function(i, obj){
@@ -595,14 +596,29 @@ function selectrclist(){
 		}, error: function(){
 			
 		}
-		}
 		
 	});
 	
 }
 	function urlinsert() {
 		var url = $("#youtubeurl").val();
-		$.ajax
+		$.ajax({
+			type : "post",
+			url : "rcvideoinsert.do",
+			data: {"book_isbn" : "8809559745767"},
+			"rcvideo_content" : url	
+			},
+			success : function (data) {
+				if(data > 0){
+					 selectrclist();
+				}else{
+					alert('실패..')
+				}
+			},error : function() {
+				alert('video ajax 오류..')
+			}
+			
+		});
 		
 	}
 	$(function () {

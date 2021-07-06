@@ -77,5 +77,18 @@ public class RcvideoDaoImpl implements RcvideoDao {
 		
 		return res;
 	}
+	@Override
+	public List<RcvideoDto> rclist(String book_isbn) {
+		
+		List<RcvideoDto> list = new ArrayList<RcvideoDto>();
+		
+		try {
+			list =sqlSession.selectList(namespace+"rclist",book_isbn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 }

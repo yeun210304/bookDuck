@@ -488,6 +488,27 @@ text-decoration: none;
 	width: 205px;
 }
 
+#searchbox {
+	position : relative;
+}
+
+.searchpagebox {
+	position : absolute;
+	background-color : white;
+	left : 0.5px;
+	width : 195px;
+	border-radius : 8px;
+	margin-bottom : 10px;
+	padding : 15px;	
+}
+
+.searchpagebox a {
+	font-size : 1.6rem;
+	line-height : 2.5rem;
+}
+
+
+
 
 </style>
 
@@ -650,7 +671,10 @@ text-decoration: none;
             });
         }
 	    
-	    $("#value").on("propertychange change keyup paste input", function() {
+	    var $searchbox = $("#searchbox").find("input");
+	    
+	    $searchbox.on("propertychange change keyup paste input", function() {
+	    	// console.log("작동되나"?");	    	
 			var booklist = [];
 			
 			if($(this).val() !== "" && $(this).val().trim() !== ""){
@@ -662,24 +686,30 @@ text-decoration: none;
 						booklist = [];
 					}
 					booklist = result.list;
-					console.log(booklist);
+					// console.log(booklist);
 						
-					var $add = $("#value").parent();						
+					var $add = $("#searchbox");						
 						
 					for(var i = 0; i<booklist.length ; i++){
 						$add.find('a').remove();
-						$add.find('.allsearch').remove();
-						$add.append('<div class="allsearch"></div>')
+						$add.find('.searchpagebox').remove();
+						$add.append('<div class="searchpagebox"></div>')
 						for(var i = 0; i < booklist.length ; i++){								
-							$add.find('div').append("<a>"+booklist[i].substring(0,15)+"...</a><br/>");
+							$add.find('div').append("<a>"+((booklist[i].length > 11)? booklist[i].substring(0,10)+"...</a><br/>" : booklist[i] +"</a><br/>"));
 						}							
 					}						
 				});		
 				
 			} else {
-				$("#value").parent().find('a').remove();
+				$("#searchbox").find('a').remove();
+				$("#searchbox").find('.searchpagebox').remove();
 			}
 		});
+	    
+	    $("body").click(function(){
+	    	$("#searchbox").find('a').remove();
+			$("#searchbox").find('.searchpagebox').remove();
+	    });
     	
     });
 

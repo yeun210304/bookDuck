@@ -208,13 +208,23 @@
     }
     a{text-decoration: none; color: black;}
     
-    #searchbox {
+    .search-wrapper {
     	position: relative;
     }    
     
-    .allsearch{
+    .headerallsearch {
 		position: absolute;
-		background-color:white;		
+		background-color:white;	
+		left : 5px;
+		width : 230px;
+		border-radius : 10px;	
+		margin-bottom : 10px;
+		padding : 15px;	
+	}
+	
+	.headerallsearch a {
+		font-size: 1.6rem;
+		line-height: 2.5rem;
 	}
     
     
@@ -275,23 +285,29 @@
 						booklist = [];
 					}
 					booklist = result.list;
-					console.log(booklist);
+					//console.log(booklist);
 						
-					var $add = $("#value").parent();						
+					var $add = $("#value").parent().parent();						
 						
 					for(var i = 0; i<booklist.length ; i++){
 						$add.find('a').remove();
-						$add.find('.allsearch').remove();
-						$add.append('<div class="allsearch"></div>')
+						$add.find('.headerallsearch').remove();
+						$add.append('<div class="headerallsearch"></div>')
 						for(var i = 0; i < booklist.length ; i++){								
-							$add.find('div').append("<a>"+booklist[i].substring(0,15)+"...</a><br/>");
+							$add.find('div').append("<a>"+((booklist[i].length > 13)? booklist[i].substring(0,12)+"...</a><br/>" : booklist[i] +"</a><br/>"));
 						}							
 					}						
 				});		
 				
 			} else {
-				$("#value").parent().find('a').remove();
-			}
+				$("#value").parent().parent().find('a').remove();
+				$("#value").parent().parent().find('.headerallsearch').remove();
+			}			
+		});
+		
+		$("body").click(function(){
+			$("#value").parent().parent().find('a').remove();
+			$("#value").parent().parent().find('.headerallsearch').remove();
 		});
 		
 		
@@ -357,6 +373,7 @@
 						<input type="hidden" id="sort" name="key" value="title">
 
           <!-- 검색 보내는 중 onclick="headsearch();"--> 
+				<!--  
 				    <div id="searchbox">
 
               <input type="text" class="form-control" 
@@ -366,11 +383,11 @@
                 <span class="glyphicon glyphicon-search"></span>
                 검색
               </button>
-
+				
 						<div class="search-wrapper">
+				-->
 
-
-					<!-- 
+					
 					<div class="search-wrapper">
 
 						<div class="input-holder">
@@ -381,7 +398,7 @@
 						</div>
 						<span class="close" onclick="searchToggle(this, event);"></span>
 					</div>	
-					 -->
+				
 					 
 					 
 					 

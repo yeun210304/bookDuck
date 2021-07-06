@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
@@ -19,8 +18,9 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <style type="text/css">
-	
 	/* 헤더 검색 */
+	
+
 	.search-wrapper {
 		left: 30px;
 	}
@@ -208,124 +208,10 @@
     }
     a{text-decoration: none; color: black;}
     
-    .search-wrapper {
-    	position: relative;
-    }    
-    
-    .headerallsearch {
-		position: absolute;
-		background-color:white;	
-		left : 5px;
-		width : 230px;
-		border-radius : 10px;	
-		margin-bottom : 10px;
-		padding : 15px;	
-	}
-	
-	.headerallsearch a {
-		font-size: 1.6rem;
-		line-height: 2.5rem;
-	}
-    
-    
 </style>
 </head>
 <script type="text/javascript">
-
 	
-	$(document).ready(function() {
-		
-		// ajax 통신으로 만든 헤더 검색 (현재 안쓰는 코드) 
-		$("#sear").click(function() {
-			
-			var value = document.getElementById("headervalue").value;
-			console.log(value);
-			$.ajax({
-				
-				url : "booksearch.do",
-				type : "post",
-				data : {"value" : value ,"key" : "title", "start" : "1", "target" : "book", "sort" : "accuracy"},
-				
-				success : function(data){
-					//location.href = "booksearch.do"
-					location.href = "booksearch.do?value=" + value + "&key=title&start=1&target=book&sort=accuracy";
-					//console.log("검색");
-					//console.log(data);
-					//const formdata = new FormData();
-					//formdata.append(data);
-					/*
-					$("#header").hide();
-					var arr = data.split('<');
-					console.log(arr);
-
-                    var value = "";
-                    
-                    for(var i=106; i < arr.length; i++){
-                    	value += '<'+arr[i]
-                    };
-                    
-                    var value2 = value.split("<ul class=");
-					
-					$("#bo").html(value);
-					*/
-				},
-				error : function() {
-					console.log("검색 실패");
-				}
-			});
-		});
-		
-		$("#value").on("propertychange change keyup paste input", function() {
-			var booklist = [];
-			
-			if($(this).val() !== "" && $(this).val().trim() !== ""){
-				var search = $(this).val();				
-				
-				$.getJSON("classifybookajax.do?search="+search, function(result){
-					// console.log(list);
-					if(booklist.length !==0){
-						booklist = [];
-					}
-					booklist = result.list;
-					//console.log(booklist);
-						
-					var $add = $("#value").parent().parent();						
-						
-					for(var i = 0; i<booklist.length ; i++){
-						$add.find('a').remove();
-						$add.find('.headerallsearch').remove();
-						$add.append('<div class="headerallsearch"></div>')
-						for(var i = 0; i < booklist.length ; i++){								
-							$add.find('div').append("<a>"+((booklist[i].length > 13)? booklist[i].substring(0,12)+"...</a><br/>" : booklist[i] +"</a><br/>"));
-						}							
-					}						
-				});		
-				
-			} else {
-				$("#value").parent().parent().find('a').remove();
-				$("#value").parent().parent().find('.headerallsearch').remove();
-			}			
-		});
-		
-		$("body").click(function(){
-			$("#value").parent().parent().find('a').remove();
-			$("#value").parent().parent().find('.headerallsearch').remove();
-		});
-		
-		
-	});
-	
-	
-	/*
-	function headsearch() {
-		
-		var value = document.getElementById("headervalue").value;
-		location.href = "booksearch.do?value=" + value + "&key=title&start=1&target=book&sort=accuracy";
-
-	} 
-	*/	
-	
-	// 검색 
 	function searchToggle(obj, evt) {
 		var container = $(obj).closest('.search-wrapper');
 		if (!container.hasClass('active')) {
@@ -338,15 +224,14 @@
 			container.find('.search-input').val('');
 		}
 	}
+		
 </script>
 <body>
 
 	<div id="header">
 		<div id="header_1">
 			<div id="header_1_left">
-
-				<a href="goHome.do">북덕 BookDuck<img src="" alt=""></a>
-
+				<img src="" alt="">
 			</div>
 			<div id="header_1_center">
 				<ul>
@@ -356,8 +241,7 @@
 				</ul>
 			</div>
 			<div id="header_1_right" >
-        
-				
+				<div>
 					<!-- 
 					<input id="headervalue">
 					<button id="sear"  type="submit" class='btn btn-info btn-sm'>
@@ -366,55 +250,21 @@
 					</button>
 					-->
 					
-
 					<!-- 헤더 검색바 -->					
 					<form role="form" class="form-inline" method="POST" action="booksearch.do">
 						<input type="hidden" id="start" name="start" value="1">
 						<input type="hidden" id="sort" name="sort" value="accuracy">
 						<input type="hidden" id="target" name="target" value="book">
 						<input type="hidden" id="sort" name="key" value="title">
-
-          <!-- 검색 보내는 중 onclick="headsearch();"--> 
-				<!--  
-				    <div id="searchbox">
-
-              <input type="text" class="form-control" 
-              id="value" name="value" required="required">
-             </div>
-              <button type="submit" class="btn btn-default-info">
-                <span class="glyphicon glyphicon-search"></span>
-                검색
-              </button>
-				
 						<div class="search-wrapper">
-				-->
-
-					
-
-					<!-- 
-					원래 검색바 
-					<div id="searchbox">
-	              		<input type="text" class="form-control" 
-	              		id="value" name="value" required="required">
-	             	</div>
-	                <button type="submit" class="btn btn-default-info">
-	                  <span class="glyphicon glyphicon-search"></span>
-	                    검색
-	                </button>
-					-->
-				
-					<!-- 꾸민 검색바 -->
-
-					<div class="search-wrapper">
 						<div class="input-holder">
 							<input id="value" name="value" required="required" type="text" class="search-input" placeholder="" />
-								<button  type="submit" class="search-icon" onclick="searchToggle(this, event);">
-									<span></span>
-								</button>
+							<button  type="submit" class="search-icon" onclick="searchToggle(this, event);">
+								<span></span>
+							</button>
 						</div>
-							<span class="close" onclick="searchToggle(this, event);"></span>
+						<span class="close" onclick="searchToggle(this, event);"></span>
 					</div>	
-					 
 						<!-- 
 						<input type="text" class="form-control" 
 						id="value" name="value" required="required">
@@ -426,8 +276,6 @@
 					</form>
 					
 				</div>	
-
-				
 				
 				<c:choose>
 					<c:when test="${empty Ldto }">
@@ -448,6 +296,7 @@
 				</c:choose>
 			</div>
 		</div>
-		
+	</div>
+	<div id="bo"></div>
 </body>
 </html>

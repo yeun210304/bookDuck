@@ -26,6 +26,7 @@ String path = request.getContextPath();
 //http://book.interpark.com/api/search.api?key=개인키&query=검색어&queryType=검색기준&maxResults=10&inputEncoding=utf-8
 
 //검색 기준 및 검색 단어 수신
+
 String key = request.getParameter("key");
 
 String value = request.getParameter("value");
@@ -43,14 +44,14 @@ String target = request.getParameter("target");
 
 String sort = request.getParameter("sort");
 
-/*
+
 System.out.println("---------");
 System.out.println(key);
 System.out.println(value);
 System.out.println(start);
 System.out.println(target);
 System.out.println(sort);
-*/
+
 /*
 Crawler craw = new Crawler();
 craw.Crawler(value, start, key);
@@ -121,6 +122,7 @@ if (key != null && value != null) {
 		if(author == null || author == "" || author == " " ){
 			author = "이 도서는 정보를 제공하지 않습니다.";
 		}
+		
 		
 		// categoryId 정리
 		if(categoryId == "101"){
@@ -284,7 +286,7 @@ div.result {
 	
 
 
-/* 도서 검색 대문 */
+/* 도서 검색 */
 #h1 {
 	font-size: 50px;
 	font-weight: bold;
@@ -351,6 +353,7 @@ div.result {
 
 
 /* 정렬 그라데이션 css */
+
 #accuracy, #publishTime, #title, #salesPoint, #customerRating, #reviewCount, #price, #priceDesc {
   text-align: center;
   transition: 0.5s;
@@ -385,6 +388,7 @@ div.result {
   background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 51%, #ffecd2 100%);
 }
 
+
 #reviewCount {
   background-image: linear-gradient(to right, #fcaebd 0%, #c55af2 51%, #e9b5ff 100%);
 }
@@ -398,7 +402,8 @@ div.result {
 }
 
 
-/* 구매하기, 추천하기, 찜하기 버튼 */
+/* 버튼 css 연습중 */
+
 .wrapper {
   position : relative;
   text-align: center;
@@ -419,7 +424,7 @@ a{
 text-decoration: none;
 }
 
-#btncss a:hover, #btncss a:visited, #btncss a:active {
+#btncss a:hover, #btncss a:visited, #btncss  {
 text-decoration: none;
 }
 
@@ -453,6 +458,7 @@ text-decoration: none;
 }
 
 /* 올라가기 고정 버튼 */
+
 #upup {
     position: fixed;
     height : 30px;
@@ -471,39 +477,16 @@ text-decoration: none;
  
 }
 
-/* 페이지 스크롤업 이미지 */
 #upup img{
 	height : 50px;
     width : 50px;
 }
 
 
-/* 이미지 리사이즈 */
 .resize{
 	height: auto;
 	width: 205px;
 }
-
-#searchbox {
-	position : relative;
-}
-
-.searchpagebox {
-	position : absolute;
-	background-color : white;
-	left : 0.5px;
-	width : 195px;
-	border-radius : 8px;
-	margin-bottom : 10px;
-	padding : 15px;	
-}
-
-.searchpagebox a {
-	font-size : 1.6rem;
-	line-height : 2.5rem;
-}
-
-
 
 
 </style>
@@ -591,6 +574,7 @@ text-decoration: none;
 			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#priceDesc").val());
 		});
 		
+		
 		// 정렬
 	    function realsort(value, key, start, target, sort){
 	    	
@@ -604,12 +588,12 @@ text-decoration: none;
                 	// console.log("성공");
                 	
                 	var arr = list.split('<');
-					console.log(arr);
+					//console.log(arr);
 					
                     var value = "";
                     
                     
-                    for(var i=227; i < arr.length; i++){
+                    for(var i=241; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -644,18 +628,18 @@ text-decoration: none;
                 	//console.log(list);
         			
         			var arr = list.split('<');
-					console.log(arr);
+					//console.log(arr);
         			
                     var value = "";
                     
                     
-                    for(var i=227; i < arr.length; i++){
+                    for(var i=241; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
-                    console.log(value);
+                    //console.log(value);
                     var value2 = value.split("<ul class=");
-                    console.log(value2);
+                    //console.log(value2);
                     
                     
 					$("#originalBody").hide();
@@ -667,10 +651,7 @@ text-decoration: none;
             });
         }
 	    
-	    var $searchbox = $("#searchbox").find("input");
-	    $searchbox.on("propertychange change keyup paste input", function() {
-	    	// console.log("작동되나"?");	    	
-
+	    $("#value").on("propertychange change keyup paste input", function() {
 			var booklist = [];
 			
 			if($(this).val() !== "" && $(this).val().trim() !== ""){
@@ -682,35 +663,30 @@ text-decoration: none;
 						booklist = [];
 					}
 					booklist = result.list;
-					// console.log(booklist);
+					console.log(booklist);
 						
-					var $add = $("#searchbox");						
+					var $add = $("#value").parent();						
 						
 					for(var i = 0; i<booklist.length ; i++){
 						$add.find('a').remove();
-						$add.find('.searchpagebox').remove();
-						$add.append('<div class="searchpagebox"></div>')
+						$add.find('.allsearch').remove();
+						$add.append('<div class="allsearch"></div>')
 						for(var i = 0; i < booklist.length ; i++){								
-							$add.find('div').append("<a>"+((booklist[i].length > 11)? booklist[i].substring(0,10)+"...</a><br/>" : booklist[i] +"</a><br/>"));
+							$add.find('div').append("<a>"+booklist[i].substring(0,15)+"...</a><br/>");
 						}							
 					}						
 				});		
 				
 			} else {
-				$("#searchbox").find('a').remove();
-				$("#searchbox").find('.searchpagebox').remove();
+				$("#value").parent().find('a').remove();
 			}
 		});
-	    
-	    $("body").click(function(){
-	    	$("#searchbox").find('a').remove();
-			$("#searchbox").find('.searchpagebox').remove();
-	    });
     	
     });
 
 
 	// 현재 페이지 
+
 	function currentPage(idx) {
 		$(".currentPage").text(idx);
 		currentPageNum = idx;
@@ -734,7 +710,7 @@ text-decoration: none;
   <div class="container">
          <div class="panel page-header" style="text-align: center;">
           
-          <!-- 주의) 상대경로 대신 절대경로 표기를 권장한다. -->
+          <!-- 주의)상대경로 대신 절대경로 표기를 권장한다. -->
           <!-- 도서검색 효과 -->
           <div class="e">
             <h1 id="h1">
@@ -799,7 +775,6 @@ text-decoration: none;
 					현재 페이지 <span class="badge currentPage">0</span>
 				</button>
 				
-				<!-- 정렬 -->
 				<div id="sorting" style="float: right">
 					<button class="btn btn-default" id="accuracy" value="accuracy">정확도순</button>
 					<button class="btn btn-default" id="publishTime" value="publishTime">출간일</button>
@@ -811,9 +786,8 @@ text-decoration: none;
 					<button class="btn btn-default" id="priceDesc" value="priceDesc">가격내림순</button>
 				</div>
 				
-				<!-- 원래 페이지 바디 -->
 				<div id="originalBody">
-					<%=sb.toString()%>
+				<%=sb.toString()%>
 				</div>
 				
 				<div id="pagingBody"></div>
@@ -827,7 +801,7 @@ text-decoration: none;
 			</ul>
 		</div>
 
-		<!-- 페이지 스크롤업 -->
+
 		<div id="upup">
 			<img src="resources/img/arrow_up.png" >
 		</div>

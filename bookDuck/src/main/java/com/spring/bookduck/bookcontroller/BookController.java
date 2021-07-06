@@ -67,6 +67,26 @@ public class BookController {
 		return "book/recommendBook";
 	}
 	
+	@RequestMapping("/recommendBook2.do")
+	public String recommend2(HttpSession session, HttpServletRequest request, Model model, String isbn) {
+		
+		logger.info("[BookController] : recommendBook.do");	
+		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
+		model.addAttribute("rclist",rcbiz.rcselectone(isbn));
+    
+		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
+
+		// 로그인 안했을 때
+		session = request.getSession();
+		MemberDto Ldto = (MemberDto) session.getAttribute("Ldto");
+		
+		if(Ldto == null) {
+			return "member/login";
+		}
+		
+		return "book/recommendBook2";
+	}
+	
 	@RequestMapping("/newBook.do")
 	public String newBook() {
 		
@@ -106,6 +126,7 @@ public class BookController {
 		
 		return "book/booksearchprac2";
 	}
+	
 	
 	@RequestMapping("/headerprac.do")
 	public String headerprac() {

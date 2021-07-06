@@ -567,6 +567,25 @@
 	</div>
 	</div>
 	<!-- 오른쪽 부분 끝나는 곳  -->
+	<table>
+	<tbody id="commentBody">
+	</tbody>
+	</table>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	</div>
 	</div>
 	<br />

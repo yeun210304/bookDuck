@@ -155,6 +155,15 @@ public class RcvideoController {
 		
 		return "home";
 	}
+	
+	@RequestMapping("rcvideolist.do")
+	public String rcvideolist() {
+		
+		
+		
+		
+		return null;
+	}
 
 }
 

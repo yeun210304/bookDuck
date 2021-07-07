@@ -25,6 +25,34 @@
 		color: white;
 		cursor: pointer;
 	}
+	
+	/* 올라가기 고정 버튼 */
+	#upup {
+	    position: fixed;
+	    height : 30px;
+	    width : 50px;
+	    right: 50px;
+	    bottom: 50px;
+	    z-index: 50;
+	    /*
+	    height : 50px;
+	    width : 50px;
+	    
+	    right: 2%;
+	    bottom: 50px;
+	    z-index: 999;
+	    */
+	 
+	}
+	
+	#upup:hover{cursor: pointer;}
+	
+	/* 페이지 스크롤업 이미지 */
+	#upup img{
+		height : 50px;
+	    width : 50px;
+	}
+	
 </style>
 <!-- bootstrap 4 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -139,6 +167,11 @@
 				<tbody id="commentBody">
 				</tbody>
 			</table>
+			
+			<!-- 페이지 스크롤업 -->
+			<div id="upup">
+				<img src="resources/img/arrow_up.png" >
+			</div>
 		</div>
 	</div>
 	
@@ -146,6 +179,10 @@
 		$(function(){
 			selectCommentList();
 			
+			$('#upup').on('click',function(e){
+				e.preventDefault();
+				$('html,body').animate({scrollTop:0},1000);
+			});
 			//setInterval(selectCommentList, 1000);
 		});
 		

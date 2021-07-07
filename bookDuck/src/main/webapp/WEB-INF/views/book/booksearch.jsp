@@ -209,8 +209,8 @@ if (key != null && value != null) {
 		//System.out.println(title);
 		sb.append(String.format("<div class='row result'>"));
 		sb.append(String.format("<div class='col-md-1'><span>%s</span></div>", a));
-		sb.append(String.format("<div class='col-md-3' style='background-size: 90%% 90%%; overflow : auto;'><img src='%s' class='resize'></div>", coverLargeUrl));
-		sb.append(String.format("<div class='col-md-6'>"));
+		sb.append(String.format("<div class='col-md-4' style='background-size: 90%% 90%%; overflow : auto;'><img src='%s' class='resize'></div>", coverLargeUrl));
+		sb.append(String.format("<div class='col-md-7'>"));
 		sb.append(String.format("<table id = 'tbb' style='table-layout:fixed'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
 		sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
 		sb.append(String.format("<tr> <td id='td1' ><b> &#127804;&nbsp; 출판사 </b></td> <td  id='td2'>%s</td> </tr>", publisher));
@@ -221,12 +221,12 @@ if (key != null && value != null) {
 		sb.append(String.format("<tr> <td id='td1' ><b> &#128049;&nbsp; 카테고리 </b></td> <td id='td2'>%s</td> </tr>", categoryName));
 		sb.append(String.format("<tr> <td id='td1' ><b> &#127776;&nbsp; 분류 </b></td> <td id='td2'>%s</td> </tr> </table>", categoryId));
 		sb.append(String.format("</div>"));
+		sb.append(String.format("</div>"));
 		sb.append(String.format("<div class='wrapper'>"));
 		sb.append(String.format("<div id='btncss'><a href='%s' target='_blank'>&#128184;&nbsp;구매하기</a></div>",
 		link));
 		sb.append(String.format("<div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author,categoryId));
 		sb.append(String.format("<div id='btncss'><a href='scinsert.do?title=%s&isbn=%s&coverLargeUrl=%s&author=%s&categoryId=%s' target='_blank'>&nbsp;&#127873;&nbsp;&nbsp;찜하기&nbsp;&nbsp;</a></div>",title,isbn,coverLargeUrl,author,categoryId));
-		sb.append(String.format("</div>"));
 		sb.append(String.format("</div>"));
 		
 	}
@@ -286,23 +286,22 @@ div.result {
 
 /* 도서 검색 대문 */
 #h1 {
-	font-size: 50px;
+	font-size: 40px;
 	font-weight: bold;
-	font-family: 'Montserrat', sans-serif;
 	text-align: center;
 	color: #696969;
-	letter-spacing: 0px;
+	letter-spacing: 3px;
 	transition: 1s;
 	-webkit-transition: 1s;
 	-ms-transition: 1s;
 	position: relative;
-	padding: 10px;
+	padding: 12px;
 }
 
 #h1:before, #h1:after {
 	content: "";
 	position: absolute;
-	height: 7px;
+	height: 8px;
 	width: 0px;
 	background: #ffd800;
 	transition: 300ms;
@@ -326,7 +325,7 @@ div.result {
 }
 
 #h1:hover:before, #h1:hover:after {
-	width: 95%;
+	width: 100%;
 	opacity: 1;
 	left: 0;
 }
@@ -345,7 +344,7 @@ div.result {
 	transition: 1s;
 	-webkit-transition: 1s;
 	-ms-transition: 1s;
-	opacity: 0.1;
+	opacity: 0.15;
 	width: 100%;
 }
 
@@ -401,7 +400,8 @@ div.result {
 /* 구매하기, 추천하기, 찜하기 버튼 */
 .wrapper {
   position : relative;
-  text-align: center;
+  text-align: right;
+  bottom : 10px;
 }
 
 #btncss { 
@@ -481,7 +481,7 @@ text-decoration: none;
 /* 이미지 리사이즈 */
 .resize{
 	height: auto;
-	width: 205px;
+	width: 265px;
 }
 
 #searchbox {
@@ -609,7 +609,7 @@ text-decoration: none;
                     var value = "";
                     
                     
-                    for(var i=227; i < arr.length; i++){
+                    for(var i=245; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -649,7 +649,7 @@ text-decoration: none;
                     var value = "";
                     
                     
-                    for(var i=227; i < arr.length; i++){
+                    for(var i=245; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     

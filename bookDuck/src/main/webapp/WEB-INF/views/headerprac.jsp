@@ -6,19 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-	-->
+
 <style type="text/css">
 	
 	/* 헤더 검색 */
@@ -197,10 +196,6 @@
     #header_1_right>ul{list-style:none;}
     #header_1_right>ul>li{float:left; padding: 10px;}
     
-    #header_footer{
-    	float: center;
-    	text-align: center;
-    }
     .content{
     	width: 80%;
     	margin: auto;
@@ -359,7 +354,6 @@
 					<li><a href="noticeList.do">공지사항</a></li>
 					<li><a href="qnaList.do">문의게시판</a></li>
 				</ul>
-		
 			</div>
 			<div id="header_1_right" >
         
@@ -380,6 +374,7 @@
 						<input type="hidden" id="target" name="target" value="book">
 						<input type="hidden" id="sort" name="key" value="title">
 
+          <!-- 검색 보내는 중 onclick="headsearch();"--> 
 				<!--  
 				    <div id="searchbox">
 
@@ -409,6 +404,7 @@
 					-->
 				
 					<!-- 꾸민 검색바 -->
+
 					<div class="search-wrapper">
 						<div class="input-holder">
 							<input id="value" name="value" required="required" type="text" class="search-input" placeholder="" />
@@ -431,7 +427,25 @@
 					
 				</div>	
 
-			
+				
+				
+				<c:choose>
+					<c:when test="${empty Ldto }">
+					<!-- 로그인 전 -->
+						<ul>
+							<li><a href="joinform.do">회원가입</a></li>
+							<li><a href="loginform.do">로그인</a></li>
+						</ul>
+					</c:when>
+					<c:otherwise>
+					<!-- 로그인 후 -->
+						<ul>
+							<li>${Ldto.member_id }님 안녕하세요.</li>
+							<li><a href="mypage.do?member_id=${Ldto.member_id}&member_payrole=${Ldto.member_payrole}">MYPAGE</a></li>
+							<li><a href="logout.do">로그아웃</a></li>
+						</ul>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		

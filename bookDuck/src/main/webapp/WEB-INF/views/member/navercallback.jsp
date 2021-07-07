@@ -21,14 +21,11 @@
 	  function naverSignInCallback() {
 		const member_email = naver_id_login.getProfileData('email');
 	    alert(member_email);
-	    console.log(member_email, token)
+	    console.log("console.log:"+member_email+token)
 	    
 	    window.opener.location.href = '/naverlogin.do?member_email='
 	    		+member_email+"&token="+token;
 	   	window.close();
-	   	
-	   	return "member/snsjoinform";
-	   	
 	   
 	  }
 </script>

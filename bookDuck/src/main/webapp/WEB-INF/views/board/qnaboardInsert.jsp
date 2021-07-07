@@ -9,27 +9,31 @@
 	table *{margin: 5px;}
 	table{width: 100%; margin: auto;}
 	th{background-color: #6277BA; height: 40px;}
-	td{background-color: #B5BFE5;}
-	input{border: none; background-color: #B5BFE5;}
+	input{border: none;}
 	input[type=button]{
 		width : 60px;
-		height: 25px;
+		height: 35px;
 		border: none;
-		border-radius: 25%;
 		background-color: #6277BA;
 		color: white;
 		}
 	input[type=submit]{
 		width : 60px;
-		height: 25px;
+		height: 35px;
 		border: none;
-		border-radius: 25%;
 		background-color: #6277BA;
 		color: white;
 		}
 </style>
+<!-- bootstrap 4 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- summernote editor -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -41,27 +45,27 @@
 	<div class="content">
 		<div class="innerOuter">
 
-			<h2 align="center">문의사항 작성</h2>
+			<h1 align="center">문의게시판</h1>
 			<br><br>
 			<form action="qnaInsertRes.do" enctype="multipart/form-data" method="post">
-				<table>
+				<table class="table">
 					<tr>
-						<th>분류</th>
-						<td><select name="post_category">
+						<th class="table-primary">분류</th>
+						<td><select class="form-control" name="post_category">
 							<option value="P">결제</option>
 							<option value="R">환불</option>
 							<option value="M">회원</option>
 							<option value="E">기타</option>
 						</select></td>
-						<th>제목</th>
-						<td><input type="text" name="post_title" required></td>
+						<th class="table-primary">제목</th>
+						<td><input class="form-control" type="text" name="post_title" required></td>
 					</tr>
 					<tr>
-						<th>작성자</th>
+						<th class="table-primary">작성자</th>
 						<td colspan="3"><input type="text" value="${Ldto.member_id }" readonly name="post_writer"></td>
 					</tr>
 					<tr>
-						<th>첨부파일</th>
+						<th class="table-primary">첨부파일</th>
 						<td colspan="4"><input type="file" name="mpfile"></td>
 					</tr>
 					<tr>

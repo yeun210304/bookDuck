@@ -9,6 +9,7 @@
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
+<jsp:include page="../header.jsp"/>
 	<h1>ID 찾기</h1>
 	
 	<form action="findIdRes.do" method="post" name="findform">

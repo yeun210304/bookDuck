@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,9 @@ public class LoginController {
 	@Autowired
 	private LoginBiz biz;
 	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	//로그인
 	@RequestMapping("/loginform.do")
 	public String loginForm() {
@@ -42,9 +46,12 @@ public class LoginController {
 		
 		boolean check = false;
 		if(res !=null) {
+			if(passwordEncoder.matches(dto.getMember_pw(), res.getMember_pw()))
 			session.setAttribute("Ldto", res); //세션 생성
 			session.setMaxInactiveInterval(10*60); //세션 시간 설정
 			check=true;
+		}else {
+			logger.info("[Controller]: password failed");
 		}
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("check", check);
@@ -75,10 +82,24 @@ public class LoginController {
 		return res;
 	}
 	
+	//이메일 중복 체크
+	@ResponseBody
+	@RequestMapping(value="/emailCheck.do")
+	public int emailCheck(MemberDto dto) {
+		logger.info("[Controller]: emailCheck.do");
+		int res = biz.emailCheck(dto);
+		return res;
+	}
+	
 	//가입 완료 버튼 누를 시
 	@RequestMapping(value="/reg.do")
 	public String Reg(MemberDto dto) {
 		logger.info("[Controller] : reg.do");
+		
+		System.out.println("암호화 전: "+dto.getMember_pw());
+		dto.setMember_pw(passwordEncoder.encode(dto.getMember_pw()));
+		System.out.println("암호화 후: "+dto.getMember_pw());
+		
 		if(biz.join(dto)>0) {
 			return "redirect:loginform.do";
 		}
@@ -95,7 +116,10 @@ public class LoginController {
 	@RequestMapping("/updatePwRes.do")
 	public String updatePwRes(MemberDto dto, HttpSession session) throws Exception {
 		logger.info("[Controller] : updatePwRes.do");
-		if(biz.updatePw(dto)>0) {
+		MemberDto dto1 = new MemberDto();
+		dto1.setMember_pw(passwordEncoder.encode(dto.getMember_pw()));
+		dto1.setMember_id(dto.getMember_id());
+		if(biz.updatePw(dto1)>0) {
 			session.invalidate();
 			return "member/login";
 		}

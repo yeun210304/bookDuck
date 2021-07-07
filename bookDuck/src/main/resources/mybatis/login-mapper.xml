@@ -22,7 +22,6 @@
 		MEMBER_PAYROLE, MEMBER_ROLE, MEMBER_TYPE, MEMBER_BLIST
 		FROM MEMBER
 		WHERE MEMBER_ID = #{member_id}
-		AND MEMBER_PW = #{member_pw}
 	</select>
 	
 	<!-- sns 로그인 -->
@@ -36,6 +35,11 @@
 	<!-- ID 중복체크 -->
 	<select id="Id_Check" resultType="int">
 		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID = #{member_id}
+	</select>
+	
+	<!-- Email 중복체크 -->
+	<select id="Email_Check" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_EMAIL = #{member_email}
 	</select>
 	
 	

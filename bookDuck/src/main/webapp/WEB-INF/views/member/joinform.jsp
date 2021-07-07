@@ -12,57 +12,82 @@
 var submitAction = function() { /* do something with Error */ return false; };
 
 function null_check(){
-	var checkpls = document.getElementById("checkpls").value;
-	if(checkpls==null||checkpls==0|checkpls==""){
+	var member_id = document.getElementById("member_id").value;
+	if(member_id==null||member_id==0|member_id==""){
 		$('form').bind('submit', submitAction);
-		alert("모든 항목을 입력해 주세요");
+		alert("아이디를 입력해 주세요");
 		return false;
+	}else if{
+		var member_pw = document.getElementById("member_pw").value;
+		if(member_pw==null||member_pw==0|member_pw==""){
+			$('form').bind('submit', submitAction);
+			alert("비밀번호를 입력해 주세요");
+			return false;
+	}else if{
+		var member_age = document.getElementById("member_age").value;
+		if(member_age==null||member_age==0|member_age==""){
+			$('form').bind('submit', submitAction);
+			alert("생년월일을 입력해 주세요");
+			return false;
+	}else if{
+		var member_gender = document.getElementById("member_gender").value;
+		if(member_gender==null||member_gender==0|member_gender==""){
+			$('form').bind('submit', submitAction);
+			alert("성별을 선택해 주세요");
+			return false;
+	}else if{
+		var member_gender = document.getElementById("member_gender").value;
+		if(member_gender==null||member_gender==0|member_gender==""){
+			$('form').bind('submit', submitAction);
+			alert("성별을 선택해 주세요");
+			return false;
+	}else if{
+		var member_email = document.getElementById("member_email").value;
+		if(member_email==null||member_email==0|member_email==""){
+			$('form').bind('submit', submitAction);
+			alert("이메일을 입력해 주세요");
+			return false;
 	}
 }
 </script>
+<!--  <link href="css/join.css" rel="stylesheet">-->
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 	<h1>회원가입</h1>
 	<form action="reg.do" method="post">
 	<div class=checkpls id=checkpls>
-		<div class="join-form_id">
-			<div class="id">ID</div>
-			<div class="id_input_box">
-				<input type="text" id="member_id" name="member_id" class="member_id">
+	<ul>
+			<li><div class="id">아이디</div></li>
+			<li><div class="id_input_box">
+				<input type="text" id="member_id" name="member_id" class="member_id" placeholder="아이디를 입력하세요">
 				<button class="idCheck" type="button" id="idCheck" onclick="Check_id();" value="N">중복확인</button>
-			</div>
-		</div>
-		<div class="join-form_pw">
-			<div class="pw">비밀번호</div>
-			<input type="password" id="member_pw" name="member_pw">
-		</div>
-		<div class="join-form_age">
-			<div class="age">생년월일</div>
-			<input type="tel" id="member_age" name="member_age">
-		</div>
-		<div class="join-form_gender">
-			<div class="gender">성별</div>
-			<input type="radio" id="member_gender" name="member_gender" value="F">여
-			<input type="radio" id="member_gender" name="member_gender" value="M">남
-		</div>
-		<div class="join-form_email">
-			<div class="email">이메일</div>
-			<input type="text" id="member_email" name="member_email" class="member_email" maxlength="20">
+			</div></li>
+			<li><div class="pw">비밀번호</div></li>
+			<li><input type="password" id="member_pw" name="member_pw" placeholder="비밀번호를 입력하세요"></li>
+			<li><div class="age">생년월일</div></li>
+			<li><input type="tel" id="member_age" name="member_age" placeholder="입력 예시: 19990101"></li>
+			<li><div class="gender">성별</div></li>
+			<li><input type="radio" id="member_gender" name="member_gender" value="F">여
+			<input type="radio" id="member_gender" name="member_gender" value="M">남</li>
+			<li><div class="email">이메일</div></li>
+			<li><input type="text" id="member_email" name="member_email" class="member_email" maxlength="20" placeholder="이메일을 입력하세요">
+			<button class="emailCheck" type="button" id="idCheck" onclick="Check_email();" value="N">이메일 중복 확인</button></li>
+			<!--  
 			<span id="imt3" style="font-weight:bold; color:black;">@</span>
 			<input type="text" id="usermail2" name="usermail2" class="usermail2" maxlength="10">
-			<!-- [1]이메일 인증번호 발송 -> [2]이메일 인증번호 확인 -->
+			<!-- [1]이메일 인증번호 발송 -> [2]이메일 인증번호 확인 
 			<input type="button" name="btemail" class="btemail" id="btemail" value="인증번호 발송!">
 			
-			<!-- 인증번호 입력란 -->
+			<!-- 인증번호 입력란 
 			<input type="text" name="writechk" class="writechk" id="writechk" value="">
 			<span id="explainsp">*메일로 보내드린 인증번호 6자리를 입력해 주세요</span>
 			
-			<!-- 이메일 인증시 Y/N -->
+			<!-- 이메일 인증시 Y/N 
 			<input type="hidden" name="emailchk" class="emailchk" id="emailchk" value="" style="background: yellow;">
-		</div>
-		<div class="join-button">
-			<input type="submit" onclick="null_check();" value=회원가입 />
-		</div>
+			-->
+			<li><input type="submit" onclick="null_check();" value=회원가입 /></li>
+		</ul>
 		</div>
 	</form>
 </body>
@@ -82,6 +107,25 @@ function Check_id(){
 				console.log("아이디 있음");
 				$("#idCheck").attr("value", "Y");
 				alert("사용 가능한 아이디입니다.");
+			}
+		}
+	})
+}
+
+function Check_email(){
+	$.ajax({
+		url:"emailCheck.do",
+		type: "POST",
+		dataType: "json",
+		data: {"member_email" : $("#member_email").val()},
+		success: function(data){
+			if(data==1){
+				console.log("메일 중복");
+				alert("이미 사용 중인 이메일입니다.");
+			}else if(data==0){
+				console.log("메일 가능");
+				$("#emailCheck").attr("value", "Y");
+				alert("사용 가능한 이메일입니다.");
 			}
 		}
 	})

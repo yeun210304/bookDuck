@@ -26,6 +26,9 @@ public interface LoginBiz {
 	//아이디 중복 검사
 	public int idCheck(MemberDto dto);
 	
+	//이메일 중복 검사
+	public int emailCheck(MemberDto dto);
+	
 	//아이디 찾기
 	public MemberDto findId(MemberDto dto);
 	

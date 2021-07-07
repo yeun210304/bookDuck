@@ -146,7 +146,6 @@
 	var bookfmlist = document.getElementsByClassName("bookfmlist");
 	console.log(bookfmlist);
 	console.log(bookfmlist[0]);
-	console.log("되냐고");
 	*/
 	
 	function setVoiceList() {
@@ -227,10 +226,11 @@
 	
 	div #right{
 	width : 65%;
-	float: left;
+	float: right;
 	padding : 5px 0px 0px 70px;
 	}
 	
+	/* 페이지 영역 나누는 중 */
 	#star{
 	padding : 10px 0px 10px 0px;
 	}
@@ -268,8 +268,7 @@
 	resize:none;
 	}
 	
-	/* 연습 중 */
-	
+	/* 책 정보, 별점, 한 줄 낭독 hover시 보이는 css */
 	nav a {
 		position: relative;
 		width: 33.333%;
@@ -373,79 +372,74 @@
 		author = (String) request.getAttribute("author");
 		categoryId = (String) request.getAttribute("categoryId");
 	}
-  
-
 	
+	// 한 줄 낭독 테스트
 	List<BookFMDto> fm = (List<BookFMDto>)request.getAttribute("rowlist");
-	//System.out.println("테스트중");
 	//System.out.println(fm.get(0).getBookfm_fm());
 	
  	/*
 	BookFMDto fm = (BookFMDto)request.getAttribute("rowlist");
-	System.out.println("테스트중");
 	System.out.println(fm.getBookfm_fm());
 	*/
 %>
-
+	<!-- 헤더 -->
 	<jsp:include page="../header.jsp"/>
       
 	<div class="content">
 		<div class="innerOuter">
       
 		<!-- 왼쪽 시작  -->
-	<div id="left">
-	<div id="book">
-		<!-- <h3>책정보</h3> -->
-		<nav>
-			<a href="#">&nbsp;도서 정보</a>
-		</nav>
-		<!-- 책 제목, 저자 -->
-		<div id="bookdetail">
-		<img src="<%=coverLargeUrl %>"><br/><br/>
-		<b><%=title %></b><br/><%=author %><br/>
-		</div>
-	</div><br/>
-	
-
-	<div id="star">
-		<h3> </h3>
-		<!--<h3>별점</h3> -->
-		<nav>
-			<a href="#">&nbsp;별점</a>
-		</nav>
-		<div id="yourstar">
-			<b>당신의 별점은?</b> (평균 :  ${staravgg } 점)
-		</div>
-		<div id="stardetail">
-		<form action="bookstarInsertRes.do" method="post">
-				<input type="hidden" name="coverLargeUrl" value="<%=coverLargeUrl %>">
-				<input type="hidden" name="title" value="<%=title %>">
-				<input type="hidden" name="author" value="<%=author %>">
-				<input type="hidden" name="isbn" value="<%=isbn %>">
-				<input type="hidden" name="categoryId" value="<%=categoryId %>">
-				
-				
-				<input type="hidden" name="bookstar_id" value="<%=id %>">
-				<input type="hidden" name="bookstar_title" value="<%=title %>">
-				<input type="hidden" name="bookstar_isbn" value="<%=isbn %>">
-				<input type="hidden" id="starsave" name="bookstar_star">
-				
-			<div class="make_star">
-				<div class="rating" data-rate="3" >
-					<i class="fas fa-star fa-2x"></i> <i class="fas fa-star fa-2x"></i> <i
-						class="fas fa-star fa-2x"></i> <i class="fas fa-star fa-2x"></i> <i
-						class="fas fa-star fa-2x"></i>
-				</div>
+		<div id="left">
+		<!-- 도서 정보 -->
+		<div id="book">
+			<nav>
+				<a href="#">&nbsp;도서 정보</a>
+			</nav>
+			<!-- 책 제목, 저자 -->
+			<div id="bookdetail">
+			<img src="<%=coverLargeUrl %>"><br/><br/>
+			<b><%=title %></b><br/><%=author %><br/>
 			</div>
-			<br/>
-			<button type="submit"  class='btn btn-default btn-xs' style="float: right;">&#127775;&nbsp;별점등록</button>	
-		</form>
-		</div>
-
-			<br />
-
-				<div id="tts">
+		</div><br/>
+	
+		<!-- 별점 -->
+		<div id="star">
+			<nav>
+				<a href="#">&nbsp;별점</a>
+			</nav>
+			<div id="yourstar">
+				<b>당신의 별점은?</b> (평균 :  ${staravgg } 점)
+			</div>
+			<div id="stardetail">
+			<form action="bookstarInsertRes.do" method="post">
+					<input type="hidden" name="coverLargeUrl" value="<%=coverLargeUrl %>">
+					<input type="hidden" name="title" value="<%=title %>">
+					<input type="hidden" name="author" value="<%=author %>">
+					<input type="hidden" name="isbn" value="<%=isbn %>">
+					<input type="hidden" name="categoryId" value="<%=categoryId %>">
+					
+					
+					<input type="hidden" name="bookstar_id" value="<%=id %>">
+					<input type="hidden" name="bookstar_title" value="<%=title %>">
+					<input type="hidden" name="bookstar_isbn" value="<%=isbn %>">
+					<input type="hidden" id="starsave" name="bookstar_star">
+					
+				<div class="make_star">
+					<div class="rating" data-rate="3" >
+						<i class="fas fa-star fa-2x"></i> <i class="fas fa-star fa-2x"></i> <i
+							class="fas fa-star fa-2x"></i> <i class="fas fa-star fa-2x"></i> <i
+							class="fas fa-star fa-2x"></i>
+					</div>
+				</div>
+				<br/>
+				<button type="submit"  class='btn btn-default btn-xs' style="float: right;">&#127775;&nbsp;별점등록</button>	
+			</form>
+			</div>
+			</div>
+				<br />
+			
 		<!-- <h4>한줄낭독</h4> -->
+		<div id="tts">
 		<nav>
 			<a href="#">&nbsp;한 줄 낭독</a>
 		</nav>
@@ -457,7 +451,6 @@
 				<input type="hidden" name="author" value="<%=author %>">
 				<input type="hidden" name="isbn" value="<%=isbn %>">
 				<input type="hidden" name="categoryId" value="<%=categoryId %>">
-				
 				
 				<table>
 					<tr>
@@ -480,28 +473,29 @@
 				</table>
 			</form>
 
-			<!-- style="display: none;" -->
-			<div>
-				<div id="ttsspeak" style="display: none;">
-					<c:choose>
-						<c:when test="${empty rowlist}">등록된 정보가 없습니다. 한 줄을 등록해주세요.</c:when>
-						<c:otherwise>
-							<c:forEach items="${rowlist }" var="dto">
-								<div class="bookfmlist">
-									${dto.bookfm_fm}
-								</div>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+				<div>
+					<div id="ttsspeak" style="display: none;">
+						<c:choose>
+							<c:when test="${empty rowlist}">등록된 정보가 없습니다. 한 줄을 등록해주세요.</c:when>
+							<c:otherwise>
+								<c:forEach items="${rowlist }" var="dto">
+									<div class="bookfmlist">
+										${dto.bookfm_fm}
+									</div>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					
+					<button onclick="speak()" type="button" class='btn btn-default'>&#128265;&nbsp;<b>SPEAK IT!</b></button>
+					<button onclick="stop()" type="button" class='btn btn-default'>&#128263;&nbsp;<b>STOP IT!</b></button>
 				</div>
-				
-				<button onclick="speak()" type="button" class='btn btn-default'>&#128265;&nbsp;<b>SPEAK IT!</b></button>
-				<button onclick="stop()" type="button" class='btn btn-default'>&#128263;&nbsp;<b>STOP IT!</b></button>
 			</div>
 		</div>
-	</div>
-	</div>
-	<!-- 왼쪽 부분 끝나는 곳 -->
+		<!-- 왼쪽 부분 끝나는 곳 -->
+
+
+
 
 	<!-- 오른쪽 부분 시작 -->
 	<div id="right">
@@ -516,7 +510,7 @@
 		<br />
 	</div>
 	<div>
-<c:choose>
+			<c:choose>
                     <c:when test="${empty rclist}">
                         <c:choose>
                             <c:when test="${empty Ldto }"></c:when>
@@ -540,7 +534,7 @@
                                 </tr>
                             </table>
                             <c:choose>
-<c:when test="${empty Ldto }">
+								<c:when test="${empty Ldto }">
                                     <table>
                                         <tr>
                                             <td>로그인 하세요</td>
@@ -640,42 +634,6 @@ function selectrclist(){
 
 
 	</div>
-	</div>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
+	
 </body>
 </html>

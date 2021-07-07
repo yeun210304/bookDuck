@@ -28,6 +28,9 @@ public interface LoginDao {
 	//아이디 중복 확인
 	public int idCheck(MemberDto dto);
 	
+	//이메일 중복 확인
+	public int emailCheck(MemberDto dto);
+	
 	//ID찾기
 	public MemberDto findId(MemberDto dto);
 	

@@ -6,16 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-
 
 <style type="text/css">
 
@@ -473,6 +463,7 @@ a {
 					<li><a href="noticeList.do">공지사항</a></li>
 					<li><a href="qnaList.do">문의게시판</a></li>
 				</ul>
+		
 			</div>
 			<div id="header_2_right">
 				<!-- 
@@ -481,14 +472,31 @@ a {
 						<span class="glyphicon glyphicon-search"></span>
 						&nbsp;검색
 					</button>
-					-->
-				<!-- 헤더 검색바 -->
-				<form role="form" class="form-inline" method="POST"
-					action="booksearch.do">
-					<input type="hidden" id="start" name="start" value="1"> <input
-						type="hidden" id="sort" name="sort" value="accuracy"> <input
-						type="hidden" id="target" name="target" value="book"> <input
-						type="hidden" id="sort" name="key" value="title">
+					-->	
+
+					<!-- 헤더 검색바 -->					
+					<form role="form" class="form-inline" method="POST" action="booksearch.do">
+						<input type="hidden" id="start" name="start" value="1">
+						<input type="hidden" id="sort" name="sort" value="accuracy">
+						<input type="hidden" id="target" name="target" value="book">
+						<input type="hidden" id="sort" name="key" value="title">
+
+				<!--  
+				    <div id="searchbox">
+
+              <input type="text" class="form-control" 
+              id="value" name="value" required="required">
+             </div>
+              <button type="submit" class="btn btn-default-info">
+                <span class="glyphicon glyphicon-search"></span>
+                검색
+              </button>
+				
+						<div class="search-wrapper">
+				-->
+
+					
+
 
 					<!-- 검색 보내는 중 onclick="headsearch();"-->
 					<!--  
@@ -537,6 +545,7 @@ a {
 							검색
 						</button>
 						-->
+
 				</form>
 			</div>
 		</div>

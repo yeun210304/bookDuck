@@ -72,7 +72,7 @@ public class RcvideoController {
 		model.addAttribute("scrapDto",scdto);
 		System.out.println(title+isbn+coverLargeUrl+author+categoryId);
 		if(biz.rcinsert(rcdto)>0) {
-			model.addAttribute("rclist",biz.rcselectone(isbn));
+			model.addAttribute("rclist",biz.rclist(isbn));
 			return "book/recommendBook";
 		}
 			
@@ -129,7 +129,7 @@ public class RcvideoController {
 		model.addAttribute("scrapDto",scdto);
 		System.out.println("여기맞나"+title+isbn+coverLargeUrl+author+categoryId);
 		if(biz.rcupdate(rcvideoDto)>0) {
-			model.addAttribute("rclist",biz.rcselectone(isbn));
+			model.addAttribute("rclist",biz.rclist(isbn));
 			return "book/recommendBook";
 		}
 		
@@ -185,7 +185,18 @@ public class RcvideoController {
 		return 0;
 		
 	}
-
+	@ResponseBody
+	@RequestMapping("deleterc.do")
+	public String deleterc(int rcvideo_no) {
+		
+		if(biz.rcdelete(rcvideo_no)>0) {
+			
+			
+			return "1";
+		}
+		
+		return "0";
+	}
 }
 
 

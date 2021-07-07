@@ -15,6 +15,7 @@ import com.spring.bookduck.rcvideo.biz.RcvideoBiz;
 import com.spring.bookduck.bookstar.biz.BookStarBiz;
 import com.spring.bookduck.classify.controller.ClassifyAIController;
 import com.spring.bookduck.model.dto.MemberDto;
+import com.spring.bookduck.rcimg.biz.RcimgBiz;
 
 
 @Controller
@@ -28,6 +29,9 @@ public class BookController {
 	
 	@Autowired
 	RcvideoBiz rcbiz;
+	
+	@Autowired
+	RcimgBiz imgbiz;
 	
 	private Logger logger = LoggerFactory.getLogger(BookController.class);			
 	
@@ -52,9 +56,10 @@ public class BookController {
 		
 		logger.info("[BookController] : recommendBook.do");	
 		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
-		model.addAttribute("rclist",rcbiz.rcselectone(isbn));
+		model.addAttribute("rclist",rcbiz.rclist(isbn));
     
 		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
+		model.addAttribute("imglist",imgbiz.imglist(isbn));
 
 		// 로그인 안했을 때
 		session = request.getSession();
@@ -72,7 +77,7 @@ public class BookController {
 		
 		logger.info("[BookController] : recommendBook.do");	
 		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
-		model.addAttribute("rclist",rcbiz.rcselectone(isbn));
+		model.addAttribute("rclist",rcbiz.rclist(isbn));
     
 		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
 

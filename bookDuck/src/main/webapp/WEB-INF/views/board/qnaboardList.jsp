@@ -195,5 +195,7 @@
 			$("#page"+currentPage).addClass("on");
 		});
 	</script>
+	
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

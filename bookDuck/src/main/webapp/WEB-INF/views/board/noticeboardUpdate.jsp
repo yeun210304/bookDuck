@@ -9,27 +9,31 @@
 <style type="text/css">
 	table *{margin: 5px;}
 	table{width: 100%; margin: auto;}
-	th{background-color: #F5DC7A; height: 40px;}
-	td{background-color: #FDF7DD;}
-	input{border: none; background-color: #FDF7DD;}
+	th{height: 40px;}
+	input{border: none;}
 	input[type=button]{
 		width : 60px;
-		height: 25px;
+		height: 35px;
 		border: none;
-		border-radius: 25%;
 		background-color: #F5DC7A;
 		}
 	input[type=submit]{
 		width : 60px;
-		height: 25px;
+		height: 35px;
 		border: none;
-		border-radius: 25%;
 		background-color: #F5DC7A;
 		}
 </style>
 </head>
+<!-- bootstrap 4 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- summernote editor -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -39,21 +43,23 @@
 	
 	<div class="content">
 		<div class="innerOuter">
-
+			
+			<h1 align="center">공지사항</h1>
+			<br><br>
 			<form action="noticeUpdateRes.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="post_id" value="${dto.post_id }">		
 				
-				<table>
+				<table class="table">
 					<tr>
-						<th>제목</th>
+						<th class="table-warning">제목</th>
 						<td><input type="text" name="post_title" value="${dto.post_title }" required></td>
 					</tr>
 					<tr>
-						<th>작성자</th>
+						<th class="table-warning">작성자</th>
 						<td>${dto.post_writer }</td>
 					</tr>
 					<tr>
-						<th>첨부파일</th>
+						<th class="table-warning">첨부파일</th>
 						<td>
 							<input type="file" name="reupfile">
 							<c:if test="${!empty dto.originName }">

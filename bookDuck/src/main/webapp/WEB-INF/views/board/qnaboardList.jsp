@@ -37,6 +37,9 @@
 		color: white;
 		cursor: pointer;
 	}
+	
+	#postContent{display:inline-block !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+	
 </style>
 
 <!-- bootstrap 4 -->
@@ -56,6 +59,13 @@
 			<br>
 			<br>
 			<table class="table" id="boardList" align="center">
+				<col width="7%">
+				<col width="7%">
+				<col width="30%">
+				<col width="20%">
+				<col width="10%">
+				<col width="16%">
+				<col width="10%">
 				<thead class="table-primary text-center">
 					<tr>
 						<th>번호</th>
@@ -83,7 +93,7 @@
 										<c:if test="${dto.post_category eq 'M' }">회원</c:if>
 										<c:if test="${dto.post_category eq 'E' }">기타</c:if>
 										<c:if test="${empty dto.post_category }">분류 없음</c:if></td>
-									<td><a href="qnaDetail.do?post_id=${dto.post_id}">${dto.post_title}[${dto.post_comment_count }]</a></td>
+									<td width="275px" id="postContent"><a href="qnaDetail.do?post_id=${dto.post_id}">${dto.post_title}&nbsp;[${dto.post_comment_count }]</a></td>
 									<td>${dto.post_writer}</td>
 									<td>${dto.post_hit }</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"

@@ -9,14 +9,14 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#boardList{text-align: center; width: 100%;}
-	#boardList>tbody>tr{height: 50px; background-color: #FDF7DD;}
-	thead{height: 40px; background-color: #F5DC7A;}
+	#boardList>tbody>tr{height: 50px;}
+	thead{height: 40px; }
 	ul{text-align : center;}
 	ul li{list-style: none; display: inline-block;}
 	#pagingArea{width:fit-content; margin:auto;}
 	#searchForm {text-align: center;}
 	#searchForm>*{display:inline-block; margin:5px;}
-	.pagination a {
+	.paging a {
 		padding: 3px 8px;
 		margin: 5px;
 	}
@@ -30,14 +30,18 @@
 	}
 	button{
 		width : 60px;
-		height: 25px;
+		height: 35px;
 		border: none;
-		border-radius: 25%;
+		border-radius: 20%;
 		background-color: #F5DC7A;
 		cursor: pointer;
 	}
 </style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+<!-- bootstrap 4 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 		$(function(){
 			var currentPage = ${pi.currentPage};
@@ -52,11 +56,11 @@
 
 	<div class="content">
 		<div class="innerOuter">
-			<h2 align="center">공지사항</h2>
+			<h1 align="center">공지사항</h1>
 			<br>
 			<br>
-			<table id="boardList" align="center">
-				<thead>
+			<table class="table" id="boardList" align="center">
+				<thead class="table-warning">
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
@@ -100,7 +104,7 @@
 			</table>
 		
 			<div id="paging-area" align="center">
-				<ul class="pagination">
+				<ul class="paging">
 					<c:if test="${ pi.currentPage ne 1 }">
 						<c:choose>
 							<c:when test="${ !empty map.condition }">
@@ -154,7 +158,7 @@
 					<input type="text" class="form-control" name="keyword"
 						value="${map.keyword }">
 				</div>
-				<button type="submit" class="searchBtn btn btn-secondary">검색</button>
+				<button type="submit" class="searchBtn">검색</button>
 			</form>
 		
 			<c:if test="${!empty map.condition }">

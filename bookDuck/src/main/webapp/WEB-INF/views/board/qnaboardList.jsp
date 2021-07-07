@@ -9,14 +9,14 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#boardList{text-align: center; width: 100%;}
-	#boardList>tbody>tr{height: 50px; background-color: #B5BFE5;}
-	thead th{background-color: #6277BA; height: 40px;}
+	#boardList>tbody>tr{height: 50px; }
+	thead th{height: 40px;}
 	ul {text-align: center;}
 	ul li {list-style: none; display: inline-block;}
 	#pagingArea{width:fit-content; margin:auto;}
 	#searchForm {text-align: center;}
 	#searchForm>*{display:inline-block; margin:5px;}
-	.pagination a {
+	.paging a {
 		padding: 3px 8px;
 		margin: 5px;
 	}
@@ -30,15 +30,23 @@
 	}
 	button{
 		width : 60px;
-		height: 25px;
+		height: 35px;
 		border: none;
-		border-radius: 25%;
+		border-radius: 20%;
 		background-color: #6277BA;
 		color: white;
 		cursor: pointer;
 	}
+	
+	#postContent{display:inline-block !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+	
 </style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+
+<!-- bootstrap 4 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"/>
@@ -47,11 +55,18 @@
 	
 		<div class="innerOuter">
 	
-			<h2 align="center">문의게시판</h2>
+			<h1 align="center">문의게시판</h1>
 			<br>
 			<br>
-			<table id="boardList" align="center">
-				<thead>
+			<table class="table" id="boardList" align="center">
+				<col width="7%">
+				<col width="7%">
+				<col width="30%">
+				<col width="20%">
+				<col width="10%">
+				<col width="16%">
+				<col width="10%">
+				<thead class="table-primary text-center">
 					<tr>
 						<th>번호</th>
 						<th>분류</th>
@@ -78,7 +93,7 @@
 										<c:if test="${dto.post_category eq 'M' }">회원</c:if>
 										<c:if test="${dto.post_category eq 'E' }">기타</c:if>
 										<c:if test="${empty dto.post_category }">분류 없음</c:if></td>
-									<td><a href="qnaDetail.do?post_id=${dto.post_id}">${dto.post_title}[${dto.post_comment_count }]</a></td>
+									<td width="275px" id="postContent"><a href="qnaDetail.do?post_id=${dto.post_id}">${dto.post_title}&nbsp;[${dto.post_comment_count }]</a></td>
 									<td>${dto.post_writer}</td>
 									<td>${dto.post_hit }</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -101,7 +116,7 @@
 			</table>
 		
 			<div id="paging-area" align="center">
-				<ul class="pagination">
+				<ul class="paging">
 					<c:if test="${ pi.currentPage ne 1 }">
 						<c:choose>
 							<c:when test="${ !empty map.condition }">
@@ -143,13 +158,15 @@
 			<!-- 검색 영역 -->
 			<form id="searchForm" action="qnaSearch.do" method="Get" align="center">
 				<div class="select">
-					<select class="category-select" name="category">
+					<select class="custom-select" name="category">
 						<option value="A">전체</option>
 						<option value="P">결제</option>
 						<option value="R">환불</option>
 						<option value="M">회원</option>
 						<option value="E">기타</option>
 					</select>
+				</div>
+				<div class="select">
 					<select class="custom-select" name="condition">
 						<option value="title">제목</option>
 						<option value="content">내용</option>
@@ -159,7 +176,7 @@
 				<div class="text">
 					<input type="text" class="form-control" name="keyword" value="${map.keyword }">
 				</div>
-				<button type="submit" class="searchBtn btn btn-secondary">검색</button>
+				<button type="submit">검색</button>
 			</form>
 			
 			<c:if test="${!empty map.condition }">

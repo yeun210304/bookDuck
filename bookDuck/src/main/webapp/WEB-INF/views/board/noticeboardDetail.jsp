@@ -10,40 +10,45 @@
 <style type="text/css">
 	table *{margin: 5px;}
 	table{width: 90%; margin: auto;}
-	th{background-color: #F5DC7A; height: 40px;}
-	td{background-color: #FDF7DD;}
+	th{height: 40px;}
 	button{
 		width : 60px;
-		height: 25px;
+		height: 35px;
 		border: none;
-		border-radius: 25%;
 		background-color: #F5DC7A;
 		cursor: pointer;
 	}
 </style>
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+<!-- bootstrap 4 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 	<jsp:include page="../header.jsp"/>
-
+	
 	<div class="content">
 		<div class="innerOuter">
-			<table id="contentArea" align="center">
+			<h1 align="center">공지사항</h1>
+			<br><br>
+			
+			<table class="table" id="contentArea" align="center">
 				<tr>
-					<th>제목</th>
+					<th class="table-warning">제목</th>
 					<td colspan="5">${dto.post_title }</td>
 				</tr>
 				<tr>
-					<th>작성자</th>
+					<th class="table-warning">작성자</th>
 					<td>${dto.post_writer }</td>
-					<th>작성일</th>
+					<th class="table-warning">작성일</th>
 					<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${dto.post_regdate }"/></td>
-					<th>조회수</th>
+					<th class="table-warning">조회수</th>
 					<td>${dto.post_hit}</td>
 				</tr>
 				<tr>
-					<th>첨부파일</th>
+					<th class="table-warning">첨부파일</th>
 					<td colspan="5">
 						<c:choose>
 							<c:when test="${empty dto.originName }">
@@ -56,7 +61,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th colspan="6">내용</th>
+					<th class="table-warning text-center" colspan="6">내용</th>
 				</tr>
 				<tr>
 					<td colspan="6" height="400px">${dto.post_content }</td>

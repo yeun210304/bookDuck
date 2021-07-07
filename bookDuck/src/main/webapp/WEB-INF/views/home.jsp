@@ -68,14 +68,8 @@ if (key == null) {
 	value = "";
 }
 
-String start = request.getParameter("start");
-if (start == null) {
-	start = "";
-}
-
-String target = request.getParameter("target");
-
-String sort = request.getParameter("sort");
+String genreTAG = request.getParameter("genreTAG");
+System.out.println("genreTAG : " + genreTAG);
 
 StringBuilder sb = new StringBuilder();
 String totalcount = "0";
@@ -85,10 +79,11 @@ if (key != null && value != null) {
 	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder builder = factory.newDocumentBuilder();
 	Document doc = null;
+	
 	String str = String.format(
-	"http://book.interpark.com/api/search.api?key=7A71D8E679DA9C96874476B8E225B77A4592E29959B15764C52A257C0343754F&query=harry");
+	"http://book.interpark.com/api/search.api?key=7A71D8E679DA9C96874476B8E225B77A4592E29959B15764C52A257C0343754F&query=%s&inputEncoding=utf-8&searchTarget=book&foreign&categoryId=%s",
+	1, genreTAG);
 	URL url = new URL(str);
-	//System.out.println(url);
 	
 	InputSource is = new InputSource(url.openStream());
 	doc = builder.parse(is);
@@ -111,116 +106,43 @@ if (key != null && value != null) {
 		String link = xpath.compile("link").evaluate(item);
 		String categoryName = xpath.compile("categoryName").evaluate(item);
 		String categoryId = xpath.compile("categoryId").evaluate(item);
-		//System.out.println(title);
 		
 		// 비어있는 값 대비
-		if(description == null || description == "" || description == " " ){
-			description = "이 도서는 정보를 제공하지 않습니다.";
-		}
-		if(categoryId == null || categoryId == "" || categoryId == " " ){
-			categoryId = "이 도서는 정보를 제공하지 않습니다.";
-		}
-		if(categoryName == null || categoryName == "" || categoryName == " " ){
-			categoryName = "이 도서는 정보를 제공하지 않습니다.";
-		}
-		if(isbn == null || isbn == "" || isbn == " " ){
-			isbn = "이 도서는 정보를 제공하지 않습니다.";
-		}
-		if(pubDate == null || pubDate == "" || pubDate == " " ){
-			pubDate = "이 도서는 정보를 제공하지 않습니다.";
-		}
-		if(publisher == null || publisher == "" || publisher == " " ){
-			publisher = "이 도서는 정보를 제공하지 않습니다.";
-		}
-		if(author == null || author == "" || author == " " ){
-			author = "이 도서는 정보를 제공하지 않습니다.";
-		}
+		if(description == null || description == "" || description == " " ){description = "이 도서는 정보를 제공하지 않습니다.";}
+		if(categoryId == null || categoryId == "" || categoryId == " " ){categoryId = "이 도서는 정보를 제공하지 않습니다.";}
+		if(categoryName == null || categoryName == "" || categoryName == " " ){categoryName = "이 도서는 정보를 제공하지 않습니다.";}
+		if(isbn == null || isbn == "" || isbn == " " ){isbn = "이 도서는 정보를 제공하지 않습니다.";}
+		if(pubDate == null || pubDate == "" || pubDate == " " ){pubDate = "이 도서는 정보를 제공하지 않습니다.";}
+		if(publisher == null || publisher == "" || publisher == " " ){publisher = "이 도서는 정보를 제공하지 않습니다.";}
+		if(author == null || author == "" || author == " " ){author = "이 도서는 정보를 제공하지 않습니다.";}
 		
 		// categoryId 정리
-		if(categoryId == "101"){
-			categoryId = "소설";
-		}
-		if(categoryId == "102"){
-			categoryId = "시/에세이";
-		}
-		if(categoryId == "103"){
-			categoryId = "예술/대중문화";
-		}
-		if(categoryId == "104"){
-			categoryId = "사회과학";
-		}
-		if(categoryId == "105"){
-			categoryId = "역사와 문화";
-		}
-		if(categoryId == "107"){
-			categoryId = "잡지";
-		}
-		if(categoryId == "108"){
-			categoryId = "만화";
-		}
-		if(categoryId == "109"){
-			categoryId = "유아";
-		}
-		if(categoryId == "110"){
-			categoryId = "아동";
-		}
-		if(categoryId == "111"){
-			categoryId = "가정과 생활";
-		}
-		if(categoryId == "112"){
-			categoryId = "청소년";
-		}
-		if(categoryId == "113"){
-			categoryId = "초등학습서";
-		}
-		if(categoryId == "114"){
-			categoryId = "고등학습서";
-		}
-		if(categoryId == "115"){
-			categoryId = "국어/외국어/사전";
-		}
-		if(categoryId == "116"){
-			categoryId = "자연과 과학";
-		}
-		if(categoryId == "117"){
-			categoryId = "경제경영";
-		}
-		if(categoryId == "118"){
-			categoryId = "자기계발";
-		}
-		if(categoryId == "119"){
-			categoryId = "인문";
-		}
-		if(categoryId == "120"){
-			categoryId = "종교/역학";
-		}
-		if(categoryId == "122"){
-			categoryId = "컴퓨터/인터넷";
-		}
-		if(categoryId == "123"){
-			categoryId = "자격서/수험서";
-		}
-		if(categoryId == "124"){
-			categoryId = "취미/레저";
-		}
-		if(categoryId == "125"){
-			categoryId = "전공도서/대학교제";
-		}
-		if(categoryId == "126"){
-			categoryId = "건강뷰티";
-		}
-		if(categoryId == "128"){
-			categoryId = "여행";
-		}
-		if(categoryId == "129"){
-			categoryId = "중등학습서";
-		}
-		/*
-		request.setAttribute("coverLargeUrl", coverLargeUrl);
-		request.setAttribute("title", title);
-		request.setAttribute("isbn", isbn);
-		*/
-		//System.out.println(title);
+		if(categoryId == "101"){categoryId = "소설";}
+		if(categoryId == "102"){categoryId = "시/에세이";}
+		if(categoryId == "103"){categoryId = "예술/대중문화";}
+		if(categoryId == "104"){categoryId = "사회과학";}
+		if(categoryId == "105"){categoryId = "역사와 문화";}
+		if(categoryId == "107"){categoryId = "잡지";}
+		if(categoryId == "108"){categoryId = "만화";}
+		if(categoryId == "109"){categoryId = "유아";}
+		if(categoryId == "110"){categoryId = "아동";}
+		if(categoryId == "111"){categoryId = "가정과 생활";}
+		if(categoryId == "112"){categoryId = "청소년";}
+		if(categoryId == "113"){categoryId = "초등학습서";}
+		if(categoryId == "114"){categoryId = "고등학습서";}
+		if(categoryId == "115"){categoryId = "국어/외국어/사전";}
+		if(categoryId == "116"){categoryId = "자연과 과학";}
+		if(categoryId == "117"){categoryId = "경제경영";}
+		if(categoryId == "118"){categoryId = "자기계발";}
+		if(categoryId == "119"){categoryId = "인문";}
+		if(categoryId == "120"){categoryId = "종교/역학";}
+		if(categoryId == "122"){categoryId = "컴퓨터/인터넷";}
+		if(categoryId == "123"){categoryId = "자격서/수험서";}
+		if(categoryId == "124"){categoryId = "취미/레저";}
+		if(categoryId == "125"){categoryId = "전공도서/대학교제";}
+		if(categoryId == "126"){categoryId = "건강뷰티";}
+		if(categoryId == "128"){categoryId = "여행";}
+		if(categoryId == "129"){categoryId = "중등학습서";}
 		sb.append(String.format("<div class='row result'>"));
 		sb.append(String.format("<div class='col-md-1'><span>%s</span></div>", a));
 		sb.append(String.format("<div class='col-md-3' style='background-size: 90%% 90%%; overflow : auto;'><img src='%s' class='resize'></div>", coverLargeUrl));
@@ -233,13 +155,13 @@ if (key != null && value != null) {
 		sb.append(String.format("<div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author,categoryId));
 		sb.append(String.format("</div>"));
 		sb.append(String.format("</div>"));
-		
 	}
 }
 %>
 <html>
 <head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+
 <!--  websocket 웹소켓을 이용한 모두가 함께 쓰는 실시간소설 RealTimeNovel -->  
 <script type="text/javascript">
 	//웹소켓 설정
@@ -381,22 +303,38 @@ if (key != null && value != null) {
 			// 금방 보낸 사람을 임시 저장한다.
 			re_send = "<%=nick%>";
 			}//inputMessage가 있을때만 전송가능 끝.
-			
-			// insert를 비동기통신인 ajax를 이용해 시도해보기로함
-			$.ajax({
-				url: ""
-				
-			});
-	}
+		}
 		
 </script>
+
+<!-- 책장르 선택시 책 나열 -->
 <script type="text/javascript">
-function genreTAG(){
-	var genreName = document.getElementById("genreName");
-}
 
+	$(document).ready(function(){
+		
+		var genreTAG = document.getElementById("genreTAG").value;
+		
+		console.log(genreTAG);
+		
+		function genreTageDo(){
+			alert("온체인지");
+			$.ajax({
+				type : "post",
+		        data: {"genreTAG" : genreTAG},
+		        success: function(data){
+		    		alert("success!");
+		            console.log(genreTAG);
+		            console.log(data);
+					$("#genreTAG") = genreTAG.val();
+		            }, 
+		        error: function(){
+	            	alert("error...");
+	         	   }
+		        });
+			}
+	});
+	
 </script>
-
 <title>북덕 BookDuck</title>
 </head>
 <body>
@@ -407,14 +345,30 @@ function genreTAG(){
 	
 	<!-- 장르(태그) 선택 -->
 	<div class="genre">
-		<div id="genreName"></div>
-		<select name="genreTAG" onclick="genreTAG();">
-			<option value="" selected></option>
-			<option value=""> </option>
-			<option value=""> </option>
-			<option value=""> </option>		
+		<select id="genreTAG" name="genreTAG" onchange="genreTageDo();">
+			<option value="101">소설</option>
+			<option value="102">시/에세이</option>
+			<option value="103">예술/대중문화</option>
+			<option value="104">사회과학</option>
+			<option value="105">역사와 문화</option>
+			<option value="107">잡지</option>
+			<option value="108">만화</option>
+			<option value="109">유아</option>
+			<option value="110">아동</option>
+			<option value="111">가정과 생활</option>
+			<option value="112">청소년</option>
+			<option value="116">자연과 과학</option>
+			<option value="117">경제경영</option>
+			<option value="118">자기계발</option>
+			<option value="119">인문</option>
+			<option value="120">종교/역학</option>
+			<option value="122">컴퓨터/인터넷</option>
+			<option value="124">취미/레저</option>
+			<option value="126">건강/뷰티</option>
+			<option value="128">여행</option>
 		</select>
-		<%=sb.toString()%>
+		<br/>
+		<div id="genreResult">갑출력부분<%=sb.toString()%></div>
 	</div>
 
 
@@ -635,7 +589,7 @@ function genreTAG(){
 			</tr>
 		</table>
 	</div>
-	
+
 	<script type="text/javascript">
 		
 		var $age = $("select[name=age]").val();

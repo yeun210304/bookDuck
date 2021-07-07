@@ -11,24 +11,26 @@
 <style type="text/css">
 	table *{margin: 5px;}
 	table{width: 90%; margin: auto;}
-	#contentArea th{background-color: #6277BA; height: 40px;}
-	#contentArea td{background-color: #B5BFE5;}
+	#contentArea th{height: 40px;}
 	#contentArea{border-bottom: 1px solid lightgray; margin-bottom: 50px;}
 	#comment{resize : none;}
 	#replyArea{border-collapse: collapse; }
-	#commentBody{background-color: #B5BFE5;}
 	#commentBody tr{border-bottom: solid 1px white;}
-	.commentList{border-style: none; resize: none; background-color: #B5BFE5;}
+	.commentList{border-style: none; resize: none;}
 	button{
 		width : 50px;
-		height: 25px;
+		height: 35px;
 		border: none;
-		border-radius: 25%;
 		background-color: #6277BA;
 		color: white;
 		cursor: pointer;
 	}
 </style>
+<!-- bootstrap 4 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -36,9 +38,12 @@
 
 	<div class="content">
 		<div class="innerOuter">
-			<table id="contentArea" align="center">
+			<h1 align="center">문의게시판</h1>
+			<br><br>
+		
+			<table class="table" id="contentArea" align="center">
 				<tr>
-					<th>분류</th>
+					<th class="table-primary">분류</th>
 					<td>
 						<c:if test="${dto.post_category eq 'P' }">결제</c:if>	
 						<c:if test="${dto.post_category eq 'R' }">환불</c:if>	
@@ -46,19 +51,19 @@
 						<c:if test="${dto.post_category eq 'E' }">기타</c:if>					
 						<c:if test="${empty dto.post_category }">분류 없음</c:if>	
 					</td>
-					<th>제목</th>
+					<th class="table-primary">제목</th>
 					<td colspan="3">${dto.post_title }</td>
 				</tr>
 				<tr>
-					<th>작성자</th>
+					<th class="table-primary">작성자</th>
 					<td>${dto.post_writer }</td>
-					<th>작성일</th>
+					<th class="table-primary">작성일</th>
 					<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${dto.post_regdate }"/></td>
-					<th>조회수</th>
+					<th class="table-primary">조회수</th>
 					<td>${dto.post_hit}</td>
 				</tr>
 				<tr>
-					<th>첨부파일</th>
+					<th class="table-primary">첨부파일</th>
 					<td colspan="5">
 						<c:choose>
 							<c:when test="${empty dto.originName }">
@@ -71,7 +76,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th colspan="6">내용</th>
+					<th class="table-primary text-center" colspan="6">내용</th>
 				</tr>
 				<tr>
 					<td colspan="6" height="300px">${dto.post_content }</td>
@@ -107,22 +112,22 @@
 				</tr>
 			</table>
 			<!-- 댓글 기능 -->
-			<table id="replyArea" align="center">
+			<table class="table" id="replyArea" align="center">
 				<thead>
 					<tr>
 						<c:choose>
 							<c:when test="${empty Ldto }">
-								<th colspan="2">
+								<th colspan="2" class="text-center">
 									<textarea rows="4" cols="70" id="comment" readonly>로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해 주세요.</textarea>
 								</th>
 								<th><button disabled>등록</button></th>
 							</c:when>
 							<c:otherwise>
-								<th colspan="2">
-									<textarea  rows="3" cols="55" id="comment" onkeydown="cancelCommentBtn();"></textarea>
+								<th colspan="2" class="text-center">
+									<textarea class="form-control" rows="3" cols="55" id="comment"></textarea>
 								</th>
 								<th><button id="addCommentBtn" onclick="addComment();">등록</button>
-									<button id="cancelCommentBtn" onclick="cancelComment();" hidden="true">취소</button>
+									<button id="cancelCommentBtn" onclick="cancelComment();">취소</button>
 								</th>
 							</c:otherwise>
 						</c:choose>
@@ -144,14 +149,9 @@
 			//setInterval(selectCommentList, 1000);
 		});
 		
-		function cancelCommentBtn(){
-			$("#cancelCommentBtn").attr("hidden", false);
-		}
-		
 		function cancelComment(){
 			$("#comment").val("");
 			$("#addCommentBtn").attr('onclick', 'addComment();').html('등록');
-			$("#cancelCommentBtn").attr("hidden", true);
 			selectCommentList();
 		}
 		
@@ -203,8 +203,8 @@
 							  +  "</tr>";
 						if('${Ldto.member_id}' == obj.comment_writer){
 							value += "<tr>"
-								  + "<td colspan='3' align='right'><button onclick='answerCommentForm("+obj.comment_id+");' >답글</button><button name='"+obj.comment_id+"' onclick='updateCommentForm("+ obj.comment_id +");'>수정</button>"
-								  + "<button onclick='deleteComment("+ obj.comment_id +");'>삭제</button></td>"
+								  + "<td colspan='3' align='right'><button onclick='answerCommentForm("+obj.comment_id+");' >답글</button>&nbsp;<button name='"+obj.comment_id+"' onclick='updateCommentForm("+ obj.comment_id +");'>수정</button>"
+								  + "&nbsp;<button onclick='deleteComment("+ obj.comment_id +");'>삭제</button></td>"
 								  + "</tr>"
 						} else if(${!empty Ldto}){
 							value += "<tr>"

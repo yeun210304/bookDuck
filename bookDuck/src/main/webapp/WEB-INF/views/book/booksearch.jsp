@@ -246,6 +246,7 @@ if (key != null && value != null) {
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
 
 
+
 <style>
 /* 책 정보 */
 td{
@@ -365,7 +366,7 @@ div.result {
 }
 
 #accuracy {
-  background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+  background-image: linear-gradient(to right, #FBD9E6 0%, #fda085 51%, #FBD9E6 100%);
 }
 
 #publishTime{
@@ -385,7 +386,7 @@ div.result {
 }
 
 #reviewCount {
-  background-image: linear-gradient(to right, #fcaebd 0%, #c55af2 51%, #e9b5ff 100%);
+  background-image: linear-gradient(to right, #FFB7C5 0%, #FFBFF0 51%, #FFB7C5 100%);
 }
 
 #price {
@@ -393,7 +394,7 @@ div.result {
 }
 
 #priceDesc {
-  background-image: linear-gradient(to right, #b5ffb9 0%, #817eed 51%, #5bf0b8 100%);
+  background-image: linear-gradient(to right, #F0DDEC 0%, #BFBFE6 51%, #F0DDEC 100%);
 }
 
 

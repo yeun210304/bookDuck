@@ -46,20 +46,6 @@
 //절대경로 확인
 String path = request.getContextPath();
 
-/*
-* XML Parsing 
-* 1. XML document loading -> XML Object 
-* 2. root element 
-* 3. child element 
-* 4. text node 
-* 5. print
-*/
-
-//인터파크 도서 검색에 대한 XML 요청 및 분석, 결과 출력
-//http://book.interpark.com/api/search.api?key=개인키&query=검색어&queryType=검색기준&maxResults=10&inputEncoding=utf-8
-
-//검색 기준 및 검색 단어 수신
-
 String key = request.getParameter("key");
 
 String value = request.getParameter("value");
@@ -68,8 +54,24 @@ if (key == null) {
 	value = "";
 }
 
+
+
+
+
+
+
+
+
 String genreTAG = request.getParameter("genreTAG");
-System.out.println("genreTAG : " + genreTAG);
+System.out.println("genreTAG : " + request.getParameter("genreTAG"));
+
+
+
+
+
+
+
+
 
 StringBuilder sb = new StringBuilder();
 String totalcount = "0";
@@ -80,10 +82,17 @@ if (key != null && value != null) {
 	DocumentBuilder builder = factory.newDocumentBuilder();
 	Document doc = null;
 	
+	
+	
+	
 	String str = String.format(
 	"http://book.interpark.com/api/search.api?key=7A71D8E679DA9C96874476B8E225B77A4592E29959B15764C52A257C0343754F&query=%s&inputEncoding=utf-8&searchTarget=book&foreign&categoryId=%s",
 	1, genreTAG);
 	URL url = new URL(str);
+	
+	
+	
+	
 	
 	InputSource is = new InputSource(url.openStream());
 	doc = builder.parse(is);
@@ -325,36 +334,231 @@ if (key != null && value != null) {
 <!-- 책장르 선택시 책 나열 -->
 <script type="text/javascript">
 
-	$(document).ready(function(){
-		
-		var genreTAG = document.getElementById("genreTAG").value;
-		
-		console.log(genreTAG);
-		
-		function genreTageDo(){
-			alert("온체인지");
-			$.ajax({
-				type : "post",
-		        data: {"genreTAG" : genreTAG},
-		        success: function(data){
-		    		alert("success!");
-		            console.log(genreTAG);
-		            console.log(data);
-					$("#genreTAG") = genreTAG.val();
-		            }, 
-		        error: function(){
-	            	alert("error...");
-	         	   }
-		        });
-			}
-	});
+	function genreTagDo(){
+		$.ajax({
+			type : "post",
+	        data: {"genreTAG" : genreTAG.value},
+	        success: function(list){
+	        	alert("success까지 옴!");
+	        	
+	        	var arr = list.split('<');
+				console.log(arr);
+				
+                var value = "";
+                
+                for(var i=245; i < arr.length; i++){
+                	value += '<'+arr[i]
+                };
+                
+                var value2 = value.split("<ul class=");
+	        	
+	        	
+	        	$("#genreResult") = html(value2[0]);
+	            }, 
+	        error: function(){
+            	alert("error...");
+         	   }
+	        });
+		}
 	
 </script>
 <title>북덕 BookDuck</title>
 </head>
-<body>
 
 	<jsp:include page="header.jsp"/>
+
+	<a href="navertest.do">네이버테스트</a>
+	
+	<!-- 장르(태그) 선택 -->
+	<div class="genre">
+		<h3>장르선택</h3>
+		<select id="genreTAG" name="genreTAG" onchange="genreTagDo();">
+			<option value="none">=== 선택 ===</option>
+			<option value="101">소설</option>
+			<option value="102">시/에세이</option>
+			<option value="103">예술/대중문화</option>
+			<option value="104">사회과학</option>
+			<option value="105">역사와 문화</option>
+			<option value="107">잡지</option>
+			<option value="108">만화</option>
+			<option value="109">유아</option>
+			<option value="110">아동</option>
+			<option value="111">가정과 생활</option>
+			<option value="112">청소년</option>
+			<option value="116">자연과 과학</option>
+			<option value="117">경제경영</option>
+			<option value="118">자기계발</option>
+			<option value="119">인문</option>
+			<option value="120">종교/역학</option>
+			<option value="122">컴퓨터/인터넷</option>
+			<option value="124">취미/레저</option>
+			<option value="126">건강/뷰티</option>
+			<option value="128">여행</option>
+		</select>
+		<br/>
+		<div id="genreResult"><%=genreTAG%>갑출력부분<%=sb.toString()%></div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+	<!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->
+	<div class="RealTimeNovle">
+		
+		<!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
+		<div id="messageWindow2" style="padding: 10px 0; height: 20em; overflow: auto; background-color: #a0c0d7;"></div>
+		<c:choose>
+			<c:when test="${Ldto.member_payrole eq 'Y'}">
+			<!-- 사용자가 입력한 키의 코드를 .d보내준다. -->
+					<input id="inputMessage" type="text" name="novel_content" onkeydown="if(event.keyCode==13){send();}" />
+					<input type="submit" value="입력" onclick="send();" />
+					<input type="hidden" id="novel_id" value="${Ldto.member_id}" name="novel_id" />
+			</c:when>
+			<c:otherwise>
+				<input type="text" readonly="readonly" value="로그인시 이용하실 수 있습니다"/>
+			</c:otherwise>
+		</c:choose>
+	</div>
+
+	<!-- 현재 위치 기준 주변 서점 또는 도서관 검색 -->
+	<div id="map" style="width:100%;height:350px;"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4cbf31fc0b4bc0ff759253ed7b23a16&libraries=services"></script>
+<script type="text/javascript">
+	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+		center: new kakao.maps.LatLng(33, 126), // 지도의 중심좌표
+		level: 6 // 지도의 확대 레벨
+		};
+
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption);
+	
+	// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+	if (navigator.geolocation) {
+	    
+	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	        
+	        var lat = position.coords.latitude; // 위도
+	        var lon = position.coords.longitude; // 경도
+	        
+	        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+	            message = '<div style="padding:5px;">나의 위치</div>'; // 인포윈도우에 표시될 내용입니다
+	        
+	        // 마커와 인포윈도우를 표시합니다
+	        displayMarker(locPosition, message);
+	            
+	     	// 장소 검색 객체를 생성합니다
+	    	var ps = new kakao.maps.services.Places();
+	    	
+	    	// 키워드로 장소를 검색합니다
+	    	ps.keywordSearch('서점', placeSearchCB, {
+	    		location : locPosition,							// 검색 중심 좌표
+	    		size : 5,										// 표시될 갯수
+	    		radius : 10000,									// 제한 범위(m)
+	    		sort : kakao.maps.services.SortBy.DISTANCE,		// 정렬 기준(DISTANCE : 거리순 , ACCURACY : 정확도순)
+	    	});
+	    	ps.keywordSearch('도서관', placeSearchCB, {
+	    		location : locPosition,
+	    		size : 5,
+	    		radius : 10000,
+	    		sort : kakao.maps.services.SortBy.DISTANCE,
+	    	});
+	            
+	      }, function(error){
+	    	  if(error.PERMISSION_DENIED){	// 사용자가 위치 권한 차단했을 경우
+	    		  var locPosition = new kakao.maps.LatLng(37.49767083325, 127.03050314956),    // kh 정보교육원 기준으로 함
+		  	        message = 'kh정보교육원'
+		  	        
+		  	    displayMarker(locPosition, message);
+	    		// 장소 검색 객체를 생성합니다
+	  	    	var ps = new kakao.maps.services.Places();
+	  	   		// 키워드로 장소를 검색합니다
+		    	ps.keywordSearch('서점', placeSearchCB, {
+		    		location : locPosition,		// 검색 중심 좌표
+		    		size : 5,										// 표시될 갯수
+		    		radius : 10000,									// 제한 범위(m)
+		    		sort : kakao.maps.services.SortBy.DISTANCE,		// 정렬 기준(DISTANCE : 거리순 , ACCURACY : 정확도순)
+		    	});
+		    	ps.keywordSearch('도서관', placeSearchCB, {
+		    		location : locPosition,
+		    		size : 5,
+		    		radius : 10000,
+		    		sort : kakao.maps.services.SortBy.DISTANCE,
+		    	});
+	    		  
+	    	  }
+	      });
+	    
+	} else { // HTML5의 GeoLocation을 지원하지 않을 때
+	    
+		console.log("");
+		console.log("findLocation : geolocation을 사용할수 없어요..");
+		alert("지도 정보를 지원하지 않는 브라우저입니다.");
+		console.log("");
+	}
+	
+	
+	function placeSearchCB(data, status, pagination){
+		if(status === kakao.maps.services.Status.OK){
+			for(var i = 0; i < data.length; i++){
+				displayMarker01(data[i]);
+			}
+		}
+	}
+	// 지도에 마커를 표시하는 함수입니다(검색 결과 마커들)
+	function displayMarker01(place) {
+	    
+	    // 마커를 생성하고 지도에 표시합니다
+	    var marker = new kakao.maps.Marker({
+	        map: map,
+	        position: new kakao.maps.LatLng(place.y, place.x) 
+	    });
+
+	    // 마커에 클릭이벤트를 등록합니다
+	    kakao.maps.event.addListener(marker, 'click', function() {
+	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+	        infowindow.setContent('<div style="padding:5px;font-size:12px;"><a href="'+ place.place_url +'" target="_blank">' + place.place_name +'</a><br/>'
+	        																  + place.address_name + '<br/>나로부터 '
+	        																  + place.distance + 'm</div>');
+	        infowindow.open(map, marker);
+	    });
+	}
+	
+	// 지도에 마커와 인포윈도우를 표시하는 함수입니다(현재 위치 혹은 기본 위치일 때)
+	function displayMarker(locPosition, message) {
+	
+	    // 마커를 생성합니다
+	    var marker = new kakao.maps.Marker({  
+	        map: map, 
+	        position: locPosition
+	    }); 
+	    
+	    var iwContent = message, // 인포윈도우에 표시할 내용
+	        iwRemoveable = true;
+	
+	    // 인포윈도우를 생성합니다
+	    var infowindow = new kakao.maps.InfoWindow({
+	        content : iwContent,
+	        removable : iwRemoveable
+	    });
+	    
+	    // 인포윈도우를 마커위에 표시합니다 
+	    infowindow.open(map, marker);
+	    
+	    // 지도 중심좌표를 접속위치로 변경합니다
+	    map.setCenter(locPosition);      
+	}
+	</script>	
 	
 	<div class="content">
 		<div class="innerOuter">

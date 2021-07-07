@@ -27,11 +27,11 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
 
-<script>
+<!-- <script>
 	$(document).ready(function() {
 		$('#summernote').summernote();
 	});
-</script>
+</script> -->
 <!-- Youtube 검색 -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script>
@@ -48,7 +48,7 @@
 		//유튜브 API 불러오는부분
 		//https://developers.google.com/youtube/v3/docs/search/list
 		var order = "relevance";
-		var maxResults = "6"; //검색 리스트 개수
+		var maxResults = "4"; //검색 리스트 개수
 		var key = "AIzaSyD5ZALqP1e8SkvfWL65oVDCHTUoibbtJGk";//api key값
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order="
 				+ order
@@ -510,7 +510,7 @@
 		<br />
 	</div>
 	<div>
-			<c:choose>
+		<%-- 	<c:choose>
                     <c:when test="${empty rclist}">
                         <c:choose>
                             <c:when test="${empty Ldto }"></c:when>
@@ -531,6 +531,7 @@
                             <table>
                                 <tr>
                                     <td id="summernote">${rcvideoDto.rcvideo_content}</td>
+                                    
                                 </tr>
                             </table>
                             <c:choose>
@@ -558,55 +559,215 @@
                 </c:choose>
 			</div>
 		</div>
-	</div>
-	</div>
-	<!-- 오른쪽 부분 끝나는 곳  -->
+ --%>
+
+
+
+
+		<!-- 오른쪽 부분 끝나는 곳  -->
 		<table id="selectrclist">
+			<thead>
 			<tr>
 				<td>
 				<input type="text" id="youtubeurl" placeholder="youtube URL을 입력해 주세요">
+				<input type="button"  value="등록" onclick="urlinsert();">
 				</td>
 			</tr>
-		</table>
-
-<script type="text/javascript">
-function selectrclist(){
-	$.ajax({
-		type : "post",
-		url : "rcvideolist.do",
-		data: {book_isbn : ${dto.book_isbn}},
-		success: function(data){
-			var value = "";
-			$.each(data.list, function(i, obj){
-				value += "<tr>";
-				value += "<td>"
-				value += "<iframe width='560' height='315' src='"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td></tr>";
+			</thead>
+			<tbody id="youtubeurllist">
 				
+			</tbody>
+		</table>
+		
+		<script type="text/javascript">
+			var isbn =<%=isbn %>
+
+			function selectrclist() {
+				$
+				.ajax({
+				type : "post",
+				url : "rcvideolist.do",
+				data : {
+				"book_isbn" : isbn
+					},
+				success : function(data) {
+					var value = "";
+					$.each(
+				data.list,
+		function(i, obj) {
+				value += "<tr>"
+					+ "<td>"
+					+ "<iframe width='560' height='315' src='https://www.youtube.com/embed/"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td></tr>"
+					+"<tr>"
+                    +"<td>"
+                       + "<input type='button' value='삭제' onclick='urldelete("+obj.rcvideo_no+");'>"
+                    +"</td>"
+                	+"</tr>";		
+				
+				});
+				$("#selectrclist tbody").html(value);
+							},
+							error : function() {
+							}
+						});
+			}
+			function urlinsert() {
+				var url = $("#youtubeurl").val().substring(17);
+				$.ajax({
+					type : "post",
+					url : "rcvideoinsert.do",
+					data : {
+						"book_isbn" : isbn,
+						"rcvideo_content" : url
+					},
+					success : function(data) {
+						if (data > 0) {
+							$("#youtubeurl").val("")
+							selectrclist();
+						} else {
+							alert('실패..')
+						}
+					},
+					error : function() {
+						alert('video ajax 오류..')
+					}
+
+				});
+
+			}
+			function urldelete(rcvideo_no) {
+				$.ajax({
+					type : "post",
+					url : "deleterc.do",
+					data : {
+						"rcvideo_no" : rcvideo_no	
+					},
+					success : function (data) {
+						if(data == "1"){
+							url = "";
+						selectrclist();
+						}else{
+							
+							alert('삭제 실패...다시해라..')
+						}
+					},
+					error : function() {
+						alert('video 삭제 ajax 오류..')
+					}
+
+					
+					});
+				
+			}
+			$(function() {
+				console.log(isbn)
+
+				selectrclist();
+
 			});
-			
-			$("#selectrclist tr").next().html(value);
-			
-		}, error: function(){
-			
-		}
-		}
-		
-	});
-	
-}
-	function urlinsert() {
-		var url = $("#youtubeurl").val();
-		$.ajax
-		
-	}
-	$(function () {
-		selectrclist();
-		
-	});
-</script>
+		</script>
 
+	<!-- 이미지 업로드 -->
+		<table id="selectimglist">
+			<thead>
+			<tr>
+				<td>
+				<input type="text" id="imgurl" placeholder="img URL을 입력해 주세요">
+				<input type="button"  value="등록" onclick="imginsert();">
+				</td>
+			</tr>
+			</thead>
+			<tbody id="imgurllist">
+		
+			</tbody>
+		</table>
+		<script type="text/javascript">
+			var isbn =<%=isbn %>
 
+			function selectimglist() {
+				$
+				.ajax({
+				type : "post",
+				url : "rcimglist.do",
+				data : {
+				"book_isbn" : isbn
+					},
+				success : function(data) {
+					var value = "";
+					$.each(
+				data.list,
+		function(i, obj) {
+				value += "<tr>"
+					+ "<td>"
+					+ "<img src="+obj.rcimg_content +"></td></tr>"
+					+"<tr>"
+                    +"<td>"
+                       + "<input type='button' value='삭제' onclick='rcimgdelete("+obj.rcimg_no+");'>"
+                    +"</td>"
+                	+"</tr>";		
+				
+				});
+				$("#selectimglist tbody").html(value);
+							},
+							error : function() {
+							}
+						});
+			}
+			function imginsert() {
+				var url = $("#imgurl").val();
+				$.ajax({
+					type : "post",
+					url : "rcimginsert.do",
+					data : {
+						"book_isbn" : isbn,
+						"rcimg_content" : url
+					},
+					success : function(data) {
+						if (data > 0) {
+							$("#imgurl").val("")
+							selectimglist();
+						} else {
+							alert('실패..')
+						}
+					},
+					error : function() {
+						alert('이미지 ajax 오류..')
+					}
 
+				});
+
+			}
+			function rcimgdelete(rcimg_no) {
+				$.ajax({
+					type : "post",
+					url : "rcimgdelete.do",
+					data : {
+						"rcimg_no" : rcimg_no	
+					},
+					success : function (data) {
+						if(data > 0){
+							url = "";
+						selectimglist();
+						}else{
+							
+							alert('이미지 삭제 실패...다시해라..')
+						}
+					},
+					error : function() {
+						alert('img 삭제 ajax 오류..')
+					}
+
+					
+					});
+				
+			}
+			$(function() {
+				console.log(isbn)
+
+				selectimglist();
+
+			});
+		</script>
 
 
 

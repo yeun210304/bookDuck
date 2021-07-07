@@ -6,6 +6,7 @@ import com.spring.bookduck.rcvideo.dto.RcvideoDto;
 
 public interface RcvideoBiz {
 	
+	public List<RcvideoDto> rclist(String book_isbn);
 	public List<RcvideoDto> rcselectone(String rcvideo_isbn);
 	public RcvideoDto rcselectoneno(int rcvideo_no);
 	public int rcinsert (RcvideoDto dto);

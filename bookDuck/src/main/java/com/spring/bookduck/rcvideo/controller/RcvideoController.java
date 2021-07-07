@@ -1,5 +1,10 @@
 package com.spring.bookduck.rcvideo.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.bookduck.bookfm.biz.BookFMBiz;
 import com.spring.bookduck.model.dto.MemberDto;
@@ -66,7 +72,7 @@ public class RcvideoController {
 		model.addAttribute("scrapDto",scdto);
 		System.out.println(title+isbn+coverLargeUrl+author+categoryId);
 		if(biz.rcinsert(rcdto)>0) {
-			model.addAttribute("rclist",biz.rcselectone(isbn));
+			model.addAttribute("rclist",biz.rclist(isbn));
 			return "book/recommendBook";
 		}
 			
@@ -123,7 +129,7 @@ public class RcvideoController {
 		model.addAttribute("scrapDto",scdto);
 		System.out.println("여기맞나"+title+isbn+coverLargeUrl+author+categoryId);
 		if(biz.rcupdate(rcvideoDto)>0) {
-			model.addAttribute("rclist",biz.rcselectone(isbn));
+			model.addAttribute("rclist",biz.rclist(isbn));
 			return "book/recommendBook";
 		}
 		
@@ -155,16 +161,42 @@ public class RcvideoController {
 		
 		return "home";
 	}
-	
-	@RequestMapping("rcvideolist.do")
-	public String rcvideolist() {
+	@ResponseBody
+	@RequestMapping(value="rcvideolist.do",produces = "application/json;")
+	public Map<String, List<RcvideoDto>> rcvideolist(String book_isbn ) {
+		
+		List<RcvideoDto> list = biz.rclist(book_isbn);
+		Map<String, List<RcvideoDto>> map = new HashMap<String, List<RcvideoDto>>(); 
+		map.put("list", list);
 		
 		
 		
-		
-		return null;
+		return map;
 	}
-
+	@ResponseBody
+	@RequestMapping("rcvideoinsert.do")
+	public int rcvidelinsert(RcvideoDto rcdto) {
+		
+		if(biz.rcinsert(rcdto)>0) {
+			return 1;
+		}
+		
+		
+		return 0;
+		
+	}
+	@ResponseBody
+	@RequestMapping("deleterc.do")
+	public String deleterc(int rcvideo_no) {
+		
+		if(biz.rcdelete(rcvideo_no)>0) {
+			
+			
+			return "1";
+		}
+		
+		return "0";
+	}
 }
 
 

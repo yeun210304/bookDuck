@@ -21,6 +21,7 @@
 		<typeAlias type="com.spring.bookduck.bookfm.dto.BookFMDto" alias="BookFMDto"/>
 		<typeAlias type="com.spring.bookduck.model.dto.RealTimeNovelDto" alias="RTNovelDto"/>
 		<typeAlias type="com.spring.bookduck.bookstar.dto.BookStarDto" alias="BookStarDto"/>
+		<typeAlias type="com.spring.bookduck.rcimg.dto.RcimgDto" alias="rcimgDto"/>
 	</typeAliases>
 	
 	<mappers>
@@ -35,6 +36,7 @@
 		<mapper resource="/mybatis/bookfm-mapper.xml"/>
 		<mapper resource="/mybatis/RealTimeNovel-mapper.xml"/>
 		<mapper resource="/mybatis/bookstar-mapper.xml"/>
+		<mapper resource="/mybatis/rcimg-mapper.xml"/>
 	</mappers>
 	
 </configuration>

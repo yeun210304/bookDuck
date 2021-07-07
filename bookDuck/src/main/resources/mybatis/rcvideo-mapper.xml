@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="rcvideo">
 
+	<select id="rclist" parameterType="String" resultType="rcvideoDto">
+		SELECT RCVIDEO_NO,RCVIDEO_CONTENT,BOOK_ISBN
+		FROM RCVIDEOTABLE
+		WHERE BOOK_ISBN = #{book_isbn}
+	
+	</select>
+
 	<select id="rcselectone" parameterType="String" resultType="rcvideoDto">
 		SELECT RCVIDEO_NO,RCVIDEO_CONTENT,RCVIDEOTABLE.BOOK_ISBN AS
 		BOOK_ISBN,SCRAP.BOOK_ISBN AS BOOK_ISBN

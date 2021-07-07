@@ -8,6 +8,7 @@ public interface RcvideoDao {
 	
 	String namespace ="rcvideo.";
 	
+	public List<RcvideoDto> rclist(String book_isbn);
 	public List<RcvideoDto> rcselectone(String rcvideo_isbn);
 	public RcvideoDto rcselectoneno(int rcvideo_no);
 	public int rcinsert (RcvideoDto dto);

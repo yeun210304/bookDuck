@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 var submitAction = function() { /* do something with Error */ return false; };
 
@@ -48,41 +48,53 @@ function null_check(){
 			return false;
 	}
 </script>
+ <link href="css/join.css" rel="stylesheet">
 </head>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <body>
 <jsp:include page="../header.jsp"/>
+	<div class=join-title>
+		<h2 align="center">sns 간편 회원가입</h2>
+	</div>
 
-	<h4>sns 간편 회원가입</h4>
-<div id=checkpls>
 	<form action="reg.do">
-		<div class="join-form_id">
-			<div class="id">ID</div>
-			<div class="id_input_box">
-				<input type="text" id="member_id" name="member_id" class="member_id">
-				<button class="idCheck" type="button" id="idCheck" onclick="Check_id();" value="N">중복확인</button>
-			</div>
+		<div class="join-form" id=checkpls>
+			<table id="jointable">
+				<colgroup>
+					<col width="15%"/>
+				</colgroup>
+				<tr class="id">
+					<th>아이디</th>
+						<td>&nbsp;<input class="text_box" type="text" id="member_id" name="member_id" class="member_id" placeholder="아이디를 입력하세요">
+						&nbsp;<button class="idCheck" type="button" id="idCheck" onclick="Check_id();" value="N">아이디 중복 확인</button></td>
+				</tr>
+				<tr class="pw">
+					<th>비밀번호</th>
+						<td>&nbsp;<input class="text_box" type="password" id="member_pw" name="member_pw" placeholder="비밀번호를 입력하세요"></td>
+				</tr>	
+				<tr class="age">
+					<th>생년월일</th>
+						<td>&nbsp;<input class="text_box" type="tel" id="member_age" name="member_age" placeholder="입력 예시: 19990101"></td>
+				</tr>
+				<tr class="gender">
+					<th>성별</th>
+						<td>&nbsp;<input type="radio" id="member_gender" name="member_gender" value="F">여성
+						<input type="radio" id="member_gender" name="member_gender" value="M">남성</td>
+				</tr>
+				<tr class="email">
+					<th>이메일</th>
+						<td>&nbsp;<input class="text_box" type="text" id="member_email" name="member_email" class="member_email" maxlength="20" value=${member_email }>
+						<button class="emailCheck" type="button" id="idCheck" onclick="Check_email();" value="N">이메일 중복 확인</button></td>
+				</tr>
+				<tr class="joinbutton">
+					<td colspan="3"><input type="submit" value="가입" id="joinbutton" onclick="null_check();"/></td>
+				</tr>
+			</table>
 		</div>
-		<div class="join-form_pw">
-			<div class="pw">비밀번호</div>
-			<input type="password" id="member_pw" name="member_pw">
-		</div>
-		<div class="join-form_age">
-			<div class="age">생년월일</div>
-			<input type="tel" id="member_age" name="member_age" placeholder="입력 예시: 19990101">
-		</div>
-		<div class="join-form_gender">
-			<div class="gender">성별</div>
-			<input type="radio" id="member_gender" name="member_gender" value="F">여
-			<input type="radio" id="member_gender" name="member_gender" value="M">남
-		</div>
-		<div class="join-form_email">
-			<div class="email">이메일</div>
-			<input type="text" id="member_email" name="member_email" class="member_email" maxlength="200" value="${member_email }">
-		</div>
-            <input type="submit" value="가입" onclick="null_check();">
-           	<input type="button" value="취소">
 	</form>
-</div>
+
 </body>
 <script type="text/javascript">
 function Check_id(){

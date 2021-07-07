@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -50,49 +49,51 @@ function null_check(){
 	}
 }
 </script>
-<!--  <link href="css/join.css" rel="stylesheet">-->
-</head>
+ <link href="css/join.css" rel="stylesheet">
+ </head>
 <body>
 <jsp:include page="../header.jsp"/>
-	<h1>회원가입</h1>
+	<div class=join-title>
+		<h2 align="center">회원가입</h2>
+	</div>
 	<form action="reg.do" method="post">
-	<div class=checkpls id=checkpls>
-	<ul>
-			<li><div class="id">아이디</div></li>
-			<li><div class="id_input_box">
-				<input type="text" id="member_id" name="member_id" class="member_id" placeholder="아이디를 입력하세요">
-				<button class="idCheck" type="button" id="idCheck" onclick="Check_id();" value="N">중복확인</button>
-			</div></li>
-			<li><div class="pw">비밀번호</div></li>
-			<li><input type="password" id="member_pw" name="member_pw" placeholder="비밀번호를 입력하세요"></li>
-			<li><div class="age">생년월일</div></li>
-			<li><input type="tel" id="member_age" name="member_age" placeholder="입력 예시: 19990101"></li>
-			<li><div class="gender">성별</div></li>
-			<li><input type="radio" id="member_gender" name="member_gender" value="F">여
-			<input type="radio" id="member_gender" name="member_gender" value="M">남</li>
-			<li><div class="email">이메일</div></li>
-			<li><input type="text" id="member_email" name="member_email" class="member_email" maxlength="20" placeholder="이메일을 입력하세요">
-			<button class="emailCheck" type="button" id="idCheck" onclick="Check_email();" value="N">이메일 중복 확인</button></li>
-			<!--  
-			<span id="imt3" style="font-weight:bold; color:black;">@</span>
-			<input type="text" id="usermail2" name="usermail2" class="usermail2" maxlength="10">
-			<!-- [1]이메일 인증번호 발송 -> [2]이메일 인증번호 확인 
-			<input type="button" name="btemail" class="btemail" id="btemail" value="인증번호 발송!">
-			
-			<!-- 인증번호 입력란 
-			<input type="text" name="writechk" class="writechk" id="writechk" value="">
-			<span id="explainsp">*메일로 보내드린 인증번호 6자리를 입력해 주세요</span>
-			
-			<!-- 이메일 인증시 Y/N 
-			<input type="hidden" name="emailchk" class="emailchk" id="emailchk" value="" style="background: yellow;">
-			-->
-			<li><input type="submit" onclick="null_check();" value=회원가입 /></li>
-		</ul>
+	<div class="join-form" id=checkpls>
+		<table id="jointable">
+				<colgroup>
+					<col width="15%"/>
+				</colgroup>
+				<tr class="id">
+					<th>아이디</th>
+						<td>&nbsp;<input class="text_box" type="text" id="member_id" name="member_id" class="member_id" placeholder="아이디를 입력하세요">
+						&nbsp;<button class="idCheck" type="button" id="idCheck" onclick="Check_id();" value="N">아이디 중복 확인</button></td>
+				</tr>
+				<tr class="pw">
+					<th>비밀번호</th>
+						<td>&nbsp;<input class="text_box" type="password" id="member_pw" name="member_pw" placeholder="비밀번호를 입력하세요"></td>
+				</tr>	
+				<tr class="age">
+					<th>생년월일</th>
+						<td>&nbsp;<input class="text_box" type="tel" id="member_age" name="member_age" placeholder="입력 예시: 19990101"></td>
+				</tr>
+				<tr class="gender">
+					<th>성별</th>
+						<td>&nbsp;<input type="radio" id="member_gender" name="member_gender" value="F">여성
+						<input type="radio" id="member_gender" name="member_gender" value="M">남성</td>
+				</tr>
+				<tr class="email">
+					<th>이메일</th>
+						<td>&nbsp;<input class="text_box" type="text" id="member_email" name="member_email" class="member_email" maxlength="20" placeholder="이메일을 입력하세요">
+						<button class="emailCheck" type="button" id="idCheck" onclick="Check_email();" value="N">이메일 중복 확인</button></td>
+				</tr>
+				<tr class="joinbutton">
+					<td colspan="3"><input type="submit" onclick="null_check();" id="joinbutton" value=회원가입 /></td>
+				</tr>
+			</table>
 		</div>
 	</form>
+	
 </body>
 <script type="text/javascript">
-
 function Check_id(){
 	$.ajax({
 		url:"idCheck.do",
@@ -130,55 +131,6 @@ function Check_email(){
 		}
 	})
 }
-$("#btemail").click(function(){
-	//alert("이메일 인증 시작!");
-	var user_email1 = $(".usermail1").val();
-	var user_email2 = $(".usermail2").val();
-	
-	var key; //인증키
-	var bool = true;
-	
-	if(bool){
-		$.ajax({
-			url:"<c:url value='member/certifiedMail.do'/>",
-			type: "post",
-			dataType:"json",
-			data:{"user_email1":user_email1,
-				  "user_email2":user_email2},
-			success: function(result){
-				alert("인증번호 발송!");
-				key=result;
-				bool=false;
-			},
-		error: function(xhr, status, error){
-			alert("Error : "+status+"==>"+error);
-		}
-	}); //ajax
-	$(".writechk").show(); //이메일 인증 입력란
-	$(".btemail").val("인증번호 확인!"); //이메일 인증 버튼 -> 내용 변경
-	
-	$(".writechk").keyup(function(){
-		if($(".writechk").val()>=6){
-			var userContent = $(".writechk").val();
-			//alert(userContent);
-			
-			if(userContent == key){
-				alert("인증 성공!");
-				$("#emailchk").val("Y"); //숨겨져 있음 -> DB에 저장할거임 (Y/N)
-				$("#btemail").val("인증 완료!"); 
-				$("#btemail").attr("disabled", true); //읽기 전용으로 변환
-				$(".writechk").attr("disabled", true);
-			}else{
-				$("#emailchk").val("N");
-				$("#btemail").val("인증번호 재발송!");
-				event.preventDefault();
-			}
-		}
-	}); //keyup
-	}else{
-		alert("test1 => false");
-		event.preventDefault();
-	}
-})
+
 </script>
 </html>

@@ -75,8 +75,8 @@
 
 <body>
 <div class="login-form">
+	<div class="general-login">
 	<table id="login-form">
-		<thead>
 			<tr>
 				<th>ID</th>
 			<td><input type="text" id="member_id"/></td>
@@ -99,9 +99,10 @@
 			<td>
 			<input type="button" value="비밀번호 찾기" id="find_pw" onclick="location.href='findPwForm.do'"/></td>
 			</tr>
-		</thead>
 	</table>
-</div>
+	</div>
+
+<div class="sns-login-area">
 <!-- 네이버 로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -123,7 +124,8 @@
         e.preventDefault();
     }
 </script>
-
+</div> <!-- sns-login-area 끝 -->
+</div>
 </head>
 
 <body>
@@ -198,7 +200,6 @@
 			}
 		});
     </script>
-  	
 
 </body>
 </html>

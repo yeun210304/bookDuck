@@ -46,20 +46,6 @@
 //절대경로 확인
 String path = request.getContextPath();
 
-/*
-* XML Parsing 
-* 1. XML document loading -> XML Object 
-* 2. root element 
-* 3. child element 
-* 4. text node 
-* 5. print
-*/
-
-//인터파크 도서 검색에 대한 XML 요청 및 분석, 결과 출력
-//http://book.interpark.com/api/search.api?key=개인키&query=검색어&queryType=검색기준&maxResults=10&inputEncoding=utf-8
-
-//검색 기준 및 검색 단어 수신
-
 String key = request.getParameter("key");
 
 String value = request.getParameter("value");
@@ -68,8 +54,24 @@ if (key == null) {
 	value = "";
 }
 
+
+
+
+
+
+
+
+
 String genreTAG = request.getParameter("genreTAG");
-System.out.println("genreTAG : " + genreTAG);
+System.out.println("genreTAG : " + request.getParameter("genreTAG"));
+
+
+
+
+
+
+
+
 
 StringBuilder sb = new StringBuilder();
 String totalcount = "0";
@@ -80,10 +82,17 @@ if (key != null && value != null) {
 	DocumentBuilder builder = factory.newDocumentBuilder();
 	Document doc = null;
 	
+	
+	
+	
 	String str = String.format(
 	"http://book.interpark.com/api/search.api?key=7A71D8E679DA9C96874476B8E225B77A4592E29959B15764C52A257C0343754F&query=%s&inputEncoding=utf-8&searchTarget=book&foreign&categoryId=%s",
 	1, genreTAG);
 	URL url = new URL(str);
+	
+	
+	
+	
 	
 	InputSource is = new InputSource(url.openStream());
 	doc = builder.parse(is);
@@ -316,42 +325,45 @@ if (key != null && value != null) {
 <!-- 책장르 선택시 책 나열 -->
 <script type="text/javascript">
 
-	$(document).ready(function(){
-		
-		var genreTAG = document.getElementById("genreTAG").value;
-		
-		console.log(genreTAG);
-		
-		function genreTageDo(){
-			alert("온체인지");
-			$.ajax({
-				type : "post",
-		        data: {"genreTAG" : genreTAG},
-		        success: function(data){
-		    		alert("success!");
-		            console.log(genreTAG);
-		            console.log(data);
-					$("#genreTAG") = genreTAG.val();
-		            }, 
-		        error: function(){
-	            	alert("error...");
-	         	   }
-		        });
-			}
-	});
+	function genreTagDo(){
+		$.ajax({
+			type : "post",
+	        data: {"genreTAG" : genreTAG.value},
+	        success: function(list){
+	        	alert("success까지 옴!");
+	        	
+	        	var arr = list.split('<');
+				console.log(arr);
+				
+                var value = "";
+                
+                for(var i=245; i < arr.length; i++){
+                	value += '<'+arr[i]
+                };
+                
+                var value2 = value.split("<ul class=");
+	        	
+	        	
+	        	$("#genreResult") = html(value2[0]);
+	            }, 
+	        error: function(){
+            	alert("error...");
+         	   }
+	        });
+		}
 	
 </script>
 <title>북덕 BookDuck</title>
 </head>
-<body>
 
 	<jsp:include page="header.jsp"/>
-
 	<a href="navertest.do">네이버테스트</a>
 	
 	<!-- 장르(태그) 선택 -->
 	<div class="genre">
-		<select id="genreTAG" name="genreTAG" onchange="genreTageDo();">
+		<h3>장르선택</h3>
+		<select id="genreTAG" name="genreTAG" onchange="genreTagDo();">
+			<option value="none">=== 선택 ===</option>
 			<option value="101">소설</option>
 			<option value="102">시/에세이</option>
 			<option value="103">예술/대중문화</option>
@@ -374,8 +386,16 @@ if (key != null && value != null) {
 			<option value="128">여행</option>
 		</select>
 		<br/>
-		<div id="genreResult">갑출력부분<%=sb.toString()%></div>
+		<div id="genreResult"><%=genreTAG%>갑출력부분<%=sb.toString()%></div>
 	</div>
+
+
+
+
+
+
+
+
 
 
 	<!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->

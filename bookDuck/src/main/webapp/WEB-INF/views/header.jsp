@@ -534,7 +534,9 @@ a {
 								<span></span>
 							</button>
 						</div>
+						<!-- 
 						<span class="close" onclick="searchToggle(this, event);"></span>
+						-->
 					</div>
 
 					<!-- 

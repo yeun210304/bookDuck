@@ -534,10 +534,10 @@ if (key != null && value != null) {
 	<!-- 인공지능을 활용한 책 카테고리 추천. -->
 	<br/><br/><br/><br/>
 	<div>
+		<div>
+			<span id="airecommendbox">나이/성별/좋아하는 책 분류를 선택해주세요</span>
+		</div>
 		<table>
-			<tr>
-				<td colspan="4" id="airecommendbox">나이/성별/좋아하는 책 분류를 선택해주세요</td>			
-			</tr>
 			<tr>
 				<td>										
 					<select name="age">

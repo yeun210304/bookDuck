@@ -515,7 +515,7 @@ text-decoration: none;
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
+		
 <script>
 
 	var currentPageNum; //현재 페이지 번호 저장용 전역변수
@@ -668,6 +668,8 @@ text-decoration: none;
             });
         }
 	    
+	   
+	    
 	    var $searchbox = $("#searchbox").find("input");
 	    $searchbox.on("propertychange change keyup paste input", function() {
 	    	// console.log("작동되나"?");	    	
@@ -692,7 +694,7 @@ text-decoration: none;
 						$add.find('.searchpagebox').remove();
 						$add.append('<div class="searchpagebox"></div>')
 						for(var i = 0; i < booklist.length ; i++){								
-							$add.find('div').append("<a>"+((booklist[i].length > 11)? booklist[i].substring(0,10)+"...</a><br/>" : booklist[i] +"</a><br/>"));
+							$add.find('div').append("<a href='javascript:$(\""+"#searchbox"+" input"+"\").val(\""+booklist[i]+"\");'>"+((booklist[i].length > 11)? booklist[i].substring(0,10)+"...</a><br/>" : booklist[i] +"</a><br/>"));
 						}							
 					}						
 				});		
@@ -725,6 +727,7 @@ text-decoration: none;
 		});
 	});
 </script>
+
 
 </head>
 <body>

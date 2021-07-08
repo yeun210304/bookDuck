@@ -262,15 +262,27 @@ a {
 }
 
 .headerallsearch a {
-	font-size: 1.6rem;
-	line-height: 2.5rem;
+	font-size: 16px;
+	line-height: 21px;
 }
 </style>
 </head>
 <script type="text/javascript">
+	function autotext(booklist){
+		console.log(booklist);
+		var text = document.getElementById("value");
+		text.value = booklist;
+	}
+
+
+</script>
+
+
+<script type="text/javascript">
 	$(document)
 			.ready(
-					function() {
+					function() {					
+						
 
 						// ajax 통신으로 만든 헤더 검색 (현재 안쓰는 코드) 
 						$("#sear")
@@ -368,7 +380,7 @@ a {
 																					.find(
 																							'div')
 																					.append(
-																							"<a>"
+																							"<a href='javascript:autotext(\""+booklist[i]+"\")'>"
 																									+ ((booklist[i].length > 13) ? booklist[i]
 																											.substring(
 																													0,

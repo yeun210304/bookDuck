@@ -265,12 +265,46 @@ a {
 	font-size: 1.6rem;
 	line-height: 2.5rem;
 }
+
+
+/*
+	헤더 도서검색 호버시 나오는 신간도서,베스트샐러 
+
+.sub{
+	top: 100%;
+	left:0;
+	z-index: 998;
+	display: none;
+	visibility: hidden;
+	float: left;
+}
+
+.menu>li:hover>.sub{
+	visibility: visible;
+	display: block;
+	background-color: white;
+}
+
+.subbook{
+	list-style: none;
+	font-size: 10pt;
+	background-color: white;
+	z-index: 998;
+	float: left;
+
+}
+
+.headerbooksear{
+	background-color: white;
+	z-index: 999;
+}
+*/
+
+
 </style>
 </head>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 
 						// ajax 통신으로 만든 헤더 검색 (현재 안쓰는 코드) 
 						$("#sear")
@@ -399,12 +433,20 @@ a {
 									$("#value").parent().parent().find(
 											'.headerallsearch').remove();
 								});
+						
+						
+						// 호버시 h1 이벤트 해제 연습중 
+						$(".sub").hover(function() {
+							$(".e").unbind("");
+							$("#h1").unbind("");
+						});
+						
+						
 
-					});
+				});
 
 	/*
 	function headsearch() {
-		
 		var value = document.getElementById("headervalue").value;
 		location.href = "booksearch.do?value=" + value + "&key=title&start=1&target=book&sort=accuracy";
 
@@ -424,6 +466,10 @@ a {
 			container.find('.search-input').val('');
 		}
 	}
+	 
+
+
+	 
 </script>
 <body>
 
@@ -458,8 +504,16 @@ a {
 			<div id="header_2_left">
 			</div>
 			<div id="header_2_center">
-				<ul>
-					<li><a href="booksearch.do">도서검색</a></li>
+				<ul class="menu">
+					<li class="headerbooksear">
+						<a href="booksearch.do">도서검색</a>
+						<!-- 
+						<ul class="sub">
+							<li class="subbook"><a href="bookbest.do">&nbsp;&nbsp;&nbsp;베스트샐러</a></li>
+							<li class="subbook"><a href="newBook.do">&nbsp;&nbsp;&nbsp;신간도서</a></li>
+						</ul>
+						-->
+					</li>
 					<li><a href="noticeList.do">공지사항</a></li>
 					<li><a href="qnaList.do">문의게시판</a></li>
 				</ul>

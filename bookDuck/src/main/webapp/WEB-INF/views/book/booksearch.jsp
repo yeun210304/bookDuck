@@ -210,7 +210,7 @@ if (key != null && value != null) {
 		sb.append(String.format("<div class='row result'>"));
 		sb.append(String.format("<div class='col-md-1'><span>%s</span></div>", a));
 		sb.append(String.format("<div class='col-md-4' style='background-size: 90%% 90%%; overflow : auto;'><img src='%s' class='resize'></div>", coverLargeUrl));
-		sb.append(String.format("<div class='col-md-7'>"));
+		sb.append(String.format("<div class='col-md-7'><ul>"));
 		sb.append(String.format("<table id = 'tbb' style='table-layout:fixed'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
 		sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
 		sb.append(String.format("<tr> <td id='td1' ><b> &#127804;&nbsp; 출판사 </b></td> <td  id='td2'>%s</td> </tr>", publisher));
@@ -297,6 +297,7 @@ div.result {
 	-ms-transition: 1s;
 	position: relative;
 	padding: 12px;
+	z-index: 1
 }
 
 #h1:before, #h1:after {
@@ -310,7 +311,6 @@ div.result {
 	-ms-transition: 1s;
 	opacity: 0.3;
 	left: 50%;
-	
 }
 
 #h1:before {
@@ -321,6 +321,7 @@ div.result {
 	top: 0;
 }
 
+/* 호버 효과 */
 #h1:hover {
 	letter-spacing: 30px;
 }
@@ -339,13 +340,13 @@ div.result {
 	color: #0A11FF;
 	font-family: 'Pinyon Script', cursive;
 	text-align: center;
-	font-size: 50px;
+	font-size: 30px;
 	font-weight: 100;
 	bottom: 40px;
 	transition: 1s;
 	-webkit-transition: 1s;
 	-ms-transition: 1s;
-	opacity: 0.15;
+	opacity: 0.3;
 	width: 100%;
 }
 
@@ -610,7 +611,7 @@ text-decoration: none;
                     var value = "";
                     
                     
-                    for(var i=245; i < arr.length; i++){
+                    for(var i=279; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -650,7 +651,7 @@ text-decoration: none;
                     var value = "";
                     
                     
-                    for(var i=245; i < arr.length; i++){
+                    for(var i=279; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -733,7 +734,7 @@ text-decoration: none;
  <jsp:include page="../header.jsp"/>
   
   <div class="container">
-         <div class="panel page-header" style="text-align: center;">
+      <div class="panel page-header" style="text-align: center;">
           
           <!-- 주의) 상대경로 대신 절대경로 표기를 권장한다. -->
           <!-- 도서검색 효과 -->
@@ -745,6 +746,10 @@ text-decoration: none;
           </div>
           <span style="font-size: small; color: #777777;"></span>
       </div>
+      <div id="btncss" style="float: right; padding: 4px 15px 15px 10px; "><a href="newBook.do">&#10024;&nbsp;신간도서</a></div>
+      <div id="btncss" style="float: right; padding: 4px 15px 15px 10px; "><a href="bookbest.do">&#128077;&nbsp;베스트셀러</a></div>
+      <br/><br/>
+      
         
       <div class="panel-group">
 			<div class="panel panel-default">

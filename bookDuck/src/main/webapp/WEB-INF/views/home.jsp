@@ -488,6 +488,10 @@ if (key != null && value != null) {
 					</div>	
 			</div>
 			
+		});
+	
+	</script>
+
 	<!-- 인공지능을 활용한 책 카테고리 추천. -->
 			<div id="mainBottom">
 				<table>
@@ -617,12 +621,7 @@ if (key != null && value != null) {
 							$aibox.text("");
 							$aibox.text("로그인을 해야 사용할 수 있는 기능입니다.");
 						}
-						
-						
-						
 					});
-				
-				
 				</script>
 			</div>
 		</div>

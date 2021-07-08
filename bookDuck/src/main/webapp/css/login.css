@@ -1,61 +1,47 @@
 @charset "UTF-8";
 
-*{
-  margin: 0px;
-  padding: 0px;
-  text-decoration: none;
-  font-family:sans-serif;
+*{margin: 0px; padding:0px;
+text-decoration: none; font-family: sens-serif;}
 
-}
+body{background-image: #34495e;}
 
-body {
-  margin: 0;
-    height: 100%;
-    background:white;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
-}
-
-.login-form{
-	position: relative;
-	width: 300px;
-	height: 200px;
-	text-align: center; width: 50%;}
-#login-form{
+.loginForm{
 	position: absolute;
-	width: 500px;
-	height: 500px;
-	background: #FDF7DD;
-	color: #000000;
-	top: 50%;
-	left: 50%;
-	margin: -50px 0 0 -50px;
-	
+	width: 300px;
+	height: 400px;
+	padding: 30px, 20px;
+	background-color: #FFFFFF;
+	text-align: center;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	border-radius: 15px;
 }
-	.login-form>tbody>tr{height: 50px; background-color: #FDF7DD;}
-	.login-form>tbody>th{height: 50px; background-color: #FDF7DD;}
-	thead{height: 40px; background-color: #F5DC7A;}
-	ul{text-align : center;}
-	ul li{list-style: none; display: inline-block;}
-	#pagingArea{width:fit-content; margin:auto;}
-	#searchForm {text-align: center;}
-	#searchForm>*{display:inline-block; margin:5px;}
-	.pagination a {
-		padding: 3px 8px;
-		margin: 5px;
-	}
-	a.on{
-		width: 30px;
-		height: 30px;
-		border: none;
-		border-radius: 100%;
-		background-color: #F5DC7A;
-		color: white;
-	}
-	button{
-		width : 60px;
-		height: 25px;
-		border: none;
-		border-radius: 25%;
-		background-color: #F5DC7A;
-		cursor: pointer;
-	}
+
+.loginForm h2{
+	text-align:center; margin: 30px;
+}
+
+.idForm{border-bottom: 2px solid #adadad;
+	margin:30px; padding: 10px 10px;}
+.pwForm{border-bottom: 2px solid #adadad;
+	margin:30px; padding: 10px 10px;}
+
+.member_id{width: 100%; border:none; outline: none; color: #636e72;
+	font-size: 16px; height: 25px; background: none;}
+
+.member_pw{width: 100%; border:none; outline: none; color: #636e72;
+	font-size: 16px; height: 25px; background: none;}
+
+button{position:relative; left:40%; transform: translateX(-50%);
+	margin-bottom:40px; width:80%; height:40px;
+	background: linear-gradient(123deg,#81ecec,#6c5ce7,#81ecec);
+	background-position: left;
+	background-size:200%;
+	color:white; font-weight:bold; border:none;
+	cursor:pointer; transition:0.4s; display:inline;}
+
+button:hover{
+	background-position: right;}
+
+.bottom{text-align: center;}

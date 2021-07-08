@@ -50,9 +50,6 @@ function null_check(){
 </script>
  <link href="css/join.css" rel="stylesheet">
 </head>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-latest.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <body>
 <jsp:include page="../header.jsp"/>
 	<div class=join-title>
@@ -67,8 +64,8 @@ function null_check(){
 				</colgroup>
 				<tr class="id">
 					<th>아이디</th>
-						<td>&nbsp;<input class="text_box" type="text" id="member_id" name="member_id" class="member_id" placeholder="아이디를 입력하세요">
-						&nbsp;<button class="idCheck" type="button" id="idCheck" onclick="Check_id();" value="N">아이디 중복 확인</button></td>
+						<td>&nbsp;<input class="text_box" type="text" id="member_id" name="member_id" class="member_id" maxlength="20" placeholder="아이디를 입력하세요">
+						<button class="idCheck" type="button" id="idCheck" onclick="Check_id();" value="N">아이디 중복 확인</button></td>
 				</tr>
 				<tr class="pw">
 					<th>비밀번호</th>
@@ -85,8 +82,8 @@ function null_check(){
 				</tr>
 				<tr class="email">
 					<th>이메일</th>
-						<td>&nbsp;<input class="text_box" type="text" id="member_email" name="member_email" class="member_email" maxlength="20" value=${member_email }>
-						<button class="emailCheck" type="button" id="idCheck" onclick="Check_email();" value="N">이메일 중복 확인</button></td>
+						<td>&nbsp;<input class="text_box" type="text" id="member_email" name="member_email" class="member_email" maxlength="200" value=${member_email }>
+						<button class="emailCheck" type="button" id="emailCheck" onclick="Check_email();" value="N">이메일 중복 확인</button></td>
 				</tr>
 				<tr class="joinbutton">
 					<td colspan="3"><input type="submit" value="가입" id="joinbutton" onclick="null_check();"/></td>

@@ -13,8 +13,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <%
 	MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
@@ -166,7 +178,7 @@
 
 
 </head>
-<body>
+<body style="background-color:#fdf7dd ">
 <jsp:include page="header.jsp"/>
 
 	
@@ -177,7 +189,7 @@
 		<a href="updatePwForm.do">비밀번호변경</a>
 		<a href="leaveAccountForm.do">회원탈퇴</a>
 	
-	<h1>MYPAGE</h1>
+	<h1 style="color: ">MY BookDuck</h1>
 	<br/><br/>
 	<div>
 		<c:choose>
@@ -194,7 +206,7 @@
 				<%--/////////////자기소개가 없을시 보여지는 단 /////////////// --%>
 				<c:choose>
 					<c:when test="${empty intdDto.intd_content}">
-						<table>
+						<table class="table table-borderless">
 							<tr>
 								<td colspan="1" align="center"
 									onclick="location.href='intdinsertres.do?member_id=${Ldto.member_id}'">
@@ -240,22 +252,22 @@
 					</c:when>
 					<c:otherwise>
 					<%--////////////자기소개가 있을때/////////////  --%>
-						<table>
+						<table class="table table-borderless">
 							<tr>
 								<td id="summernote">${intdDto.intd_content}
 								</td>
 							</tr>
 							<tr>
-								<td><input type="button" value="수정"
+								<td class="btn-group" ><input type="button" value="수정" class="btn btn-primary"
 									onclick="location.href='updateintdres.do?intd_no=${intdDto.intd_no}'">
-									<input type="button" value="삭제"
+									<input type="button" value="삭제" class="btn btn-primary"
 									onclick="location.href='deleteintd.do?intd_no=${intdDto.intd_no}'">
 								</td>
 							</tr>
 						</table>
 						<br/><br/>
 						<div>
-							<table border="1">
+							<table border="1" class="table table-borderless">
 								<col width="10">
 								<col width="25" />
 								<col width="100" />
@@ -287,14 +299,13 @@
 									</c:otherwise>
 								</c:choose>
 							</table>
-							<input type="button" value="삭제" onclick="deleteValue();" />	
+							<input type="button" class="btn btn-primary" value="삭제" onclick="deleteValue();" />	
 						</div>
 					</c:otherwise>
 				</c:choose>
 			</c:when>
 		</c:choose>
 		<br/><br/><br/>
-		<input type="button" value="Home" onclick="location.href='home.do'" />
 	</div>
 	
 	
@@ -306,8 +317,7 @@
 				<p> </p>
 			</c:when>
 			<c:when test="${Ldto.member_payrole eq 'Y'}">
-				<p>독서량</p>
-					<!-- 구글차트 위치-->
+				<!-- 구글차트 위치-->
 				<div id="curve_chart" method="get" style="width:900px; height:500px">
 					<h3>독서량을 등록하시면 그래프가 그려집니다</h3>
 				</div>

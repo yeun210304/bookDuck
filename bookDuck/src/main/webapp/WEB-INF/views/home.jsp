@@ -686,7 +686,6 @@ if (key != null && value != null) {
 			
 			
 			
-		});
 	
 	
 	</script>

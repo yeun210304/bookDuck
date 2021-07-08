@@ -225,7 +225,7 @@
 	}
 	
 	div #right{
-	width : 65%;
+	width : 60%;
 	float: right;
 	padding : 5px 0px 0px 70px;
 	}
@@ -492,14 +492,16 @@
 				</div>
 			</div>
 		</div>
-		<!-- 왼쪽 부분 끝나는 곳 -->
-
-
+	</div>
+	<!-- 왼쪽 부분 끝나는 곳 -->
 
 
 	<!-- 오른쪽 부분 시작 -->
 	<div id="right">
 	<div id="youtubesearch" style="float: inherit;">
+		<nav>
+			<a href="#">&nbsp;동영상 등록</a>
+		</nav>
 		<%--/////////////youtube 동영상 검색 단 /////////////// --%>
 		<form name="form1" method="post" onsubmit="return false;">
 			<input type="text" id="search_box" placeholder="동영상을 검색하세요">
@@ -562,9 +564,7 @@
  --%>
 
 
-
-
-		<!-- 오른쪽 부분 끝나는 곳  -->
+		
 		<table id="selectrclist">
 			<thead>
 			<tr>
@@ -669,6 +669,9 @@
 
 	<!-- 이미지 업로드 -->
 		<table id="selectimglist">
+		<nav>
+			<a href="#">&nbsp;이미지 등록</a>
+		</nav>
 			<thead>
 			<tr>
 				<td>
@@ -770,15 +773,12 @@
 		</script>
 
 
-
-
-
-
-
-
-
+		</div>
 
 	</div>
+	<!-- 오른쪽 부분 끝나는 곳  -->
+</div>
+</div>
 	
 </body>
 </html>

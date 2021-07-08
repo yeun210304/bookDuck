@@ -65,7 +65,7 @@ function null_check(){
 				<tr class="id">
 					<th>아이디</th>
 						<td>&nbsp;<input class="text_box" type="text" id="member_id" name="member_id" class="member_id" placeholder="아이디를 입력하세요">
-						&nbsp;<button class="idCheck" type="button" id="idCheck" onclick="Check_id();" value="N">아이디 중복 확인</button></td>
+						<button class="idCheck" type="button" id="idCheck" onclick="Check_id();" value="N">아이디 중복 확인</button></td>
 				</tr>
 				<tr class="pw">
 					<th>비밀번호</th>

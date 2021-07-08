@@ -71,37 +71,38 @@
 		});
 	});
 </script>
+
+<!-- bootstrap 4 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  
 <jsp:include page="../header.jsp"/>
 
-<body>
-<div class="login-form">
+<body width="100%" height="100%">
+<div class="loginform">
 	<div class="general-login">
-	<table id="login-form">
-			<tr>
-				<th>ID</th>
-			<td><input type="text" id="member_id"/></td>
-			</tr>
-			<tr>
-				<th>PW</th>
-				<td><input type="password" id="member_pw"/></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="button" value="login" id="login" onclick="login();"/></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center" id="loginChk"></td>
-			</tr>
-			<tr>
-			<td>
-			<input type="button" value="회원가입" id="join" onclick="location.href='joinform.do'"/></td>
-			<td>
-			<input type="button" value="아이디 찾기" id="find_id" onclick="location.href='findIdForm.do'"/></td>
-			<td>
-			<input type="button" value="비밀번호 찾기" id="find_pw" onclick="location.href='findPwForm.do'"/></td>
-			</tr>
-	</table>
+		<div class=login-title>
+		<h2 align="center">로그인</h2>
+		</div>
+		<div class="idForm">
+			<input type="text" class="member_id" placeholder="ID" id="member_id"/>
+		</div>
+		<div class="pwForm">
+			<input type="password" class="member_pw" placeholder="Password" id="member_pw"/>
+		</div>
+		<input type="button" value="login" id="login" onclick="login();"/>
+		<script>
+			let button = () => {alert('login Button!')}
+		</script>
+		<div class="bottom">
+			<input type="button" value="회원가입" id="join" onclick="location.href='joinform.do'"/>
+			<input type="button" value="아이디 찾기" id="find_id" onclick="location.href='findIdForm.do'"/>
+			<input type="button" value="비밀번호 찾기" id="find_pw" onclick="location.href='findPwForm.do'"/>
+		</div>
 	</div>
-
 <div class="sns-login-area">
 <!-- 네이버 로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -125,7 +126,7 @@
     }
 </script>
 </div> <!-- sns-login-area 끝 -->
-</div>
+</div> <!-- login-form 끝 -->
 </head>
 
 <body>

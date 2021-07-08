@@ -47,6 +47,12 @@ public class ScrapController {
 		HttpSession sess = request.getSession();
 		
 		MemberDto Ldto = (MemberDto) sess.getAttribute("Ldto");
+		
+		// 로그인 안했을 때
+		if(Ldto == null) {
+			return "member/login";
+		}
+		
 		Ldto.getMember_id();
 		String path = request.getContextPath();
 		String title = request.getParameter("title");
@@ -99,6 +105,7 @@ public class ScrapController {
 		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
 		
 		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
+
 		
 		return "book/recommendBook";
 	}

@@ -53,6 +53,7 @@ function null_check(){
  </head>
 <body>
 <jsp:include page="../header.jsp"/>
+<br/>
 	<div class=join-title>
 		<h2 align="center">회원가입</h2>
 	</div>

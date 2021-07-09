@@ -1,47 +1,37 @@
 @charset "UTF-8";
 
-*{margin: 0px; padding:0px;
-text-decoration: none; font-family: sens-serif;}
+.login-title{height: 400px;}
+table{width: 400px;}
+table {
+    margin-left:auto;
+    margin-right:auto;
+}
+#login{border:none; color:white; 
+	width: 400px; height: 50px; background-color:#6277BA;
+	margin-left:auto; margin-right:auto;
+	font-size: 20;}
+/*
+#join-button{border:none; color:white; 
+	width: 250px; height: 50px; background-color:#6277BA;
+	margin-left:auto; margin-right:auto;}*/
+td {height:40px; background-color:#B5BFE5;}
+th{background-color: #6277BA; width:50px;}
+.text_box{width:290px; height:40px;}
+th{width:290px; height:51px;}
+button{height:40px;}
+input, button{vertical-align:middle; border:none;}
 
-body{background-image: #34495e;}
-
-.loginForm{
-	position: absolute;
-	width: 300px;
-	height: 400px;
-	padding: 30px, 20px;
-	background-color: #FFFFFF;
-	text-align: center;
-	top:50%;
-	left:50%;
-	transform: translate(-50%, -50%);
-	border-radius: 15px;
+a:link {
+  color : pink;
 }
 
-.loginForm h2{
-	text-align:center; margin: 30px;
+a:hover {
+  color : #6277BA;
+  
 }
-
-.idForm{border-bottom: 2px solid #adadad;
-	margin:30px; padding: 10px 10px;}
-.pwForm{border-bottom: 2px solid #adadad;
-	margin:30px; padding: 10px 10px;}
-
-.member_id{width: 100%; border:none; outline: none; color: #636e72;
-	font-size: 16px; height: 25px; background: none;}
-
-.member_pw{width: 100%; border:none; outline: none; color: #636e72;
-	font-size: 16px; height: 25px; background: none;}
-
-button{position:relative; left:40%; transform: translateX(-50%);
-	margin-bottom:40px; width:80%; height:40px;
-	background: linear-gradient(123deg,#81ecec,#6c5ce7,#81ecec);
-	background-position: left;
-	background-size:200%;
-	color:white; font-weight:bold; border:none;
-	cursor:pointer; transition:0.4s; display:inline;}
-
-button:hover{
-	background-position: right;}
-
-.bottom{text-align: center;}
+a:active {
+  color : black;
+}
+#join_link{
+	text-decoration: underline;
+}

@@ -158,11 +158,14 @@
 	top: 10px;
 }
 /* 여기까지 검색바 */
+
 #header {
-	width: 90%;
+	width: 100%;
 	height: 100px;
 	padding-top: 10px;
-	margin: auto;
+	/*margin: auto; */
+	background-color: F5DC7A;
+	color: white;
 }
 
 #header>div {
@@ -225,7 +228,6 @@
 
 #header_2_center>ul>li a {
 	text-decoration: none;
-	color: black;
 	font-size: 18px;
 	font-weight: 900;
 }
@@ -244,7 +246,6 @@
 
 a {
 	text-decoration: none;
-	color: black;
 }
 
 .search-wrapper {
@@ -299,7 +300,6 @@ a {
 	z-index: 999;
 }
 */
-
 
 </style>
 </head>
@@ -490,8 +490,9 @@ a {
 
 	<div id="header">
 		<div id="header_1">
-			<div id="header_1_left">
-				<a href="goHome.do">북덕 BookDuck<img src="" alt=""></a>
+			<div id="header_1_left" >
+			
+				 <a href="goHome.do" class="text-body">북덕 BookDuck<img src="" alt=""></a></p>
 			</div>
 			<div id="header_1_center"></div>
 			<div id="header_1_right">
@@ -499,17 +500,16 @@ a {
 					<c:when test="${empty Ldto }">
 						<!-- 로그인 전 -->
 						<ul>
-							<li><a href="joinform.do">회원가입</a></li>
-							<li><a href="loginform.do">로그인</a></li>
+							<li><a href="joinform.do" class="text-body">회원가입</a></li>
+							<li><a href="loginform.do" class="text-body">로그인</a></li>
 						</ul>
 					</c:when>
 					<c:otherwise>
 						<!-- 로그인 후 -->
 						<ul>
-							<li>${Ldto.member_id } 님, 안녕하세요😊</li>
-							<li><a
-								href="mypage.do?member_id=${Ldto.member_id}&member_payrole=${Ldto.member_payrole}">MYPAGE</a></li>
-							<li><a href="logout.do">로그아웃</a></li>
+							<li class="text-body">${Ldto.member_id } 님, 안녕하세요😊</li>
+							<li class="text-body"><a href="mypage.do?member_id=${Ldto.member_id}&member_payrole=${Ldto.member_payrole}">MYPAGE</a></li>
+							<li class="text-body"><a href="logout.do">로그아웃</a></li>
 						</ul>
 					</c:otherwise>
 				</c:choose>
@@ -521,7 +521,7 @@ a {
 			<div id="header_2_center">
 				<ul class="menu">
 					<li class="headerbooksear">
-						<a href="booksearch.do">도서검색</a>
+						<a href="booksearch.do" class="text-body">도서검색</a>
 						<!-- 
 						<ul class="sub">
 							<li class="subbook"><a href="bookbest.do">&nbsp;&nbsp;&nbsp;베스트샐러</a></li>
@@ -529,8 +529,8 @@ a {
 						</ul>
 						-->
 					</li>
-					<li><a href="noticeList.do">공지사항</a></li>
-					<li><a href="qnaList.do">문의게시판</a></li>
+					<li><a href="noticeList.do" class="text-body">공지사항</a></li>
+					<li><a href="qnaList.do" class="text-body">문의게시판</a></li>
 				</ul>
 		
 			</div>

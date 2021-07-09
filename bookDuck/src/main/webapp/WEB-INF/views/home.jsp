@@ -54,7 +54,7 @@ if (key != null && value != null) {
 	DocumentBuilder builder = factory.newDocumentBuilder();
 	Document doc = null;
 	String str = String.format(
-	"http://book.interpark.com/api/search.api?key=7A71D8E679DA9C96874476B8E225B77A4592E29959B15764C52A257C0343754F&query=%s&inputEncoding=utf-8&searchTarget=book&foreign&categoryId=%s",
+	"http://book.interpark.com/api/search.api?key=7A71D8E679DA9C96874476B8E225B77A4592E29959B15764C52A257C0343754F&query=%s&inputEncoding=utf-8&searchTarget=book&foreign&categoryId=%s&sort=customerRating",
 	1, genreTAG);
 	URL url = new URL(str);
 	InputSource is = new InputSource(url.openStream());
@@ -113,16 +113,19 @@ if (key != null && value != null) {
 		if(categoryId == "126"){categoryId = "건강뷰티";}
 		if(categoryId == "128"){categoryId = "여행";}
 		if(categoryId == "129"){categoryId = "중등학습서";}
-		sb.append(String.format("<div class='row result'>"));
-		sb.append(String.format("<div class='col-md-3' style='background-size: 90%% 90%%; overflow : auto;'><img src='%s' class='resize'></div>", coverLargeUrl));
-		sb.append(String.format("<div class='col-md-6'>"));
-		sb.append(String.format("<table id = 'tbb' style='table-layout:fixed'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
-		sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
-		sb.append(String.format("<tr> <td id='td1' ><b> &#128049;&nbsp; 카테고리 </b></td> <td id='td2'>%s</td> </tr>", categoryName));
-		sb.append(String.format("</div>"));
-		sb.append(String.format("<div class='wrapper'>"));
-		sb.append(String.format("<div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author,categoryId));
-		sb.append(String.format("</div>"));
+		sb.append(String.format("<div class='jumbotron'"));
+			sb.append(String.format("<div class='rowResult'>"));
+			sb.append(String.format("<div class='col-md-1'></div>"));
+				sb.append(String.format("<div class='col-md-4' style='overflow : auto;'><img src='%s' class='resize' ></div>", coverLargeUrl));
+				sb.append(String.format("<div class='col-md-7'><ul>"));
+					sb.append(String.format("<table id = 'tbb' style='table-layout:fixed'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
+						sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
+						sb.append(String.format("<tr> <td id='td1' ><b> &#128049;&nbsp; 카테고리 </b></td> <td id='td2'>%s</td> </tr>", categoryName));
+						sb.append(String.format("<tr> <td id='td1' ><div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'>&#128149;&nbsp;도서추천</a></div></td></tr></table>",title,coverLargeUrl,isbn,author,categoryId));
+						sb.append(String.format("</div>"));
+						sb.append(String.format("</div>"));
+					sb.append(String.format("<div class='wrapper'>"));
+			sb.append(String.format("</div>"));
 		sb.append(String.format("</div>"));
 	}
 }
@@ -132,28 +135,10 @@ if (key != null && value != null) {
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 <!-- bootstrap 4 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="css/home.css" rel="stylesheet" type="text/css"/>
+<script src="https://ajax.googleapis.com/ajax	 /libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<style type="text/css">
-	#mainCenter {
-		width: 100%;
-	}
-	
-	#mainCenter>div {
-		width: 48%;
-		float: left;
-		margin-left: 2%;
-		margin-bottom: 100px;
-	} /*#mainCenter_left{width:50%;} #mainCenter_right{width: 40%}*/
-	#inputMessage {
-		width: 80%;
-	}
-	
-	#mainBottom {
-		width: 80%;
-	}
-</style>
 <!--  websocket 웹소켓을 이용한 모두가 함께 쓰는 실시간소설 RealTimeNovel -->  
 <script type="text/javascript">
 	//웹소켓 설정
@@ -269,12 +254,14 @@ if (key != null && value != null) {
 	        data: {"genreTAG" : genreTAG.value},
 	        success: function(list){
 	        	var arr = list.split('<');
+	        	console.log(arr);
                 var value = "";
-                for(var i=212; i < arr.length; i++){
+                for(var i=241; i < 400; i++){
                 	value += '<'+arr[i]
                 };
                 var value2 = value.split("<ul class=");
-	        	$("#Result1").html(value);
+               // $("#genreTAG").hide();
+	        	$("#Result1").html(value2);
 	            }, 
 	        error: function(){
             	alert("error...");
@@ -286,54 +273,63 @@ if (key != null && value != null) {
 </head>
 
 	<jsp:include page="header.jsp"/>
-
+	
+			<!-- 장르(태그) 선택 -->
+				<div id="genre" class="jumbotron text-center">
+					<label>장르선택</label>
+					<select id="genreTAG" name="genreTAG" onchange="genreTagDo();">
+						<option value="none"> ▫▫▫▫▫▫ 선택 ▫▫▫▫▫▫ </option>
+						<optgroup label=문학>
+							<option value="101">소설</option>
+							<option value="112">청소년</option>
+							<option value="108">만화</option>
+						</optgroup>	
+						<optgroup label="전문서적">
+							<option value="119">인문</option>
+							<option value="117">경제경영</option>
+							<option value="104">사회과학</option>
+							<option value="116">자연과 과학</option>
+							<option value="103">예술/대중문화</option>
+							<option value="122">컴퓨터/인터넷</option>
+							<option value="120">종교/역학</option>
+							<option value="105">역사와 문화</option>
+							<option value="118">자기계발</option>
+						</optgroup>	
+						<optgroup label="학습서">
+							<option value="113">초등학습서</option>
+							<option value="129">중등학습서</option>			
+							<option value="114">고등학습서</option>
+							<option value="123">자격서/수험서</option>
+							<option value="125">전공도서/대학교재</option>
+							<option value="115">국어/외국어/사전</option>
+						</optgroup>	
+						<optgroup label="사회">
+							<option value="107">잡지</option>
+							<option value="109">유아</option>
+							<option value="110">아동</option>
+							<option value="111">가정과 생활</option>
+							<option value="124">취미/레저</option>
+							<option value="126">건강/뷰티</option>
+							<option value="128">여행</option>
+						</optgroup>
+					</select>
+					<%=sb.toString()%>
+					<div id="Result1"></div>
+				</div>
+				
+		<a href="navertest.do">네이버테스트</a>
+						
 	<div class="content">
 		<div class="innerOuter">
 			<div id="mainTop">
-				<a href="navertest.do">네이버테스트</a>
-				
-			<!-- 장르(태그) 선택 -->
-				<div class="genre">
-					<h3>장르선택</h3>
-					<select id="genreTAG" name="genreTAG" onchange="genreTagDo();">
-						<option value="none"> ▫▫▫▫▫▫ 선택 ▫▫▫▫▫▫ </option>
-						<option value="101">소설</option>
-						<option value="102">시/에세이</option>
-						<option value="103">예술/대중문화</option>
-						<option value="104">사회과학</option>
-						<option value="105">역사와 문화</option>
-						<option value="107">잡지</option>
-						<option value="108">만화</option>
-						<option value="109">유아</option>
-						<option value="110">아동</option>
-						<option value="111">가정과 생활</option>
-						<option value="112">청소년</option>
-						<option value="113">초등학습서</option>
-						<option value="114">고등학습서</option>
-						<option value="115">국어/외국어/사전</option>
-						<option value="116">자연과 과학</option>
-						<option value="117">경제경영</option>
-						<option value="118">자기계발</option>
-						<option value="119">인문</option>
-						<option value="120">종교/역학</option>
-						<option value="122">컴퓨터/인터넷</option>
-						<option value="123">자격서/수험서</option>
-						<option value="124">취미/레저</option>
-						<option value="125">전공도서/대학교재</option>
-						<option value="126">건강/뷰티</option>
-						<option value="128">여행</option>
-						<option value="129">중등학습서</option>			
-					</select>
-					<br/>
-					<div id="Result1"><%=sb.toString()%></div>
-				</div>
+			
 			</div>
 			
 			<div id="mainCenter">
                 <!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->
                 <div class="RealTimeNovle" id="mainCenter_left">
                     <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
-                    <h5 align="center">모두와 소설</h5>
+                    <h5 align="center">모두와 채팅</h5>
                     <div id="messageWindow2" style="padding: 10px 0; height: 20em; overflow: auto; background-color: #a0c0d7;"></div>
                     <div class="form-inline" align="right">
                         <c:choose>
@@ -352,7 +348,14 @@ if (key != null && value != null) {
 			
 				<!-- 현재 위치 기준 주변 서점 또는 도서관 검색 -->
 				<div id="mainCenter_right">
-					<b>${Ldto.member_id } 님 주변에 위치한 서점 및 도서관</b>
+					<c:choose>
+						<c:when test="${Ldto.member_id eq null }">
+							<b>주변 서점 및 도서관</b>
+						</c:when>
+						<c:otherwise>
+							<b>${Ldto.member_id } 님 주변에 위치한 서점 및 도서관</b>
+						</c:otherwise>
+					</c:choose>
 					<div id="map" style="width:100%;height:350px;"></div>
 					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4cbf31fc0b4bc0ff759253ed7b23a16&libraries=services"></script>
 					<script type="text/javascript">
@@ -495,7 +498,9 @@ if (key != null && value != null) {
 			<div id="mainBottom">
 				<table>
 					<tr>
-						<td colspan="4" id="airecommendbox">나이/성별/좋아하는 책 분류를 선택해주세요</td>			
+						<td colspan="4" id="airecommendbox">
+							<label>나이/성별/좋아하는 책 분류를 선택해주세요</label>
+						</td>			
 					</tr>
 					<tr>
 						<td>										

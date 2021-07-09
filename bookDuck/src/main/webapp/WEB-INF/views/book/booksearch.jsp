@@ -97,15 +97,13 @@ if (key != null && value != null) {
 		String link = xpath.compile("link").evaluate(item);
 		String categoryName = xpath.compile("categoryName").evaluate(item);
 		String categoryId = xpath.compile("categoryId").evaluate(item);
-		//System.out.println(title);
+		//System.out.println(categoryId);
 		
 		// 비어있는 값 대비
 		if(description == null || description == "" || description == " " ){
 			description = "이 도서는 정보를 제공하지 않습니다.";
 		}
-		if(categoryId == null || categoryId == "" || categoryId == " " ){
-			categoryId = "이 도서는 정보를 제공하지 않습니다.";
-		}
+	
 		if(categoryName == null || categoryName == "" || categoryName == " " ){
 			categoryName = "이 도서는 정보를 제공하지 않습니다.";
 		}
@@ -123,8 +121,8 @@ if (key != null && value != null) {
 		}
 		
 		// categoryId 정리
-		if(categoryId == "101"){
-			categoryId = "소설";
+		if(categoryId == "101" || categoryId == "101 "){
+			categoryId = categoryId + "소설";
 		}
 		if(categoryId == "102"){
 			categoryId = "시/에세이";
@@ -148,7 +146,7 @@ if (key != null && value != null) {
 			categoryId = "유아";
 		}
 		if(categoryId == "110"){
-			categoryId = "아동";
+			categoryId = categoryId + "아동";
 		}
 		if(categoryId == "111"){
 			categoryId = "가정과 생활";
@@ -163,7 +161,7 @@ if (key != null && value != null) {
 			categoryId = "고등학습서";
 		}
 		if(categoryId == "115"){
-			categoryId = "국어/외국어/사전";
+			categoryId = categoryId + "국어/외국어/사전";
 		}
 		if(categoryId == "116"){
 			categoryId = "자연과 과학";
@@ -175,7 +173,7 @@ if (key != null && value != null) {
 			categoryId = "자기계발";
 		}
 		if(categoryId == "119"){
-			categoryId = "인문";
+			categoryId = categoryId + "인문";
 		}
 		if(categoryId == "120"){
 			categoryId = "종교/역학";
@@ -524,6 +522,9 @@ text-decoration: none;
     $(document).ready(function() {
         $("#key option[value='<%=key%>']").attr("selected", "selected");
         $("#value").val('<%=value%>');
+        <%--
+        $("#sort").val('<%=sort%>');
+        --%>
         
         console.log("통신");
         
@@ -555,41 +556,57 @@ text-decoration: none;
 		
 		// 출간일 정렬
 		$("#publishTime").click(function() {
+			currentPageNum = 1;
+			currentPage(1);
 			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#publishTime").val());
 		});
 		
 		// 정확도 정렬
 		$("#accuracy").click(function() {
+			currentPageNum = 1;
+			currentPage(1);
 			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#accuracy").val());
 		});
 		
 		// 제목 정렬
 		$("#title").click(function() {
+			currentPageNum = 1;
+			currentPage(1);
 			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#title").val());
 		});
 		
 		// 판매량 정렬
 		$("#salesPoint").click(function() {
+			currentPageNum = 1;
+			currentPage(1);
 			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#salesPoint").val());
 		});
 		
 		// 고객평점 정렬
 		$("#customerRating").click(function() {
+			currentPageNum = 1;
+			currentPage(1);
 			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#customerRating").val());
 		});
 		
 		// 리뷰갯수 정렬
 		$("#reviewCount").click(function() {
+			currentPageNum = 1;
+			currentPage(1);
 			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#reviewCount").val());
 		});
 		
 		// 가격오름순 정렬
 		$("#price").click(function() {
+			currentPageNum = 1;
+			currentPage(1);
 			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#price").val());
 		});
 		
 		// 가격내림순 정렬
 		$("#priceDesc").click(function() {
+			currentPageNum = 1;
+			currentPage(1);
 			realsort($("#value").val(), $("#key option:selected").val(), currentPageNum, $("input:radio[name='target']:checked").val(), $("#priceDesc").val());
 		});
 		
@@ -611,7 +628,7 @@ text-decoration: none;
                     var value = "";
                     
                     
-                    for(var i=279; i < arr.length; i++){
+                    for(var i=283; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -651,7 +668,7 @@ text-decoration: none;
                     var value = "";
                     
                     
-                    for(var i=279; i < arr.length; i++){
+                    for(var i=283; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     

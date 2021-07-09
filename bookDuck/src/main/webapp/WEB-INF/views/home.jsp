@@ -488,7 +488,6 @@ if (key != null && value != null) {
 					</div>	
 			</div>
 			
-		});
 	
 	</script>
 

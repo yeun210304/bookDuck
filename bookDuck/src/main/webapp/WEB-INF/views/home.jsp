@@ -116,7 +116,7 @@ if (key != null && value != null) {
 		sb.append(String.format("<div class='jumbotron'"));
 			sb.append(String.format("<div class='rowResult'>"));
 			sb.append(String.format("<div class='col-md-1'></div>"));
-				sb.append(String.format("<div class='col-md-4' style='overflow : auto;'><img src='%s' class='resize' ></div>", coverLargeUrl));
+				sb.append(String.format("<div class='col-md-4' style='overflow : auto;'><img src='%s' class='resize'></div>", coverLargeUrl));
 				sb.append(String.format("<div class='col-md-7'><ul>"));
 					sb.append(String.format("<table id = 'tbb' style='table-layout:fixed'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
 						sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
@@ -273,12 +273,7 @@ if (key != null && value != null) {
 </head>
 
 	<jsp:include page="header.jsp"/>
-
-	<div class="content">
-		<div class="innerOuter">
-			<div id="mainTop">
-				<!-- <a href="navertest.do">네이버테스트</a>
-				 -->
+	
 			<!-- 장르(태그) 선택 -->
 				<div id="genre" class="jumbotron text-center">
 					<label>장르선택</label>

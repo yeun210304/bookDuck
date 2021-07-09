@@ -104,6 +104,10 @@ if (key != null && value != null) {
 			description = "이 도서는 정보를 제공하지 않습니다.";
 		}
 	
+		if(categoryId == null || categoryId == "" || categoryId == " " ){
+			categoryId = "이 도서는 정보를 제공하지 않습니다.";
+		}
+		
 		if(categoryName == null || categoryName == "" || categoryName == " " ){
 			categoryName = "이 도서는 정보를 제공하지 않습니다.";
 		}
@@ -860,6 +864,6 @@ text-decoration: none;
 
 	</div>
 	
-
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

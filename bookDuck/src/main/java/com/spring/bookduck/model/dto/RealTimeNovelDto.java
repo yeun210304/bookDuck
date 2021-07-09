@@ -30,10 +30,10 @@ public class RealTimeNovelDto {
 	public void setNovel_id(String novel_id) {
 		this.novel_id = novel_id;
 	}
-	public Date getNovel_regdate() {
+	public Date getnovel_regdate() {
 		return novel_regdate;
 	}
-	public void setNovel_regdate(Date novel_regdate) {
+	public void setnovel_regdate(Date novel_regdate) {
 		this.novel_regdate = novel_regdate;
 	}
 	public String getNovel_content() {

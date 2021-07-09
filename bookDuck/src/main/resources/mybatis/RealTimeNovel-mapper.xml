@@ -5,7 +5,7 @@
 	<select id="selectList" resultType="RTNovelDto">
 		SELECT NOVEL_ID, NOVEL_REGDATE, NOVEL_CONTENT
 		FROM REALTIMENOVEL 
-		ORDER BY NOVEL_ID
+		ORDER BY NOVEL_REGDATE
 	</select>
 	
 	<insert id="insert" parameterType="RTNovelDto">

@@ -273,7 +273,12 @@ if (key != null && value != null) {
 </head>
 
 	<jsp:include page="header.jsp"/>
-	
+
+	<div class="content">
+		<div class="innerOuter">
+			<div id="mainTop">
+				<!-- <a href="navertest.do">네이버테스트</a>
+				 -->
 			<!-- 장르(태그) 선택 -->
 				<div id="genre" class="jumbotron text-center">
 					<label>장르선택</label>

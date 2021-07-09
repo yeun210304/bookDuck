@@ -8,7 +8,6 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="css/login.css" rel="stylesheet">
 </head>
 <script type="text/javascript">
 
@@ -72,60 +71,74 @@
 	});
 </script>
 
-<!-- bootstrap 4 -->
+<!-- bootstrap 4 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  
+-->
   
 <jsp:include page="../header.jsp"/>
-
-<body width="100%" height="100%">
-<div class="loginform">
+<link href="css/login.css" rel="stylesheet">
+<body>
+<div id="loginform">
+<br/>
 	<div class="general-login">
-		<div class=login-title>
+		<div id="login-title" style="text-align: center;">
+		<img src="resources/img/bookduck_logo.png" width="300" height="74" align="center" id="loginlogo">
 		<h2 align="center">로그인</h2>
+		<br/>
 		</div>
-		<div class="idForm">
-			<input type="text" class="member_id" placeholder="ID" id="member_id"/>
-		</div>
-		<div class="pwForm">
-			<input type="password" class="member_pw" placeholder="Password" id="member_pw"/>
-		</div>
-		<input type="button" value="login" id="login" onclick="login();"/>
-		<script>
-			let button = () => {alert('login Button!')}
-		</script>
-		<div class="bottom">
-			<input type="button" value="회원가입" id="join" onclick="location.href='joinform.do'"/>
-			<input type="button" value="아이디 찾기" id="find_id" onclick="location.href='findIdForm.do'"/>
-			<input type="button" value="비밀번호 찾기" id="find_pw" onclick="location.href='findPwForm.do'"/>
-		</div>
+		<table id="logintable">
+			<colgroup>
+				<col width="15%">
+			</colgroup>
+			<tr id="idForm">
+				<th>ID</th>
+				<td>&nbsp;<input type="text" class="text_box" placeholder="ID" id="member_id"/></td>
+			</tr>
+			<tr id="pwForm">
+				<th>PW</th>
+				<td>&nbsp;<input type="password" class="text_box" placeholder="Password" id="member_pw"/></td>
+			</tr>
+			<tr id="login-button">
+				<td id="login-button" colspan="2"><input type="button" value="로그인" id="login" onclick="login();"/></td>
+			</tr>
+		</table>
+			<div class="login-footer"></div>
+			<h4 align="center">아직 BookDuck의 
+			<b><a onclick="location.href='joinform.do'" id="join_link">회원</a>이 아니신가요?</h4></b>
+			<!-- 구현 안 할 부분 
+			<tr id="find-account">
+				<td>&nbsp;<input type="button" value="아이디 찾기" id="find_id" onclick="location.href='findIdForm.do'"/></td>
+				<td>&nbsp;<input type="button" value="비밀번호 찾기" id="find_pw" onclick="location.href='findPwForm.do'"/></td>
+				<td id="join-button">&nbsp;<input type="button" value="회원가입" id="join" onclick="location.href='joinform.do'"/></td>
+			</tr>
+			-->
 	</div>
-<div class="sns-login-area">
-<!-- 네이버 로그인 -->
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- 카카오로그인 또한 별다를 거없이 카카오(https://developers.kakao.com/)
-개발자센터에서 앱을 만들고 키값을 받은후에 주어진 설명따라 진행하겠습니다. 아래의 스크립트를 복사해서 상위에 붙여넣고 아래 스크립트에서 설명하겠습니다. -->
-<!-- kakaoLogin -->
-<script type="text/javascript"src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<!-- 구글 로그인같은경우는 동일한방식으로 진행이되지만 사이트 자체에서 영어로 되어있는부분이 어려움이 있을수있습니다.
-(https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin) 
-사이트에서 진행방법에따라 진행하면되는데 네이버 카카오 전부 동일하게 애플리케이션을 만들고 키값을 받게되면 아래의 스크립트로 이동하겠습니다.
- -->
-<!-- googleLogin -->
-<script src="https://apis.google.com/js/client:platform.js?onload=init" async defer></script>
-
-<script>
-    function onSubmit(e){
-        console.log("rere")
-        e.preventDefault();
-    }
-</script>
-</div> <!-- sns-login-area 끝 -->
+	<div class="sns-login-area">
+	<!-- 네이버 로그인 -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	
+	<!-- 카카오로그인 또한 별다를 거없이 카카오(https://developers.kakao.com/)
+	개발자센터에서 앱을 만들고 키값을 받은후에 주어진 설명따라 진행하겠습니다. 아래의 스크립트를 복사해서 상위에 붙여넣고 아래 스크립트에서 설명하겠습니다. -->
+	<!-- kakaoLogin -->
+	<script type="text/javascript"src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<!-- 구글 로그인같은경우는 동일한방식으로 진행이되지만 사이트 자체에서 영어로 되어있는부분이 어려움이 있을수있습니다.
+	(https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin) 
+	사이트에서 진행방법에따라 진행하면되는데 네이버 카카오 전부 동일하게 애플리케이션을 만들고 키값을 받게되면 아래의 스크립트로 이동하겠습니다.
+	 -->
+	<!-- googleLogin -->
+	<script src="https://apis.google.com/js/client:platform.js?onload=init" async defer></script>
+	
+	<script>
+	    function onSubmit(e){
+	        console.log("rere")
+	        e.preventDefault();
+	    }
+	</script>
+	</div> <!-- sns-login-area 끝 -->
 </div> <!-- login-form 끝 -->
 </head>
 

@@ -268,6 +268,27 @@
 	resize:none;
 	}
 	
+	/*
+	#imgadd{
+	height : 50%;
+	bottom : 10px;
+	padding : 20px 0px 0px 0px;	
+	}
+	
+	#youtubesearch{
+	height: 50%;
+	}
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/* 책 정보, 별점, 한 줄 낭독 hover시 보이는 css */
 	nav a {
 		position: relative;
@@ -510,7 +531,7 @@
 		<div id="get_view"></div>
 		<div id="nav_view"></div>
 		<br />
-	</div>
+	
 	<div>
 		<%-- 	<c:choose>
                     <c:when test="${empty rclist}">
@@ -666,8 +687,11 @@
 
 			});
 		</script>
-
+		</div>
+		</div>
+		
 	<!-- 이미지 업로드 -->
+		<div id="imgadd">
 		<table id="selectimglist">
 		<nav>
 			<a href="#">&nbsp;이미지 등록</a>
@@ -771,9 +795,8 @@
 
 			});
 		</script>
-
-
 		</div>
+
 
 	</div>
 	<!-- 오른쪽 부분 끝나는 곳  -->

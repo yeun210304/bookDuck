@@ -83,12 +83,14 @@
 <body>
 <div id="loginform">
 <br/>
+<br/>
+<br/>
+<br/>
 	<div class="general-login">
 		<div id="login-title" style="text-align: center;">
-		<img src="resources/img/bookduck_logo.png" width="300" height="74" align="center" id="loginlogo">
-		<h2 align="center">로그인</h2>
-		<br/>
+		<img src="resources/img/bookduck_logo.png" width="200" height="49" id="loginlogo">
 		</div>
+		<br/>
 		<table id="logintable">
 			<colgroup>
 				<col width="15%">

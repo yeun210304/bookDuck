@@ -136,7 +136,7 @@ public class LoginController {
 	@RequestMapping("/leaveAccount.do")
 	public String leaveAccount(MemberDto dto, HttpSession session, RedirectAttributes rttr) throws Exception{
 		logger.info("[Controller] : leaveAccount.do");
-		MemberDto member = (MemberDto) session.getAttribute("Ldto");
+		MemberDto member = (MemberDto) session.getAttribute("dto");
 		String sessionPass = member.getMember_pw();
 		String dtoPass = dto.getMember_pw();
 		

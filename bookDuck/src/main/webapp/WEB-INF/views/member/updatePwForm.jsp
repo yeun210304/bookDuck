@@ -7,25 +7,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+var submitAction = function() { /* do something with Error */ return false; };
+
+function null_check(){
+	var member_pw = document.getElementById("member_pw").value;
+	if(member_pw==null||member_pw==0|member_pw==""){
+		$('form').bind('submit', submitAction);
+		alert("아이디를 입력해 주세요");
+		return false;
+</script>
 </head>
+<link href="css/upDelMem.css" rel="stylesheet">
 <body>
 <jsp:include page="../header.jsp"/>
-<h1>비밀번호 변경</h1>
+<br/>
+<div id="update-title" style="text-align: center;">
+	<h2>비밀번호 변경</h2>
+</div>
 	<form action="updatePwRes.do" method="post">
-		<div class="updatePw-form_id">
-			<div class="id">ID</div>
-			<div class="id_input_box">
-				<input type="text" id="member_id" name="member_id" class="member_id" value="${Ldto.member_id}" readonly="readonly">
-			</div>
-		</div>
-		<div class="updatePw_pw">
-			<div class="pw">비밀번호</div>
-			<input type="password" id="member_pw" name="member_pw">
-		</div>
-		<div class="updatePw-button">
-			<button type="submit">회원정보 수정</button>
-			<button type="button">취소</button>
-		</div>
+		<table id="updatePwtable">
+			<colgroup>
+				<col width="15%">
+			</colgroup>
+			<tr id="idForm">
+				<th>ID</th>
+				<td>&nbsp;<input type="text" id="member_id" name="member_id" class="text_box" value="${Ldto.member_id}" readonly="readonly"></td>
+			</tr>
+			<tr id="pwForm">
+				<th>PW</th>
+				<td>&nbsp;<input type="password" class="text_box" placeholder="변경할 비밀번호를 입력해 주세요." id="member_pw"/></td>
+			</tr>
+			<tr id="updatePw-button">
+				<td colspan="2"><input type="submit" id="update-button" value="비밀번호 수정" onclick="login();"/></td>
+			</tr>
+			<!-- 
+			<tr id="updatePw-cancel">
+				<td colspan="2"><input type="button" id="updatePw-cancel" value="취소"/></td>
+			<tr> -->
+		</table>
+
 	</form>
 
 </body>

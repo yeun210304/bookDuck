@@ -23,7 +23,7 @@ public interface LoginDao {
 	public int updatePw(MemberDto dto);
 	
 	//회원 탈퇴
-	public void leaveAccount(MemberDto dto);
+	public int leaveAccount(MemberDto dto);
 	
 	//아이디 중복 확인
 	public int idCheck(MemberDto dto);

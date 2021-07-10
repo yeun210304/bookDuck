@@ -68,8 +68,14 @@ public class LoginDaoImpl implements LoginDao {
 	}
 
 	@Override
-	public void leaveAccount(MemberDto dto) {
-		sqlSession.delete(NAMESPACE+"leaveAccount", dto);
+	public int leaveAccount(MemberDto dto) {
+		int res=0;
+		try {
+			res=sqlSession.delete(NAMESPACE+"leaveAccount", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override

@@ -105,7 +105,7 @@ public class ScrapController {
 		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
 		
 		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
-
+		model.addAttribute("scidlist",biz.scidlist(isbn));
 		
 		return "book/recommendBook";
 	}

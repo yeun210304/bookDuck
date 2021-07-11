@@ -13,5 +13,7 @@ public interface ScrapDao {
 	public int scinsert(ScrapDto dto);
 	public int scdelete(int scrap_no);
 	public void scalldelete(String scrap_no);
+	public List<ScrapDto> scidlist(String book_isbn);
+	
 	
 }

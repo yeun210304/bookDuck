@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.bookduck.bookfm.biz.BookFMBiz;
 import com.spring.bookduck.rcvideo.biz.RcvideoBiz;
+import com.spring.bookduck.scrap.biz.ScrapBiz;
 import com.spring.bookduck.bookstar.biz.BookStarBiz;
 import com.spring.bookduck.classify.controller.ClassifyAIController;
 import com.spring.bookduck.model.dto.MemberDto;
@@ -32,6 +33,9 @@ public class BookController {
 	
 	@Autowired
 	RcimgBiz imgbiz;
+	
+	@Autowired
+	ScrapBiz scbiz;
 	
 	private Logger logger = LoggerFactory.getLogger(BookController.class);			
 	
@@ -57,7 +61,7 @@ public class BookController {
 		logger.info("[BookController] : recommendBook.do");	
 		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
 		model.addAttribute("rclist",rcbiz.rclist(isbn));
-    
+		model.addAttribute("scidlist",scbiz.scidlist(isbn));
 		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
 		model.addAttribute("imglist",imgbiz.imglist(isbn));
 
@@ -78,6 +82,7 @@ public class BookController {
 		logger.info("[BookController] : recommendBook.do");	
 		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
 		model.addAttribute("rclist",rcbiz.rclist(isbn));
+		model.addAttribute("scidlist",scbiz.scidlist(isbn));
     
 		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
 

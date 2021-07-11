@@ -79,7 +79,7 @@
     		
             sb.append(String.format("<div class='row result'>"));
             sb.append(String.format("<div class='col-md-1'><span>%s</span></div>", a));
-            sb.append(String.format("<div class='col-md-4' style=' overflow : auto;'><img src='%s' class='resize'></div>", coverLargeUrl));
+    		sb.append(String.format("<div class='col-md-4' id='selectimg' style='overflow : auto; text-align : center;'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'><img src='%s' class='resize'><div class='hovertext'><p>클릭시 도서추천 페이지로 이동합니다.</p></div></a></div>", title,coverLargeUrl,isbn,author,categoryId,coverLargeUrl));
             sb.append(String.format("<div class='col-md-7'><ul>"));
     		sb.append(String.format("<table id = 'tbb' style='table-layout:fixed'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
     		sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
@@ -123,6 +123,27 @@
     src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  
 <style type="text/css">
+
+
+/* 이미지 호버시 도서 추천 페이지 이동 */
+.hovertext{
+	background : #000000;
+	opacity: 0;
+}
+
+#selectimg:hover{
+	opacity : 0.6;
+	color : #ffffff;
+	text-align: center;
+}
+
+#selectimg:hover .hovertext{
+	margin-top : 15px;
+	font-size : 15px;
+	opacity: 0.8;
+	text-align: center;
+	color : #ffffff;
+}
 
 
 div.result {
@@ -231,6 +252,11 @@ td{
   position: relative;
   text-decoration: none;
   display:inline-block;
+}
+
+#btncss>a{
+	text-decoration: none;
+	color: black;
 }
 
 a{

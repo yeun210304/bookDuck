@@ -211,7 +211,7 @@ if (key != null && value != null) {
 		//System.out.println(title);
 		sb.append(String.format("<div class='row result'>"));
 		sb.append(String.format("<div class='col-md-1'><span>%s</span></div>", a));
-		sb.append(String.format("<div class='col-md-4' style='background-size: 90%% 90%%; overflow : auto;'><img src='%s' class='resize'></div>", coverLargeUrl));
+		sb.append(String.format("<div class='col-md-4' id='selectimg' style='overflow : auto; text-align : center;'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'><img src='%s' class='resize'><div class='hovertext'><p>클릭시 도서추천 페이지로 이동합니다.</p></div></a></div>", title,coverLargeUrl,isbn,author,categoryId,coverLargeUrl));
 		sb.append(String.format("<div class='col-md-7'><ul>"));
 		sb.append(String.format("<table id = 'tbb' style='table-layout:fixed'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
 		sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
@@ -225,10 +225,10 @@ if (key != null && value != null) {
 		sb.append(String.format("</div>"));
 		sb.append(String.format("</div>"));
 		sb.append(String.format("<div class='wrapper'>"));
-		sb.append(String.format("<div id='btncss'><a href='%s' target='_blank'>&#128184;&nbsp;구매하기</a></div>",
+		sb.append(String.format("<div id='btncss' style='background : #F7DAE5;'><a href='%s' target='_blank'>&#128184;&nbsp;구매하기</a></div>",
 		link));
-		sb.append(String.format("<div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author,categoryId));
-		sb.append(String.format("<div id='btncss'><a href='scinsert.do?title=%s&isbn=%s&coverLargeUrl=%s&author=%s&categoryId=%s' target='_blank'>&nbsp;&#127873;&nbsp;&nbsp;찜하기&nbsp;&nbsp;</a></div>",title,isbn,coverLargeUrl,author,categoryId));
+		sb.append(String.format("<div id='btncss' style='background : #FFEAB3;'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'>&#128149;&nbsp;도서추천</a></div>",title,coverLargeUrl,isbn,author,categoryId));
+		sb.append(String.format("<div id='btncss' style='background : #C5F5D4;'><a href='scinsert.do?title=%s&isbn=%s&coverLargeUrl=%s&author=%s&categoryId=%s' target='_blank'>&nbsp;&#127873;&nbsp;&nbsp;찜하기&nbsp;&nbsp;</a></div>",title,isbn,coverLargeUrl,author,categoryId));
 		sb.append(String.format("</div>"));
 		
 	}
@@ -250,6 +250,43 @@ if (key != null && value != null) {
 
 
 <style>
+
+/* 글씨체 */
+@font-face{
+	src: url("font/NanumSquareB.ttf");
+	font-family: NanumMyeongjo;
+}
+/*
+body {
+	font-family:  NanumMyeongjo;
+}
+
+#sorting{
+	font-family: NanumMyeongjo;
+}
+*/
+/* 이미지 호버시 도서 추천 페이지 이동 */
+.hovertext{
+	background : #000000;
+	opacity: 0;
+}
+
+#selectimg:hover{
+	opacity : 0.6;
+	color : #ffffff;
+	text-align: center;
+}
+
+#selectimg:hover .hovertext{
+	margin-top : 15px;
+	font-size : 15px;
+	opacity: 0.8;
+	text-align: center;
+	color : #ffffff;
+}
+
+
+
 /* 책 정보 */
 td{
 	width: 130px;
@@ -409,14 +446,19 @@ div.result {
 }
 
 #btncss { 
+  border-radius : 10px;
   padding : 10px 10px 10px 10px;
+  margin : 0px 15px 0px 15px;
+  opacity : 0.75;
   color: #A071F5;
+  font-size : 15px;
   font-weight : bold;
   text-transform: uppercase;
   text-align: center;
   position: relative;
   text-decoration: none;
   display:inline-block;
+ 
 }
 
 #btncss>a{
@@ -439,8 +481,8 @@ text-decoration: none;
   bottom: 0%;
   left: 0px;
   width: 100%;
-  height: 1px;
-  background: #6098FF;
+  height: 2px;
+  background: #dcdcdc;
   display: block;
   -webkit-transform-origin: right top;
   -ms-transform-origin: right top;
@@ -490,7 +532,9 @@ text-decoration: none;
 /* 이미지 리사이즈 */
 .resize{
 	height: auto;
-	width: 265px;
+	width: 245px;
+	float : center;
+	text-align: center;
 }
 
 #searchbox {
@@ -848,7 +892,7 @@ text-decoration: none;
 				</button>
 				
 				<!-- 정렬 -->
-				<div id="sorting" style="float: right">
+				<div id="sorting" style="float: right;">
 					<button class="btn btn-default" id="accuracy" value="accuracy">정확도순</button>
 					<button class="btn btn-default" id="publishTime" value="publishTime">출간일</button>
 					<button class="btn btn-default" id="title" value="title">제목</button>

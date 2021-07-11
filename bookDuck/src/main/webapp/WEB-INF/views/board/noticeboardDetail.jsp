@@ -32,7 +32,7 @@
 	<div class="content">
 		<div class="innerOuter">
 			<h1 align="center">공지사항</h1>
-			<br><br>
+			<br><br><br>
 			
 			<table class="table" id="contentArea" align="center">
 				<tr>

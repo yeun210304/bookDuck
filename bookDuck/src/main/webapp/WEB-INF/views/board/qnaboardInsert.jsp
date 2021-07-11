@@ -46,7 +46,7 @@
 		<div class="innerOuter">
 
 			<h1 align="center">문의게시판</h1>
-			<br><br>
+			<br><br><br>
 			<form action="qnaInsertRes.do" enctype="multipart/form-data" method="post">
 				<table class="table">
 					<tr>

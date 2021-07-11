@@ -16,6 +16,9 @@
 	#pagingArea{width:fit-content; margin:auto;}
 	#searchForm {text-align: center;}
 	#searchForm>*{display:inline-block; margin:5px;}
+	
+	a {text-decoration: none !important; color: black !important;}
+	
 	.paging a {
 		padding: 3px 8px;
 		margin: 5px;
@@ -26,7 +29,7 @@
 		border: none;
 		border-radius: 100%;
 		background-color: #F5DC7A;
-		color: white;
+		color: white !important;
 	}
 	button{
 		width : 60px;
@@ -59,6 +62,7 @@
 			<h1 align="center">공지사항</h1>
 			<br>
 			<br>
+			<br>
 			<table class="table" id="boardList" align="center">
 				<thead class="table-warning">
 					<tr>
@@ -74,7 +78,7 @@
 					<c:choose>
 						<c:when test="${empty list }">
 							<tr>
-								<td colspan="6" align="center">------------ 작성된 글이 없습니다 -------------</td>
+								<td colspan="6" align="center">------------  작성된 글이 없습니다  -------------</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
@@ -103,19 +107,25 @@
 				</tbody>
 			</table>
 		
+			<br><br>
 			<div id="paging-area" align="center">
 				<ul class="paging">
-					<c:if test="${ pi.currentPage ne 1 }">
-						<c:choose>
-							<c:when test="${ !empty map.condition }">
-								<li><a href="noticeSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}">이전</a></li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="noticeList.do?currentPage=${ pi.currentPage-1 }">이전</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:if>
-		
+					<c:choose>
+						<c:when test="${ pi.currentPage ne 1 }">
+							<c:choose>
+								<c:when test="${ !empty map.condition }">
+									<li><a href="noticeSearch.do?currentPage=${ pi.currentPage-1 }&condition=${map.condition}&keyword=${map.keyword}">이전</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="noticeList.do?currentPage=${ pi.currentPage-1 }">이전</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<li><a href="">이전</a></li>
+						</c:otherwise>
+					</c:choose>
+					
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:choose>
 							<c:when test="${ !empty map.condition }">
@@ -126,17 +136,22 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-		
-					<c:if test="${ pi.currentPage ne pi.maxPage }">
-						<c:choose>
-							<c:when test="${ !empty map.condition }">
-								<li><a href="noticeSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}">다음</a></li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="noticeList.do?currentPage=${ pi.currentPage+1 }">다음</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:if>
+					
+					<c:choose>
+						<c:when test="${ pi.currentPage ne pi.maxPage }">
+							<c:choose>
+								<c:when test="${ !empty map.condition }">
+									<li><a href="noticeSearch.do?currentPage=${ pi.currentPage+1 }&condition=${map.condition}&keyword=${map.keyword}">다음</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="noticeList.do?currentPage=${ pi.currentPage+1 }">다음</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<li><a href="">다음</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 		

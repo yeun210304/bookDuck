@@ -45,7 +45,7 @@
 		<div class="innerOuter">
 			
 			<h1 align="center">공지사항</h1>
-			<br><br>
+			<br><br><br>
 			<form action="noticeUpdateRes.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="post_id" value="${dto.post_id }">		
 				

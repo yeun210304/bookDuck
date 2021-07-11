@@ -49,13 +49,13 @@
 		<div class="innerOuter">
 		
 			<h1 align="center">공지사항</h1>
-			<br><br>
+			<br><br><br>
 			<form action="noticeInsertRes.do" enctype="multipart/form-data" method="post">
 				<input type="hidden" name="board_id" value="0">
 				<table class="table">
 					<tr>
 						<th class="table-warning">제목</th>
-						<td><input type="text" name="post_title" required></td>
+						<td><input class="form-control" type="text" name="post_title" required></td>
 					</tr>
 					<tr>
 						<th class="table-warning">작성자</th>

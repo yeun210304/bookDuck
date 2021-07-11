@@ -188,6 +188,12 @@
 	position: relative;
 }
 
+#header_1_left>a {
+	color : black;
+	text-decoration: none;
+}
+
+
 #header_1_center {
 	width: 30%;
 }
@@ -203,6 +209,11 @@
 #header_1_right>ul>li {
 	float: left;
 	padding: 10px;
+}
+
+#header_1_right>ul>li>a {
+	color: black;
+	text-decoration: none;
 }
 
 #header_2_left{width: 30%;}
@@ -223,12 +234,14 @@
 	height: 100%;
 	line-height: 55px;
 	text-align: center;
+	color: black;
 }
 
 #header_2_center>ul>li a {
 	text-decoration: none;
 	font-size: 18px;
 	font-weight: 900;
+	color: black;
 }
 
 .content {
@@ -243,9 +256,6 @@
 	background: white;
 }
 
-a {
-	text-decoration: none;
-}
 
 .search-wrapper {
 	position: relative;
@@ -529,7 +539,7 @@ a {
 						</ul>
 						-->
 					</li>
-					<li><a href="noticeList.do" class="text-body">공지사항</a></li>
+					<li><a href="noticeList.do" class="text-body">베스트셀러</a></li>
 					<li><a href="qnaList.do" class="text-body">문의게시판</a></li>
 				</ul>
 		

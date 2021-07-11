@@ -113,7 +113,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>신간도서</title>
+<title>책추천 해줄게 북...덕... :: 북덕 BookDuck - 신간도서</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
  

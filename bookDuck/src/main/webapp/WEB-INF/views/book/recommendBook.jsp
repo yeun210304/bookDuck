@@ -97,6 +97,11 @@
 					+ jdata.nextPageToken
 					+ '\');"><다음페이지></a>');
 					}
+				if (jdata.nextPageToken) {
+					$("#refr_view")
+					.append(
+				'<input type="button" value="닫기" onclick="refr();">');
+				}
 				});
 			},
 			error : function(xhr, textStatus) {
@@ -105,6 +110,9 @@
 				return;
 			}
 		});
+	}
+	function refr() {
+		window.location.reload();
 	}
 </script>
 
@@ -509,6 +517,7 @@
 		</form>
 		<div id="get_view"></div>
 		<div id="nav_view"></div>
+		<div id="refr_view"></div>
 		<br />
 	</div>
 	<div>

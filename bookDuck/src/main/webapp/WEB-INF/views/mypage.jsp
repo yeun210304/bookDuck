@@ -175,7 +175,23 @@
 
 
 </style>
+<style type="text/css">
+/* 좌우 나누기 */
+	div #left{
+	width : 35%;
+	float: left;
+	padding : 5px 15px 0px 0px;
+	
+	}
+	
+	div #right{
+	width : 60%;
+	float: right;
+	padding : 5px 0px 0px 30px;
+	}
+	
 
+</style>
 
 
 </head>
@@ -195,28 +211,31 @@
 	<div>
 		<c:choose>
 			<c:when test="${Ldto.member_payrole eq 'N'}">
-				<div>
+				<div class="jumbotron">
 					<p>${Ldto.member_id }님은 회원권이 없습니다. </p>
-					<a href="payorder.do?">회원 결제하기</a>
+					<a class="btn btn-warning" href="payorder.do?">회원 결제하기</a>
 				</div>
 			</c:when>
+		</c:choose>
+			</div>
+			<c:choose>
 				<%--/////////////결제한 회원이보여지는 단 /////////////// --%>
 			<c:when test="${Ldto.member_payrole eq 'Y'}">
-				<p>${Ldto.member_id }님은, 유료회원 입니다.</p>
-				<br/><br/>
 				<%--/////////////자기소개가 없을시 보여지는 단 /////////////// --%>
 				<c:choose>
 					<c:when test="${empty intdDto.intd_content}">
+					<div id="right">
 						<table class="table table-borderless">
-							<tr>
+							<tr> 
 								<td colspan="1" align="center"
 									onclick="location.href='intdinsertres.do?member_id=${Ldto.member_id}'">
 									자기소개를작성해 주세요(클릭)</td>
 							</tr>
 						</table>
+						</div>
 						<br/><br/>
-							<div>
-							<table border="1">
+							<div id="left">
+							<table border="1" class="table table-hover">
 								<col width="10">
 								<col width="25" />
 								<col width="100" />
@@ -253,6 +272,7 @@
 					</c:when>
 					<c:otherwise>
 					<%--////////////자기소개가 있을때/////////////  --%>
+					<div id="right">
 						<table class="table table-borderless">
 							<tr>
 								<td id="summernote">${intdDto.intd_content}
@@ -266,9 +286,10 @@
 								</td>
 							</tr>
 						</table>
+						</div>
 						<br/><br/>
-						<div>
-							<table border="1" class="table table-borderless">
+						<div id="left">
+							<table border="1" class="table table-hover">
 								<col width="10">
 								<col width="25" />
 								<col width="100" />
@@ -307,12 +328,15 @@
 			</c:when>
 		</c:choose>
 		<br/><br/><br/>
-	</div>
 	
 	
+	
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	
 	<!-- 리딩차트. 구글차트 부분 -->
-	<div class="readingChart">
+	<div class="readingChart" style="float: inherit;">
 		<c:choose>
 			<c:when test="${Ldto.member_payrole eq 'N'}">
 				<p> </p>

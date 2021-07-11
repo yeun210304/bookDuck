@@ -164,8 +164,7 @@
 	height: 100px;
 	padding-top: 10px;
 	/*margin: auto; */
-	background-color: F5DC7A;
-	color: white;
+	background-color: F5DC7A; important!
 }
 
 #header>div {
@@ -312,6 +311,7 @@ a {
 	}
 
 </script>
+
 
 
 <script type="text/javascript">

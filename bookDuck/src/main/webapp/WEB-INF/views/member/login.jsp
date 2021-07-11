@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

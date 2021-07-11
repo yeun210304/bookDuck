@@ -17,18 +17,94 @@
 #mainBottom {
 	width: 80%;
 }
+
+/*채팅*/
+.RealTimeNovle{
+	width: 450px;
+	float: right;
+	margin-top: 30px;
+}
+/*지도*/
+#mainCenter_right{
+	float: left;
+	margin-top: 30px;
+}
+
+#map{
+	width: 360px;
+	height: 360px;
+}
+/*인공지능책추천*/
+#mainMiddle{
+	width: 500px;
+	height: 400px;
+	margin: 100px;
+	display: inline-block;
+}
+#airecommendbox{
+	
+}
+.content{
+	margin: 20px;
+}
+
+/*책장르*/
 #genre{
 	background-color: white;
 }
-
-
-#TagResult{
-	height: 200px;
-	width: 200px;
-	clear: both;
+#tbb{
+	width: 300px; 
+}
+#td1{
+	width: 110px; 
 }
 
+.rowResult{
+	display: inline-block;
+    width: 350px; 
+    height: 150px;
+    margin-bottom: 60px;
+}
+/*책추천버튼*/
+#btncss{
+  background:#F5DC7A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:40px;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  text-align: center;
+  vertical-align: middle; 
+}
+#btncss:hover{
+  background:#fff;
+  color:#EDC630;
+}
+#btncss:before,#btncss:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #EDC630;
+  transition:400ms ease all;
+}
+#btncss:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#btncss:hover:before,#btncss:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 
+/*장르선택 버튼*/
 select{
   -moz-appearance: none;
   -webkit-appearance: none;

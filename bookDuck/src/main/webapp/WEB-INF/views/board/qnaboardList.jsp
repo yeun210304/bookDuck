@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
 <style type="text/css">
 	#boardList{text-align: center; width: 100%;}
 	#boardList>tbody>tr{height: 50px; }

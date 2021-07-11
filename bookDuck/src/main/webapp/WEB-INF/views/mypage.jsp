@@ -55,7 +55,7 @@
     	  var jsonData = $.ajax({
     		 url: "chartData.do",
     		 data: "chartId=${Ldto.member_id}",
-    		 dataType:"json",
+    		 dataType:"json : RCdto",
     		 async: false
     		}).responseText;
 
@@ -332,8 +332,6 @@
 	
 	
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	
 	<!-- 리딩차트. 구글차트 부분 -->
 	<div class="readingChart" style="float: inherit;">
@@ -343,7 +341,7 @@
 			</c:when>
 			<c:when test="${Ldto.member_payrole eq 'Y'}">
 				<!-- 구글차트 위치-->
-				<div id="curve_chart" method="get" style="width:80%; height:200px">
+				<div id="curve_chart" method="get" style="width:80%; height:200px ">
 					<h3>독서량을 등록하시면 그래프가 그려집니다</h3>
 				</div>
 				<!-- 독서량 전달 -->
@@ -353,7 +351,7 @@
 					<input type="date" id="chartMdate" name="chartMdate" style="width:30%" />
 					<br/>
 					<!-- 독서한 시간(분) -->
-					<input type="range" min="0" max="600" value="0" style="width:30%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
+					<input type="range" class="progress-bar" min="0" max="600" value="0" style="width:30%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
 					<br/>
 					<span id="CRTime" ></span>분
 					<input type="hidden" id="chartId" name="chartId" value="${Ldto.member_id}" />

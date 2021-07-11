@@ -183,7 +183,7 @@ if (key != null && value != null) {
 			div.style["width"]="auto";
 			div.style["word-wrap"]="break-word";
 			div.style["display"]="inline-block";
-			div.style["background-color"]="#B5BFE5";
+			div.style["background-color"]="#6277BA";
 			div.style["border-radius"]="3px";
 			div.style["padding"]="3px";
 			div.style["margin-left"]="3px";
@@ -235,7 +235,7 @@ if (key != null && value != null) {
 			div.style["margin-right"]="3px";
 			//div에 innerHTML로 문자 넣기
 			div.innerHTML = inputMessage.value;
-			document.getElementById('messageWindow2').appendChild(div);
+			docume"C:/Users/green/Downloads/NanumFontSetup_TTF_ALL/NanumGothicCodingBold.ttf"nt.getElementById('messageWindow2').appendChild(div);
 			//clear div 추가
 			var clear = document.createElement('div');
 			clear.style["clear"] = "both";
@@ -320,27 +320,11 @@ if (key != null && value != null) {
 					<div id="Result1"></div>
 				</div>
 				
-	<div class="content">
-                <!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->
-                <div class="RealTimeNovle" id="mainCenter_left">
-                    <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
-                    <h5 align="center">모두와 채팅</h5>
-                    <div id="messageWindow2" style="padding: 10px 0; height: 20em; overflow: auto; background-color: #FDF7DD;"></div>
-                    <div class="form-inline" align="right">
-                        <c:choose>
-                            <c:when test="${Ldto.member_payrole eq 'Y'}">
-                            <!-- 사용자가 입력한 키의 코드를 .d보내준다. -->
-                                <input id="inputMessage" class="form-control mr-sm-2 mb-2" type="text" name="novel_content" onkeydown="if(event.keyCode==13){send();}" />
-                                <input id="submitBtn" class="btn mr-sm-2 mb-2" type="submit" value="입력" onclick="send();" />
-                                <input type="hidden" id="novel_id" value="${Ldto.member_id}" name="novel_id" />
-                            </c:when>
-                            <c:otherwise>
-                                <input id="inputMessage" class="form-control" type="text" readonly="readonly" value="로그인시 이용하실 수 있습니다"/>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                </div>
+	<div class="container">
+		<div class="container-fluid">
+			<div class="row">
 			
+				<div class="col-sm-5">
 				<!-- 현재 위치 기준 주변 서점 또는 도서관 검색 -->
 				<div id="mainCenter_right">
 					<c:choose>
@@ -483,12 +467,37 @@ if (key != null && value != null) {
 						    map.setCenter(locPosition);      
 						}
 						</script>
-					</div>	
-			
+				</div>
+				</div>
+				
+				<div class="col-sm-7">
+                <!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->
+                <div class="RealTimeNovle" id="mainCenter_left">
+                    <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
+                    <p align="center">모두와 채팅</p>
+                    <div id="messageWindow2" style="padding: 10px 0; height: 20em; overflow: auto; background-color: #B5BFE5;"></div>
+                    <div class="form-inline" align="right">
+                        <c:choose>
+                            <c:when test="${Ldto.member_payrole eq 'Y'}">
+                            <!-- 사용자가 입력한 키의 코드를 .d보내준다. -->
+                                <input id="inputMessage" class="form-control mr-sm-2 mb-2" type="text" name="novel_content" onkeydown="if(event.keyCode==13){send();}" />
+                                <input id="submitBtn" class="btn mr-sm-2 mb-2" type="submit" value="입력" onclick="send();" />
+                                <input type="hidden" id="novel_id" value="${Ldto.member_id}" name="novel_id" />
+                            </c:when>
+                            <c:otherwise>
+                                <input id="inputMessage" class="form-control" type="text" readonly="readonly" value="로그인시 이용하실 수 있습니다"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+                </div>
+				
+				</div>
+			</div>
+		</div>	
 	
 
 	<!-- 인공지능을 활용한 책 카테고리 추천. -->
-			<div id="mainMiddle">
 				<h3>나에게 맞는 책추천📖</h3>
 				<table>
 					<tr>
@@ -638,8 +647,7 @@ if (key != null && value != null) {
 						
 					});
 				</script>
-			</div>
-		</div>
+		
 	
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

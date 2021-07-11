@@ -113,19 +113,19 @@ if (key != null && value != null) {
 		if(categoryId == "126"){categoryId = "건강뷰티";}
 		if(categoryId == "128"){categoryId = "여행";}
 		if(categoryId == "129"){categoryId = "중등학습서";}
-		sb.append(String.format("<div class='jumbotron'"));
-			sb.append(String.format("<div class='rowResult'>"));
-			sb.append(String.format("<div class='col-md-1'></div>"));
-				sb.append(String.format("<div class='col-md-4' style='overflow : auto;'><img src='%s' class='resize' ></div>", coverLargeUrl));
-				sb.append(String.format("<div class='col-md-7'><ul>"));
-					sb.append(String.format("<table id = 'tbb' style='table-layout:fixed'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
-						sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
-						sb.append(String.format("<tr> <td id='td1' ><b> &#128049;&nbsp; 카테고리 </b></td> <td id='td2'>%s</td> </tr>", categoryName));
-						sb.append(String.format("<tr> <td id='td1' ><div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank'>&#128149;&nbsp;도서추천</a></div></td></tr></table>",title,coverLargeUrl,isbn,author,categoryId));
-						sb.append(String.format("</div>"));
-						sb.append(String.format("</div>"));
-					sb.append(String.format("<div class='wrapper'>"));
-			sb.append(String.format("</div>"));
+		sb.append(String.format("<div class='h-25 d-inline-block p-2'>")); 
+		sb.append(String.format("<div class='rowResult'>"));
+		sb.append(String.format("<div class='col-md-1'></div>"));
+		sb.append(String.format("<div class='col-md-4' style='margin: 20px;'><img src='%s' style='width:130px; height:200; margin-left:65px;'></div>", coverLargeUrl));
+		sb.append(String.format("<div class='col-md-7'>"));
+		sb.append(String.format("<table id = 'tbb'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
+		sb.append(String.format("<tr> <td id='td1' ><b> &#128049;&nbsp; 카테고리 </b></td> <td id='td2'>%s</td> </tr>", categoryName));
+		sb.append(String.format("<tr> <td id='td1' colspan='2'><div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank' style='vertical-align: middle; margin-botton: 60px;'>&#128149;&nbsp;도서추천</a></div></td></tr></table>",title,coverLargeUrl,isbn,author,categoryId));
+		sb.append(String.format("</div>"));
+		sb.append(String.format("<div class='wrapper'>"));
+		sb.append(String.format("</div>"));
+		sb.append(String.format("</div>"));
 		sb.append(String.format("</div>"));
 	}
 }
@@ -183,7 +183,7 @@ if (key != null && value != null) {
 			div.style["width"]="auto";
 			div.style["word-wrap"]="break-word";
 			div.style["display"]="inline-block";
-			div.style["background-color"]="#fcfcfc";
+			div.style["background-color"]="#B5BFE5";
 			div.style["border-radius"]="3px";
 			div.style["padding"]="3px";
 			div.style["margin-left"]="3px";
@@ -209,7 +209,10 @@ if (key != null && value != null) {
 			clear.style["clear"]="both";
 			document.getElementById('messageWindow2').appendChild(clear);
 			//접속했을 때 접속자들에게 알릴 내용.
-			webSocket.send("<%=nick%>|\|<%=nick%>님이 채팅에 입장하셨습니다.");
+			if(<%=nick%> != null){
+				webSocket.send("<%=nick%>|\|<%=nick%>님이 채팅에 입장하셨습니다.");s
+			}
+			
 		}
 	}
 	// send 함수를 통해서 웹소켓으로 메시지를 보낸다.
@@ -226,7 +229,7 @@ if (key != null && value != null) {
 			div.style["word-wrap"]="break-word";
 			div.style["float"]="right";
 			div.style["display"]="inline-block";
-			div.style["background-color"]="#ffea00";
+			div.style["background-color"]="#F5DC7A";
 			div.style["padding"]="3px";
 			div.style["border-radius"]="3px";
 			div.style["margin-right"]="3px";
@@ -256,7 +259,7 @@ if (key != null && value != null) {
 	        	var arr = list.split('<');
 	        	console.log(arr);
                 var value = "";
-                for(var i=241; i < 400; i++){
+                for(var i=240; i < 419; i++){
                 	value += '<'+arr[i]
                 };
                 var value2 = value.split("<ul class=");
@@ -269,21 +272,16 @@ if (key != null && value != null) {
 	        });
 		}
 </script>
-<title>북덕 BookDuck</title>
+<title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
 </head>
 
 	<jsp:include page="header.jsp"/>
-
-	<div class="content">
-		<div class="innerOuter">
-			<div id="mainTop">
-				<!-- <a href="navertest.do">네이버테스트</a>
-				 -->
+	
 			<!-- 장르(태그) 선택 -->
 				<div id="genre" class="jumbotron text-center">
 					<label>장르선택</label>
 					<select id="genreTAG" name="genreTAG" onchange="genreTagDo();">
-						<option value="none"> ▫▫▫▫▫▫ 선택 ▫▫▫▫▫▫ </option>
+						<option value="none">  ---------   선택   ---------  </option>
 						<optgroup label=문학>
 							<option value="101">소설</option>
 							<option value="112">청소년</option>
@@ -322,20 +320,12 @@ if (key != null && value != null) {
 					<div id="Result1"></div>
 				</div>
 				
-		<a href="navertest.do">네이버테스트</a>
-						
 	<div class="content">
-		<div class="innerOuter">
-			<div id="mainTop">
-			
-			</div>
-			
-			<div id="mainCenter">
                 <!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->
                 <div class="RealTimeNovle" id="mainCenter_left">
                     <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
                     <h5 align="center">모두와 채팅</h5>
-                    <div id="messageWindow2" style="padding: 10px 0; height: 20em; overflow: auto; background-color: #a0c0d7;"></div>
+                    <div id="messageWindow2" style="padding: 10px 0; height: 20em; overflow: auto; background-color: #FDF7DD;"></div>
                     <div class="form-inline" align="right">
                         <c:choose>
                             <c:when test="${Ldto.member_payrole eq 'Y'}">
@@ -361,7 +351,7 @@ if (key != null && value != null) {
 							<b>${Ldto.member_id } 님 주변에 위치한 서점 및 도서관</b>
 						</c:otherwise>
 					</c:choose>
-					<div id="map" style="width:100%;height:350px;"></div>
+					<div id="map"></div>
 					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4cbf31fc0b4bc0ff759253ed7b23a16&libraries=services"></script>
 					<script type="text/javascript">
 						// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
@@ -494,18 +484,17 @@ if (key != null && value != null) {
 						}
 						</script>
 					</div>	
-			</div>
 			
 	
-	</script>
 
 	<!-- 인공지능을 활용한 책 카테고리 추천. -->
-			<div id="mainBottom">
+			<div id="mainMiddle">
+				<h3>나에게 맞는 책추천📖</h3>
 				<table>
 					<tr>
 						<td colspan="4" id="airecommendbox">
 							<label>나이/성별/좋아하는 책 분류를 선택해주세요</label>
-						</td>			
+						</td>
 					</tr>
 					<tr>
 						<td>										
@@ -634,8 +623,6 @@ if (key != null && value != null) {
 				</script>
 			</div>
 		</div>
-	</div>
-	
 	
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

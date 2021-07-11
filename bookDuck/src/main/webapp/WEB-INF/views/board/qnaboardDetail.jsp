@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
 <style type="text/css">
 	table *{margin: 5px;}

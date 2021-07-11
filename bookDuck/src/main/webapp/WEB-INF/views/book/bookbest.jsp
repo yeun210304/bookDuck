@@ -105,7 +105,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>베스트셀러</title>
+<title>책추천 해줄게 북...덕... :: 북덕 BookDuck - 베스트셀러</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
  

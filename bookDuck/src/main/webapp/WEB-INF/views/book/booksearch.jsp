@@ -237,7 +237,7 @@ if (key != null && value != null) {
 <!DOCTYPE html>
 <html>
 <head>
-<title>도서검색</title>
+<title>책추천 해줄게 북...덕... :: 북덕 BookDuck - 도서검색</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -417,6 +417,11 @@ div.result {
   position: relative;
   text-decoration: none;
   display:inline-block;
+}
+
+#btncss>a{
+	text-decoration: none;
+	color: black;
 }
 
 a{

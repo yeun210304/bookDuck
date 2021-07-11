@@ -270,6 +270,7 @@
 	border-radius: 10px;
 	margin-bottom: 10px;
 	padding: 15px;
+	z-index: 1000;
 }
 
 .headerallsearch a {

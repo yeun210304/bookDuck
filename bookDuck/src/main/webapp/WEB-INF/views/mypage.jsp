@@ -366,22 +366,27 @@
 
 	
 	<!-- 신고하기. 블랙리스트 -->
+	<br/><br/>
 	
 	<div>
 		<input id="blist" type="button" value="신고하기">
 		<div id="blistdiv" class="blistclass">			
 			<table>
+			 <colgroup>
+			    <col width="70px" />
+			    <col width="300px" />			   
+			  </colgroup>
 				<tr>
-					<td>ID</td>
+					<td style="text-align: center">ID</td>
 					<td>
 						<input id="blistid" type="text" placeholder="신고할 ID를 검색하세요">
 						<input id="blistidsearch" type="button" value="ID 찾기">
 					</td>
 				</tr>
 				<tr>
-					<td>신고내용</td>
+					<td style="text-align: center">신고내용</td>
 					<td>
-						<textarea id="blistcontent" rows="10" cols="60"></textarea>
+						<textarea style="resize: none;" id="blistcontent" rows="10" cols="60"></textarea>
 					</td>
 				</tr>
 				<tr>

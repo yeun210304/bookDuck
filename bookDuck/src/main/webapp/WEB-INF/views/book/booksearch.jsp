@@ -505,6 +505,7 @@ text-decoration: none;
 	border-radius : 8px;
 	margin-bottom : 10px;
 	padding : 15px;	
+	z-index : 1000;
 }
 
 .searchpagebox a {

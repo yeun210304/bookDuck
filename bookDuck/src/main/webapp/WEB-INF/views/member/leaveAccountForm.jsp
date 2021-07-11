@@ -9,7 +9,9 @@
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+<link href="css/upDelMem.css" rel="stylesheet">
 <script type="text/javascript">
+
 $(document).ready(function(){
 	// 취소
 	$(".cancel").on("click", function(){
@@ -26,31 +28,42 @@ $(document).ready(function(){
 		}	
 	});
 })
+
 </script>
 <body>
 <jsp:include page="../header.jsp"/>
-	<h1>회원 탈퇴</h1>
+<br/>
+<div id="update-title" style="text-align: center;">
+	<h2>회원 탈퇴</h2>
+</div>
+<br/>
 	<form action="leaveAccount.do">
-		<div class="leave_id">
-			<div class="id">ID</div>
-			<div class="id_input_box">
-				<input type="text" id="member_id" name="member_id" class="member_id" value="${Ldto.member_id}" readonly="readonly">
-			</div>
-		</div>
-		<div class="leave_pw">
-			<div class="pw">비밀번호</div>
-			<input type="password" id="member_pw" name="member_pw">
-		</div>
-		<div class="leave-button">
-			<button type="submit">회원탈퇴</button>
-			<button type="button" class="cancel">취소</button>
-		</div>
+		<table id="updatePwtable">
+			<colgroup>
+				<col width="15%">
+			</colgroup>
+			<tr class="leave_id">
+				<th class="id">ID</th>
+				<td>&nbsp;<input type="text" class="text_box" id="member_id" name="member_id" class="member_id" value="${Ldto.member_id}" readonly="readonly"></td>
+			</tr>
+			<tr class="pw">
+			<th>PW</th>
+				<td>&nbsp;<input type="password" class="text_box" placeholder="비밀번호를 입력해 주세요." id="member_pw"/></td>
+			</tr>
+			<tr id="updatePw-button">
+				<td colspan="2"><input type="submit" id="update-button" value="회원 탈퇴" onclick=""/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" id="update-button" value="취소" onclick=""/></td>
+			</tr>
+		</table>
 	</form>
-	<div>
-		<c:if test="${msg==false }">
-			비밀번호가 맞지 않습니다.
-		</c:if>
-	</div>
+		<div>
+			<c:if test="${msg==false }">
+				비밀번호가 맞지 않습니다.
+			</c:if>
+		</div>
+		
 
 </body>
 </html>

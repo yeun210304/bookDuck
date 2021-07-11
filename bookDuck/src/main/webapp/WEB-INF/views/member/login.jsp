@@ -48,29 +48,6 @@
 	}
 </script>
 	
-<script type="text/javascript">
-	function JoinForm(){
-		$(".join").click(function(){
-			$(".join").attr("action", "/member/joinform");
-			$(".join").submit();
-		});
-	});
-	
-	function FindIdForm(){
-		$(".find_id").click(function(){
-			$(".find_id").attr("action", "/member/findIdForm");
-			$(".find_id").submit();
-		});
-	});
-	
-	function FindPwForm(){
-		$(".find_pw").click(function(){
-			$(".find_pw").attr("action", "/member/findPwForm");
-			$(".find_pw").submit();
-		});
-	});
-</script>
-
 <!-- bootstrap 4 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -104,33 +81,39 @@
 				<td>&nbsp;<input type="password" class="text_box" placeholder="Password" id="member_pw"/></td>
 			</tr>
 			<tr id="login-button">
-				<td id="login-button" colspan="2"><input type="button" value="로그인" id="login" onclick="login();"/></td>
+				<td id="login-button" colspan="2"><input type="button" name="#loginChk" value="로그인" id="login" onclick="login();"/></td>
 			</tr>
 		</table>
-			<div class="login-footer"></div>
-			<h4 align="center">아직 BookDuck의 
-			<b><a onclick="location.href='joinform.do'" id="join_link">회원</a>이 아니신가요?</h4></b>
-			<!-- 구현 안 할 부분 
-			<tr id="find-account">
-				<td>&nbsp;<input type="button" value="아이디 찾기" id="find_id" onclick="location.href='findIdForm.do'"/></td>
-				<td>&nbsp;<input type="button" value="비밀번호 찾기" id="find_pw" onclick="location.href='findPwForm.do'"/></td>
-				<td id="join-button">&nbsp;<input type="button" value="회원가입" id="join" onclick="location.href='joinform.do'"/></td>
-			</tr>
-			-->
-	</div>
+		</div><!-- general login 끝 -->
+
+		<div class="SNSButton" id="SNSButton">
+			<h4 align="center">SNS로 로그인하기</h4>
+			<div class="card">
+				<!-- 카카오 아이콘 -->
+	  			<a><img src="resources/img/kakao.png" 
+	  				onclick="document.getElementById('kakao-login-btn').click();" width="72" height="36" id="kakao-login-btn">
+				<!-- 구글 아이콘 -->
+				<img src="resources/img/g-normal.png" style="width:40px; " id="glogin">
+				<!-- 네이버 아이콘 -->
+				<div id="naver_id_login" class="SNSButton"></div></a>
+			</div>
+		</div><!-- SNSButton 끝 -->
+<br/>
+		<hr style="border:1px color= silver;" width="30%">
+		<div class="login-footer">
+			<h4 align="center">BookDuck의 
+			<b><a onclick="location.href='joinform.do'" id="join_link">식구</a>되기</h4></b>
+		</div>
+</div>
+
+
 	<div class="sns-login-area">
 	<!-- 네이버 로그인 -->
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	
-	<!-- 카카오로그인 또한 별다를 거없이 카카오(https://developers.kakao.com/)
-	개발자센터에서 앱을 만들고 키값을 받은후에 주어진 설명따라 진행하겠습니다. 아래의 스크립트를 복사해서 상위에 붙여넣고 아래 스크립트에서 설명하겠습니다. -->
 	<!-- kakaoLogin -->
 	<script type="text/javascript"src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-	<!-- 구글 로그인같은경우는 동일한방식으로 진행이되지만 사이트 자체에서 영어로 되어있는부분이 어려움이 있을수있습니다.
-	(https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin) 
-	사이트에서 진행방법에따라 진행하면되는데 네이버 카카오 전부 동일하게 애플리케이션을 만들고 키값을 받게되면 아래의 스크립트로 이동하겠습니다.
-	 -->
 	<!-- googleLogin -->
 	<script src="https://apis.google.com/js/client:platform.js?onload=init" async defer></script>
 	
@@ -146,24 +129,20 @@
 
 <body>
 
-	<!-- 네이버아이디로로그인 버튼 노출 영역 -->
-  <div id="naver_id_login"></div>
+<div class="card">
   <!-- //네이버아이디로로그인 버튼 노출 영역 -->
   <script type="text/javascript">
       var naver_id_login = new naver_id_login("Hft3mSmHcCpHqnsB7j3E", "http://localhost:8787/bookduck/naverlogin.do");
       var state = naver_id_login.getUniqState();
-      naver_id_login.setButton("white", 2,40);
+      naver_id_login.setButton("green", 2,36);
       naver_id_login.setDomain("http://localhost:8787");
       naver_id_login.setState(state);
       naver_id_login.setPopup();
       naver_id_login.init_naver_id_login();
   </script>
   
-  <!-- 구글 아이콘 -->
-  <a><img src="https://www.drupal.org/files/styles/grid-3-2x/public/project-images/Google-login.png?itok=mHMjUmpH" style="width:40px; " id="glogin"></a>
-  <!-- 카카오 아이콘 -->
-  <a><img src="https://mblogthumb-phinf.pstatic.net/MjAxODAyMDJfMzQg/MDAxNTE3NTAyODA4ODA1.aYtwH9e-REqhMJ-y4FntHDf9cG--EQq76kK3k27DQd8g.Bv8IKu7PShK6fJCmgifry9yIFuBBJpQ1utdqGXUrT7kg.PNG.marketstory24/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1_%EB%A1%9C%EA%B3%A0_1.png?type=w800" style="width:40px; "  id="kakao-login-btn"></a>
   <!-- googleLogin -->
+</div><!-- snsloginarea -->
          <!-- 이곳에서 동일하게 키값을 통해서 전달받은 정보를 onsingup함수 를통해 location.href로 로그인컨트롤러에 보내주게됩니다.-->
     <script>
          function init() {

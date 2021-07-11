@@ -38,7 +38,7 @@ public class LoginBizImpl implements LoginBiz {
 
 	@Override
 	public int leaveAccount(MemberDto dto) {
-		dao.leaveAccount(dto);
+		return dao.leaveAccount(dto);
 	}
 
 	@Override

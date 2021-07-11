@@ -343,7 +343,7 @@
 			</c:when>
 			<c:when test="${Ldto.member_payrole eq 'Y'}">
 				<!-- 구글차트 위치-->
-				<div id="curve_chart" method="get" style="width:900px; height:500px">
+				<div id="curve_chart" method="get" style="width:80%; height:200px">
 					<h3>독서량을 등록하시면 그래프가 그려집니다</h3>
 				</div>
 				<!-- 독서량 전달 -->

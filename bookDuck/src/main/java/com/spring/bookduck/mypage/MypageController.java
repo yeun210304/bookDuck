@@ -47,7 +47,7 @@ public class MypageController {
 		List<ScrapDto> scrapres = scbiz.sclist(dto.getMember_id());
 		model.addAttribute("sclist",scrapres);
 		model.addAttribute("RCdto", RCdto);
-		
+
 		return "mypage";
 	}
 	@RequestMapping("home.do")

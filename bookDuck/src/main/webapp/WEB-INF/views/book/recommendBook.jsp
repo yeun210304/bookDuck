@@ -13,6 +13,18 @@
 <meta charset="UTF-8">
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck
 </title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <!--SummerNote  -->
 <link
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
@@ -402,6 +414,39 @@
 
 	
 </style>
+<style type="text/css">
+/* CSS */
+.Blog .grid-image {
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-start;
+    margin:30px 0;
+}
+.Blog .grid-image img {
+    width:calc(33.333% - 10px);
+    margin:0 15px 15px 0;
+}
+.Blog .grid-image img:nth-of-type(3n),
+.Blog .grid-image img:last-child {
+    margin-right:0;
+}
+@media screen and (max-width:640px){
+  .Blog .grid-image img {
+    width:calc(50% - 15px);
+  }
+}
+@media screen and (max-width:480px){
+  .Blog .grid-image img:nth-of-type(2n) {
+    margin-right:0;
+  }
+  .Blog .grid-image img:nth-of-type(3n) {
+    margin-right:15px;
+  }
+}
+
+</style>
+
+
 </head>
 <body>
 	<%
@@ -515,7 +560,32 @@
 			</form>
 			</div>
 			</div>
+      
+				<br />
+				<!--찜한사람  -->
+				<table class="table table-hover">
+								<col width="100" />
+								<tr>
+									<th>찜한 회원 </th>
+								</tr>
+								<c:choose>
+									<c:when test="${empty scidlist }">
+										<tr>
+											<td colspan="3" align="center">찜한 사람이 없습니다.</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${scidlist }" var="scrapDto">
+											<tr>
+												<td><a href="mypage.do?member_id=${scrapDto.scrap_id }">${scrapDto.scrap_id }</a></td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</table>
+
 				<br /><br/>
+
 			
 		<!-- <h4>한줄낭독</h4> -->
 		<div id="tts">
@@ -763,6 +833,7 @@
 		
 		
 	<!-- 이미지 업로드 -->
+	
 		<div id="imgadd">
 		<table id="selectimglist">
 			<col width="480px;">
@@ -781,7 +852,6 @@
 			</tr>
 			</thead>
 			<tbody id="imgurllist">
-		
 			</tbody>
 		</table>
 		<script type="text/javascript">
@@ -882,7 +952,7 @@
 			});
 		</script>
 		</div>
-
+		</div>
 
 	</div>
 	<!-- 오른쪽 부분 끝나는 곳  -->

@@ -111,6 +111,7 @@
 					+ '\');"><다음페이지></a>');
 					}
 				if (jdata.nextPageToken) {
+					$("#refr_view").find("input").remove();
 					$("#refr_view")
 					.append(
 				'<input type="button" value="닫기" onclick="refr();">');
@@ -240,18 +241,23 @@
 	
 	/* 좌우 나누기 */
 	div #left{
-	width : 35%;
+	width : 20%;
 	float: left;
-	padding : 5px 15px 0px 0px;
+	padding-top : 50px;
+	margin : 0px auto;
+	padding-left: 10px; 
+	text-align: center;
 	}
 	
 	div #right{
-	width : 60%;
+	width : 75%;
 	float: right;
-	padding : 5px 0px 0px 70px;
+	padding-top : 50px;
+	margin : 0px auto;
 	}
 	
 	/* 페이지 영역 나누는 중 */
+	/*
 	#star{
 	padding : 10px 0px 10px 0px;
 	}
@@ -282,7 +288,7 @@
 	padding : 0px 5px 5px 18px;
 	text-align: center;
 	}
-	
+	*/
 	textarea{
 	width:290px; 
 	height:90px;
@@ -362,6 +368,49 @@
 	
 	nav a:nth-child(1):hover ~ #indicator {
 		background: linear-gradient(130deg, yellow, red);
+	}
+	
+	/* 동영상, 이미지 정렬 css */
+		
+	#selectimglist tr {
+		border-bottom: 25px solid #fff;
+	}
+	
+	#selectrclist tr{
+		border-bottom: 25px solid #fff;
+	}
+	
+	#selectimglist tbody{
+		text-align:center;
+	}
+	
+	.videodbtn input{
+		border:0px;
+		background-color:white;
+		margin-top:-130px;
+		font-size:20px;
+		font-color:white;
+		color:white;
+	}
+	.videodbtn input:hover{
+		color:red;
+		border-radius:15px;
+	}
+	
+	.imgdbtn input {
+		border:0px;
+		background-color:white;
+		margin-top:-140px;
+		font-size:20px;
+		font-color:white;
+		color:white;	
+	}
+	
+	.imgdbtn input:hover{
+		color:red;
+		border-radius:15px;
+	}
+	
 
 	
 </style>
@@ -461,13 +510,13 @@
 	<jsp:include page="../header.jsp"/>
       
 	<div class="content">
-		<div class="innerOuter">
+	
       
 		<!-- 왼쪽 시작  -->
-		<div id="left">
+		<div id="left" style="margin:0px;">
 		<!-- 도서 정보 -->
 		<div id="book">
-			<nav>
+			<nav style="text-align: left; padding:10px;">
 				<a href="#">&nbsp;도서 정보</a>
 			</nav>
 			<!-- 책 제목, 저자 -->
@@ -475,11 +524,11 @@
 			<img src="<%=coverLargeUrl %>"><br/><br/>
 			<b><%=title %></b><br/><%=author %><br/>
 			</div>
-		</div><br/>
+		</div><br/><br/>
 	
 		<!-- 별점 -->
 		<div id="star">
-			<nav>
+			<nav style="text-align: left; padding:10px;">
 				<a href="#">&nbsp;별점</a>
 			</nav>
 			<div id="yourstar">
@@ -511,6 +560,7 @@
 			</form>
 			</div>
 			</div>
+      
 				<br />
 				<!--찜한사람  -->
 				<table class="table table-hover">
@@ -533,13 +583,16 @@
 									</c:otherwise>
 								</c:choose>
 							</table>
+
+				<br /><br/>
+
 			
 		<!-- <h4>한줄낭독</h4> -->
 		<div id="tts">
-		<nav>
-			<a href="#">&nbsp;한 줄 낭독</a>
+		<nav style="text-align:left; padding:10px; margin-left:-10px;">
+			<a href="#">한 줄 낭독</a>
 		</nav>
-		<br/>
+		
 		<div id="ttsdetail">
 			<form action="bookfmInsertRes.do" method="post">
 				<input type="hidden" name="coverLargeUrl" value="<%=coverLargeUrl %>">
@@ -593,10 +646,10 @@
 
 
 	<!-- 오른쪽 부분 시작 -->
-	<div id="right">
+	<div id="right" style="margin:0px;">
 	<div id="youtubesearch" style="float: inherit;">
 		<nav>
-			<a href="#">&nbsp;동영상 등록</a>
+			<a href="#">동영상 검색</a>
 		</nav>
 		<%--/////////////youtube 동영상 검색 단 /////////////// --%>
 		<form name="form1" method="post" onsubmit="return false;">
@@ -660,12 +713,13 @@
 		</div>
  --%>
 
-
-		
+		<nav>
+			<a href="#">동영상 등록</a>
+		</nav>		
 		<table id="selectrclist">
 			<thead>
 			<tr>
-				<td>
+				<td colspan="2">
 				<input type="text" id="youtubeurl" placeholder="youtube URL을 입력해 주세요">
 				<input type="button"  value="등록" onclick="urlinsert();">
 				</td>
@@ -692,14 +746,22 @@
 					$.each(
 				data.list,
 		function(i, obj) {
-				value += "<tr>"
-					+ "<td>"
-					+ "<iframe width='560' height='315' src='https://www.youtube.com/embed/"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td></tr>"
-					+"<tr>"
-                    +"<td>"
-                       + "<input type='button' value='삭제' onclick='urldelete("+obj.rcvideo_no+");'>"
-                    +"</td>"
-                	+"</tr>";		
+				if(i%2 == 0){
+					value += "<tr>"
+						+ "<td>"
+						+ "<iframe width='480' height='270' src='https://www.youtube.com/embed/"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
+						+"<td class='videodbtn'>"
+	                       + "<input type='button' value='X' onclick='urldelete("+obj.rcvideo_no+");'>"
+	                    +"</td>";	          				
+				} else {
+					value += "<td>"
+						+ "<iframe width='480' height='270' src='https://www.youtube.com/embed/"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
+						+"<td class='videodbtn'>"
+	                       + "<input type='button' value='X' onclick='urldelete("+obj.rcvideo_no+");'>"
+	                    +"</td>"
+	                	+"</tr>";		
+				}
+					
 				
 				});
 				$("#selectrclist tbody").html(value);
@@ -764,14 +826,22 @@
 			});
 		</script>
 		</div>
+		
+		<br/><br/>
 		</div>
+		
+		
 		
 	<!-- 이미지 업로드 -->
 	
 		<div id="imgadd">
 		<table id="selectimglist">
+			<col width="480px;">
+			<col width="40px;">
+			<col width="480px;">
+			<col width="40px;">
 		<nav>
-			<a href="#">&nbsp;이미지 등록</a>
+			<a href="#">이미지 등록</a>
 		</nav>
 			<thead>
 			<tr>
@@ -799,15 +869,25 @@
 					var value = "";
 					$.each(
 				data.list,
-		function(i, obj) {
-				value += "<tr>"
-					+ "<td>"
-					+ "<img src="+obj.rcimg_content +"></td></tr>"
-					+"<tr>"
-                    +"<td>"
-                       + "<input type='button' value='삭제' onclick='rcimgdelete("+obj.rcimg_no+");'>"
-                    +"</td>"
-                	+"</tr>";		
+		function(i, obj) {					
+				if(i%2 == 0){
+					value += "<tr>"
+						+ "<td>"
+						+ "<img style='height:270px;' src="+obj.rcimg_content +"></td>"
+	                    +"<td class='imgdbtn'>"
+	                       + "<input type='button' value='X' onclick='rcimgdelete("+obj.rcimg_no+");'>"
+	                    +"</td>";
+	                	
+				} else {
+					value += "<td>"
+						+ "<img style='width:480px;' src="+obj.rcimg_content +"></td>"
+	                    +"<td class='imgdbtn'>"
+	                       + "<input type='button' value='X' onclick='rcimgdelete("+obj.rcimg_no+");'>"
+	                    +"</td>"
+	                	+"</tr>";		
+				}
+					
+				
 				
 				});
 				$("#selectimglist tbody").html(value);
@@ -876,7 +956,7 @@
 
 	</div>
 	<!-- 오른쪽 부분 끝나는 곳  -->
-</div>
+
 </div>
 	
 </body>

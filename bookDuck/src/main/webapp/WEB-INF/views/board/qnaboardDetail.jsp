@@ -67,7 +67,7 @@
 	<div class="content">
 		<div class="innerOuter">
 			<h1 align="center">문의게시판</h1>
-			<br><br>
+			<br><br><br>
 		
 			<table class="table" id="contentArea" align="center">
 				<tr>

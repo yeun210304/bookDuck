@@ -165,7 +165,7 @@
 	height: 100px;
 	padding-top: 10px;
 	/*margin: auto; */
-	background-color: F5DC7A; important!
+	background-color: #F5DC7A;
 }
 
 #header>div {
@@ -270,6 +270,7 @@
 	border-radius: 10px;
 	margin-bottom: 10px;
 	padding: 15px;
+	z-index: 1000;
 }
 
 .headerallsearch a {

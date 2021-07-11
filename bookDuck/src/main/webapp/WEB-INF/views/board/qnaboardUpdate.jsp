@@ -47,7 +47,7 @@
 		<div class="innerOuter">
 	
 			<h1 align="center">문의게시판</h1>
-			<br><br>
+			<br><br><br>
 			<form action="qnaUpdateRes.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="post_id" value="${dto.post_id }">		
 				

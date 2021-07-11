@@ -37,8 +37,7 @@
 					if(msg.check == true){
 						location.href='index.jsp';
 					}else{
-						$("#loginChk").show();
-						$("#loginChk").html("ID 혹은 PW가 잘못되었습니다.")
+						alert("ID 및 PW를 확인해 주세요");
 					}
 				},
 				error:function(){
@@ -48,13 +47,6 @@
 		}
 	}
 </script>
-	
-<!-- bootstrap 4 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
--->
   
 <jsp:include page="../header.jsp"/>
 <link href="css/login.css" rel="stylesheet">
@@ -82,8 +74,12 @@
 				<td>&nbsp;<input type="password" class="text_box" placeholder="Password" id="member_pw"/></td>
 			</tr>
 			<tr id="login-button">
-				<td id="login-button" colspan="2"><input type="button" name="#loginChk" value="로그인" id="login" onclick="login();"/></td>
+				<td id="login-button" colspan="2"><input type="button" value="로그인" id="login" onclick="login();"/></td>
 			</tr>
+			<tr>
+				<td colspan="2" align="center" id="loginChk"></td>
+			</tr>
+
 		</table>
 		</div><!-- general login 끝 -->
 
@@ -91,12 +87,12 @@
 			<h4 align="center">SNS로 로그인하기</h4>
 			<div class="card">
 				<!-- 카카오 아이콘 -->
-	  			<a><img src="resources/img/kakao.png" 
-	  				onclick="document.getElementById('kakao-login-btn').click();" width="72" height="36" id="kakao-login-btn">
-				<!-- 구글 아이콘 -->
-				<img src="resources/img/g-normal.png" style="width:40px; " id="glogin">
+	  			<div><img src="resources/img/kakao.png" 
+	  				onclick="document.getElementById('kakao-login-btn').click();" width="72" height="36" id="kakao-login-btn"></div>
 				<!-- 네이버 아이콘 -->
-				<div id="naver_id_login" class="SNSButton"></div></a>
+				<div id="naver_id_login" class="SNSButton" ></div>
+				<!-- 구글 아이콘 -->
+				<div><img src="resources/img/google.png" id="glogin" width="150"></div>
 			</div>
 		</div><!-- SNSButton 끝 -->
 <br/>

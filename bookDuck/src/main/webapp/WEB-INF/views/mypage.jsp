@@ -44,7 +44,7 @@
     	  var jsonData = $.ajax({
     		 url: "chartData.do",
     		 data: "chartId=${Ldto.member_id}",
-    		 dataType:"json",
+    		 dataType:"json : RCdto",
     		 async: false
     		}).responseText;
 
@@ -349,28 +349,61 @@
 	
 	
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	
+
+	<!-- 리딩차트. 구글차트 부분 -->
+	<div class="readingChart" style="float: inherit;">
+		<c:choose>
+			<c:when test="${Ldto.member_payrole eq 'N'}">
+				<p> </p>
+			</c:when>
+			<c:when test="${Ldto.member_payrole eq 'Y'}">
+				<!-- 구글차트 위치-->
+				<div id="curve_chart" method="get" style="width:80%; height:200px ">
+					<h3>독서량을 등록하시면 그래프가 그려집니다</h3>
+				</div>
+				<!-- 독서량 전달 -->
+				<form action="readingTimeInsert.do" method="post">
+					<p>독서량을 등록하시면 그래프가 그려집니다</p>
+					<!-- 날짜 -->
+					<input type="date" id="chartMdate" name="chartMdate" style="width:30%" />
+					<br/>
+					<!-- 독서한 시간(분) -->
+					<input type="range" class="progress-bar" min="0" max="600" value="0" style="width:30%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
+					<br/>
+					<span id="CRTime" ></span>분
+					<input type="hidden" id="chartId" name="chartId" value="${Ldto.member_id}" />
+					<input type="submit" value="등록" onclick="isNullCheck();" />
+				</form>
+			</c:when>
+		</c:choose>
+
+	</div>
+
 
 	
 	<!-- 신고하기. 블랙리스트 -->
+	<br/><br/>
 	
 	<div>
 		<input id="blist" type="button" value="신고하기">
 		<div id="blistdiv" class="blistclass">			
 			<table>
+			 <colgroup>
+			    <col width="70px" />
+			    <col width="300px" />			   
+			  </colgroup>
 				<tr>
-					<td>ID</td>
+					<td style="text-align: center">ID</td>
 					<td>
 						<input id="blistid" type="text" placeholder="신고할 ID를 검색하세요">
 						<input id="blistidsearch" type="button" value="ID 찾기">
 					</td>
 				</tr>
 				<tr>
-					<td>신고내용</td>
+					<td style="text-align: center">신고내용</td>
 					<td>
-						<textarea id="blistcontent" rows="10" cols="60"></textarea>
+						<textarea style="resize: none;" id="blistcontent" rows="10" cols="60"></textarea>
 					</td>
 				</tr>
 				<tr>

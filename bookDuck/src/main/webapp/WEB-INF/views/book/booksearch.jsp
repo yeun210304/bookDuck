@@ -501,8 +501,21 @@ text-decoration: none;
 .searchpagebox a {
 	font-size : 1.6rem;
 	line-height : 2.5rem;
+	text-decoration : none;
+	color : black;	
 }
-
+.searchpagebox a:link {
+	text-decoration : none;
+	color : black;
+}
+.searchpagebox a:visited {
+	text-decoration : none;
+	color : black;
+}
+.searchpagebox a:hover {
+	text-decoration : none;
+	color : black;
+}
 
 
 

@@ -11,7 +11,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>도서추천</title>
+<title>책추천 해줄게 북...덕... :: 북덕 BookDuck
+</title>
 <!--SummerNote  -->
 <link
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"

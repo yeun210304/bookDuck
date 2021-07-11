@@ -597,6 +597,9 @@ if (key != null && value != null) {
 										{category : '126' , name : '건강/뷰티'},
 										{category : '128' , name : '여행'},
 										{category : '129' , name : '중등학습서'}];
+					var onecate;
+					var twocate;
+					var threecate;					
 							
 					$("#airecommend").click(function(){
 						if(id.trim() != ""){
@@ -607,6 +610,10 @@ if (key != null && value != null) {
 							$.getJSON("airecommend.do?age_mw="+$age+"_"+$mw+"&category="+$category, function(result){
 								scorelist = result.list;
 								scorelist.sort((a,b) => (a.score > b.score) ? -1 : ((a.score < b.score) ? 1 : 0));
+								
+								onecate = scorelist[0];
+								twocate = scorelist[1];
+								threecate = scorelist[2];
 								
 								var one;
 								var two;
@@ -623,13 +630,23 @@ if (key != null && value != null) {
 								}
 								
 								$aibox.text("");
-								$aibox.text("추천 카테고리 1 : "+ one +" 2 : "+ two +" 3: "+ three);
+								$aibox.text("추천 카테고리 1 : "+ one +" 2 : "+ two +" 3 : "+ three +"<br/>");
 								
 							});
 						} else {
 							$aibox.text("");
 							$aibox.text("로그인을 해야 사용할 수 있는 기능입니다.");
 						}
+						$aibox.appendTo($("<table>"));
+						
+						$.getJSON("airecommendcate.do?categoryId="+onecate, function(result){
+							$aibox.appendTo();
+							
+						});
+						
+						
+						
+						
 					});
 				</script>
 			</div>

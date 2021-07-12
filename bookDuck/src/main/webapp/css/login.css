@@ -10,7 +10,7 @@ table {
 	width: 400px; height: 50px; background-color:#6277BA;
 	margin-left:auto; margin-right:auto;
 	font-size: 20;}
-td {height:40px; background-color:#B5BFE5;}
+td {height:40px; background-color: #FDF7DD;}
 th{background-color: #6277BA; width:50px;}
 .text_box{width:290px; height:40px;}
 th{width:290px; height:51px;}
@@ -33,4 +33,6 @@ a:active {
 	margin-left:auto; margin-right:auto;
 	width: 100%;
 }
-
+body{
+	margin: 0px;
+}

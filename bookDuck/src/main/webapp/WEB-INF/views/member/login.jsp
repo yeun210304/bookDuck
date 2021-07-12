@@ -58,7 +58,7 @@
 <br/>
 	<div class="general-login">
 		<div id="login-title" style="text-align: center;">
-		<img src="resources/img/bookduck_logo.png" width="200" height="49" id="loginlogo">
+		<img src="resources/img/bookduckLogo.png" width="200" height="49" id="loginlogo">
 		</div>
 		<br/>
 		<table id="logintable">

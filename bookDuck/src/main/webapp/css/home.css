@@ -1,10 +1,12 @@
 @charset "UTF-8";
-
+/*폰트*/
 p{
 	font-family: "NanumSquareRoundEB";
 	src: url("resources/font/NanumSquareRoundEB.ttf");
 }
-
+#header a{
+	font-weight: bold;
+}
 
 #mainCenter>div {
 	width: 48%;
@@ -17,17 +19,18 @@ p{
 }
 
 .jumbotron {
-    padding: 2rem;
+    padding: 4rem 10rem;
+	margin-bottom: 0;
 }
 
 /*채팅*/
 .RealTimeNovle{
 	width: 100%;
-	margin-top: 80px;
+	margin-top: 100px;
 }
 /*지도*/
 #mainCenter_right{
-	margin-top: 80px;
+	margin-top: 100px;
 }
 #map{
 	width: 100%;
@@ -38,23 +41,17 @@ p{
 	margin: 20px;
 }
 
-/*책장르*/
-#genre{
-	background-color: white;
-}
-#tbb{
-	width: 300px; 
-}
-#td1{
-	width: 110px; 
+
+
+.cols {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+    display: table-cell;
 }
 
-.rowResult{
-	display: inline-block;
-    width: 350px; 
-    height: 150px;
-    margin-bottom: 60px;
-}
 /*책추천버튼*/
 #btncss{
   background:#F5DC7A;
@@ -93,6 +90,35 @@ p{
   width:100%;
   transition:800ms ease all;
 }
+
+/*책장르*/
+#genre{
+	background-color: white;
+	left: 50px;
+}
+#tbb{
+	width: 300px;
+	margin-left: 30px;
+	margin-right: 30px;
+}
+#td1{
+	width: 105px; 
+}
+#td2{
+	width: 145px; 
+}
+
+.rowResult{
+    width: 150px;
+    height: 300px;
+    margin: 30px;
+}
+#Result1{
+	width: 100px;
+	height: 200px;
+	margin: 0;
+}
+
 
 /*장르선택 버튼*/
 select{

@@ -9,9 +9,25 @@ table {
 #joinbutton{border:none; color:white; 
 	width: 500px; height: 50px; background-color:#6277BA;
 	margin-left:auto; margin-right:auto;}
-td {height:40px; background-color:#B5BFE5;}
+td {height:40px; background-color:#FDF7DD;}
 th{background-color: #6277BA;}
 input, button{vertical-align:middle; border:none;}
 .text_box{width:290px; height:40px;}
 th{width:290px; height:51px;}
 button{height:40px;}
+body {margin: 0px;}
+#idCheck{
+	
+}
+button {
+    width: 116px;
+    background: #EDC630;
+    color: black;
+    border: none;
+    position: relative;
+    height: 42px;
+    cursor: pointer;
+    float: right;
+    border-radius: 10px;
+    font-weight: bold;
+}

@@ -177,6 +177,11 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 	height: 100%;
 	width: 130px;
 
+#right {
+    width: 60%%;
+    height: 200px;
+    float: right;
+    padding: 5px 0px 0px 30px;
 }
 
 </style>
@@ -259,8 +264,6 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						</table>
 					</div>
 			
-					<br />
-					<br />
 					<div class="second" >
 						<table border="1" class="table table-hover" >
 							<col width="10">

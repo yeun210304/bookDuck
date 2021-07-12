@@ -113,19 +113,17 @@ if (key != null && value != null) {
 		if(categoryId == "126"){categoryId = "건강뷰티";}
 		if(categoryId == "128"){categoryId = "여행";}
 		if(categoryId == "129"){categoryId = "중등학습서";}
-		sb.append(String.format("<div class='h-25 d-inline-block p-2'>")); 
-		sb.append(String.format("<div class='rowResult'>"));
-		sb.append(String.format("<div class='col-md-1'></div>"));
-		sb.append(String.format("<div class='col-md-4' style='margin: 20px;'><img src='%s' style='width:130px; height:200; margin-left:65px;'></div>", coverLargeUrl));
-		sb.append(String.format("<div class='col-md-7'>"));
-		sb.append(String.format("<table id = 'tbb'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
-		sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
-		sb.append(String.format("<tr> <td id='td1' ><b> &#128049;&nbsp; 카테고리 </b></td> <td id='td2'>%s</td> </tr>", categoryName));
-		sb.append(String.format("<tr> <td id='td1' colspan='2'><div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank' style='vertical-align: middle; margin-botton: 60px;'>&#128149;&nbsp;도서추천</a></div></td></tr></table>",title,coverLargeUrl,isbn,author,categoryId));
-		sb.append(String.format("</div>"));
-		sb.append(String.format("<div class='wrapper'>"));
-		sb.append(String.format("</div>"));
-		sb.append(String.format("</div>"));
+		
+		sb.append(String.format("<div class='cols'>"));
+			
+			sb.append(String.format("<div><img src='%s' style='width:130px; height:200; margin-left: 87px; margin-bottom: 20px;'></div>", coverLargeUrl));
+			sb.append(String.format("<table id = 'tbb'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
+			sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
+			sb.append(String.format("<tr> <td id='td1' ><b> &#128049;&nbsp; 카테고리 </b></td> <td id='td2'>%s</td> </tr>", categoryName));
+			sb.append(String.format("<tr> <td id='td1' colspan='2'><div id='btncss'><a href='recommendBook.do?title=%s&coverLargeUrl=%s&isbn=%s&author=%s&categoryId=%s'  target='_blank' style='vertical-align: middle; margin-botton: 60px;'>&#128149;&nbsp;도서추천</a></div></td></tr></table>",title,coverLargeUrl,isbn,author,categoryId));
+			sb.append(String.format("<div class='wrapper'></div>"));
+		
+			
 		sb.append(String.format("</div>"));
 	}
 }
@@ -259,7 +257,7 @@ if (key != null && value != null) {
 	        	var arr = list.split('<');
 	        	console.log(arr);
                 var value = "";
-                for(var i=240; i < 419; i++){
+                for(var i=220; i < 396; i++){
                 	value += '<'+arr[i]
                 };
                 var value2 = value.split("<ul class=");
@@ -273,16 +271,18 @@ if (key != null && value != null) {
 		}
 </script>
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style type="text/css">
 	#aire_box table{
 		text-align:center;
 		margin:0px auto;
 	}
-
-
 </style>
-
-
 
 </head>
 
@@ -328,7 +328,12 @@ if (key != null && value != null) {
 						</optgroup>
 					</select>
 					<%=sb.toString()%>
-					<div id="Result1"></div>
+					<div class="container-fluid">
+					 	<div class="row">
+							<div id="Result1"></div>
+						</div>
+					</div>
+					 	
 				</div>
 				
 	<div class="container">
@@ -482,11 +487,11 @@ if (key != null && value != null) {
 				</div>
 				
 				<div class="col-sm-7">
-                <!-- 웹소켓 채팅을 이용한 소설 RealTimeNovel -->
+                <!-- 웹소켓 채팅 -->
                 <div class="RealTimeNovle" id="mainCenter_left">
                     <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
-                    <p align="center">모두와 채팅</p>
-                    <div id="messageWindow2" style="padding: 10px 0; height: 20em; overflow: auto; background-color: #B5BFE5;"></div>
+                    <b align="center">모두와 채팅</b>
+                    <div id="messageWindow2" style="padding: 10px 0; height: 332px; overflow: auto; background-color: #B5BFE5;"></div>
                     <div class="form-inline" align="right">
                         <c:choose>
                             <c:when test="${Ldto.member_payrole eq 'Y'}">

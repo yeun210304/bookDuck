@@ -35,16 +35,17 @@ public class MypageController {
 	private ScrapBiz scbiz;
 	
 	@RequestMapping("mypage.do")
-	public String mypage(HttpSession session, HttpServletRequest request,MemberDto dto,ReadingChartDto RCdto, Model model ) {
+	public String mypage(HttpSession session, HttpServletRequest request,MemberDto Ldto,ReadingChartDto RCdto, Model model ) {
 		
 
 		logger.info("[Controller] mypage.do ");
 		session= request.getSession();
-		model.addAttribute("member_id",dto.getMember_id());
-		model.addAttribute("member_payrole",dto.getMember_payrole());
-	 	IntroduceDto intdres = biz.selectone(dto.getMember_id());
+		model.addAttribute("Ldto", Ldto);
+		model.addAttribute("member_id",Ldto.getMember_id());
+		model.addAttribute("member_payrole",Ldto.getMember_payrole());
+	 	IntroduceDto intdres = biz.selectone(Ldto.getMember_id());
 		model.addAttribute("intdDto",intdres);
-		List<ScrapDto> scrapres = scbiz.sclist(dto.getMember_id());
+		List<ScrapDto> scrapres = scbiz.sclist(Ldto.getMember_id());
 		model.addAttribute("sclist",scrapres);
 		model.addAttribute("RCdto", RCdto);
 

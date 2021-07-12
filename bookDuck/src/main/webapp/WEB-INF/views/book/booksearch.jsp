@@ -543,10 +543,10 @@ text-decoration: none;
 
 .searchpagebox {
 	position : absolute;
-	background-color : white;
+	background-color : #fcfaf2;
 	left : 0.5px;
 	width : 195px;
-	border-radius : 8px;
+	border-radius : 10px;
 	margin-bottom : 10px;
 	padding : 15px;	
 	z-index : 1000;
@@ -556,19 +556,19 @@ text-decoration: none;
 	font-size : 1.6rem;
 	line-height : 2.5rem;
 	text-decoration : none;
-	color : black;	
+	color:#233f9e
 }
 .searchpagebox a:link {
 	text-decoration : none;
-	color : black;
+	color:#233f9e
 }
 .searchpagebox a:visited {
 	text-decoration : none;
-	color : black;
+	color:#233f9e
 }
 .searchpagebox a:hover {
 	text-decoration : none;
-	color : black;
+	color:#233f9e
 }
 
 

@@ -7,14 +7,28 @@
 <head>
 <meta charset="UTF-8">
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
+<!-- 나눔고딕 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
+<!-- 나눔바른고딕 -->
+<link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
+<!-- 나눔 스퀘어 -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"> 
 <style type="text/css">
-	#boardList{text-align: center; width: 100%;}
+	/* nanumsquare bold */
+	@font-face{
+		font-family : 'Nanum Square Bold';
+		src: url("font/NanumSquare_acB.ttf");
+	}
+	
+	#boardList{text-align: center; width: 100%; font-family : 'NanumSquare'; transform:skew(-0.03deg);}
 	#boardList>tbody>tr{height: 50px;}
-	thead{height: 40px; }
+	thead{height: 40px;}
 	ul{text-align : center;}
 	ul li{list-style: none; display: inline-block;}
-	#pagingArea{width:fit-content; margin:auto;}
-	#searchForm {text-align: center;}
+	#pagingArea{width:fit-content; margin:auto; font-family: 'NanumSquare'; transform:skew(-0.03deg);}
+	#searchForm {text-align: center; font-family: 'NanumSquare'; transform:skew(-0.03deg);}
 	#searchForm>*{display:inline-block; margin:5px;}
 	
 	a {text-decoration: none !important; color: black !important;}
@@ -39,6 +53,13 @@
 		background-color: #F5DC7A;
 		cursor: pointer;
 	}
+	h1{
+		/*font-family: 'Nanum Gothic', sans-serif;*/
+		font-family:'Nanum Square Bold', sans-serif;
+		letter-spacing: 10px;
+	}
+	#postContent{display:inline-block !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+	
 </style>
 <!-- bootstrap 4 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -64,6 +85,12 @@
 			<br>
 			<br>
 			<table class="table" id="boardList" align="center">
+				<col width="7%">
+				<col width="33%">
+				<col width="20%">
+				<col width="10%">
+				<col width="15%">
+				<col width="10%">
 				<thead class="table-warning">
 					<tr>
 						<th>번호</th>
@@ -85,7 +112,7 @@
 							<c:forEach var="dto" items="${list }">
 								<tr>
 									<td>${dto.post_no}</td>
-									<td><a href="noticeDetail.do?post_id=${dto.post_id}">${dto.post_title}</a></td>
+									<td width="369px" id="postContent"><a href="noticeDetail.do?post_id=${dto.post_id}">${dto.post_title}</a></td>
 									<td>${dto.post_writer}</td>
 									<td>${dto.post_hit }</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -108,7 +135,7 @@
 			</table>
 		
 			<br><br>
-			<div id="paging-area" align="center">
+			<div id="pagingArea" align="center">
 				<ul class="paging">
 					<c:choose>
 						<c:when test="${ pi.currentPage ne 1 }">
@@ -187,6 +214,6 @@
 		</div>
 	</div>
 	
-	<jsp:include page="../footer.jsp"></jsp:include>
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>

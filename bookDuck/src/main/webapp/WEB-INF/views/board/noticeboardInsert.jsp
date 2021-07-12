@@ -21,10 +21,21 @@
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
+<!-- nanum square regular -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"> 
 <style type="text/css">
+	/* nanumsquare bold */
+	@font-face{
+		font-family : 'Nanum Square Bold';
+		src: url("font/NanumSquare_acB.ttf");
+	}
+	h1{
+		font-family:'Nanum Square Bold', sans-serif !important;
+		letter-spacing: 10px;
+	}
+	
 	table *{margin: 5px;}
-	table{width: 100%; margin: auto;}
+	table{width: 100%; margin: auto; font-family : 'NanumSquare'; transform:skew(-0.03deg); font-size: medium;}
 	th{height: 40px;}
 	input{border: none;}
 	input[type=button]{

@@ -7,9 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"> 
 <style type="text/css">
+	/* nanumsquare bold */
+	@font-face{
+		font-family : 'Nanum Square Bold';
+		src: url("font/NanumSquare_acB.ttf");
+	}
+	h1{
+		font-family:'Nanum Square Bold', sans-serif;
+		letter-spacing: 10px;
+	}
+	
 	table *{margin: 5px;}
-	table{width: 90%; margin: auto;}
+	table{width: 90%; margin: auto; font-family: 'NanumSquare'; transform:skew(-0.03deg);}
 	th{height: 40px;}
 	button{
 		width : 60px;
@@ -18,6 +29,7 @@
 		background-color: #F5DC7A;
 		cursor: pointer;
 	}
+	
 </style>
 <!-- bootstrap 4 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">

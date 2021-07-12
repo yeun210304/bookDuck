@@ -7,14 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
+<!-- 나눔 스퀘어 -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"> 
 <style type="text/css">
-	#boardList{text-align: center; width: 100%;}
-	#boardList>tbody>tr{height: 50px; }
+	/* nanumsquare bold */
+	@font-face{
+		font-family : 'Nanum Square Bold';
+		src: url("font/NanumSquare_acB.ttf");
+	}
+	h1{
+		font-family:'Nanum Square Bold', sans-serif;
+		letter-spacing: 10px;
+	}
+	
+	#boardList{text-align: center; width: 100%; font-family: 'NanumSquare'; transform:skew(-0.03deg);}
+	#boardList>tbody>tr{height: 50px;}
 	thead th{height: 40px;}
 	ul {text-align: center;}
 	ul li {list-style: none; display: inline-block;}
-	#pagingArea{width:fit-content; margin:auto;}
-	#searchForm {text-align: center;}
+	#pagingArea{width:fit-content; margin:auto; font-family : 'NanumSquare'; transform:skew(-0.03deg);}
+	#searchForm {text-align: center; font-family : 'NanumSquare'; transform:skew(-0.03deg);}
 	#searchForm>*{display:inline-block; margin:5px;}
 	a {text-decoration: none !important; color: black !important;}
 	.paging a {
@@ -95,7 +107,7 @@
 										<c:if test="${dto.post_category eq 'M' }">회원</c:if>
 										<c:if test="${dto.post_category eq 'E' }">기타</c:if>
 										<c:if test="${empty dto.post_category }">분류 없음</c:if></td>
-									<td width="275px" id="postContent"><a href="qnaDetail.do?post_id=${dto.post_id}">${dto.post_title}&nbsp;[${dto.post_comment_count }]</a></td>
+									<td width="310px" id="postContent"><a href="qnaDetail.do?post_id=${dto.post_id}">${dto.post_title}&nbsp;[${dto.post_comment_count }]</a></td>
 									<td>${dto.post_writer}</td>
 									<td>${dto.post_hit }</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -118,7 +130,7 @@
 			</table>
 			
 			<br><br>
-			<div id="paging-area" align="center">
+			<div id="pagingArea" align="center">
 				<ul class="paging">
 					<c:choose>
 						<c:when test="${ pi.currentPage ne 1 }">

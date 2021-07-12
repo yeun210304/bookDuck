@@ -6,8 +6,18 @@
 <meta charset="UTF-8">
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
 <style type="text/css">
+	/* nanumsquare bold */
+	@font-face{
+		font-family : 'Nanum Square Bold';
+		src: url("font/NanumSquare_acB.ttf");
+	}
+	h1{
+		font-family:'Nanum Square Bold', sans-serif !important;
+		letter-spacing: 10px;
+	}
+	
 	table *{margin: 5px;}
-	table{width: 100%; margin: auto;}
+	table{width: 100%; margin: auto; font-family : 'NanumSquare' !important; transform:skew(-0.03deg); font-size: medium;}
 	th{background-color: #6277BA; height: 40px;}
 	input{border: none;}
 	input[type=button]{

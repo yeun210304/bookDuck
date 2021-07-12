@@ -241,7 +241,10 @@ td{
 }
 
 #btncss { 
+  border-radius : 10px;
   padding : 10px 10px 10px 10px;
+  margin : 0px 15px 0px 15px;
+  opacity : 0.75;
   color: #A071F5;
   font-weight : bold;
   text-transform: uppercase;
@@ -271,8 +274,8 @@ text-decoration: none;
   bottom: 0%;
   left: 0px;
   width: 100%;
-  height: 1px;
-  background: #6098FF;
+  height: 2px;
+  background: #dcdcdc;
   display: block;
   -webkit-transform-origin: right top;
   -ms-transform-origin: right top;

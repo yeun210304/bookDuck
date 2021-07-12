@@ -15,7 +15,12 @@
 	FROM SCRAP
 	WHERE BOOK_ISBN =#{book_isbn} 
 	</select>
-	
+
+	<select id="scidlist" parameterType="String" resultType="scrapDto">
+		SELECT SCRAP_ID
+		FROM SCRAP
+		WHERE BOOK_ISBN =#{book_isbn}
+	</select>
 	
 	<insert id="scinsert" parameterType="scrapDto">
 		INSERT INTO SCRAP
@@ -30,4 +35,6 @@
 		DELETE FROM SCRAP
 		WHERE SCRAP_NO= #{scrap_no}
 	</delete>
+	
+	
 </mapper>

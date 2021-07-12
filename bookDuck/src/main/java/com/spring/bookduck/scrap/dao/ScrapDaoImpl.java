@@ -74,4 +74,17 @@ public class ScrapDaoImpl implements ScrapDao {
 		}
 	}
 
+	@Override
+	public List<ScrapDto> scidlist(String book_isbn) {
+		List<ScrapDto> scidlist= new ArrayList<ScrapDto>();
+		
+		try {
+			scidlist = sqlSession.selectList(namespace+"scidlist",book_isbn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return scidlist;
+	}
+
 }

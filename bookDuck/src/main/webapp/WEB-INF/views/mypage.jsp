@@ -16,17 +16,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <%
 	MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
@@ -55,7 +44,7 @@
     	  var jsonData = $.ajax({
     		 url: "chartData.do",
     		 data: "chartId=${Ldto.member_id}",
-    		 dataType:"json",
+    		 dataType:"json : RCdto",
     		 async: false
     		}).responseText;
 
@@ -200,8 +189,6 @@
 
 	
 
-<div class="content">
-	<div class="innerOuter">
 	
 		<a href="updatePwForm.do">비밀번호변경</a>
 		<a href="leaveAccountForm.do">회원탈퇴</a>
@@ -210,7 +197,7 @@
 	<br/><br/>
 	<div>
 		<c:choose>
-			<c:when test="${Ldto.member_payrole eq 'N'}">
+			<c:when test="${Ldto.member_payrole eq 'N' }">
 				<div class="jumbotron">
 					<p>${Ldto.member_id }님은 회원권이 없습니다. </p>
 					<a class="btn btn-warning" href="payorder.do?">회원 결제하기</a>
@@ -225,6 +212,7 @@
 				<c:choose>
 					<c:when test="${empty intdDto.intd_content}">
 					<div id="right">
+					<h4>${Ldto.member_id }&nbsp;님 책 읽으세요!</h4>
 						<table class="table table-borderless">
 							<tr> 
 								<td colspan="1" align="center"
@@ -273,6 +261,7 @@
 					<c:otherwise>
 					<%--////////////자기소개가 있을때/////////////  --%>
 					<div id="right">
+					<h4>${Ldto.member_id }&nbsp;님 책 읽으세요!</h4>
 						<table class="table table-borderless">
 							<tr>
 								<td id="summernote">${intdDto.intd_content}
@@ -287,8 +276,36 @@
 							</tr>
 						</table>
 						</div>
+						<!-- 리딩차트. 구글차트 부분 -->
+	<div class="readingChart" style="float: inherit;" id="left">
+		<c:choose>
+			<c:when test="${Ldto.member_payrole eq 'N'}">
+				<p> </p>
+			</c:when>
+			<c:when test="${Ldto.member_payrole eq 'Y'}">
+				<!-- 구글차트 위치-->
+				<div id="curve_chart" method="get" style="width:80%; height:200px">
+					<h3>독서량을 등록하시면 그래프가 그려집니다</h3>
+				</div>
+				<!-- 독서량 전달 -->
+				<form action="readingTimeInsert.do" method="post">
+					<p>독서량을 등록하시면 그래프가 그려집니다</p>
+					<!-- 날짜 -->
+					<input type="date" id="chartMdate" name="chartMdate" style="width:30%" />
+					<br/>
+					<!-- 독서한 시간(분) -->
+					<input type="range" min="0" max="600" value="0" style="width:30%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
+					<br/>
+					<span id="CRTime" ></span>분
+					<input type="hidden" id="chartId" name="chartId" value="${Ldto.member_id}" />
+					<input type="submit" value="등록" onclick="isNullCheck();" />
+				</form>
+			</c:when>
+		</c:choose>
+
+	</div>
 						<br/><br/>
-						<div id="left">
+						<div >
 							<table border="1" class="table table-hover">
 								<col width="10">
 								<col width="25" />
@@ -332,9 +349,8 @@
 	
 	
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	
+
 	<!-- 리딩차트. 구글차트 부분 -->
 	<div class="readingChart" style="float: inherit;">
 		<c:choose>
@@ -343,7 +359,7 @@
 			</c:when>
 			<c:when test="${Ldto.member_payrole eq 'Y'}">
 				<!-- 구글차트 위치-->
-				<div id="curve_chart" method="get" style="width:80%; height:200px">
+				<div id="curve_chart" method="get" style="width:80%; height:200px ">
 					<h3>독서량을 등록하시면 그래프가 그려집니다</h3>
 				</div>
 				<!-- 독서량 전달 -->
@@ -353,7 +369,7 @@
 					<input type="date" id="chartMdate" name="chartMdate" style="width:30%" />
 					<br/>
 					<!-- 독서한 시간(분) -->
-					<input type="range" min="0" max="600" value="0" style="width:30%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
+					<input type="range" class="progress-bar" min="0" max="600" value="0" style="width:30%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
 					<br/>
 					<span id="CRTime" ></span>분
 					<input type="hidden" id="chartId" name="chartId" value="${Ldto.member_id}" />
@@ -363,6 +379,7 @@
 		</c:choose>
 
 	</div>
+
 
 	
 	<!-- 신고하기. 블랙리스트 -->

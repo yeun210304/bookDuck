@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
-#mainCenter {
-	width: 100%;
+p{
+	font-family: "NanumSquareRoundEB";
+	src: url("resources/font/NanumSquareRoundEB.ttf");
 }
+
 
 #mainCenter>div {
 	width: 48%;
@@ -14,36 +16,24 @@
 	width: 80%;
 }
 
-#mainBottom {
-	width: 80%;
+.jumbotron {
+    padding: 2rem;
 }
 
 /*채팅*/
 .RealTimeNovle{
-	width: 450px;
-	float: right;
-	margin-top: 30px;
+	width: 100%;
+	margin-top: 80px;
 }
 /*지도*/
 #mainCenter_right{
-	float: left;
-	margin-top: 30px;
+	margin-top: 80px;
 }
-
 #map{
-	width: 360px;
+	width: 100%;
 	height: 360px;
 }
 /*인공지능책추천*/
-#mainMiddle{
-	width: 500px;
-	height: 400px;
-	margin: 100px;
-	display: inline-block;
-}
-#airecommendbox{
-	
-}
 .content{
 	margin: 20px;
 }

@@ -39,4 +39,9 @@ public class ScrapBizImpl implements ScrapBiz {
 		 dao.scalldelete(scrap_no);
 	}
 
+	@Override
+	public List<ScrapDto> scidlist(String book_isbn) {
+		return dao.scidlist(book_isbn);
+	}
+
 }

@@ -264,7 +264,7 @@
 
 .headerallsearch {
 	position: absolute;
-	background-color: white;
+	background-color: #fcfaf2;
 	left: 5px;
 	width: 230px;
 	border-radius: 10px;
@@ -276,6 +276,7 @@
 .headerallsearch a {
 	font-size: 16px;
 	line-height: 21px;
+	color:#233f9e;
 }
 
 

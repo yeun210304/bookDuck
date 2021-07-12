@@ -757,7 +757,11 @@
 									<c:otherwise>
 										<c:forEach items="${scidlist }" var="scrapDto">
 											<tr>
-												<td><a href="mypage.do?member_id=${scrapDto.scrap_id }">${scrapDto.scrap_id }</a></td>
+												<td>
+												<a href="mypage.do?member_id=${scrapDto.scrap_id}&member_payrole=${Ldto.member_payrole}">
+												 <!-- <a href="mypage.do?member_id=${scrapDto.scrap_id }">${scrapDto.scrap_id }  -->
+												${scrapDto.scrap_id}
+												</a></td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>

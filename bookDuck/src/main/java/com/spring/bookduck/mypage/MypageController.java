@@ -35,8 +35,7 @@ public class MypageController {
 	private ScrapBiz scbiz;
 	
 	@RequestMapping("mypage.do")
-	public String mypage(HttpSession session, HttpServletRequest request,MemberDto Ldto,ReadingChartDto RCdto, Model model ) {
-		
+	public String mypage(HttpSession session, HttpServletRequest request,MemberDto Ldto, String member_id, ReadingChartDto RCdto, Model model ) {
 
 		logger.info("[Controller] mypage.do ");
 		session= request.getSession();
@@ -48,6 +47,19 @@ public class MypageController {
 		List<ScrapDto> scrapres = scbiz.sclist(Ldto.getMember_id());
 		model.addAttribute("sclist",scrapres);
 		model.addAttribute("RCdto", RCdto);
+		
+		HttpSession msession = request.getSession(); 
+		MemberDto mdto = (MemberDto) msession.getAttribute("Ldto");
+		
+		System.out.println("mdto.getMember_id : " + mdto.getMember_id());
+		System.out.println("memberid : " + member_id);
+		
+		
+		if(mdto.getMember_id().equals(member_id)) {
+			model.addAttribute("memberChk", "yes");
+		} else {
+			model.addAttribute("memberChk", "no");
+		}
 
 		return "mypage";
 	}

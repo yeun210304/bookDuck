@@ -180,11 +180,13 @@ div #left {
 	padding: 5px 15px 0px 0px;
 }
 
-div #right {
-	width: 60%;
-	float: right;
-	padding: 5px 0px 0px 30px;
+#right {
+    width: 60%%;
+    height: 200px;
+    float: right;
+    padding: 5px 0px 0px 30px;
 }
+
 </style>
 
 
@@ -230,7 +232,7 @@ div #right {
 					<br />
 					<br />
 					<div id="left">
-						<table border="1" class="table table-hover">
+						<table border="1" >
 							<col width="10">
 							<col width="25" />
 							<col width="100" />

@@ -47,8 +47,6 @@ public class BookController {
 		return "book/booksearch";
 	}
 	
-
-	
 	@RequestMapping("/recommendBook.do")
 	public String recommend(HttpSession session, HttpServletRequest request, Model model, String isbn) {
 		

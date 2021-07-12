@@ -68,6 +68,7 @@ public class BookController {
 		return "book/recommendBook";
 	}
 
+
 	@RequestMapping("/newBook.do")
 	public String newBook() {
 		

@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,9 +22,9 @@
 	  function naverSignInCallback() {
 		const member_email = naver_id_login.getProfileData('email');
 	    alert(member_email);
-	    console.log("console.log:"+member_email+token)
+	  	console.log("console.log:"+member_email+token)
 	    
-	    window.opener.location.href = '/naverlogin.do?member_email='
+	    window.opener.location.href = 'naverlogin.do?member_email='
 	    		+member_email+"&token="+token;
 	   	window.close();
 	   

@@ -69,17 +69,17 @@ public class BookController {
 		
 		return "book/recommendBook";
 	}
-	
-	@RequestMapping("/recommendBook2.do")
-	public String recommend2(HttpSession session, HttpServletRequest request, Model model, String isbn) {
+	/*
+	 * @RequestMapping("/recommendBook2.do") public String recommend2(HttpSession
+	 * session, HttpServletRequest request, Model model, String isbn) {
+	 * 
+	 * logger.info("[BookController] : recommendBook.do");
+	 * model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
+	 * model.addAttribute("rclist",rcbiz.rclist(isbn));
+	 * model.addAttribute("scidlist",scbiz.scidlist(isbn));
+	 * model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
+	 */
 		
-		logger.info("[BookController] : recommendBook.do");	
-		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
-		model.addAttribute("rclist",rcbiz.rclist(isbn));
-		model.addAttribute("scidlist",scbiz.scidlist(isbn));
-		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
-
-	
 	@RequestMapping("/newBook.do")
 	public String newBook() {
 		

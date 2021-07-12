@@ -64,7 +64,7 @@ public class ReadingChartController {
 			model.addAttribute("intdDto",intdres);
 			List<ScrapDto> scrapres = scbiz.sclist(Ldto.getMember_id());
 			model.addAttribute("sclist",scrapres);
-			
+			model.addAttribute("Ldto",Ldto);
 			return "redirect:mypage.do";
 		} 
 		return "redirect:mypage.do";

@@ -173,20 +173,54 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 }
 </style>
 <style type="text/css">
-/* 좌우 나누기 */
-div #left {
-	width: 35%;
-	float: left;
-	padding: 5px 15px 0px 0px;
+.introduce{
+	height: 100%;
+	width: 130px;
+
 }
 
-div #right {
-	width: 60%;
-	float: right;
-	padding: 5px 0px 0px 30px;
-}
 </style>
 
+
+<style type="text/css">
+.parent{
+    width: 90%;
+    margin: 10px auto;
+}
+
+.first {
+    float: left;
+    width:210px;
+    height: 100%;
+    margin: 20px;
+}
+
+.second{
+    float: left;
+    margin-left: 5%;
+    width:30%;
+}
+
+.third{
+  	float: right;
+    height: 500px;
+    width: 600px;
+}
+
+.blacklist {
+    margin-left: 70%;
+    margin-top: 20px;
+    display: table-caption;
+}
+
+
+#CRTime{
+	width: 50px;
+	height: 20px;
+	margin: 5px;
+
+}
+</style>
 
 </head>
 <body style="background-color: #fdf7dd">
@@ -194,13 +228,9 @@ div #right {
 
 
 
-
+<div class="parent">
 	<a href="updatePwForm.do">비밀번호변경</a>
 	<a href="leaveAccountForm.do">회원탈퇴</a>
-
-	<h1 style="color:">MY BookDuck</h1>
-	<br />
-	<br />
 	<div>
 		<c:choose>
 			<c:when test="${Ldto.member_payrole eq 'N' }">
@@ -216,21 +246,23 @@ div #right {
 		<c:when test="${Ldto.member_payrole eq 'Y'}">
 			<%--/////////////자기소개가 없을시 보여지는 단 /////////////// --%>
 			<c:choose>
+			
 				<c:when test="${empty intdDto.intd_content}">
-					<div id="right">
+					<div class="first">
 						<h4>${Ldto.member_id }&nbsp;님책 읽으세요!</h4>
-						<table class="table table-borderless">
-							<tr>
+						<table>
+						<tr>
 								<td colspan="1" align="center"
 									onclick="location.href='intdinsertres.do?member_id=${Ldto.member_id}'">
 									자기소개를작성해 주세요(클릭)</td>
 							</tr>
 						</table>
 					</div>
+			
 					<br />
 					<br />
-					<div id="left">
-						<table border="1" class="table table-hover">
+					<div class="second" >
+						<table border="1" class="table table-hover" >
 							<col width="10">
 							<col width="25" />
 							<col width="100" />
@@ -270,15 +302,14 @@ div #right {
 				</c:when>
 				<c:otherwise>
 					<%--////////////자기소개가 있을때/////////////  --%>
-					<div id="right">
+					<div class="first">
 						<h4>${Ldto.member_id }&nbsp;님책 읽으세요!</h4>
-						<table class="table table-borderless">
+						<table> 
 							<tr>
-								<td id="summernote">${intdDto.intd_content}</td>
+								<td id="summernote" class="introduce">${intdDto.intd_content}</td>
 							</tr>
 							<tr>
 								<c:choose>
-
 									<c:when test="${memberChk eq 'yes' }">
 										<td class="btn-group">
 											<input type="button" value="수정"
@@ -296,9 +327,10 @@ div #right {
 						</table>
 					</div>
 					<!-- 리딩차트. 구글차트 부분 -->
+					<div class="second" >
 					<c:choose>
 						<c:when test="${memberChk eq 'yes' }">
-							<div class="readingChart" style="float: inherit;" id="left">
+							<div class="readingChart" style="float: inherit;">
 								<c:choose>
 									<c:when test="${Ldto.member_payrole eq 'N'}">
 										<p></p>
@@ -311,18 +343,19 @@ div #right {
 										</div>
 										<!-- 독서량 전달 -->
 										<form action="readingTimeInsert.do" method="post">
-											<p>독서량을 등록하시면 그래프가 그려집니다</p>
+											<p  style="margin: 10px;">독서량을 등록하시면 그래프가 그려집니다</p>
 											<!-- 날짜 -->
 											<input type="date" id="chartMdate" name="chartMdate"
-												style="width: 30%" /> <br />
+												style="width: 50%" /> <br />
 											<!-- 독서한 시간(분) -->
 											<input type="range" min="0" max="600" value="0"
-												style="width: 30%" id="chartreadingtime"
+												style="width: 50%" id="chartreadingtime"
 												name="chartreadingtime"
 												oninput="document.getElementById('CRTime').innerHTML=this.value;">
 											<br /> <span id="CRTime"></span>분 <input type="hidden"
-												id="chartId" name="chartId" value="${Ldto.member_id}" /> <input
-												type="submit" value="등록" onclick="isNullCheck();" />
+												id="chartId" name="chartId" value="${Ldto.member_id}" />
+											 <input
+												type="submit" class="btn btn-primary" value="등록" onclick="isNullCheck();" />
 										</form>
 									</c:when>
 								</c:choose>
@@ -333,12 +366,12 @@ div #right {
 
 						</c:otherwise>
 					</c:choose>
-
+				</div>
 
 					<br />
 					<br />
-					<div>
-						<table border="1" class="table table-hover">
+					<div class="third" >
+						<table border="1" class="table table-hover">		
 							<col width="10">
 							<col width="25" />
 							<col width="100" />
@@ -390,65 +423,21 @@ div #right {
 			</c:choose>
 		</c:when>
 	</c:choose>
-	<br />
-	<br />
-	<br />
-
-
-
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-
-
-
-	<!-- 신고하기. 블랙리스트 -->
-
+	</div>
+	<!-- 신고하기. 블랙리스트 -->	
+	<div>
 	<c:choose>
-		<c:when test="${memberChk eq 'no' }">
+		<c:when test="${memberChk eq 'yes' }">
 
-			<div>
-				<input id="blist" type="button" value="신고하기">
-				<div id="blistdiv" class="blistclass">
+			<div class="blacklist">
+				<input id="blist" type="button" value="신고하기" class="btn btn-danger" >
+				<div id="blistdiv" class="blistclass" >
 					<table>
 						<tr>
 							<td>ID</td>
 							<td><input id="blistid" type="text"
 								placeholder="신고할 ID를 검색하세요"> <input id="blistidsearch"
-								type="button" value="ID 찾기"></td>
+								type="button" value="ID 찾기" class="btn btn-danger"></td>
 						</tr>
 						<tr>
 							<td>신고내용</td>
@@ -469,8 +458,8 @@ div #right {
 
 		</c:otherwise>
 	</c:choose>
-
-
+	
+	
 	<script type="text/javascript">
 		var $blist = $("#blist");
 		var $blistdiv = $("#blistdiv");
@@ -536,9 +525,9 @@ div #right {
 	</script>
 
 
+</div>
 
 
-
 	<br />
 	<br />
 	<br />
@@ -551,8 +540,6 @@ div #right {
 	<br />
 	<br />
 	<br />
-	</div>
-	</div>
 
 
 </body>

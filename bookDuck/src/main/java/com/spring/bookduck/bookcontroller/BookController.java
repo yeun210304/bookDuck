@@ -69,7 +69,7 @@ public class BookController {
 		
 		return "book/recommendBook";
 	}
-	
+	/*
 	@RequestMapping("/recommendBook2.do")
 	public String recommend2(HttpSession session, HttpServletRequest request, Model model, String isbn) {
 		
@@ -78,7 +78,10 @@ public class BookController {
 		model.addAttribute("rclist",rcbiz.rclist(isbn));
 		model.addAttribute("scidlist",scbiz.scidlist(isbn));
 		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
-
+		
+		return null;
+	}
+	*/
 	
 	@RequestMapping("/newBook.do")
 	public String newBook() {

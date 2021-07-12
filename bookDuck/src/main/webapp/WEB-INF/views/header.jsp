@@ -165,7 +165,9 @@
 	height: 100px;
 	padding-top: 10px;
 	/*margin: auto; */
+
 	background-color: #F5DC7A;
+
 }
 
 #header>div {
@@ -542,7 +544,7 @@
 						</ul>
 						-->
 					</li>
-					<li><a href="noticeList.do" class="text-body">베스트셀러</a></li>
+					<li><a href="noticeList.do" class="text-body">공지사항</a></li>
 					<li><a href="qnaList.do" class="text-body">문의게시판</a></li>
 				</ul>
 		

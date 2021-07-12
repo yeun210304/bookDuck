@@ -78,7 +78,9 @@ public class BookController {
 		model.addAttribute("rclist",rcbiz.rclist(isbn));
 		model.addAttribute("scidlist",scbiz.scidlist(isbn));
 		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
-
+		
+		return "";
+	}
 	
 	@RequestMapping("/newBook.do")
 	public String newBook() {

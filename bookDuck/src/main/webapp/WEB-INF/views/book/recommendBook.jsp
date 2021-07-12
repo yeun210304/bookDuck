@@ -61,7 +61,7 @@
 		//유튜브 API 불러오는부분
 		//https://developers.google.com/youtube/v3/docs/search/list
 		var order = "relevance";
-		var maxResults = "4"; //검색 리스트 개수
+		var maxResults = "3"; //검색 리스트 개수
 		var key = "AIzaSyD5ZALqP1e8SkvfWL65oVDCHTUoibbtJGk";//api key값
 		var sTargetUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&order="
 				+ order
@@ -90,7 +90,7 @@
 					$("#get_view")
 					.append(
 				//검색한 책목록을 ifram api 를 활용해서 영상을 띄운다
-				'<iframe width="320" height="180"src="https://www.youtube.com/embed/'
+				'<iframe width="360" height="202.5"src="https://www.youtube.com/embed/'
 					+this.id.videoId+'"title="YouTube video player" frameborder="0"allow="accelerometer; autoplay;clipboard-write; encrypted-media; gyroscope; picture-in-picture"allowfullscreen></iframe>');
 					})
 				.promise()
@@ -101,14 +101,14 @@
 					.append(
 					'<a href="javascript:fnGetList(\''
 					+ jdata.prevPageToken
-					+ '\');"><이전페이지></a>');
+					+ '\');">◀ 이전 </a>');
 					}
 				if (jdata.nextPageToken) {
 					$("#nav_view")
 					.append(
 					'<a href="javascript:fnGetList(\''
 					+ jdata.nextPageToken
-					+ '\');"><다음페이지></a>');
+					+ '\');"> 다음 ▶</a>');
 					}
 				if (jdata.nextPageToken) {
 					$("#refr_view").find("input").remove();
@@ -241,16 +241,16 @@
 	
 	/* 좌우 나누기 */
 	div #left{
-	width : 20%;
+	width : 18%;
 	float: left;
 	padding-top : 50px;
 	margin : 0px auto;
-	padding-left: 10px; 
+	padding-left: 0px; 
 	text-align: center;
 	}
 	
 	div #right{
-	width : 75%;
+	width : 77%;
 	float: right;
 	padding-top : 50px;
 	margin : 0px auto;
@@ -373,11 +373,11 @@
 	/* 동영상, 이미지 정렬 css */
 		
 	#selectimglist tr {
-		border-bottom: 25px solid #fff;
+		border-bottom: 20px solid #FDF7DD;
 	}
 	
 	#selectrclist tr{
-		border-bottom: 25px solid #fff;
+		border-bottom: 20px solid #FDF7DD;
 	}
 	
 	#selectimglist tbody{
@@ -386,12 +386,13 @@
 	
 	.videodbtn input{
 		border:0px;
-		background-color:white;
-		margin-top:-130px;
-		font-size:20px;
-		font-color:white;
-		color:white;
+		background-color:#FDF7DD;
+		margin-top:-100px;
+		font-size:10px;
+		color:#052696;
+		border-radius:10px;
 	}
+	
 	.videodbtn input:hover{
 		color:red;
 		border-radius:15px;
@@ -399,17 +400,196 @@
 	
 	.imgdbtn input {
 		border:0px;
-		background-color:white;
-		margin-top:-140px;
+		background-color:#FDF7DD;
+		margin-top:0px;
 		font-size:20px;
-		font-color:white;
-		color:white;	
+		color:#FDF7DD;
+		border-radius:10px;
 	}
 	
 	.imgdbtn input:hover{
 		color:red;
 		border-radius:15px;
 	}
+	
+	
+	/* 검색 태그 버튼 css */
+	
+	#search_box {
+		border: 0px;
+		width : 250px;
+		font-size:15px;
+		margin-top:5px;
+		border-radius:10px;
+		text-indent : 10px;
+		margin-bottom:8px;
+		padding:5px;
+		padding-top:7px;
+	}
+	#search_box:focus{
+		outline: none;
+		border-bottom : 1px solid #6277BA;
+		box-shadow: 4.5px 4.5px #B5BFE5;
+	}	
+	#search_box_btn {
+		border: 0px;
+		border-radius:15px;
+		background-color:#052696;
+		color:white;
+		font-size:13px;
+		margin-left:10px;
+	}
+	
+	#youtubeurl {
+		border: 0px;
+		width : 280px;
+		font-size:16px;
+		margin-top:5px;
+		border-radius:10px;
+		text-indent : 10px;
+		margin-bottom:8px;
+		padding:5px;
+		padding-top:7px;
+	}
+	#youtubeurl:focus{
+		outline: none;
+		border-bottom : 1px solid #6277BA;
+		box-shadow: 4.5px 4.5px #B5BFE5;
+	}	
+	#youtubeurl_btn {
+		border: 0px;
+		border-radius:15px;
+		background-color:#052696;
+		color:white;
+		font-size:13px;
+		margin-left:10px;
+	}
+	
+	#imgurl {
+		border: 0px;
+		width : 280px;
+		font-size:16px;
+		margin-top:5px;
+		border-radius:10px;
+		text-indent : 10px;
+		margin-bottom:8px;
+		padding:5px;
+		padding-top:7px;
+	}
+	#imgurl:focus{
+		outline: none;
+		border-bottom : 1px solid #6277BA;
+		box-shadow: 4.5px 4.5px #B5BFE5;
+	}	
+	#imgurl_btn {
+		border: 0px;
+		border-radius:15px;
+		background-color:#052696;
+		color:white;
+		font-size:13px;
+		margin-left:10px;
+	}
+	
+	
+	/* 이미지나 동영상이 없을때 빈공간 css */
+	
+	.emptyspace {
+		height: 250px;
+		background-color:#F5F5DC;
+		text-align:center;
+		color:#483D8B;
+		font-size:17px;
+	}	
+	
+	
+	/* 왼쪽에 별점 한줄낭독 버튼 css */
+	
+	#stardetail button {
+		border:0px;
+		background-color:#6277BA;
+		border-radius:10px;
+		font-size:13px;
+		color:white;
+	
+	}
+	
+	#ttsdetail_sub_btn{
+		border:0px;
+		background-color:#6277BA;
+		border-radius:10px;
+		font-size:10px;
+		color:white;
+		margin-top:5px;
+	}
+	
+	#tts_speak_btn{
+		border:0px;
+		background-color:#6277BA;
+		border-radius:10px;
+		font-size:15px;
+		color:white;
+		margin-top:5px;
+		margin-left:15px;
+	}
+	
+	#tts_stop_btn{
+		border:0px;
+		background-color:#6277BA;
+		border-radius:10px;
+		font-size:15px;
+		color:white;
+		margin-top:5px;
+		margin-left:7px;
+	}
+	
+	
+	/* 동영상 검색 하고나서 css*/
+	#nav_view{
+		text-align:center;
+		font-size:17px;
+	}
+	#nav_view a{
+		text-decoration: none;
+		color:#052696;
+		margin-left:10px;
+	}	
+	#nav_view a:link{
+		text-decoration: none;	
+		color:#052696;
+	}
+	
+	#refr_view{
+		text-align:right;
+	}
+	#refr_view input{
+		border: 0px;
+		border-radius:15px;
+		background-color:#052696;
+		color:white;
+		font-size:15px;
+	}
+	
+	#get_view iframe{
+		margin-left:5px;	
+	}
+	
+	
+	/*이미지 파일 위치조정*/
+	#imgurllist img{
+		
+	}
+	
+	
+	body {
+		background-color:#FDF7DD;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 
 	
@@ -556,7 +736,7 @@
 					</div>
 				</div>
 				<br/>
-				<button type="submit"  class='btn btn-default btn-xs' style="float: right;">&#127775;&nbsp;별점등록</button>	
+				<button type="submit"  class='btn btn-default btn-xs' style="float: right;">&#127775;&nbsp;별점등록&nbsp;</button>	
 			</form>
 			</div>
 			</div>
@@ -616,7 +796,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="right">
-							<input type="submit" class='btn btn-default btn-xs' style="text-align: center;" value="등록">
+							<input id="ttsdetail_sub_btn" type="submit" class='btn btn-default btn-xs' style="text-align: center;" value="등록">
 						</td>
 					</tr>
 				</table>
@@ -636,8 +816,8 @@
 						</c:choose>
 					</div>
 					
-					<button onclick="speak()" type="button" class='btn btn-default'>&#128265;&nbsp;<b>SPEAK IT!</b></button>
-					<button onclick="stop()" type="button" class='btn btn-default'>&#128263;&nbsp;<b>STOP IT!</b></button>
+					<button id="tts_speak_btn" onclick="speak()" type="button" class='btn btn-default'>&#128265;&nbsp;<b>SPEAK IT!</b></button>
+					<button id="tts_stop_btn" onclick="stop()" type="button" class='btn btn-default'>&#128263;&nbsp;<b>STOP IT!</b></button>
 				</div>
 			</div>
 		</div>
@@ -649,12 +829,12 @@
 	<div id="right" style="margin:0px;">
 	<div id="youtubesearch" style="float: inherit;">
 		<nav>
-			<a href="#">동영상 검색</a>
+			<a href="#">▶ 동영상 검색</a>
 		</nav>
 		<%--/////////////youtube 동영상 검색 단 /////////////// --%>
 		<form name="form1" method="post" onsubmit="return false;">
 			<input type="text" id="search_box" placeholder="동영상을 검색하세요">
-			<button onclick="fnGetList();">검색</button>
+			<button id="search_box_btn" onclick="fnGetList();">검색</button>
 		</form>
 		<div id="get_view"></div>
 		<div id="nav_view"></div>
@@ -714,14 +894,20 @@
  --%>
 
 		<nav>
-			<a href="#">동영상 등록</a>
+			<a href="#">▶ 동영상 등록</a>
 		</nav>		
 		<table id="selectrclist">
+			<col width="360px;">
+			<col width="10px;">
+			<col width="360px;">
+			<col width="10px;">
+			<col width="360px;">
+			<col width="10px;">
 			<thead>
 			<tr>
 				<td colspan="2">
 				<input type="text" id="youtubeurl" placeholder="youtube URL을 입력해 주세요">
-				<input type="button"  value="등록" onclick="urlinsert();">
+				<input id="youtubeurl_btn" type="button"  value="등록" onclick="urlinsert();">
 				</td>
 			</tr>
 			</thead>
@@ -732,6 +918,7 @@
 		
 		<script type="text/javascript">
 			var isbn =<%=isbn %>
+			var content = 0;
 
 			function selectrclist() {
 				$
@@ -742,29 +929,45 @@
 				"book_isbn" : isbn
 					},
 				success : function(data) {
+					content = data.list.length					
 					var value = "";
 					$.each(
 				data.list,
 		function(i, obj) {
-				if(i%2 == 0){
+				if(i%3 == 0){
 					value += "<tr>"
 						+ "<td>"
-						+ "<iframe width='480' height='270' src='https://www.youtube.com/embed/"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
+						+ "<iframe width='360' height='202.5' src='https://www.youtube.com/embed/"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
 						+"<td class='videodbtn'>"
 	                       + "<input type='button' value='X' onclick='urldelete("+obj.rcvideo_no+");'>"
 	                    +"</td>";	          				
+				} else if(i%3 == 1) {
+					value += "<td>"
+						+ "<iframe width='360' height='202.5' src='https://www.youtube.com/embed/"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
+						+"<td class='videodbtn'>"
+	                       + "<input type='button' value='X' onclick='urldelete("+obj.rcvideo_no+");'>"
+	                    +"</td>";	                		
 				} else {
 					value += "<td>"
-						+ "<iframe width='480' height='270' src='https://www.youtube.com/embed/"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
+						+ "<iframe width='360' height='202.5' src='https://www.youtube.com/embed/"+obj.rcvideo_content +"' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe></td>"
 						+"<td class='videodbtn'>"
 	                       + "<input type='button' value='X' onclick='urldelete("+obj.rcvideo_no+");'>"
 	                    +"</td>"
-	                	+"</tr>";		
+	                	+"</tr>";						
 				}
 					
 				
 				});
-				$("#selectrclist tbody").html(value);
+				if(content == 0){					
+						var context = "<tr class='emptyspace'>"+"<td>"
+						+"추천하는 동영상을<br/>등록해주세요"						
+						+"</td>"+"</tr>";
+						$("#selectrclist tbody").html(context);
+				} else {
+					$("#selectrclist tbody").html(value);
+				}
+					
+				
 							},
 							error : function() {
 							}
@@ -830,24 +1033,24 @@
 		<br/><br/>
 		</div>
 		
-		
-		
 	<!-- 이미지 업로드 -->
 	
 		<div id="imgadd">
 		<table id="selectimglist">
-			<col width="480px;">
-			<col width="40px;">
-			<col width="480px;">
-			<col width="40px;">
+			<col width="360px;">
+			<col width="10px;">
+			<col width="360px;">
+			<col width="10px;">
+			<col width="360px;">
+			<col width="10px;">
 		<nav>
-			<a href="#">이미지 등록</a>
+			<a href="#">▶ 이미지 등록</a>
 		</nav>
 			<thead>
 			<tr>
 				<td>
 				<input type="text" id="imgurl" placeholder="img URL을 입력해 주세요">
-				<input type="button"  value="등록" onclick="imginsert();">
+				<input id="imgurl_btn" type="button" value="등록" onclick="imginsert();">
 				</td>
 			</tr>
 			</thead>
@@ -856,6 +1059,7 @@
 		</table>
 		<script type="text/javascript">
 			var isbn =<%=isbn %>
+			var content = 0;
 
 			function selectimglist() {
 				$
@@ -866,21 +1070,28 @@
 				"book_isbn" : isbn
 					},
 				success : function(data) {
+					content = data.list.length		
 					var value = "";
 					$.each(
 				data.list,
 		function(i, obj) {					
-				if(i%2 == 0){
+				if(i%3 == 0){
 					value += "<tr>"
 						+ "<td>"
-						+ "<img style='height:270px;' src="+obj.rcimg_content +"></td>"
+						+ "<img style='width:360px;' src="+obj.rcimg_content +"></td>"
 	                    +"<td class='imgdbtn'>"
 	                       + "<input type='button' value='X' onclick='rcimgdelete("+obj.rcimg_no+");'>"
 	                    +"</td>";
 	                	
+				} else if(i%3 == 1){
+					value += "<td>"
+						+ "<img style='width:360px;' src="+obj.rcimg_content +"></td>"
+	                    +"<td class='imgdbtn'>"
+	                       + "<input type='button' value='X' onclick='rcimgdelete("+obj.rcimg_no+");'>"
+	                    +"</td>";	                		
 				} else {
 					value += "<td>"
-						+ "<img style='width:480px;' src="+obj.rcimg_content +"></td>"
+						+ "<img style='width:360px;' src="+obj.rcimg_content +"></td>"
 	                    +"<td class='imgdbtn'>"
 	                       + "<input type='button' value='X' onclick='rcimgdelete("+obj.rcimg_no+");'>"
 	                    +"</td>"
@@ -890,7 +1101,16 @@
 				
 				
 				});
-				$("#selectimglist tbody").html(value);
+				if(content == 0){					
+						var context = "<tr class='emptyspace'>"+"<td>"
+						+"추천하는 이미지를<br>등록해주세요"						
+						+"</td>"+"</tr>";
+						$("#selectimglist tbody").html(context);
+				} else {
+					$("#selectimglist tbody").html(value);
+				}	
+					
+				
 							},
 							error : function() {
 							}
@@ -957,7 +1177,6 @@
 	</div>
 	<!-- 오른쪽 부분 끝나는 곳  -->
 
-</div>
 	
 </body>
 </html>

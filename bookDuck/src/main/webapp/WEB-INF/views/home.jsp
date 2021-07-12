@@ -136,7 +136,7 @@ if (key != null && value != null) {
 <!-- bootstrap 4 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link href="css/home.css" rel="stylesheet" type="text/css"/>
-<script src="https://ajax.googleapis.com/ajax	 /libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!--  websocket 웹소켓을 이용한 모두가 함께 쓰는 실시간소설 RealTimeNovel -->  
@@ -273,6 +273,17 @@ if (key != null && value != null) {
 		}
 </script>
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
+<style type="text/css">
+	#aire_box table{
+		text-align:center;
+		margin:0px auto;
+	}
+
+
+</style>
+
+
+
 </head>
 
 	<jsp:include page="header.jsp"/>
@@ -495,14 +506,16 @@ if (key != null && value != null) {
 				</div>
 			</div>
 		</div>	
-	
+		<br><br>
 
 	<!-- 인공지능을 활용한 책 카테고리 추천. -->
-				<h3>나에게 맞는 책추천📖</h3>
+				<h3 style="text-align:center;">나에게 맞는 AI 책추천📖</h3>	
+				<br><br>
+				<div id="aire_box">		
 				<table>
 					<tr>
 						<td colspan="4" id="airecommendbox">
-							<label>나이/성별/좋아하는 책 분류를 선택해주세요</label>
+							<label>나이/성별/좋아하는 책 분류를 선택해주세요</label>													
 						</td>
 					</tr>
 					<tr>
@@ -558,9 +571,10 @@ if (key != null && value != null) {
 								</optgroup>					
 							</select>	
 						</td>
-						<td><input id="airecommend" type="button" value="추천받기"></td>			
+						<td><input id="aire_btn" type="button" value="추천받기"></td>			
 					</tr>
 				</table>
+				</div>
 				<script type="text/javascript">
 					
 					var $age = $("select[name=age]").val();
@@ -595,11 +609,14 @@ if (key != null && value != null) {
 										{category : '126' , name : '건강/뷰티'},
 										{category : '128' , name : '여행'},
 										{category : '129' , name : '중등학습서'}];
-					var onecate;
-					var twocate;
-					var threecate;					
 							
-					$("#airecommend").click(function(){
+					
+					$("#aire_btn").click(function(){	
+						
+						var onecate;
+						var twocate;
+						var threecate;			
+						
 						if(id.trim() != ""){
 							$age = $("select[name=age]").val();
 							$mw = $("select[name=mw]").val();
@@ -609,9 +626,9 @@ if (key != null && value != null) {
 								scorelist = result.list;
 								scorelist.sort((a,b) => (a.score > b.score) ? -1 : ((a.score < b.score) ? 1 : 0));
 								
-								onecate = scorelist[0];
-								twocate = scorelist[1];
-								threecate = scorelist[2];
+								onecate = scorelist[0].category;
+								twocate = scorelist[1].category;
+								threecate = scorelist[2].category;
 								
 								var one;
 								var two;
@@ -626,23 +643,30 @@ if (key != null && value != null) {
 										three = categorylist[i].name
 									}
 								}
-								
 								$aibox.text("");
-								$aibox.text("추천 카테고리 1 : "+ one +" 2 : "+ two +" 3 : "+ three +"<br/>");
+								
+								$.getJSON("airecommendcate.do?onecate="+onecate+"&twocate="+twocate+"&threecate="+threecate, function(result){
+									//console.log(result.list);
+									//console.log(result.list[0].isbn);
+									//console.log(result.list[1].isbn);
+									//console.log(result.list[2].isbn);
+									$aibox.text("");
+									$aibox.text("추천 카테고리 1 : "+one+" title : "+result.list[0].title+ " coverLargeUrl : "
+											+result.list[0].coverLargeUrl+" isbn : "+result.list[0].isbn+" author : "+result.list[0].author
+											+" categoryId : "+ result.list[0].categoryId+ 
+											"추천 카테고리 2 : "+two+" title : "+result.list[1].title+ " coverLargeUrl : "
+											+result.list[1].coverLargeUrl+" isbn : "+result.list[1].isbn+" author : "+result.list[1].author
+											+" categoryId : "+ result.list[1].categoryId+ 
+											"추천 카테고리 2 : "+three+" title : "+result.list[2].title+ " coverLargeUrl : "
+											+result.list[2].coverLargeUrl+" isbn : "+result.list[2].isbn+" author : "+result.list[2].author
+											+" categoryId : "+ result.list[2].categoryId);
+								});
 								
 							});
 						} else {
 							$aibox.text("");
 							$aibox.text("로그인을 해야 사용할 수 있는 기능입니다.");
-						}
-						$aibox.appendTo($("<table>"));
-						
-						$.getJSON("airecommendcate.do?categoryId="+onecate, function(result){
-							$aibox.appendTo();
-							
-						});
-						
-						
+						}				
 						
 						
 					});

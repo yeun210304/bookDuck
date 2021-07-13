@@ -277,6 +277,7 @@ if (key != null && value != null) {
 		        });
 			}
 		}
+	
 </script>
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
 <meta charset="utf-8">
@@ -292,7 +293,7 @@ if (key != null && value != null) {
 			<!-- 장르(태그) 선택 -->
 				<div id="genre" class="jumbotron text-center">
 					<label>장르선택</label>
-					<select id="genreTAG" name="genreTAG" onchange="genreTagDo();">
+					<select id="genreTAG" name="genreTAG" onchange="genreTagDo();" >
 						<option value="none">  ---------   선택   ---------  </option>
 						<optgroup label=문학>
 							<option value="101">소설</option>

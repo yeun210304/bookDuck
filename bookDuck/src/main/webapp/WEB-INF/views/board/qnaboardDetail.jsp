@@ -8,9 +8,21 @@
 <meta charset="UTF-8">
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+<!-- 나눔 스퀘어 -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"> 
 <style type="text/css">
+	/* nanumsquare bold */
+	@font-face{
+		font-family : 'Nanum Square Bold';
+		src: url("font/NanumSquare_acB.ttf");
+	}
+	h1{
+		font-family:'Nanum Square Bold', sans-serif;
+		letter-spacing: 10px;
+	}
+	
 	table *{margin: 5px;}
-	table{width: 90%; margin: auto;}
+	table{width: 90%; margin: auto; font-family : 'NanumSquare'; transform:skew(-0.03deg);}
 	#contentArea th{height: 40px;}
 	#contentArea{border-bottom: 1px solid lightgray; margin-bottom: 50px;}
 	#comment{resize : none;}

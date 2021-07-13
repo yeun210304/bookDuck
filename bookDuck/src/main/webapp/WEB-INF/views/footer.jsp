@@ -1,12 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- nanum square regular -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"> 
 </head>
 <style>
+	/* nanumsquare bold */
+	@font-face{
+		font-family : 'Nanum Square Bold';
+		src: url("font/NanumSquare_acB.ttf");
+	}
+	/* nanumbarungothic light*/
+	@font-face{
+		font-family: 'NanumBarun light';
+		src: url("font/NanumBarunGothicLight.ttf")
+	}
+	
     #footer{
         width:80%;
         height:200px;
@@ -19,6 +33,8 @@
         border-top:1px solid lightgray;
         border-bottom:1px solid lightgray;
         text-align: center;
+        font-family: 'Nanum Square Bold';
+        transform:skew(-0.03deg);
     }
     #footer-2{width:100%;height:80%;}
     #footer-1, #footer-2{padding-left:50px}
@@ -33,8 +49,10 @@
         margin: 0;
         padding:10px;
         font-size: 13px;
+        letter-spacing: 2px;
     }
-    #p2{text-align:center;}
+    #p1{font-family:'NanumBarun light'; font-weight: normal;}
+    #p2{text-align:center; font-family: 'NanumSquare'; transform:skew(-0.03deg);}
 </style>
 <body>
 
@@ -44,6 +62,7 @@
             <a href="booksearch.do">도서검색</a> | 
             <a href="noticeList.do">공지사항</a> | 
             <a href="qnaList.do">Q & A</a> 
+            <c:if test="${empty Ldto }"> |  <a href="joinform.do">회원가입</a></c:if>
         </div>
 
         <div id="footer-2">

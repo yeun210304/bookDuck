@@ -43,6 +43,7 @@
 #mainlogin{
 	float: right;
 	margin: 15px;
+	/*margin-left: 400px; */
 }
 #admin{
 	float:right;

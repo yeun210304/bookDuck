@@ -250,24 +250,32 @@ if (key != null && value != null) {
 <!-- 책장르 선택시 책 나열 -->
 <script type="text/javascript">
 	function genreTagDo(){
-		$.ajax({
-			type : "post",
-	        data: {"genreTAG" : genreTAG.value},
-	        success: function(list){
-	        	var arr = list.split('<');
-	        	console.log(arr);
-                var value = "";
-                for(var i=226; i < 390; i++){
-                	value += '<'+arr[i]
-                };
-                var value2 = value.split("<ul class=");
-               // $("#genreTAG").hide();
-	        	$("#Result1").html(value2);
-	            }, 
-	        error: function(){
-            	alert("error...");
-         	   }
-	        });
+		
+		var member_id = document.getElementById("member_id");
+		
+		if(member_id == null){
+			alert("로그인 후 이용가능합니다");
+			return false;
+		} else{
+			$.ajax({
+				type : "post",
+		        data: {"genreTAG" : genreTAG.value},
+		        success: function(list){
+		        	var arr = list.split('<');
+		        	console.log(arr);
+	                var value = "";
+	                for(var i=226; i < 390; i++){
+	                	value += '<'+arr[i]
+	                };
+	                var value2 = value.split("<ul class=");
+	               // $("#genreTAG").hide();
+		        	$("#Result1").html(value2);
+		            }, 
+		        error: function(){
+	            	alert("error...");
+	         	   }
+		        });
+			}
 		}
 </script>
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
@@ -491,7 +499,7 @@ if (key != null && value != null) {
                             <!-- 사용자가 입력한 키의 코드를 .d보내준다. -->
                                 <input id="inputMessage" type="text" name="novel_content" onkeydown="if(event.keyCode==13){send();}" />
                                 <input id="submitBtn" type="submit" value="입력" onclick="send();" />
-                                <input type="hidden" id="novel_id" value="${Ldto.member_id}" name="novel_id" />
+                                <input type="hidden" id="member_id" value="${Ldto.member_id}" name="member_id" />
                             </c:when>
                             <c:otherwise>
                                 <input id="inputMessage" class="form-control" type="text" readonly="readonly" value="로그인시 이용하실 수 있습니다"/>

@@ -88,6 +88,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 <!-- 리딩차트 null값 처리 -->
 <script type="text/javascript">
 	var submitAction = function() {
+		
 		/* do something with Error */
 		return false;
 	};
@@ -435,13 +436,13 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 										<form action="readingTimeInsert.do" method="post">
 											<p  style="margin: 10px;">독서량을 등록하시면 그래프가 그려집니다</p>
 											<!-- 날짜 -->
-											<input type="date" id="chartMdate" name="chartMdate" style="width: 50%" /> 
+											<input type="date" id="chartMdate" name="chartMdate" style="width: 100%" /> 
 											<!-- 독서한 시간(분) -->
-											<input type="range" min="0" max="600" value="0" style="width: 50%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
-											<span id="CRTime"></span>분 
+											<input type="range" min="0" max="600" value="0" style="width: 90%; margin: 20px;" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
+											<span id="CRTime"  style="margin-left: 50%;"></span>분 
 											<input type="hidden" id="chartId" name="chartId" value="${Ldto.member_id}" />
 											<input type="hidden" id="member_payrole" name=member_payrole value="${Ldto.member_payrole}" />
-											 <input type="submit" class="buttoncssadded" value="등록" onclick="isNullCheck();" />
+											 <input type="submit" class="buttoncssadded" value="등록" onclick="isNullCheck();" style="float: initial;"/>
 										</form>
 									</c:when>
 								</c:choose>

@@ -178,7 +178,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
 #parent_box{
     width: 95%;
-    margin: 0px auto;
+    margin: 40px;
 }
 
 #first_1{
@@ -193,7 +193,8 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 	width:300px;
 	float:left;
 	height:100%;
-	margin:15px;
+	margin:50px;
+	margin-left: 70px;
 }
 
 #second_1{
@@ -203,16 +204,16 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 }
 
 #second_2{
-	width:40%;
+	width:45%;
 	float:left;
 	height:100%;
 
 }
 
 #third{
-	width:25%;
-	float:left;
-	margin:15px;
+	width: 25%;
+    float: left;
+    margin-left: 105px;
 }
 
 
@@ -222,13 +223,15 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
 #fourth{
 	float:left;
-	margin-left: 63%;
-
-
+	margin-left: 72%;
 }
 
-img {
-	width:300px;
+#first_1 img { 
+	width:300px; 
+} 
+
+#first_2 img { 
+	width:300px; 
 }
 
 
@@ -268,10 +271,10 @@ img {
 	<jsp:include page="header.jsp" />
 
 
-
+<a class="buttoncssadded" href="updatePwForm.do">비밀번호변경</a>
+	<a class="buttoncssadded" href="leaveAccountForm.do">회원탈퇴</a>
 <div id="parent_box">
-	<a href="updatePwForm.do">비밀번호변경</a>
-	<a href="leaveAccountForm.do">회원탈퇴</a>
+	
 	<div>
 		<c:choose>
 			<c:when test="${Ldto.member_payrole eq 'N' }">
@@ -313,23 +316,19 @@ img {
 							<c:choose>
 								<c:when test="${empty sclist }">
 									<tr>
-										<td colspan="3" align="center">------------찜목록이
-											없습니다.------------</td>
+										<td colspan="3" align="center">------------찜목록이 없습니다.------------</td>
 									</tr>
 								</c:when>
 								<c:otherwise>
 									<c:forEach items="${sclist }" var="scrapDto">
 										<tr>
-											<td><input name="RowCheck" type="checkbox"
-												value="${scrapDto.scrap_no }" /> <input type="hidden"
-												name="book_author" value="${scrapDto.book_author }">
-												<input type="hidden" name="book_coverLargeUrl"
-												value="${scrapDto.book_coverLargeUrl }"> <input
-												type="hidden" name="book_categoryId"
-												value="${scrapDto.book_categoryId }"></td>
-											<td><a
-												href="scselectone.do?title=${scrapDto.book_title }&coverLargeUrl=${scrapDto.book_coverLargeUrl }
-												&isbn=${scrapDto.book_isbn }&author=${scrapDto.book_author }&categoryId=${scrapDto.book_categoryId}">${scrapDto.book_isbn }</a></td>
+											<td>
+												<input name="RowCheck" type="checkbox" value="${scrapDto.scrap_no }" />
+												<input type="hidden" name="book_author" value="${scrapDto.book_author }">
+												<input type="hidden" name="book_coverLargeUrl"value="${scrapDto.book_coverLargeUrl }"> 
+												<input type="hidden" name="book_categoryId" value="${scrapDto.book_categoryId }">
+											</td>
+											<td><a href="scselectone.do?title=${scrapDto.book_title }&coverLargeUrl=${scrapDto.book_coverLargeUrl }&isbn=${scrapDto.book_isbn }&author=${scrapDto.book_author }&categoryId=${scrapDto.book_categoryId}">${scrapDto.book_isbn }</a></td>
 											<td>${scrapDto.book_title }</td>
 										</tr>
 									</c:forEach>
@@ -364,8 +363,6 @@ img {
 					</div>
 
 
-					<br />
-					<br />
 					<div id="second_2" >
 						<table border="1" class="table table-hover">		
 							<col width="10">
@@ -420,7 +417,6 @@ img {
 	</c:choose>
 	</div>
 	
-	<br><br><br><br>
 	<!-- 리딩차트. 구글차트 부분 -->
 					<div id="third" >
 					<c:choose>
@@ -432,16 +428,14 @@ img {
 									</c:when>
 									<c:when test="${Ldto.member_payrole eq 'Y'}">
 										<!-- 구글차트 위치-->
-										<div id="curve_chart" method="get"
-											style="width: 80%; height: 200px">
+										<div id="curve_chart" method="get" style="width: 400px; height: 270px">
 											<h3>독서량을 등록하시면 그래프가 그려집니다</h3>
 										</div>
 										<!-- 독서량 전달 -->
 										<form action="readingTimeInsert.do" method="post">
 											<p  style="margin: 10px;">독서량을 등록하시면 그래프가 그려집니다</p>
 											<!-- 날짜 -->
-											<input type="date" id="chartMdate" name="chartMdate"
-												style="width: 50%" /> <br />
+											<input type="date" id="chartMdate" name="chartMdate" style="width: 50%" /> 
 											<!-- 독서한 시간(분) -->
 											<input type="range" min="0" max="600" value="0" style="width: 50%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
 											<span id="CRTime"></span>분 

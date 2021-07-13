@@ -687,7 +687,6 @@
 	*/
 %>
 	<!-- 헤더 -->
-	<jsp:include page="../header.jsp"/>
       
 	<div class="content">
 	

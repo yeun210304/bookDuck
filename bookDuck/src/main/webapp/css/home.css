@@ -2,10 +2,6 @@
 
 /*폰트*/
 
-p{
-	font-family: "NanumSquareRoundEB";
-	src: url("resources/font/NanumSquareRoundEB.ttf");
-}
 #header a{
 	font-weight: bold;
 }
@@ -53,7 +49,6 @@ p{
     max-width: 100%;
     display: table-cell;
 }
-
 /*책장르*/
 #genre{
 	background-color: white;
@@ -127,11 +122,8 @@ p{
   opacity: 0.5;
 }
 
-/*웹소켓 채팅*/
+/*웹소켓 채팅
 #submitBtn{
-	-webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   background: #B5BFE5;
   color: black;
   padding: 0.5rem 1rem;
@@ -149,29 +141,7 @@ p{
   transition: 0.5s;
   margin-top: 10px;
 }
-#submitBtn.success {
-  --button-bg-color: #28a745;
-  --button-hover-bg-color: #218838;
-}
-#submitBtn.error {
-  --button-bg-color: #dc3545;
-  --button-hover-bg-color: #c82333;
-}
-#submitBtn.warning {
-  --button-color: #212529;
-  --button-bg-color: #ffc107;
-  --button-hover-bg-color: #e0a800;
-}
-#submitBtn:active,
-#submitBtn:hover,
-#submitBtn:focus {
-  background: var(--button-hover-bg-color);
-  outline: 0;
-}
-#submitBtn:disabled {
-  opacity: 0.5;
-}
-
+*/
 /*장르선택 버튼*/
 select{
   -moz-appearance: none;

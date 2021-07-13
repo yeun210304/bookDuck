@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,6 +62,7 @@
             <a href="booksearch.do">도서검색</a> | 
             <a href="noticeList.do">공지사항</a> | 
             <a href="qnaList.do">Q & A</a> 
+            <c:if test="${empty Ldto }"> |  <a href="joinform.do">회원가입</a></c:if>
         </div>
 
         <div id="footer-2">

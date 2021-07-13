@@ -207,8 +207,9 @@
 
 /* 여기까지 검색바 */
 
-
+/*
 .headerallsearch {
+	position:absolute;
 	background-color: #fcfaf2;
 	left: 5px;
 	width: 230px;
@@ -223,11 +224,7 @@
 	line-height: 21px;
 	color:#233f9e;
 }
-
-#test {
-	clear:both;	
-}
-
+*/
 
 
 /*

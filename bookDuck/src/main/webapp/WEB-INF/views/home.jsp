@@ -170,7 +170,7 @@ if (key != null && value != null) {
 				//messageWindow2에 붙이기
 				var who = document.createElement('div');
 				who.style["padding"]="3px";
-				who.style["margin-left"]="3px";
+				who.style["margin"]="6px";
 				who.innerHTML = message[0];
 				document.getElementById('messageWindow2').appendChild(who);
 				re_send = message[0];
@@ -183,7 +183,8 @@ if (key != null && value != null) {
 			div.style["background-color"]="#6277BA";
 			div.style["border-radius"]="3px";
 			div.style["padding"]="3px";
-			div.style["margin-left"]="3px";
+			div.style["color"]="white";
+			div.style["margin"]="6px";
 			div.innerHTML = message[1];
 			document.getElementById('messageWindow2').appendChild(div);
 		//clear div 추가. 줄바꿈용.		
@@ -229,7 +230,7 @@ if (key != null && value != null) {
 			div.style["background-color"]="#F5DC7A";
 			div.style["padding"]="3px";
 			div.style["border-radius"]="3px";
-			div.style["margin-right"]="3px";
+			div.style["margin"]="6px";
 			//div에 innerHTML로 문자 넣기
 			div.innerHTML = inputMessage.value;
 			document.getElementById('messageWindow2').appendChild(div);

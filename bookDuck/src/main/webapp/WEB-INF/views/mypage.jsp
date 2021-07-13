@@ -37,8 +37,6 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 	});
 </script>
 
-
-
 <!-- 구글차트 GoogleChart -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript"
@@ -183,6 +181,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
     margin: 0px auto;
 }
 
+
 #first_1{
 	margin-top:10px;
 	width:45%;
@@ -202,6 +201,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 #second_2{
 	width:45%;
 	float:left;
+
 }
 
 #clear{
@@ -227,13 +227,28 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
     display: table-caption;
 }
 
-
-#CRTime{
-	width: 50px;
-	height: 20px;
-	margin: 5px;
-
+.buttoncssadded{
+	-webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #EDC630;
+  color: black;
+  padding: 0.5rem 1rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  width: auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: 0.5s;
+  float: left;
+  margin: 5px;
 }
+
 </style>
 
 </head>
@@ -324,11 +339,8 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 								<c:choose>
 									<c:when test="${memberChk eq 'yes' }">
 										<td class="btn-group">
-											<input type="button" value="수정"
-											class="btn btn-primary"
-											onclick="location.href='updateintdres.do?intd_no=${intdDto.intd_no}'">
-											<input type="button" value="삭제" class="btn btn-primary"
-											onclick="location.href='deleteintd.do?intd_no=${intdDto.intd_no}'">
+											<input class="buttoncssadded" type="button" value="수정" onclick="location.href='updateintdres.do?intd_no=${intdDto.intd_no}'">
+											<input class="buttoncssadded" type="button" value="삭제" onclick="location.href='deleteintd.do?intd_no=${intdDto.intd_no}'">
 										</td>
 									</c:when>
 									<c:otherwise>
@@ -338,7 +350,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 							</tr>
 						</table>
 					</div>
-					
+
 
 					<br />
 					<br />
@@ -381,8 +393,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						<c:choose>
 							<c:when test="${memberChk eq 'yes' }">
 
-								<input type="button" class="btn btn-primary" value="삭제"
-									onclick="deleteValue();" />
+								<input type="button" class="buttoncssadded" value="삭제" onclick="deleteValue();" />
 
 							</c:when>
 							<c:otherwise>
@@ -453,14 +464,14 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 		<c:when test="${memberChk eq 'yes' }">
 
 			<div class="blacklist">
-				<input id="blist" type="button" value="신고하기" class="btn btn-danger" >
+				<input id="blist" type="button" value="신고하기" class="buttoncssadded"  style="background-color: pink;">
 				<div id="blistdiv" class="blistclass" >
 					<table>
 						<tr>
 							<td>ID</td>
-							<td><input id="blistid" type="text"
-								placeholder="신고할 ID를 검색하세요"> <input id="blistidsearch"
-								type="button" value="ID 찾기" class="btn btn-danger"></td>
+							<td>
+								<input id="blistid" type="text" placeholder="신고할 ID를 검색하세요"> <input id="blistidsearch" type="button" value="ID 찾기" class="buttoncssadded">
+							</td>
 						</tr>
 						<tr>
 							<td>신고내용</td>
@@ -468,9 +479,10 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2" align="right"><input id="blistinsert"
-								type="button" value="신고하기"> <input id="blistcancel"
-								type="button" value="취소"></td>
+							<td colspan="2" align="right">
+								<input class="buttoncssadded" type="button" style="background-color: pink;"value="신고등록"> 
+								<input id="blistcancel" class="buttoncssadded" style="background-color: pink;" type="button" value="취소">
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -481,7 +493,6 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
 		</c:otherwise>
 	</c:choose>
-	
 	
 	<script type="text/javascript">
 		var $blist = $("#blist");
@@ -547,23 +558,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 		});
 	</script>
 
-
 </div>
-
-
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-
 
 </body>
 </html>

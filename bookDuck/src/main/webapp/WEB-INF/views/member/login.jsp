@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>책추천 해줄게 북...덕... :: 북덕 BookDuck</title>
+<style type="text/css">
+	@font-face{
+		font-family: 'NanumSquareRoundEB';
+		src: url("webapp/font/NanumSquareRoundEB.ttf");
+		}
+</style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -84,7 +90,7 @@
 		</div><!-- general login 끝 -->
 
 		<div class="SNSButton" id="SNSButton">
-			<h4 align="center">SNS로 로그인하기</h4>
+			<h4 align="center" style="font-family:'NanumSquareRoundEB';">SNS로 로그인하기 나눔스퀘어</h4>
 			<div class="card">
 				<!-- 카카오 아이콘 -->
 	  			<div><img src="resources/img/kakao.png" 
@@ -99,7 +105,7 @@
 		<hr style="border:1px color= silver;" width="30%">
 		<div class="login-footer">
 			<h4 align="center">BookDuck의 
-			<b><a onclick="location.href='joinform.do'" id="join_link">식구</a>되기</h4></b>
+			<a onclick="location.href='joinform.do'" id="join_link">식구</a>되기</h4>
 		</div>
 </div>
 

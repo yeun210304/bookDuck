@@ -1,5 +1,7 @@
 @charset "UTF-8";
+
 /*폰트*/
+
 p{
 	font-family: "NanumSquareRoundEB";
 	src: url("resources/font/NanumSquareRoundEB.ttf");

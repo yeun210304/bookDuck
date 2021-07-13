@@ -90,7 +90,7 @@
 		</div><!-- general login 끝 -->
 
 		<div class="SNSButton" id="SNSButton">
-			<h4 align="center" style="font-family:'NanumSquareRoundEB';">SNS로 로그인하기 나눔스퀘어</h4>
+			<h4 align="center" style="font-family:'NanumSquareRoundEB';">SNS로 로그인하기</h4>
 			<div class="card">
 				<!-- 카카오 아이콘 -->
 	  			<div><img src="resources/img/kakao.png" 

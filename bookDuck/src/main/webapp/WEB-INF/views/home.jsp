@@ -11,7 +11,6 @@
 <%@page import="javax.xml.parsers.DocumentBuilderFactory"%>
 <%@page import="java.io.Console"%>
 <%@page import="org.springframework.beans.factory.annotation.Autowired"%>
-<%@page import="com.spring.bookduck.model.dto.RealTimeNovelDto"%>
 <%@page import="com.spring.bookduck.pay.dto.PayDto"%>
 <%@page import="com.spring.bookduck.model.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -116,7 +115,7 @@ if (key != null && value != null) {
 		
 		sb.append(String.format("<div class='cols'>"));
 			
-			sb.append(String.format("<div><img src='%s' style='width:130px; height:200; margin-left: 87px; margin-bottom: 20px;'></div>", coverLargeUrl));
+			sb.append(String.format("<div><img src='%s' style='width:115px; margin-left: 40px; margin-bottom: 10px;'></div>", coverLargeUrl));
 			sb.append(String.format("<table id = 'tbb'><tr> <td id='td1'><b> &#128157;&nbsp; 제목 </b></td> <td id='td2'>%s</td> </tr>", title));
 			sb.append(String.format("<tr> <td id='td1' ><b> &#128039;&nbsp; 저자 </b></td> <td  id='td2'>%s</td> </tr>", author));
 			sb.append(String.format("<tr> <td id='td1' ><b> &#128049;&nbsp; 카테고리 </b></td> <td id='td2'>%s</td> </tr>", categoryName));
@@ -257,7 +256,7 @@ if (key != null && value != null) {
 	        	var arr = list.split('<');
 	        	console.log(arr);
                 var value = "";
-                for(var i=220; i < 396; i++){
+                for(var i=228; i < 390; i++){
                 	value += '<'+arr[i]
                 };
                 var value2 = value.split("<ul class=");

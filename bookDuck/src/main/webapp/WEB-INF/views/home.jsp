@@ -256,7 +256,7 @@ if (key != null && value != null) {
 	        	var arr = list.split('<');
 	        	console.log(arr);
                 var value = "";
-                for(var i=228; i < 390; i++){
+                for(var i=226; i < 390; i++){
                 	value += '<'+arr[i]
                 };
                 var value2 = value.split("<ul class=");
@@ -354,8 +354,6 @@ if (key != null && value != null) {
 		font-family: 'NanumSquareR';
 	
 	}
-	
-	
 
 
 </style>

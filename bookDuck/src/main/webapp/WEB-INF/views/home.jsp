@@ -277,10 +277,87 @@ if (key != null && value != null) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style type="text/css">
+	@font-face {
+    font-family: 'NanumSquareR';
+    src: url('font/NanumSquareR.ttf') format('truetype');
+	}
+	@font-face {
+    font-family: 'NanumPen';
+    src: url('font/NanumPen.ttf') format('truetype');
+	}
+	@font-face {
+    font-family: 'NanumBrush';
+    src: url('font/NanumBrush.ttf') format('truetype');
+    }
+
 	#aire_box table{
 		text-align:center;
 		margin:0px auto;
 	}
+
+	
+	#airecommendbox{
+		border-spacing: 50px;
+  		border-collapse: separate;
+	}	
+	
+	#aire_cate_name {
+		text-align : center;
+		font-size: 18px;
+		color : white;
+		font-family: 'NanumSquareR';
+	}
+	#aire_cate_name td{
+		background-color : #B5BFE5;
+		border-radius : 15px;
+	}
+	
+	
+	#aire_book {
+		margin:10px;
+		margin-bottom: 500px;
+		
+	}
+			
+	#aire_scrap { 
+	  border-radius : 10px;
+	  padding : 10px 10px 10px 10px;
+	  margin : 0px 15px 0px 15px;
+	  opacity : 0.75;
+	  color: #A071F5;
+	  font-size : 15px;
+	  font-weight : bold;
+	  text-transform: uppercase;
+	  text-align: center;
+	  text-decoration: none;
+	}
+	
+	#aire_scrap td{
+		background-color : #B5BFE5;
+		border-radius : 15px;
+	}
+	
+	#aire_scrap a{
+		text-decoration: none;
+		color: white;
+	}
+	
+	#aire_btn {
+		border : 0px;
+		padding: 10px;
+		border-radius: 15px;
+		margin-left:10px;
+		background-color: #B5BFE5;
+		text-align : center;
+		font-size: 15px;
+		color : white;
+		font-family: 'NanumSquareR';
+	
+	}
+	
+	
+
+
 </style>
 
 </head>
@@ -514,14 +591,15 @@ if (key != null && value != null) {
 
 	<!-- 인공지능을 활용한 책 카테고리 추천. -->
 				<h3 style="text-align:center;">나에게 맞는 AI 책추천📖</h3>	
-				<br><br>
-				<div id="aire_box">		
-				<table>
+				<div id="aire_box">	
+				<table id="airecommendbox">
 					<tr>
-						<td colspan="4" id="airecommendbox">
+						<td>
 							<label>나이/성별/좋아하는 책 분류를 선택해주세요</label>													
 						</td>
-					</tr>
+					</tr>				
+				</table>				
+				<table>
 					<tr>
 						<td>										
 							<select name="age">
@@ -655,15 +733,38 @@ if (key != null && value != null) {
 									//console.log(result.list[1].isbn);
 									//console.log(result.list[2].isbn);
 									$aibox.text("");
-									$aibox.text("추천 카테고리 1 : "+one+" title : "+result.list[0].title+ " coverLargeUrl : "
-											+result.list[0].coverLargeUrl+" isbn : "+result.list[0].isbn+" author : "+result.list[0].author
-											+" categoryId : "+ result.list[0].categoryId+ 
-											"추천 카테고리 2 : "+two+" title : "+result.list[1].title+ " coverLargeUrl : "
-											+result.list[1].coverLargeUrl+" isbn : "+result.list[1].isbn+" author : "+result.list[1].author
-											+" categoryId : "+ result.list[1].categoryId+ 
-											"추천 카테고리 2 : "+three+" title : "+result.list[2].title+ " coverLargeUrl : "
-											+result.list[2].coverLargeUrl+" isbn : "+result.list[2].isbn+" author : "+result.list[2].author
-											+" categoryId : "+ result.list[2].categoryId);
+									$aibox.append("<tr id='aire_cate_name'><td>"+one+"</td><td>"+two+"</td><td>"+three+"</td></tr>"+
+											"<tr id='aire_book'><td><a href='recommendBook.do?title="+result.list[0].title+"&coverLargeUrl="+result.list[0].coverLargeUrl+
+											"&isbn="+result.list[0].isbn+"&author="+result.list[0].author+"&categoryId="+result.list[0].categoryId+"'  target='_blank'>"
+											+"<img src='"+result.list[0].coverLargeUrl+"'></a></td>"+
+											"<td><a href='recommendBook.do?title="+result.list[1].title+"&coverLargeUrl="+result.list[1].coverLargeUrl+
+											"&isbn="+result.list[1].isbn+"&author="+result.list[1].author+"&categoryId="+result.list[1].categoryId+"'  target='_blank'>"
+											+"<img src='"+result.list[1].coverLargeUrl+"'></a></td>"+
+											"<td><a href='recommendBook.do?title="+result.list[2].title+"&coverLargeUrl="+result.list[2].coverLargeUrl+
+											"&isbn="+result.list[2].isbn+"&author="+result.list[2].author+"&categoryId="+result.list[2].categoryId+"'  target='_blank'>"
+											+"<img src='"+result.list[2].coverLargeUrl+"'></a></td></tr>"+
+											"<tr id='aire_scrap'><td><a href='scinsert.do?title="+result.list[0].title+"&coverLargeUrl="+result.list[0].coverLargeUrl+
+											"&isbn="+result.list[0].isbn+"&author="+result.list[0].author+"&categoryId="+result.list[0].categoryId+"'  target='_blank'>&#127873; 찜하기</a></td>"+
+											"<td><a href='scinsert.do?title="+result.list[1].title+"&coverLargeUrl="+result.list[1].coverLargeUrl+
+											"&isbn="+result.list[1].isbn+"&author="+result.list[1].author+"&categoryId="+result.list[1].categoryId+"'  target='_blank'>&#127873; 찜하기</a></td>"+
+											"<td><a href='scinsert.do?title="+result.list[2].title+"&coverLargeUrl="+result.list[2].coverLargeUrl+
+											"&isbn="+result.list[2].isbn+"&author="+result.list[2].author+"&categoryId="+result.list[2].categoryId+"'  target='_blank'>&#127873; 찜하기</a></td></tr>"
+									);
+																		
+									/*
+									$aibox.append("<tr><td>추천 카테고리 1 : "+one+
+											"<br><a href='recommendBook.do?title="+result.list[0].title+"&coverLargeUrl="+result.list[0].coverLargeUrl+
+											"&isbn="+result.list[0].isbn+"&author="+result.list[0].author+"&categoryId="+result.list[0].categoryId+"'  target='_blank'>"
+											+"<img src='"+result.list[0].coverLargeUrl+"'></a></td><td>"+ 
+											"추천 카테고리 2 : "+two+
+											"<br><a href='recommendBook.do?title="+result.list[1].title+"&coverLargeUrl="+result.list[1].coverLargeUrl+
+											"&isbn="+result.list[1].isbn+"&author="+result.list[1].author+"&categoryId="+result.list[1].categoryId+"'  target='_blank'>"
+											+"<img src='"+result.list[1].coverLargeUrl+"'></a></td><td>"+
+											"추천 카테고리 3 : "+three+
+											"<br><a href='recommendBook.do?title="+result.list[2].title+"&coverLargeUrl="+result.list[2].coverLargeUrl+
+											"&isbn="+result.list[2].isbn+"&author="+result.list[2].author+"&categoryId="+result.list[2].categoryId+"'  target='_blank'>"
+											+"<img src='"+result.list[2].coverLargeUrl+"'></a></td></tr>");
+									*/
 								});
 								
 							});

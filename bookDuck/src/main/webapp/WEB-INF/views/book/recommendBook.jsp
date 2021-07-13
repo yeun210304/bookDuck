@@ -586,7 +586,9 @@
 	
 	
 	
-	
+	#test {
+		clear:both;
+	}
 	
 	
 	
@@ -629,6 +631,9 @@
 
 </head>
 <body>
+
+	<jsp:include page="../header.jsp"/>
+	<div id="test"></div>
 	<%
 	request.setCharacterEncoding("UTF-8");
 

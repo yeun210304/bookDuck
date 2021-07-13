@@ -71,7 +71,7 @@
 														}
 													});
 										});
-
+						/*
 						$("#value")
 								.on(
 										"propertychange change keyup paste input",
@@ -148,7 +148,7 @@
 									$("#value").parent().parent().find(
 											'.headerallsearch').remove();
 								});
-
+						*/
 						// 호버시 h1 이벤트 해제 연습중 
 						$(".sub").hover(function() {
 							$(".e").unbind("");
@@ -293,8 +293,6 @@
 							검색
 						</button>
 						-->
-
-	<div id="test"></div>
 
 </body>
 </html>

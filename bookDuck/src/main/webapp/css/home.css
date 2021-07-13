@@ -171,3 +171,85 @@ label {
   
   margin-right: 0.5em;
 }
+
+
+	@font-face {
+    font-family: 'NanumSquareR';
+    src: url('font/NanumSquareR.ttf') format('truetype');
+	}
+	@font-face {
+    font-family: 'NanumPen';
+    src: url('font/NanumPen.ttf') format('truetype');
+	}
+	@font-face {
+    font-family: 'NanumBrush';
+    src: url('font/NanumBrush.ttf') format('truetype');
+    }
+
+	#aire_box table{
+		text-align:center;
+		margin:0px auto;
+	}
+
+	
+	#airecommendbox{
+		border-spacing: 50px;
+  		border-collapse: separate;
+	}	
+	
+	#aire_cate_name {
+		text-align : center;
+		font-size: 18px;
+		color : white;
+		font-family: 'NanumSquareR';
+	}
+	#aire_cate_name td{
+		background-color : #B5BFE5;
+		border-radius : 15px;
+	}
+	
+	
+	#aire_book {
+		margin:10px;
+		margin-bottom: 500px;
+		
+	}
+			
+	#aire_scrap { 
+	  border-radius : 10px;
+	  padding : 10px 10px 10px 10px;
+	  margin : 0px 15px 0px 15px;
+	  opacity : 0.75;
+	  color: #A071F5;
+	  font-size : 15px;
+	  font-weight : bold;
+	  text-transform: uppercase;
+	  text-align: center;
+	  text-decoration: none;
+	}
+	
+	#aire_scrap td{
+		background-color : #B5BFE5;
+		border-radius : 15px;
+	}
+	
+	#aire_scrap a{
+		text-decoration: none;
+		color: white;
+	}
+	
+	#aire_btn {
+		border : 0px;
+		padding: 10px;
+		border-radius: 15px;
+		margin-left:10px;
+		background-color: #B5BFE5;
+		text-align : center;
+		font-size: 15px;
+		color : white;
+		font-family: 'NanumSquareR';
+	
+	}
+
+
+

@@ -506,6 +506,7 @@ if (key != null && value != null) {
 		</div>	
 		<br><br>
 
+
 	<!-- 인공지능을 활용한 책 카테고리 추천. -->
 				<h3 style="text-align:center;">나에게 맞는 AI 책추천📖</h3>	
 				<div id="aire_box">	

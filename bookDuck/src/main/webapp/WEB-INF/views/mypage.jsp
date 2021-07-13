@@ -177,56 +177,68 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 	}
 
 #parent_box{
-    width: 90%;
+    width: 95%;
     margin: 0px auto;
 }
 
-
 #first_1{
 	margin-top:10px;
-	width:45%;
+	width:300px;
 	float:left;
+	height:100%;
+	margin:15px;
 }
 #first_2{
 	margin-top:10px;
-	width:45%;
+	width:300px;
 	float:left;
+	height:100%;
+	margin:15px;
 }
 
 #second_1{
-	width:45%;
-	float:right;
+	width:40%;
+	float:left;
+	height:100%;
 }
 
 #second_2{
-	width:45%;
+	width:40%;
 	float:left;
+	height:100%;
 
 }
+
+#third{
+	width:25%;
+	float:left;
+	margin:15px;
+}
+
 
 #clear{
 	clear:both;
 }
 
-#third{
-	
-}
-
 #fourth{
-	
+	float:left;
+	margin-left: 63%;
+
 
 }
 
+img {
+	width:300px;
+}
 
 
-
-
+/*
 .blacklist {
     margin-left: 70%;
     margin-top: 20px;
     display: table-caption;
 }
-
+*/
 .buttoncssadded{
 	-webkit-appearance: none;
   -moz-appearance: none;
@@ -407,7 +419,6 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 		</c:when>
 	</c:choose>
 	</div>
-	<div id="clear"></div>
 	
 	<br><br><br><br>
 	<!-- 리딩차트. 구글차트 부분 -->
@@ -439,7 +450,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 											<br /> <span id="CRTime"></span>분 
 											<input type="hidden" id="chartId" name="chartId" value="${Ldto.member_id}" />
 											<input type="hidden" id="member_payrole" name=member_payrole value="${Ldto.member_payrole}" />
-											 <input type="submit" class="btn btn-primary" value="등록" onclick="isNullCheck();" />
+											 <input type="submit" class="buttoncssadded" value="등록" onclick="isNullCheck();" />
 										</form>
 									</c:when>
 								</c:choose>
@@ -456,6 +467,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 	
 	
 	
+	<div id="clear"></div>
 	
 	<br><br>
 	<!-- 신고하기. 블랙리스트 -->	

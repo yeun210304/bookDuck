@@ -177,9 +177,8 @@ public class ClassifyAIController {
 		CateGsonDto dto2 = gson.fromJson(arr2.get(0).toString(), CateGsonDto.class);
 		CateGsonDto dto3 = gson.fromJson(arr3.get(0).toString(), CateGsonDto.class);
 			
-		System.out.println(result1);
-		System.out.println(dto1);
-		
+		// System.out.println(result1);
+		// System.out.println(dto1);		
 		
 		List<CateGsonDto> list = new ArrayList<CateGsonDto>();
 		list.add(dto1);

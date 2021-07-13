@@ -14,10 +14,14 @@ import com.google.api.client.http.HttpRequest;
 import com.spring.bookduck.bookfm.biz.BookFMBiz;
 import com.spring.bookduck.bookfm.dto.BookFMDto;
 import com.spring.bookduck.bookstar.biz.BookStarBiz;
+import com.spring.bookduck.scrap.biz.ScrapBiz;
 
 @Controller
 public class BooKFMController {
 	
+	@Autowired
+	ScrapBiz biz;	
+
 	@Autowired
 	BookFMBiz bookfmbiz;
 	
@@ -38,8 +42,11 @@ public class BooKFMController {
 		String author = request.getParameter("author");
 		String categoryId = request.getParameter("categoryId");
 		
+		
 		model.addAttribute("rowlist", bookfmbiz.selectList(isbn));
 		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
+		model.addAttribute("scidlist",biz.scidlist(isbn));
+
 		
 		if(bookfmbiz.insertBookFM(dto) > 0) {
 			model.addAttribute("coverLargeUrl", coverLargeUrl);

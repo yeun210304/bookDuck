@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.spring.bookduck.bookfm.biz.BookFMBiz;
 import com.spring.bookduck.bookstar.biz.BookStarBiz;
 import com.spring.bookduck.bookstar.dto.BookStarDto;
+import com.spring.bookduck.scrap.biz.ScrapBiz;
 
 @Controller
 public class BookStarController {
 
+	@Autowired
+	ScrapBiz biz;
+	
 	@Autowired
 	BookStarBiz bookstarbiz;
 	
@@ -48,6 +52,7 @@ public class BookStarController {
 			model.addAttribute("isbn", isbn);
 			model.addAttribute("author", author);
 			model.addAttribute("categoryId", categoryId);
+			model.addAttribute("scidlist",biz.scidlist(isbn));
 			
 			//model.addAttribute("staravg", bookstarbiz.selectOne(isbn));
 			//System.out.println("실행중??");

@@ -23,6 +23,9 @@ import com.spring.bookduck.rcimg.biz.RcimgBiz;
 public class BookController {
 	
 	@Autowired
+	ScrapBiz biz;
+	
+	@Autowired
 	BookFMBiz bookfmbiz;
 	
 	@Autowired
@@ -56,6 +59,7 @@ public class BookController {
 		model.addAttribute("scidlist",scbiz.scidlist(isbn));
 		model.addAttribute("staravgg", bookstarbiz.selectAvg(isbn));
 		model.addAttribute("imglist",imgbiz.imglist(isbn));
+		model.addAttribute("scidlist",biz.scidlist(isbn));
 
 		// 로그인 안했을 때
 		session = request.getSession();

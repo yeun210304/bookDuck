@@ -123,6 +123,12 @@
  
 <style>
 
+/* 헤더 글씨 굵고 까맣게 */
+#notice>a, #qna>a, .headerbooksear>a, #admin, #mainlogin, #afterLogin>li>a{
+	font-weight: bold;
+	color : black;
+}
+
 /* 이미지 호버시 도서 추천 페이지 이동 */
 .hovertext{
 	background : #000000;
@@ -325,7 +331,6 @@ text-decoration: none;
 .resize{
 	height: auto;
 	width: 265px;
-
 
 </style>
  

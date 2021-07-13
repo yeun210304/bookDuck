@@ -571,6 +571,7 @@ text-decoration: none;
 	color:#233f9e
 }
 
+/* 헤더 글씨 굵고 까맣게 */
 #notice>a, #qna>a, .headerbooksear>a, #admin, #mainlogin, #afterLogin>li>a{
 	font-weight: bold;
 	color : black;

@@ -571,6 +571,12 @@ text-decoration: none;
 	color:#233f9e
 }
 
+#notice>a, #qna>a, .headerbooksear>a, #admin, #mainlogin, #afterLogin>li>a{
+	font-weight: bold;
+	color : black;
+}
+
+
 
 
 </style>
@@ -695,7 +701,7 @@ text-decoration: none;
                     var value = "";
                     
                     
-                    for(var i=283; i < arr.length; i++){
+                    for(var i=261; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     
@@ -735,7 +741,7 @@ text-decoration: none;
                     var value = "";
                     
                     
-                    for(var i=283; i < arr.length; i++){
+                    for(var i=261; i < arr.length; i++){
                     	value += '<'+arr[i]
                     };
                     

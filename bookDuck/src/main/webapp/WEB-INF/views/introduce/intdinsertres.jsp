@@ -58,7 +58,7 @@ function goWrite(frm) {
 					//console.log(url);
 					var path = "http://localhost:8787/bookduck";
 					//console.log(path+url);
-					var image = $('<img>').attr('src', path+url).attr('width','500');
+					var image = $('<img>').attr('src', path+url).attr('width','300');
 					$("#summernote").summernote('insertNode', image[0]);
 				}
 			});

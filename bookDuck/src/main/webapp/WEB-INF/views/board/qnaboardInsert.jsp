@@ -33,7 +33,19 @@
 		border: none;
 		background-color: #6277BA;
 		color: white;
-		}
+	}
+	.content {
+		width: 90%;
+		margin: auto;
+	}
+	
+	.innerOuter {
+		width: 80%;
+		margin: auto;
+		padding: 5% 10%;
+		background: white;
+	}
+	
 </style>
 <!-- bootstrap 4 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">

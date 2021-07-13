@@ -50,6 +50,18 @@
 		border: none;
 		background-color: #F5DC7A;
 		}
+	.content {
+		width: 90%;
+		margin: auto;
+	}
+	
+	.innerOuter {
+		width: 80%;
+		margin: auto;
+		padding: 5% 10%;
+		background: white;
+	}
+	
 </style>
 </head>
 

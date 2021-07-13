@@ -64,6 +64,17 @@
 		height : 50px;
 	    width : 50px;
 	}
+	.content {
+		width: 90%;
+		margin: auto;
+	}
+	
+	.innerOuter {
+		width: 80%;
+		margin: auto;
+		padding: 5% 10%;
+		background: white;
+	}
 	
 </style>
 <!-- bootstrap 4 -->

@@ -53,6 +53,18 @@
 	
 	#postContent{display:inline-block !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 	
+	.content {
+		width: 90%;
+		margin: auto;
+	}
+	
+	.innerOuter {
+		width: 80%;
+		margin: auto;
+		padding: 5% 10%;
+		background: white;
+	}
+	
 </style>
 
 <!-- bootstrap 4 -->

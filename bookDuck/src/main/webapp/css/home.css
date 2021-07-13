@@ -122,7 +122,7 @@
   opacity: 0.5;
 }
 
-/*웹소켓 채팅
+/* 웹소켓 채팅 */
 #submitBtn{
   background: #B5BFE5;
   color: black;
@@ -141,7 +141,7 @@
   transition: 0.5s;
   margin-top: 10px;
 }
-*/
+
 /*장르선택 버튼*/
 select{
   -moz-appearance: none;

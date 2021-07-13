@@ -17,7 +17,9 @@ p{
 	margin-bottom: 100px;
 } /*#mainCenter_left{width:50%;} #mainCenter_right{width: 40%}*/
 #inputMessage {
-	width: 80%;
+	width: 88%;
+	margin-top: 15px;
+	float: left;
 }
 
 .jumbotron {
@@ -96,14 +98,11 @@ p{
   text-decoration: none;
   border: none;
   border-radius: 4px;
-  display: inline-block;
   width: 270px;
-  
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  
   cursor: pointer;
-  
   transition: 0.5s;
+  float: left;
 }
 #btncss.success {
   --button-bg-color: #28a745;
@@ -127,6 +126,52 @@ p{
 #btncss:disabled {
   opacity: 0.5;
 }
+
+/*웹소켓 채팅*/
+#submitBtn{
+	-webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #B5BFE5;
+  color: black;
+  padding: 0.5rem 1rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  width: auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: 0.5s;
+  margin-top: 10px;
+}
+#submitBtn.success {
+  --button-bg-color: #28a745;
+  --button-hover-bg-color: #218838;
+}
+#submitBtn.error {
+  --button-bg-color: #dc3545;
+  --button-hover-bg-color: #c82333;
+}
+#submitBtn.warning {
+  --button-color: #212529;
+  --button-bg-color: #ffc107;
+  --button-hover-bg-color: #e0a800;
+}
+#submitBtn:active,
+#submitBtn:hover,
+#submitBtn:focus {
+  background: var(--button-hover-bg-color);
+  outline: 0;
+}
+#submitBtn:disabled {
+  opacity: 0.5;
+}
+
 /*장르선택 버튼*/
 select{
   -moz-appearance: none;

@@ -37,8 +37,6 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 	});
 </script>
 
-
-
 <!-- 구글차트 GoogleChart -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript"
@@ -183,9 +181,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
     float: right;
     padding: 5px 0px 0px 30px;
 }
-
 </style>
-
 
 <style type="text/css">
 .parent{
@@ -218,13 +214,28 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
     display: table-caption;
 }
 
-
-#CRTime{
-	width: 50px;
-	height: 20px;
-	margin: 5px;
-
+.buttoncssadded{
+	-webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #EDC630;
+  color: black;
+  padding: 0.5rem 1rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  width: auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: 0.5s;
+  float: left;
+  margin: 5px;
 }
+
 </style>
 
 </head>
@@ -315,11 +326,8 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 								<c:choose>
 									<c:when test="${memberChk eq 'yes' }">
 										<td class="btn-group">
-											<input type="button" value="수정"
-											class="btn btn-primary"
-											onclick="location.href='updateintdres.do?intd_no=${intdDto.intd_no}'">
-											<input type="button" value="삭제" class="btn btn-primary"
-											onclick="location.href='deleteintd.do?intd_no=${intdDto.intd_no}'">
+											<input class="buttoncssadded" type="button" value="수정" onclick="location.href='updateintdres.do?intd_no=${intdDto.intd_no}'">
+											<input class="buttoncssadded" type="button" value="삭제" onclick="location.href='deleteintd.do?intd_no=${intdDto.intd_no}'">
 										</td>
 									</c:when>
 									<c:otherwise>
@@ -340,29 +348,24 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 									</c:when>
 									<c:when test="${Ldto.member_payrole eq 'Y'}">
 										<!-- 구글차트 위치-->
-										<div id="curve_chart" method="get"
-											style="width: 80%; height: 200px">
+										<div id="curve_chart" method="get" style="width: 400px; height: 220px;">
 											<h3>독서량을 등록하시면 그래프가 그려집니다</h3>
 										</div>
 										<!-- 독서량 전달 -->
 										<form action="readingTimeInsert.do" method="post">
-											<p  style="margin: 10px;">독서량을 등록하시면 그래프가 그려집니다</p>
+											<h6 style="margin: 10px;">독서량을 등록하시면 그래프가 그려집니다</h6>
 											<!-- 날짜 -->
-											<input type="date" id="chartMdate" name="chartMdate"
-												style="width: 50%" /> <br />
+											<input type="date" id="chartMdate" name="chartMdate" style="width: 100%" /> <br />
 											<!-- 독서한 시간(분) -->
-											<input type="range" min="0" max="600" value="0"
-												style="width: 50%" id="chartreadingtime"
-												name="chartreadingtime"
+											<input type="range" min="0" max="600" value="0" style="width: 90%; margin: 20px;" id="chartreadingtime" name="chartreadingtime"
 												oninput="document.getElementById('CRTime').innerHTML=this.value;">
-											<br /> <span id="CRTime"></span>분 
+											<span id="CRTime" style="font-weight: bold; margin-left: 40%;"></span>분
 											<input type="hidden" id="chartId" name="chartId" value="${Ldto.member_id}" />
 											<input type="hidden" id="member_payrole" name=member_payrole value="${Ldto.member_payrole}" />
-											 <input type="submit" class="btn btn-primary" value="등록" onclick="isNullCheck();" />
+											<input type="submit" class="buttoncssadded" value="등록" onclick="isNullCheck();" />
 										</form>
 									</c:when>
 								</c:choose>
-
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -412,8 +415,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 						<c:choose>
 							<c:when test="${memberChk eq 'yes' }">
 
-								<input type="button" class="btn btn-primary" value="삭제"
-									onclick="deleteValue();" />
+								<input type="button" class="buttoncssadded" value="삭제" onclick="deleteValue();" />
 
 							</c:when>
 							<c:otherwise>
@@ -433,14 +435,14 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 		<c:when test="${memberChk eq 'yes' }">
 
 			<div class="blacklist">
-				<input id="blist" type="button" value="신고하기" class="btn btn-danger" >
+				<input id="blist" type="button" value="신고하기" class="buttoncssadded"  style="background-color: pink;">
 				<div id="blistdiv" class="blistclass" >
 					<table>
 						<tr>
 							<td>ID</td>
-							<td><input id="blistid" type="text"
-								placeholder="신고할 ID를 검색하세요"> <input id="blistidsearch"
-								type="button" value="ID 찾기" class="btn btn-danger"></td>
+							<td>
+								<input id="blistid" type="text" placeholder="신고할 ID를 검색하세요"> <input id="blistidsearch" type="button" value="ID 찾기" class="buttoncssadded">
+							</td>
 						</tr>
 						<tr>
 							<td>신고내용</td>
@@ -448,9 +450,10 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2" align="right"><input id="blistinsert"
-								type="button" value="신고하기"> <input id="blistcancel"
-								type="button" value="취소"></td>
+							<td colspan="2" align="right">
+								<input class="buttoncssadded" type="button" style="background-color: pink;"value="신고등록"> 
+								<input id="blistcancel" class="buttoncssadded" style="background-color: pink;" type="button" value="취소">
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -461,7 +464,6 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
 		</c:otherwise>
 	</c:choose>
-	
 	
 	<script type="text/javascript">
 		var $blist = $("#blist");
@@ -527,23 +529,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 		});
 	</script>
 
-
 </div>
-
-
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-
 
 </body>
 </html>

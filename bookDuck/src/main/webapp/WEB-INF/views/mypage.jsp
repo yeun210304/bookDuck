@@ -198,13 +198,13 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 }
 
 #second_1{
-	width:40%;
+	width:35%;
 	float:left;
 	height:100%;
 }
 
 #second_2{
-	width:45%;
+	width:35%;
 	float:left;
 	height:100%;
 
@@ -213,7 +213,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 #third{
 	width: 25%;
     float: left;
-    margin-left: 105px;
+    margin-left: 80px;
 }
 
 
@@ -223,7 +223,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 
 #fourth{
 	float:left;
-	margin-left: 72%;
+	margin-left: 67%;
 }
 
 #first_1 img { 
@@ -455,8 +455,7 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 				</div>
 	
 	<div id="clear"></div>
-	
-	<br><br>
+
 	<!-- 신고하기. 블랙리스트 -->	
 	<div id="fourth">
 	<c:choose>
@@ -467,20 +466,22 @@ MemberDto dto1 = (MemberDto) session.getAttribute("Ldto");
 				<div id="blistdiv" class="blistclass" >
 					<table>
 						<tr>
-							<td>ID</td>
+							<td style="text-align:center;">ID</td>
 							<td>
-								<input id="blistid" type="text" placeholder="신고할 ID를 검색하세요"> <input id="blistidsearch" type="button" value="ID 찾기" class="buttoncssadded">
+								<input id="blistid" type="text" placeholder="신고할 ID를 검색하세요"> 
+								<input id="blistidsearch" type="button" value="ID 찾기" class="buttoncssadded" style="background-color: pink; float:right;" >
 							</td>
 						</tr>
 						<tr>
-							<td>신고내용</td>
+							<td style="text-align:center;">신고내용</td>
 							<td><textarea id="blistcontent" rows="10" cols="60"></textarea>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2" align="right">
-								<input class="buttoncssadded" type="button" style="background-color: pink;"value="신고등록"> 
-								<input id="blistcancel" class="buttoncssadded" style="background-color: pink;" type="button" value="취소">
+							<td colspan="2" align="right">								
+								<input id="blistcancel" class="buttoncssadded" style="background-color: pink; float:right;" type="button" value="취소">
+								<input id="blistinsert" class="buttoncssadded" type="button" style="background-color: pink; float:right;" value="신고등록"> 
+								
 							</td>
 						</tr>
 					</table>

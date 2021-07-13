@@ -87,7 +87,7 @@ function null_check(){
 						<button class="emailCheck" type="button" id="idCheck" onclick="Check_email();" value="N">이메일 중복 확인</button></td>
 				</tr>
 				<tr class="joinbutton">
-					<td colspan="3"><input type="submit" onclick="null_check();" id="joinbutton" value=회원가입 /></td>
+					<td colspan="3"><input type="submit" onclick="null_check();" id="joinbutton" value="회원가입" /></td>
 				</tr>
 			</table>
 		</div>

@@ -19,18 +19,18 @@ p{
 }
 
 .jumbotron {
-    padding: 4rem 10rem;
+    padding: 2rem 2rem;
 	margin-bottom: 0;
 }
 
 /*채팅*/
 .RealTimeNovle{
 	width: 100%;
-	margin-top: 100px;
+	margin-top: 30px;
 }
 /*지도*/
 #mainCenter_right{
-	margin-top: 100px;
+	margin-top: 30px;
 }
 #map{
 	width: 100%;
@@ -41,8 +41,6 @@ p{
 	margin: 20px;
 }
 
-
-
 .cols {
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -50,45 +48,6 @@ p{
     flex-grow: 1;
     max-width: 100%;
     display: table-cell;
-}
-
-/*책추천버튼*/
-#btncss{
-  background:#F5DC7A;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:40px;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-  text-align: center;
-  vertical-align: middle; 
-}
-#btncss:hover{
-  background:#fff;
-  color:#EDC630;
-}
-#btncss:before,#btncss:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #EDC630;
-  transition:400ms ease all;
-}
-#btncss:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-#btncss:hover:before,#btncss:hover:after{
-  width:100%;
-  transition:800ms ease all;
 }
 
 /*책장르*/
@@ -116,10 +75,55 @@ p{
 #Result1{
 	width: 100px;
 	height: 200px;
-	margin: 0;
+	margin-top: 30px;
 }
 
-
+/*도서추천버튼*/
+#btncss{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #B5BFE5;
+  color: black;
+  padding: 0.5rem 1rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  width: 270px;
+  
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  cursor: pointer;
+  
+  transition: 0.5s;
+}
+#btncss.success {
+  --button-bg-color: #28a745;
+  --button-hover-bg-color: #218838;
+}
+#btncss.error {
+  --button-bg-color: #dc3545;
+  --button-hover-bg-color: #c82333;
+}
+#btncss.warning {
+  --button-color: #212529;
+  --button-bg-color: #ffc107;
+  --button-hover-bg-color: #e0a800;
+}
+#btncss:active,
+#btncss:hover,
+#btncss:focus {
+  background: var(--button-hover-bg-color);
+  outline: 0;
+}
+#btncss:disabled {
+  opacity: 0.5;
+}
 /*장르선택 버튼*/
 select{
   -moz-appearance: none;

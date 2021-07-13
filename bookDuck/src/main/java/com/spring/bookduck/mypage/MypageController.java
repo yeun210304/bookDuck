@@ -16,7 +16,6 @@ import com.spring.bookduck.introduce.biz.IntroduceBiz;
 import com.spring.bookduck.introduce.dto.IntroduceDto;
 import com.spring.bookduck.model.dto.MemberDto;
 import com.spring.bookduck.model.dto.ReadingChartDto;
-import com.spring.bookduck.model.dto.RealTimeNovelDto;
 import com.spring.bookduck.pay.controller.PayController;
 import com.spring.bookduck.pay.dto.PayDto;
 import com.spring.bookduck.scrap.biz.ScrapBiz;
@@ -64,7 +63,7 @@ public class MypageController {
 		return "mypage";
 	}
 	@RequestMapping("home.do")
-	public String home(HttpSession session, HttpServletRequest request, RealTimeNovelDto dto) {
+	public String home(HttpSession session, HttpServletRequest request) {
 		session= request.getSession();
 		
 		return"home";

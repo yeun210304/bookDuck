@@ -19,7 +19,6 @@
 		<typeAlias type="com.spring.bookduck.scrap.dto.ScrapDto" alias="scrapDto"/>
 		<typeAlias type="com.spring.bookduck.rcvideo.dto.RcvideoDto" alias="rcvideoDto"/>
 		<typeAlias type="com.spring.bookduck.bookfm.dto.BookFMDto" alias="BookFMDto"/>
-		<typeAlias type="com.spring.bookduck.model.dto.RealTimeNovelDto" alias="RTNovelDto"/>
 		<typeAlias type="com.spring.bookduck.bookstar.dto.BookStarDto" alias="BookStarDto"/>
 		<typeAlias type="com.spring.bookduck.rcimg.dto.RcimgDto" alias="rcimgDto"/>
 	</typeAliases>
@@ -34,7 +33,6 @@
 		<mapper resource="/mybatis/scrap-mapper.xml"/>
 		<mapper resource="/mybatis/rcvideo-mapper.xml"/>
 		<mapper resource="/mybatis/bookfm-mapper.xml"/>
-		<mapper resource="/mybatis/RealTimeNovel-mapper.xml"/>
 		<mapper resource="/mybatis/bookstar-mapper.xml"/>
 		<mapper resource="/mybatis/rcimg-mapper.xml"/>
 	</mappers>

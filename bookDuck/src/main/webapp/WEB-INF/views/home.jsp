@@ -136,7 +136,7 @@ if (key != null && value != null) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!--  websocket 웹소켓을 이용한 모두가 함께 쓰는 실시간소설 RealTimeNovel -->  
+<!--  websocket 웹솤캣 채팅-->  
 <script type="text/javascript">
 	//웹소켓 설정
 	var webSocket = new WebSocket('ws://localhost:8787/bookduck/RealTimeNovel.do');	
@@ -232,7 +232,7 @@ if (key != null && value != null) {
 			div.style["margin-right"]="3px";
 			//div에 innerHTML로 문자 넣기
 			div.innerHTML = inputMessage.value;
-			docume"C:/Users/green/Downloads/NanumFontSetup_TTF_ALL/NanumGothicCodingBold.ttf"nt.getElementById('messageWindow2').appendChild(div);
+			document.getElementById('messageWindow2').appendChild(div);
 			//clear div 추가
 			var clear = document.createElement('div');
 			clear.style["clear"] = "both";
@@ -276,8 +276,6 @@ if (key != null && value != null) {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 </head>
 
 	<jsp:include page="header.jsp"/>

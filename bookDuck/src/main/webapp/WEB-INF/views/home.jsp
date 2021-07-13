@@ -566,12 +566,12 @@ if (key != null && value != null) {
                     <!-- onkeydown을 통해서 엔터키로도 입력되도록 설정. -->
                     <b align="center">모두와 채팅</b>
                     <div id="messageWindow2" style="padding: 10px 0; height: 332px; overflow: auto; background-color: #B5BFE5;"></div>
-                    <div class="form-inline" align="right">
+                    <div align="right">
                         <c:choose>
                             <c:when test="${Ldto.member_payrole eq 'Y'}">
                             <!-- 사용자가 입력한 키의 코드를 .d보내준다. -->
-                                <input id="inputMessage" class="form-control mr-sm-2 mb-2" type="text" name="novel_content" onkeydown="if(event.keyCode==13){send();}" />
-                                <input id="submitBtn" class="btn mr-sm-2 mb-2" type="submit" value="입력" onclick="send();" />
+                                <input id="inputMessage" type="text" name="novel_content" onkeydown="if(event.keyCode==13){send();}" />
+                                <input id="submitBtn" type="submit" value="입력" onclick="send();" />
                                 <input type="hidden" id="novel_id" value="${Ldto.member_id}" name="novel_id" />
                             </c:when>
                             <c:otherwise>

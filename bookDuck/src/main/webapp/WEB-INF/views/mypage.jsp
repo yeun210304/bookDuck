@@ -443,11 +443,8 @@ img {
 											<input type="date" id="chartMdate" name="chartMdate"
 												style="width: 50%" /> <br />
 											<!-- 독서한 시간(분) -->
-											<input type="range" min="0" max="600" value="0"
-												style="width: 50%" id="chartreadingtime"
-												name="chartreadingtime"
-												oninput="document.getElementById('CRTime').innerHTML=this.value;">
-											<br /> <span id="CRTime"></span>분 
+											<input type="range" min="0" max="600" value="0" style="width: 50%" id="chartreadingtime" name="chartreadingtime" oninput="document.getElementById('CRTime').innerHTML=this.value;">
+											<span id="CRTime"></span>분 
 											<input type="hidden" id="chartId" name="chartId" value="${Ldto.member_id}" />
 											<input type="hidden" id="member_payrole" name=member_payrole value="${Ldto.member_payrole}" />
 											 <input type="submit" class="buttoncssadded" value="등록" onclick="isNullCheck();" />
@@ -462,10 +459,6 @@ img {
 						</c:otherwise>
 					</c:choose>
 				</div>
-	
-	
-	
-	
 	
 	<div id="clear"></div>
 	
